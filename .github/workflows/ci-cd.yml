@@ -1,0 +1,55 @@
+# Copyright Jiaqi Liu
+---
+name: CI/CD
+
+"on":
+  pull_request:
+  push:
+    branches:
+      - master
+
+env:
+  USER: QubitPi
+  EMAIL: jack20220723@gmail.com
+
+jobs:
+  documentation:
+    name: Deploy Documentation to GitHub Pages (**build steps copied from codeql-analysis.yml action file**)
+    outputs:
+      outcome: ${{ job.status }}
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: 3.9.2
+      - name: Clean install dependencies and build
+        run: mvn clean install -DskipTests -B
+      - name: Deploy documentation to GitHub Pages
+        if: github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: documentation/jetty-documentation/target/html/
+          enable_jekyll: false
+          user_name: ${{ env.USER }}
+          user_email: ${{ env.EMAIL }}
+
+  slack-notification:
+    name: Send Slack Notification
+    if: ${{ always() }}
+    needs: documentation
+    uses: QubitPi/hashicorp-aws/.github/workflows/slack-notification.yml@master
+    with:
+      job-status: ${{ needs.documentation.outputs.outcome }}
+    secrets:
+      slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
