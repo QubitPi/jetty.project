@@ -44,8 +44,8 @@ pipeline {
           steps {
             timeout( time: 180, unit: 'MINUTES' ) {
               checkout scm
-              withEnv(["JAVA_HOME=${ tool jdk17 }",
-                       "PATH+MAVEN=${ tool jdk17 }/bin:${tool maven3}/bin",
+              withEnv(["JAVA_HOME=${ tool 'jdk17' }",
+                       "PATH+MAVEN=${ tool 'jdk17' }/bin:${tool 'maven3'}/bin",
                        "MAVEN_OPTS=-Xms3072m -Xmx5120m -Djava.awt.headless=true -client -XX:+UnlockDiagnosticVMOptions -XX:GCLockerRetryAllocationCount=100"]) {
                 configFileProvider(
                         [configFile(fileId: 'oss-settings.xml', variable: 'GLOBAL_MVN_SETTINGS'),
