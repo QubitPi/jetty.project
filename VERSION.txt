@@ -1,3 +1,5 @@
+jetty-12.0.19-SNAPSHOT
+
 jetty-12.0.18 - 12 March 2025
  + 12802 Make Server::setDefaultHandler and Server::setErrorHandler arguments
    consistent
