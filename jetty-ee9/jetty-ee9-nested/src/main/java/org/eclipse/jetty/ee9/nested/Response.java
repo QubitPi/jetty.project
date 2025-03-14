@@ -726,7 +726,8 @@ public class Response implements HttpServletResponse
             return;
         }
 
-        _fields.add(name, value);
+        if (value != null)
+            _fields.add(name, value);
     }
 
     @Override

@@ -45,6 +45,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ResponseHeadersTest
@@ -150,6 +151,20 @@ public class ResponseHeadersTest
         }
     }
 
+    public static class NullResponseHeaderValueServlet extends HttpServlet
+    {
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+        {
+            // We set an initial desired behavior.
+            response.addHeader("customHeader", null);
+            response.addHeader("customHeader", "foobar");
+            response.setHeader("customHeader", null);
+            PrintWriter writer = response.getWriter();
+            writer.println("content");
+        }
+    }
+
     private static Server server;
     private static LocalConnector connector;
 
@@ -174,6 +189,7 @@ public class ResponseHeadersTest
         context.addServlet(CharsetResetToJsonMimeTypeServlet.class, "/charset/json-reset/*");
         context.addServlet(CharsetChangeToJsonMimeTypeServlet.class, "/charset/json-change/*");
         context.addServlet(CharsetChangeToJsonMimeTypeSetCharsetToNullServlet.class, "/charset/json-change-null/*");
+        context.addServlet(new ServletHolder(new NullResponseHeaderValueServlet()), "/nullHeaderValue");
 
         server.start();
     }
@@ -309,5 +325,22 @@ public class ResponseHeadersTest
         assertThat("Response Code", response.getStatus(), is(200));
         // The Content-Type should not have a charset= portion
         assertThat("Response Header Content-Type", response.get("Content-Type"), is("application/json"));
+    }
+
+    @Test
+    public void testNullHeaderValue() throws Exception
+    {
+        HttpTester.Request request = new HttpTester.Request();
+        request.setMethod("GET");
+        request.setURI("/nullHeaderValue");
+        request.setVersion(HttpVersion.HTTP_1_1);
+        request.setHeader("Host", "test");
+
+        ByteBuffer responseBuffer = connector.getResponse(request.generate());
+        HttpTester.Response response = HttpTester.parseResponse(responseBuffer);
+
+        // Now test for properly formatted HTTP Response Headers.
+        assertThat("Response Code", response.getStatus(), is(200));
+        assertThat(response.get("customHeader"), nullValue());
     }
 }
