@@ -961,15 +961,16 @@ public interface HttpFields extends Iterable<HttpField>, Supplier<HttpFields>
          * <p>Adds a new {@link HttpField} with the given name and string value.</p>
          * <p>The new {@link HttpField} is added even if a field with the
          * same name is already present.</p>
+         * <p>This method has no effect if null is passed for either the name or value parameters.</p>
          *
-         * @param name the non-{@code null} name of the field
-         * @param value the non-{@code null} value of the field
+         * @param name the name of the field
+         * @param value the value of the field
          * @return this instance
          */
         default Mutable add(String name, String value)
         {
-            Objects.requireNonNull(name);
-            Objects.requireNonNull(value);
+            if (name == null || value == null)
+                return this;
             return add(new HttpField(name, value));
         }
 

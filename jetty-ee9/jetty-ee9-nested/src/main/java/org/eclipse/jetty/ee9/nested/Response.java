@@ -708,7 +708,7 @@ public class Response implements HttpServletResponse
         {
             boolean errorSent = AtomicBiInteger.getHi(biInt) != 0;
             boolean including = AtomicBiInteger.getLo(biInt) > 0;
-            if (!errorSent && including && name.startsWith(SET_INCLUDE_HEADER_PREFIX))
+            if (!errorSent && including && name != null && name.startsWith(SET_INCLUDE_HEADER_PREFIX))
                 name = name.substring(SET_INCLUDE_HEADER_PREFIX.length());
             else
                 return;
@@ -726,8 +726,7 @@ public class Response implements HttpServletResponse
             return;
         }
 
-        if (value != null)
-            _fields.add(name, value);
+        _fields.add(name, value);
     }
 
     @Override
