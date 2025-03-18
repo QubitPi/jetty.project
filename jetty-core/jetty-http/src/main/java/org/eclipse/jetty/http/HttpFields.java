@@ -985,7 +985,8 @@ public interface HttpFields extends Iterable<HttpField>, Supplier<HttpFields>
          */
         default Mutable add(String name, long value)
         {
-            Objects.requireNonNull(name);
+            if (name == null)
+                return this;
             return add(new HttpField.LongValueHttpField(name, value));
         }
 
@@ -1075,9 +1076,7 @@ public interface HttpFields extends Iterable<HttpField>, Supplier<HttpFields>
          */
         default Mutable add(String name, List<String> list)
         {
-            Objects.requireNonNull(name);
-            Objects.requireNonNull(list);
-            if (list.isEmpty())
+            if (name == null || list == null || list.isEmpty())
                 return this;
             if (list.size() == 1)
             {
