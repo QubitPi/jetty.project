@@ -43,7 +43,9 @@ For more information, refer to xref:programming-guide:server/http.adoc#connector
 
 The module file is `$JETTY_HOME/modules/accept-rate-limit.mod`:
 
+----
 include::{jetty-home}/modules/accept-rate-limit.mod[tags=documentation]
+----
 
 [[bytebufferpool]]
 == Module `bytebufferpool`
@@ -89,7 +91,9 @@ For more information, refer to xref:programming-guide:server/http.adoc#connector
 
 The module file is `$JETTY_HOME/modules/connection-limit.mod`:
 
+----
 include::{jetty-home}/modules/connection-limit.mod[tags=documentation]
+----
 
 [[console-capture]]
 == Module `console-capture`
@@ -149,7 +153,6 @@ The module properties are:
 ----
 include::{jetty-home}/modules/debuglog.mod[tags=documentation]
 ----
-
 
 [[eeN-deploy]]
 == Module `{ee-all}-deploy`
