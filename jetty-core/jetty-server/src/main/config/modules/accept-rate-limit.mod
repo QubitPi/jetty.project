@@ -13,11 +13,14 @@ server
 etc/jetty-accept-rate-limit.xml
 
 [ini-template]
-## The limit of accepted connections
+#tag::documentation[]
+## The limit for the rate of accepted connections.
 #jetty.acceptratelimit.acceptRateLimit=1000
 
-## The period over which the rate applies
+## The period of time to check for the rate of accepted
+## connections to have returned within the limit.
 #jetty.acceptratelimit.period=1000
 
-# The unit of time for the period
+## The unit of time for the period.
 #jetty.acceptratelimit.units=MILLISECONDS
+#end::documentation[]
