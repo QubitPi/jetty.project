@@ -969,7 +969,8 @@ public interface HttpFields extends Iterable<HttpField>, Supplier<HttpFields>
          */
         default Mutable add(String name, String value)
         {
-            if (name == null || value == null)
+            Objects.requireNonNull(name);
+            if (value == null)
                 return this;
             return add(new HttpField(name, value));
         }
@@ -985,8 +986,7 @@ public interface HttpFields extends Iterable<HttpField>, Supplier<HttpFields>
          */
         default Mutable add(String name, long value)
         {
-            if (name == null)
-                return this;
+            Objects.requireNonNull(name);
             return add(new HttpField.LongValueHttpField(name, value));
         }
 
@@ -1002,7 +1002,8 @@ public interface HttpFields extends Iterable<HttpField>, Supplier<HttpFields>
         default Mutable add(HttpHeader header, HttpHeaderValue value)
         {
             Objects.requireNonNull(header);
-            Objects.requireNonNull(value);
+            if (value == null)
+                return this;
             return add(header, value.toString());
         }
 
@@ -1018,7 +1019,8 @@ public interface HttpFields extends Iterable<HttpField>, Supplier<HttpFields>
         default Mutable add(HttpHeader header, String value)
         {
             Objects.requireNonNull(header);
-            Objects.requireNonNull(value);
+            if (value == null)
+                return this;
             return add(new HttpField(header, value));
         }
 
@@ -1060,6 +1062,7 @@ public interface HttpFields extends Iterable<HttpField>, Supplier<HttpFields>
          */
         default Mutable add(HttpFields fields)
         {
+            Objects.requireNonNull(fields);
             for (HttpField field : fields)
             {
                 add(field);
@@ -1076,7 +1079,8 @@ public interface HttpFields extends Iterable<HttpField>, Supplier<HttpFields>
          */
         default Mutable add(String name, List<String> list)
         {
-            if (name == null || list == null || list.isEmpty())
+            Objects.requireNonNull(name);
+            if (list == null || list.isEmpty())
                 return this;
             if (list.size() == 1)
             {

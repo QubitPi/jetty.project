@@ -1019,9 +1019,7 @@ public class HttpFieldsTest
     public void testAddNullName()
     {
         HttpFields.Mutable fields = HttpFields.build();
-        fields.add((String)null, "bogus");
-        assertThat(fields.size(), is(0));
-
+        assertThrows(NullPointerException.class, () -> fields.add((String)null, "bogus"));
         assertThrows(NullPointerException.class, () -> fields.add((HttpHeader)null, "bogus"));
         assertThat(fields.size(), is(0));
     }
