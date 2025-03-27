@@ -92,6 +92,7 @@ public class ResponseHeadersTest
 
                 response.setHeader("SetAfterCommit", "ignored");
                 response.addHeader("AddAfterCommit", "ignored");
+                response.setHeader("AddHeaderTwice", "ignored");
 
                 response.getOutputStream().print("OK");
             }
