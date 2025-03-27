@@ -150,7 +150,7 @@ public class ResponseHttpFields implements HttpFields.Mutable
             public void remove()
             {
                 if (_committed.get())
-                    throw new UnsupportedOperationException("Read Only");
+                    return;
                 if (isPersistent(_current))
                     throw new UnsupportedOperationException("Persistent field");
                 if (_current == null)
@@ -211,7 +211,7 @@ public class ResponseHttpFields implements HttpFields.Mutable
             public void remove()
             {
                 if (_committed.get())
-                    throw new UnsupportedOperationException("Read Only");
+                    return;
                 if (isPersistent(_current))
                     throw new UnsupportedOperationException("Persistent field");
                 if (_current == null)
@@ -224,7 +224,7 @@ public class ResponseHttpFields implements HttpFields.Mutable
             public void set(HttpField field)
             {
                 if (_committed.get())
-                    throw new UnsupportedOperationException("Read Only");
+                    return;
                 if (_current instanceof Persistent persistent)
                 {
                     // cannot change the field name
@@ -248,9 +248,7 @@ public class ResponseHttpFields implements HttpFields.Mutable
             @Override
             public void add(HttpField field)
             {
-                if (_committed.get())
-                    throw new UnsupportedOperationException("Read Only");
-                if (field != null)
+                if (field != null && !_committed.get())
                     i.add(field);
             }
         };
