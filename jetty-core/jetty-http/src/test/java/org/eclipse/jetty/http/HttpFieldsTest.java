@@ -1486,5 +1486,9 @@ public class HttpFieldsTest
         assertThat(wrapper.size(), is(0));
         assertThat(wrapper.actions, is(List.of("onAddField", "onReplaceField", "onRemoveField")));
         wrapper.actions.clear();
+
+        wrapper.ensureField(new HttpField("ensure", "value0"));
+        wrapper.ensureField(new HttpField("ensure", "value1"));
+        assertThat(wrapper.actions, is(List.of("onAddField", "onReplaceField")));
     }
 }

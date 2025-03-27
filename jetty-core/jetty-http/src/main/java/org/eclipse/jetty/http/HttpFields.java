@@ -1698,6 +1698,11 @@ public interface HttpFields extends Iterable<HttpField>, Supplier<HttpFields>
                 _fields = fields;
             }
 
+            public Mutable getWrapped()
+            {
+                return _fields;
+            }
+
             /**
              * Called when a field is added (including as part of a put).
              *
