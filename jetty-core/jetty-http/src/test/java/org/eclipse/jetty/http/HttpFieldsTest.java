@@ -1460,6 +1460,12 @@ public class HttpFieldsTest
             @Override
             public HttpField onReplaceField(HttpField oldField, HttpField newField)
             {
+                if (newField.getValueList().contains("removeOnReplace"))
+                {
+                    actions.add("onReplaceFieldRemove");
+                    return null;
+                }
+
                 actions.add("onReplaceField");
                 return super.onReplaceField(oldField, newField);
             }
@@ -1490,5 +1496,8 @@ public class HttpFieldsTest
         wrapper.ensureField(new HttpField("ensure", "value0"));
         wrapper.ensureField(new HttpField("ensure", "value1"));
         assertThat(wrapper.actions, is(List.of("onAddField", "onReplaceField")));
+        wrapper.ensureField(new HttpField("ensure", "removeOnReplace"));
+        assertThat(wrapper.actions, is(List.of("onAddField", "onReplaceField", "onReplaceFieldRemove")));
+        assertThat(wrapper.getField("ensure"), nullValue());
     }
 }

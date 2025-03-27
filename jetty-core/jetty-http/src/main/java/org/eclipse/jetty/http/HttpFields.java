@@ -1786,7 +1786,9 @@ public interface HttpFields extends Iterable<HttpField>, Supplier<HttpFields>
                     i = _fields.listIterator(put);
                     HttpField old = i.next();
                     field = onReplaceField(old, field);
-                    if (field != null)
+                    if (field == null)
+                        i.remove();
+                    else if (field != old)
                         i.set(field);
                 }
 
@@ -1870,7 +1872,12 @@ public interface HttpFields extends Iterable<HttpField>, Supplier<HttpFields>
                             if (last != null)
                             {
                                 field = onReplaceField(last, field);
-                                if (field != null)
+                                if (field == null)
+                                {
+                                    last = null;
+                                    i.remove();
+                                }
+                                else if (field != last)
                                 {
                                     last = null;
                                     i.set(field);

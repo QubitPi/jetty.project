@@ -64,16 +64,18 @@ public class ResponseHttpFields extends HttpFields.Mutable.Wrapper
     @Override
     public boolean onRemoveField(HttpField field)
     {
+        if (isCommitted())
+            return false;
         if (isPersistent(field))
             throw new UnsupportedOperationException("Persistent field");
-        return !isCommitted();
+        return true;
     }
 
     @Override
     public HttpField onReplaceField(HttpField oldField, HttpField newField)
     {
         if (isCommitted())
-            return null;
+            return oldField;
 
         if (oldField instanceof Persistent persistent)
         {
