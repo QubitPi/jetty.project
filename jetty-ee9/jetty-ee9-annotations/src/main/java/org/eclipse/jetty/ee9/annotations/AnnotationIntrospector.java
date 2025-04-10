@@ -36,6 +36,7 @@ import org.slf4j.LoggerFactory;
 public class AnnotationIntrospector
 {
     private static final Logger LOG = LoggerFactory.getLogger(AnnotationIntrospector.class);
+    private static final String ALLOW_INCOMPLETE_METADATA = AnnotationIntrospector.class.getName() + ".allowIncompleteMetadata";
 
     private final AutoLock _lock = new AutoLock();
     private final Set<Class<?>> _introspectedClasses = new HashSet<>();
@@ -163,7 +164,7 @@ public class AnnotationIntrospector
             {
                 //must be from a descriptor. Only introspect if the descriptor with which it was associated
                 //is not metadata-complete
-                if (_context.getMetaData().isMetaDataComplete())
+                if (_context.getMetaData().isMetaDataComplete() && _context.getAttribute(ALLOW_INCOMPLETE_METADATA) == null)
                     return false;
 
                 Resource descriptorLocation = holder.getSource().getResource();
