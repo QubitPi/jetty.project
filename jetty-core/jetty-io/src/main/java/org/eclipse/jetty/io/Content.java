@@ -156,6 +156,22 @@ public class Content
     public interface Source
     {
         /**
+         * Factory of {@link Content.Source}.
+         */
+        interface Factory
+        {
+            /**
+             * Creates a new {@link Content.Source}.
+             *
+             * @param bufferPool the {@link ByteBufferPool.Sized} to get buffers from. {@code null} means allocate new buffers as needed.
+             * @param first the first byte of the resource to start from.
+             * @param length the length of the content to make available, -1 for the full length.
+             * @return a {@link Content.Source}.
+             */
+            Content.Source newContentSource(ByteBufferPool.Sized bufferPool, long first, long length);
+        }
+
+        /**
          * Create a {@code Content.Source} from zero or more {@link ByteBuffer}s
          * @param byteBuffers The {@link ByteBuffer}s to use as the source.
          * @return A {@code Content.Source}
