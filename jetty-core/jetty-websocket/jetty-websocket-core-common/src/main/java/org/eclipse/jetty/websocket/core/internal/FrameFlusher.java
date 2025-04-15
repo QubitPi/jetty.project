@@ -197,7 +197,7 @@ public class FrameFlusher extends IteratingCallback
         {
             closedCause = cause == null ? CLOSED_CHANNEL : cause;
         }
-        iterate();
+        abort(closedCause);
     }
 
     @Override
@@ -401,7 +401,8 @@ public class FrameFlusher extends IteratingCallback
         }
 
         if (failed)
-            this.iterate();
+            abort(closedCause);
+
     }
 
     @Override
