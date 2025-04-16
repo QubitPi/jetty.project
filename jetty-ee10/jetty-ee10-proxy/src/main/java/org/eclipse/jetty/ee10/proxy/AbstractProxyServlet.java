@@ -309,6 +309,14 @@ public abstract class AbstractProxyServlet extends HttpServlet
             value = "256";
         client.setMaxConnectionsPerDestination(Integer.parseInt(value));
 
+        value = getInitParameter("maxRequestHeadersSize");
+        if (value != null)
+            client.setMaxRequestHeadersSize(Integer.parseInt(value));
+
+        value = getInitParameter("maxResponseHeadersSize");
+        if (value != null)
+            client.setMaxResponseHeadersSize(Integer.parseInt(value));
+
         value = config.getInitParameter("idleTimeout");
         if (value == null)
             value = "30000";
