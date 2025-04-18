@@ -744,7 +744,7 @@ public class JSON
      * @param string the JSON string to parse
      * @return the object constructed from the JSON string representation
      */
-    public Object fromJSON(String string)
+    public Object fromJSON(CharSequence string)
     {
         return parse(new StringSource(string), false);
     }
@@ -1436,11 +1436,11 @@ public class JSON
      */
     public static class StringSource implements Source
     {
-        private final String string;
+        private final CharSequence string;
         private int index;
         private char[] scratch;
 
-        public StringSource(String s)
+        public StringSource(CharSequence s)
         {
             string = s;
         }
@@ -1469,7 +1469,7 @@ public class JSON
         @Override
         public String toString()
         {
-            return string.substring(0, index) + "|||" + string.substring(index);
+            return "CharSequence[index=" + index + ", length=" + string.length() + "]";
         }
 
         @Override
