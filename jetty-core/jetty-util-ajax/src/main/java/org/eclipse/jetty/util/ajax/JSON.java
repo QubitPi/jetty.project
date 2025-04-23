@@ -1467,17 +1467,17 @@ public class JSON
         }
 
         @Override
-        public String toString()
-        {
-            return "CharSequence[index=" + index + ", length=" + string.length() + "]";
-        }
-
-        @Override
         public char[] scratchBuffer()
         {
             if (scratch == null)
                 scratch = new char[string.length()];
             return scratch;
+        }
+
+        @Override
+        public String toString()
+        {
+            return "%s@%x[index=%d,length=%d]".formatted(TypeUtil.toShortName(getClass()), hashCode(), index, string.length());
         }
     }
 
