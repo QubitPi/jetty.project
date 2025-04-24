@@ -292,6 +292,13 @@ public class PerMessageDeflateExtension extends AbstractExtension implements Dem
         {
             boolean finished = deflate(callback);
             _first = false;
+
+            if (finished)
+            {
+                _frame = null;
+                getDeflater().setInput(BufferUtil.EMPTY_BUFFER);
+            }
+
             return finished;
         }
 
@@ -326,7 +333,6 @@ public class PerMessageDeflateExtension extends AbstractExtension implements Dem
 
                 if (compressed == 0)
                 {
-                    deflater.setInput(BufferUtil.EMPTY_BUFFER);
                     finished = true;
                     break;
                 }
