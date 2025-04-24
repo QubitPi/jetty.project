@@ -181,7 +181,7 @@ public class QueuedThreadPool extends ContainerLifeCycle implements ThreadFactor
             queue = new BlockingArrayQueue<>(capacity, capacity);
         }
         if (queue.remainingCapacity() != Integer.MAX_VALUE)
-            LOG.warn("Detected thread pool queue {} bounded at {} entries, which can lead to unexpected behavior. Use an unbounded queue instead.", queue, queue.remainingCapacity());
+            LOG.warn("Detected thread pool queue {} bounded at {} entries, which can lead to unexpected behavior. Use an unbounded queue instead.", queue.getClass(), queue.remainingCapacity());
         _jobs = queue;
         _threadGroup = threadGroup;
         setThreadPoolBudget(new ThreadPoolBudget(this));
