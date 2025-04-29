@@ -1,3 +1,5 @@
+jetty-12.0.21-SNAPSHOT
+
 jetty-12.0.20 - 29 April 2025
 + 13033 Added "since" and "forRemoval" attributes to AbstractLifeCycle.AbstractLifeCycleListener deprecation, and removed its usages.
 + 13029 Web-socket that use permessage-deflate extensions are keeping in memory the last message sent to the client
