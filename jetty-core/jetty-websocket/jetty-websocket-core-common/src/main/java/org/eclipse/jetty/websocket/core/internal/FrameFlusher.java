@@ -15,17 +15,17 @@ package org.eclipse.jetty.websocket.core.internal;
 
 import java.nio.ByteBuffer;
 import java.nio.channels.ClosedChannelException;
+import java.time.Duration;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.LongAdder;
 
 import org.eclipse.jetty.io.ByteBufferPool;
-import org.eclipse.jetty.io.CyclicTimeout;
+import org.eclipse.jetty.io.CyclicTimeouts;
 import org.eclipse.jetty.io.EndPoint;
 import org.eclipse.jetty.io.RetainableByteBuffer;
 import org.eclipse.jetty.util.BufferUtil;
@@ -43,13 +43,6 @@ import org.eclipse.jetty.websocket.core.exception.WebSocketWriteTimeoutException
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * <p>This is an internal class which uses {@link IteratingCallback} used to flush websocket frames out to the {@link EndPoint}.</p>
- *
- * <p>Even though this uses an iterating callback, we need an {@link AutoLock} to synchronize between the iterating callback
- * and the {@link #timeoutExpired()} method, which will iterate through the {@link #_queue} and {@link #_entries} to find
- * expired entries.</p>
- */
 public class FrameFlusher extends IteratingCallback
 {
     public static final Frame FLUSH_FRAME = new Frame(OpCode.UNDEFINED)
@@ -72,11 +65,10 @@ public class FrameFlusher extends IteratingCallback
     private final Generator _generator;
     private final int _maxGather;
     private final Deque<Entry> _queue = new ArrayDeque<>();
-    private final CyclicTimeout _cyclicTimeout;
+    private final CyclicTimeouts<Entry> _cyclicTimeouts;
     private final List<Entry> _entries;
     private final List<RetainableByteBuffer> _releasableBuffers = new ArrayList<>();
 
-    private boolean _timeoutPending = false;
     private RetainableByteBuffer _batchBuffer;
     private boolean _canEnqueue = true;
     private Throwable _closedCause;
@@ -93,12 +85,29 @@ public class FrameFlusher extends IteratingCallback
         _generator = Objects.requireNonNull(generator);
         _maxGather = maxGather;
         _entries = new ArrayList<>(maxGather);
-        _cyclicTimeout = new CyclicTimeout(scheduler)
+        _cyclicTimeouts = new CyclicTimeouts<>(scheduler)
         {
             @Override
-            public void onTimeoutExpired()
+            protected boolean onExpired(Entry expirable)
             {
-                timeoutExpired();
+                abort(new WebSocketWriteTimeoutException("FrameFlusher Frame Write Timeout"));
+                return false;
+            }
+
+            @Override
+            protected Iterator<Entry> iterator()
+            {
+                return TypeUtil.concat(_entries.iterator(), _queue.iterator());
+            }
+
+            @Override
+            protected void iterate()
+            {
+                // We need to acquire the lock before we can iterate over the queue and entries.
+                try (AutoLock l = _lock.lock())
+                {
+                    super.iterate();
+                }
             }
         };
     }
@@ -128,7 +137,7 @@ public class FrameFlusher extends IteratingCallback
         byte opCode = frame.getOpCode();
 
         Throwable error = null;
-        Throwable abort = null;
+        boolean abort = false;
         List<Entry> failedEntries = null;
         CloseStatus closeStatus = null;
 
@@ -160,38 +169,22 @@ public class FrameFlusher extends IteratingCallback
                         break;
 
                     default:
-                        _queue.offerLast(entry);
+                        if (entry.isExpired())
+                        {
+                            // For DATA frames there is a possibility that the message timeout has already expired in the
+                            // case of a partial message. In this case do not even add it to the queue and abort the connection.
+                            error = new WebSocketWriteTimeoutException("FrameFlusher Frame Write Timeout");
+                            abort = true;
+                        }
+                        else
+                        {
+                            _queue.offerLast(entry);
+                        }
                         break;
                 }
 
-                long currentTime = System.nanoTime();
-                if (_frameTimeout > 0)
-                    entry.setFrameExpiry(currentTime + _frameTimeout);
-                if (_messageTimeout > 0)
-                {
-                    if (frame.isDataFrame())
-                    {
-                        // If this is the first frame of the message remember the message timeout.
-                        if (frame.getOpCode() != OpCode.CONTINUATION)
-                            _currentMessageTimeout = currentTime + TimeUnit.MILLISECONDS.toNanos(_messageTimeout);
-                        else if (_currentMessageTimeout <= currentTime)
-                            abort = new WebSocketWriteTimeoutException("FrameFlusher Message Write Timeout");
-
-                        entry.setMessageExpiry(_currentMessageTimeout);
-                    }
-                    else
-                    {
-                        entry.setMessageExpiry(currentTime + TimeUnit.MILLISECONDS.toNanos(_messageTimeout));
-                    }
-                }
-
-                /* When the timeout expires we will go over entries in the queue and entries list to see
-                if any of them have expired, it will then reset the timeout for the frame with the soonest expiry time. */
-                if ((_frameTimeout > 0 || _messageTimeout > 0) && !_timeoutPending && abort == null)
-                {
-                    _timeoutPending = true;
-                    _cyclicTimeout.schedule(Math.min(_frameTimeout, _messageTimeout), TimeUnit.MILLISECONDS);
-                }
+                if (!abort)
+                    _cyclicTimeouts.schedule(entry);
             }
         }
 
@@ -211,12 +204,8 @@ public class FrameFlusher extends IteratingCallback
         if (error != null)
         {
             notifyCallbackFailure(callback, error);
-            return false;
-        }
-
-        if (abort != null)
-        {
-            abort(abort);
+            if (abort)
+                abort(error);
             return false;
         }
 
@@ -359,7 +348,7 @@ public class FrameFlusher extends IteratingCallback
             // If we did not get any new entries go to IDLE state
             if (entries.isEmpty())
             {
-                releaseAggregate();
+                releaseAggregateIfEmpty();
                 return Action.IDLE;
             }
 
@@ -381,69 +370,6 @@ public class FrameFlusher extends IteratingCallback
         {
             return _queue.size();
         }
-    }
-
-    private void timeoutExpired()
-    {
-        Throwable failure = null;
-        try (AutoLock l = _lock.lock())
-        {
-            if (_closedCause != null)
-                return;
-
-            long currentTime = NanoTime.now();
-            long earliestExpiry = Long.MAX_VALUE;
-
-            // Iterate through entries in both the queue and entries list, and if any entry has expired
-            // then we fail the FrameFlusher, otherwise schedule a new timeout.
-            Iterator<Entry> iterator = TypeUtil.concat(_entries.iterator(), _queue.iterator());
-            while (iterator.hasNext())
-            {
-                Entry entry = iterator.next();
-
-                // Check frame timeout.
-                long frameExpiry = entry.getFrameExpiry();
-                if (frameExpiry > 0)
-                {
-                    if (frameExpiry <= currentTime)
-                    {
-                        if (LOG.isDebugEnabled())
-                            LOG.debug("FrameFlusher frame write timeout on entry: {}", entry);
-                        failure = new WebSocketWriteTimeoutException("FrameFlusher Frame Write Timeout");
-                        break;
-                    }
-
-                    if (frameExpiry < earliestExpiry)
-                        earliestExpiry = frameExpiry;
-                }
-
-                // Check message timeout.
-                long messageExpiry = entry.getMessageExpiry();
-                if (messageExpiry > 0)
-                {
-                    if (messageExpiry <= currentTime)
-                    {
-                        if (LOG.isDebugEnabled())
-                            LOG.debug("FrameFlusher message write timeout on entry: {}", entry);
-                        failure = new WebSocketWriteTimeoutException("FrameFlusher Message Write Timeout");
-                        break;
-                    }
-
-                    if (messageExpiry < earliestExpiry)
-                        earliestExpiry = messageExpiry;
-                }
-            }
-
-            // Try to schedule a new timeout for the next earliest expiry time.
-            boolean rescheduleTimeout = (failure == null) && (earliestExpiry != Long.MAX_VALUE);
-            if (rescheduleTimeout)
-                _cyclicTimeout.schedule(earliestExpiry - currentTime, TimeUnit.NANOSECONDS);
-            else
-                _timeoutPending = false;
-        }
-
-        if (failure != null)
-            abort(failure);
     }
 
     @Override
@@ -473,7 +399,7 @@ public class FrameFlusher extends IteratingCallback
     {
         if (_batchBuffer != null)
             _batchBuffer.clear();
-        releaseAggregate();
+        releaseAggregateIfEmpty();
         List<Entry> failedEntries;
         try (AutoLock l = _lock.lock())
         {
@@ -487,6 +413,7 @@ public class FrameFlusher extends IteratingCallback
             failedEntries.addAll(_entries);
             _queue.clear();
             _entries.clear();
+            _cyclicTimeouts.destroy();
         }
 
         for (Entry entry : failedEntries)
@@ -499,7 +426,7 @@ public class FrameFlusher extends IteratingCallback
         _endPoint.close(_closedCause);
     }
 
-    private void releaseAggregate()
+    private void releaseAggregateIfEmpty()
     {
         if (_batchBuffer != null && !_batchBuffer.hasRemaining())
         {
@@ -584,40 +511,59 @@ public class FrameFlusher extends IteratingCallback
             _batchBuffer);
     }
 
-    private static class Entry extends FrameEntry
+    private class Entry extends FrameEntry implements CyclicTimeouts.Expirable
     {
-        private long _messageExpiry = -1;
-        private long _frameExpiry = -1;
+        private long _expiry = Long.MAX_VALUE;
 
         private Entry(Frame frame, Callback callback, boolean batch)
         {
             super(frame, callback, batch);
+
+            long currentTime = NanoTime.now();
+            if (_frameTimeout > 0)
+            {
+                long frameExpiry = Math.addExact(currentTime, Duration.ofMillis(_frameTimeout).toNanos());
+                _expiry = nanoTimeMin(_expiry, frameExpiry);
+            }
+            if (_messageTimeout > 0)
+            {
+                if (frame.isDataFrame())
+                {
+                    // If this is the first frame of the message remember the message timeout.
+                    if (frame.getOpCode() != OpCode.CONTINUATION)
+                        _currentMessageTimeout = Math.addExact(currentTime, Duration.ofMillis(_messageTimeout).toNanos());
+
+                    _expiry = nanoTimeMin(_expiry, _currentMessageTimeout);
+                }
+                else
+                {
+                    long messageExpiry = Math.addExact(currentTime, Duration.ofMillis(_messageTimeout).toNanos());
+                    _expiry = nanoTimeMin(_expiry, messageExpiry);
+                }
+            }
+
         }
 
-        public long getFrameExpiry()
+        @Override
+        public long getExpireNanoTime()
         {
-            return _frameExpiry;
+            return _expiry;
         }
 
-        public void setFrameExpiry(long frameExpiry)
+        public boolean isExpired()
         {
-            _frameExpiry = frameExpiry;
+            return (_expiry != Long.MAX_VALUE) && NanoTime.isBeforeOrSame(_expiry, NanoTime.now());
         }
 
-        public void setMessageExpiry(long messageExpiry)
+        private static long nanoTimeMin(long nanoTime1, long nanoTime2)
         {
-            _messageExpiry = messageExpiry;
-        }
-
-        public long getMessageExpiry()
-        {
-            return _messageExpiry;
+            return NanoTime.isBeforeOrSame(nanoTime1, nanoTime2) ? nanoTime1 : nanoTime2;
         }
 
         @Override
         public String toString()
         {
-            return String.format("%s{%s,%s,%b}", getClass().getSimpleName(), frame, callback, batch);
+            return String.format("%s{%s,%s,%b,%s}", getClass().getSimpleName(), frame, callback, batch, _expiry);
         }
     }
 }
