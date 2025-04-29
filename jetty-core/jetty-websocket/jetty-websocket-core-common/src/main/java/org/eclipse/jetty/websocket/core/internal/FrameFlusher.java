@@ -437,7 +437,7 @@ public class FrameFlusher extends IteratingCallback
             // Try to schedule a new timeout for the next earliest expiry time.
             boolean rescheduleTimeout = (failure == null) && (earliestExpiry != Long.MAX_VALUE);
             if (rescheduleTimeout)
-                _cyclicTimeout.schedule(earliestExpiry - currentTime, TimeUnit.MILLISECONDS);
+                _cyclicTimeout.schedule(earliestExpiry - currentTime, TimeUnit.NANOSECONDS);
             else
                 _timeoutPending = false;
         }
