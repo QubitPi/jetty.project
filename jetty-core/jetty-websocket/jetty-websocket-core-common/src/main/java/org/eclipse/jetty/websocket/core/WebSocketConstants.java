@@ -65,7 +65,18 @@ public final class WebSocketConstants
     /**
      * The default maximum time a frame may be waiting to be sent.
      */
-    public static final Duration DEFAULT_WRITE_TIMEOUT = Duration.ZERO;
+    public static final Duration DEFAULT_FRAME_WRITE_TIMEOUT = Duration.ZERO;
+
+    /**
+     * The default maximum time a message may be waiting to be sent.
+     */
+    public static final Duration DEFAULT_MESSAGE_WRITE_TIMEOUT = Duration.ZERO;
+
+    /**
+     * The default maximum time a frame may be waiting to be sent.
+     */
+    @Deprecated
+    public static final Duration DEFAULT_WRITE_TIMEOUT = DEFAULT_FRAME_WRITE_TIMEOUT;
 
     // Attributes for storing API requests as attributes on the base jetty-core request.
     public static final String WEBSOCKET_WRAPPED_REQUEST_ATTRIBUTE = "org.eclipse.jetty.websocket.wrappedRequest";

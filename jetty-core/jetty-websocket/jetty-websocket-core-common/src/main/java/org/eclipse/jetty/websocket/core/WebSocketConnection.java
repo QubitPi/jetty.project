@@ -179,9 +179,20 @@ public class WebSocketConnection extends AbstractConnection implements Connectio
         return useInputDirectByteBuffers;
     }
 
+    @Deprecated
     public void setWriteTimeout(long writeTimeout)
     {
         flusher.setIdleTimeout(writeTimeout);
+    }
+
+    public void setFrameWriteTimeout(long writeTimeout)
+    {
+        flusher.setFrameWriteTimeout(writeTimeout);
+    }
+
+    public void setMessageWriteTimeout(long writeTimeout)
+    {
+        flusher.setMessageWriteTimeout(writeTimeout);
     }
 
     public void setUseInputDirectByteBuffers(boolean useInputDirectByteBuffers)

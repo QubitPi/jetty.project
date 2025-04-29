@@ -91,12 +91,12 @@ public class JakartaWebSocketRemoteEndpoint implements jakarta.websocket.RemoteE
 
     public long getWriteTimeout()
     {
-        return coreSession.getWriteTimeout().toMillis();
+        return coreSession.getMessageWriteTimeout().toMillis();
     }
 
     public void setWriteTimeout(long ms)
     {
-        coreSession.setWriteTimeout(Duration.ofMillis(ms));
+        coreSession.setMessageWriteTimeout(Duration.ofMillis(ms));
     }
 
     @Override

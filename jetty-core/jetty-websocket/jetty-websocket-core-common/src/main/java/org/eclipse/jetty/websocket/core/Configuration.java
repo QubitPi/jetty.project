@@ -28,8 +28,24 @@ public interface Configuration
      * Get the Write Timeout
      *
      * @return the write timeout
+     * @deprecated use {@link #getFrameWriteTimeout()} or {@link #getMessageWriteTimeout()}.
      */
+    @Deprecated
     Duration getWriteTimeout();
+
+    /**
+     * Get the Frame Write Timeout
+     *
+     * @return the write timeout
+     */
+    Duration getFrameWriteTimeout();
+
+    /**
+     * Get the Message Write Timeout
+     *
+     * @return the write timeout
+     */
+    Duration getMessageWriteTimeout();
 
     /**
      * Set the Idle Timeout.
@@ -39,11 +55,27 @@ public interface Configuration
     void setIdleTimeout(Duration timeout);
 
     /**
-     * Set the Write Timeout.
+     * Set the Frame Write Timeout.
      *
      * @param timeout the timeout duration (timeout &lt;= 0 implies an infinite timeout)
+     * @deprecated use {@link #setFrameWriteTimeout(Duration)} or {@link #setMessageWriteTimeout(Duration)}.
      */
+    @Deprecated
     void setWriteTimeout(Duration timeout);
+
+    /**
+     * Set the Frame Write Timeout.
+     *
+     * @param timeout the timeout duration (timeout &lt;= 0 implies an infinite timeout).
+     */
+    void setFrameWriteTimeout(Duration timeout);
+
+    /**
+     * Set the Message Write Timeout.
+     *
+     * @param timeout the timeout duration (timeout &lt;= 0 implies an infinite timeout).
+     */
+    void setMessageWriteTimeout(Duration timeout);
 
     boolean isAutoFragment();
 
@@ -99,7 +131,8 @@ public interface Configuration
     class ConfigurationCustomizer implements Configuration, Customizer
     {
         private Duration idleTimeout;
-        private Duration writeTimeout;
+        private Duration frameTimeout;
+        private Duration messageTimeout;
         private Boolean autoFragment;
         private Long maxFrameSize;
         private Integer outputBufferSize;
@@ -117,7 +150,19 @@ public interface Configuration
         @Override
         public Duration getWriteTimeout()
         {
-            return writeTimeout == null ? WebSocketConstants.DEFAULT_WRITE_TIMEOUT : writeTimeout;
+            return getFrameWriteTimeout();
+        }
+
+        @Override
+        public Duration getFrameWriteTimeout()
+        {
+            return frameTimeout == null ? WebSocketConstants.DEFAULT_FRAME_WRITE_TIMEOUT : frameTimeout;
+        }
+
+        @Override
+        public Duration getMessageWriteTimeout()
+        {
+            return messageTimeout == null ? WebSocketConstants.DEFAULT_MESSAGE_WRITE_TIMEOUT : messageTimeout;
         }
 
         @Override
@@ -129,7 +174,19 @@ public interface Configuration
         @Override
         public void setWriteTimeout(Duration timeout)
         {
-            this.writeTimeout = timeout;
+            setFrameWriteTimeout(timeout);
+        }
+
+        @Override
+        public void setFrameWriteTimeout(Duration timeout)
+        {
+            this.frameTimeout = timeout;
+        }
+
+        @Override
+        public void setMessageWriteTimeout(Duration timeout)
+        {
+            this.messageTimeout = timeout;
         }
 
         @Override
@@ -221,8 +278,10 @@ public interface Configuration
         {
             if (idleTimeout != null)
                 configurable.setIdleTimeout(idleTimeout);
-            if (writeTimeout != null)
-                configurable.setWriteTimeout(writeTimeout);
+            if (frameTimeout != null)
+                configurable.setFrameWriteTimeout(frameTimeout);
+            if (messageTimeout != null)
+                configurable.setMessageWriteTimeout(messageTimeout);
             if (autoFragment != null)
                 configurable.setAutoFragment(autoFragment);
             if (maxFrameSize != null)
@@ -242,10 +301,10 @@ public interface Configuration
         @Override
         public String toString()
         {
-            return String.format("%s@%x{idleTimeout=%s, writeTimeout=%s, autoFragment=%s, maxFrameSize=%s, " +
+            return String.format("%s@%x{idleTimeout=%s, frameWriteTimeout=%s, messageWriteTimeout=%s, autoFragment=%s, maxFrameSize=%s, " +
                     "inputBufferSize=%s, outputBufferSize=%s, maxBinaryMessageSize=%s, maxTextMessageSize=%s, maxOutgoingFrames=%s}",
                 getClass().getSimpleName(), hashCode(),
-                idleTimeout, writeTimeout, autoFragment, maxFrameSize, inputBufferSize, outputBufferSize,
+                idleTimeout, frameTimeout, messageTimeout, autoFragment, maxFrameSize, inputBufferSize, outputBufferSize,
                 maxBinaryMessageSize, maxTextMessageSize, maxOutgoingFrames);
         }
     }
