@@ -105,7 +105,7 @@ public abstract class JakartaWebSocketContainer extends ContainerLifeCycle imple
     @Override
     public void setAsyncSendTimeout(long ms)
     {
-        defaultCustomizer.setWriteTimeout(Duration.ofMillis(ms));
+        defaultCustomizer.setMessageWriteTimeout(Duration.ofMillis(ms));
     }
 
     @Override
