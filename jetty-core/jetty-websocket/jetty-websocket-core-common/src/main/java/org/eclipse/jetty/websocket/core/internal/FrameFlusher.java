@@ -68,6 +68,7 @@ public class FrameFlusher extends IteratingCallback
     private final CyclicTimeouts<Entry> _cyclicTimeouts;
     private final List<Entry> _entries;
     private final List<RetainableByteBuffer> _releasableBuffers = new ArrayList<>();
+    private final List<Entry> _processingEntries = new ArrayList<>();
 
     private RetainableByteBuffer _batchBuffer;
     private boolean _canEnqueue = true;
@@ -87,10 +88,13 @@ public class FrameFlusher extends IteratingCallback
         _entries = new ArrayList<>(maxGather);
         _cyclicTimeouts = new CyclicTimeouts<>(scheduler)
         {
+            private boolean _expired = false;
+
             @Override
             protected boolean onExpired(Entry expirable)
             {
-                abort(new WebSocketWriteTimeoutException("FrameFlusher Frame Write Timeout"));
+                // This is called with lock held so we delay the abort until we exit the lock in iterate().
+                _expired = true;
                 return false;
             }
 
@@ -108,6 +112,10 @@ public class FrameFlusher extends IteratingCallback
                 {
                     super.iterate();
                 }
+
+                // Abort the flusher if any entries have timed out.
+                if (_expired)
+                    abort(new WebSocketWriteTimeoutException("FrameFlusher Frame Write Timeout"));
             }
         };
     }
@@ -229,13 +237,13 @@ public class FrameFlusher extends IteratingCallback
         if (LOG.isDebugEnabled())
             LOG.debug("Flushing {}", this);
 
-        List<Entry> entries = new ArrayList<>();
         boolean flush = false;
         try (AutoLock l = _lock.lock())
         {
             if (_closedCause != null)
                 throw _closedCause;
 
+            assert _processingEntries.isEmpty();
             while (!_queue.isEmpty() && _entries.size() <= _maxGather)
             {
                 Entry entry = _queue.poll();
@@ -247,7 +255,7 @@ public class FrameFlusher extends IteratingCallback
                 }
                 else
                 {
-                    entries.add(entry);
+                    _processingEntries.add(entry);
                 }
             }
         }
@@ -257,7 +265,7 @@ public class FrameFlusher extends IteratingCallback
         List<ByteBuffer> buffers = new ArrayList<>((_maxGather * 2) + 1);
         if (_batchBuffer != null)
             buffers.add(_batchBuffer.getByteBuffer());
-        for (Entry entry : entries)
+        for (Entry entry : _processingEntries)
         {
             _messagesOut.increment();
 
@@ -318,9 +326,11 @@ public class FrameFlusher extends IteratingCallback
         if (LOG.isDebugEnabled())
             LOG.debug("{} processed {} entries flush={}: {}",
                 this,
-                entries.size(),
+                _processingEntries.size(),
                 flush,
-                entries);
+                _processingEntries);
+        boolean hadEntries = !_processingEntries.isEmpty();
+        _processingEntries.clear();
 
         if (flush)
         {
@@ -346,7 +356,7 @@ public class FrameFlusher extends IteratingCallback
         else
         {
             // If we did not get any new entries go to IDLE state
-            if (entries.isEmpty())
+            if (!hadEntries)
             {
                 releaseAggregateIfEmpty();
                 return Action.IDLE;
