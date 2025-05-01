@@ -15,13 +15,13 @@ package org.eclipse.jetty.websocket.core.internal;
 
 import java.nio.ByteBuffer;
 import java.nio.channels.ClosedChannelException;
-import java.time.Duration;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.LongAdder;
 
 import org.eclipse.jetty.io.ByteBufferPool;
@@ -532,7 +532,7 @@ public class FrameFlusher extends IteratingCallback
             long currentTime = NanoTime.now();
             if (_frameTimeout > 0)
             {
-                long frameExpiry = Math.addExact(currentTime, Duration.ofMillis(_frameTimeout).toNanos());
+                long frameExpiry = Math.addExact(currentTime, TimeUnit.MILLISECONDS.toNanos(_frameTimeout));
                 _expiry = nanoTimeMin(_expiry, frameExpiry);
             }
             if (_messageTimeout > 0)
@@ -541,13 +541,12 @@ public class FrameFlusher extends IteratingCallback
                 {
                     // If this is the first frame of the message remember the message timeout.
                     if (frame.getOpCode() != OpCode.CONTINUATION)
-                        _currentMessageTimeout = Math.addExact(currentTime, Duration.ofMillis(_messageTimeout).toNanos());
-
+                        _currentMessageTimeout = Math.addExact(currentTime, TimeUnit.MILLISECONDS.toNanos(_messageTimeout));
                     _expiry = nanoTimeMin(_expiry, _currentMessageTimeout);
                 }
                 else
                 {
-                    long messageExpiry = Math.addExact(currentTime, Duration.ofMillis(_messageTimeout).toNanos());
+                    long messageExpiry = Math.addExact(currentTime, TimeUnit.MILLISECONDS.toNanos(_messageTimeout));
                     _expiry = nanoTimeMin(_expiry, messageExpiry);
                 }
             }
