@@ -64,11 +64,11 @@ public class FrameFlusher extends IteratingCallback
     private final int _bufferSize;
     private final Generator _generator;
     private final int _maxGather;
-    private final Deque<Entry> _queue = new ArrayDeque<>();
     private final CyclicTimeouts<Entry> _cyclicTimeouts;
-    private final List<Entry> _entries;
+    private final Deque<Entry> _queue = new ArrayDeque<>();
+    private final List<Entry> _currentEntries;
+    private final List<Entry> _completedEntries = new ArrayList<>();
     private final List<RetainableByteBuffer> _releasableBuffers = new ArrayList<>();
-    private final List<Entry> _processingEntries = new ArrayList<>();
 
     private RetainableByteBuffer _batchBuffer;
     private boolean _canEnqueue = true;
@@ -85,7 +85,7 @@ public class FrameFlusher extends IteratingCallback
         _bufferSize = bufferSize;
         _generator = Objects.requireNonNull(generator);
         _maxGather = maxGather;
-        _entries = new ArrayList<>(maxGather);
+        _currentEntries = new ArrayList<>(maxGather);
         _cyclicTimeouts = new CyclicTimeouts<>(scheduler)
         {
             private boolean _expired = false;
@@ -101,7 +101,7 @@ public class FrameFlusher extends IteratingCallback
             @Override
             protected Iterator<Entry> iterator()
             {
-                return TypeUtil.concat(_entries.iterator(), _queue.iterator());
+                return TypeUtil.concat(_currentEntries.iterator(), _queue.iterator());
             }
 
             @Override
@@ -243,30 +243,27 @@ public class FrameFlusher extends IteratingCallback
             if (_closedCause != null)
                 throw _closedCause;
 
-            assert _processingEntries.isEmpty();
-            while (!_queue.isEmpty() && _entries.size() <= _maxGather)
+            while (!_queue.isEmpty() && _currentEntries.size() <= _maxGather)
             {
                 Entry entry = _queue.poll();
-                _entries.add(entry);
+                _currentEntries.add(entry);
                 if (entry.frame == FLUSH_FRAME)
                 {
                     flush = true;
                     break;
                 }
-                else
-                {
-                    _processingEntries.add(entry);
-                }
             }
         }
 
-        // Process the entries outside the lock.
+        // Process the entries outside the lock, as inside the ICB we only need the lock to modify _entries but not iterate it.
         boolean canBatch = true;
         List<ByteBuffer> buffers = new ArrayList<>((_maxGather * 2) + 1);
         if (_batchBuffer != null)
             buffers.add(_batchBuffer.getByteBuffer());
-        for (Entry entry : _processingEntries)
+        for (Entry entry : _currentEntries)
         {
+            if (entry.frame == FLUSH_FRAME)
+                continue;
             _messagesOut.increment();
 
             int batchSpace = _batchBuffer == null ? _bufferSize : BufferUtil.space(_batchBuffer.getByteBuffer());
@@ -326,11 +323,9 @@ public class FrameFlusher extends IteratingCallback
         if (LOG.isDebugEnabled())
             LOG.debug("{} processed {} entries flush={}: {}",
                 this,
-                _processingEntries.size(),
+                _currentEntries.size(),
                 flush,
-                _processingEntries);
-        boolean hadEntries = !_processingEntries.isEmpty();
-        _processingEntries.clear();
+                _currentEntries);
 
         if (flush)
         {
@@ -356,7 +351,7 @@ public class FrameFlusher extends IteratingCallback
         else
         {
             // If we did not get any new entries go to IDLE state
-            if (!hadEntries)
+            if (_currentEntries.isEmpty())
             {
                 releaseAggregateIfEmpty();
                 return Action.IDLE;
@@ -385,19 +380,20 @@ public class FrameFlusher extends IteratingCallback
     @Override
     protected void onSuccess()
     {
-        List<Entry> succeededEntries;
         try (AutoLock l = _lock.lock())
         {
-            succeededEntries = new ArrayList<>(_entries);
-            _entries.clear();
+            assert _completedEntries.isEmpty();
+            _completedEntries.addAll(_currentEntries);
+            _currentEntries.clear();
         }
 
-        for (Entry entry : succeededEntries)
+        for (Entry entry : _completedEntries)
         {
             if (entry.frame.getOpCode() == OpCode.CLOSE)
                 _endPoint.shutdownOutput();
             notifyCallbackSuccess(entry.callback);
         }
+        _completedEntries.clear();
 
         _releasableBuffers.forEach(RetainableByteBuffer::release);
         _releasableBuffers.clear();
@@ -410,7 +406,6 @@ public class FrameFlusher extends IteratingCallback
         if (_batchBuffer != null)
             _batchBuffer.clear();
         releaseAggregateIfEmpty();
-        List<Entry> failedEntries;
         try (AutoLock l = _lock.lock())
         {
             // Ensure no more entries can be enqueued.
@@ -419,17 +414,20 @@ public class FrameFlusher extends IteratingCallback
                 _closedCause = failure;
             else if (_closedCause != failure)
                 _closedCause.addSuppressed(failure);
-            failedEntries = new ArrayList<>(_queue);
-            failedEntries.addAll(_entries);
+
+            assert _completedEntries.isEmpty();
+            _completedEntries.addAll(_queue);
+            _completedEntries.addAll(_currentEntries);
             _queue.clear();
-            _entries.clear();
+            _currentEntries.clear();
             _cyclicTimeouts.destroy();
         }
 
-        for (Entry entry : failedEntries)
+        for (Entry entry : _completedEntries)
         {
             notifyCallbackFailure(entry.callback, failure);
         }
+        _completedEntries.clear();
 
         _releasableBuffers.forEach(RetainableByteBuffer::release);
         _releasableBuffers.clear();
