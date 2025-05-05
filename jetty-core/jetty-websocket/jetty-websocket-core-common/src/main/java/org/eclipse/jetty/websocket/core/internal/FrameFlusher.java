@@ -521,17 +521,17 @@ public class FrameFlusher extends IteratingCallback
 
     private class Entry extends FrameEntry implements CyclicTimeouts.Expirable
     {
-        private long _expiry = Long.MAX_VALUE;
+        private final long _expiry;
 
         private Entry(Frame frame, Callback callback, boolean batch)
         {
             super(frame, callback, batch);
 
             long currentTime = NanoTime.now();
+            long expiry = Long.MAX_VALUE;
             if (_frameTimeout > 0)
             {
-                long frameExpiry = Math.addExact(currentTime, TimeUnit.MILLISECONDS.toNanos(_frameTimeout));
-                _expiry = nanoTimeMin(_expiry, frameExpiry);
+                expiry = Math.addExact(currentTime, TimeUnit.MILLISECONDS.toNanos(_frameTimeout));
             }
             if (_messageTimeout > 0)
             {
@@ -540,15 +540,15 @@ public class FrameFlusher extends IteratingCallback
                     // If this is the first frame of the message remember the message timeout.
                     if (frame.getOpCode() != OpCode.CONTINUATION)
                         _currentMessageTimeout = Math.addExact(currentTime, TimeUnit.MILLISECONDS.toNanos(_messageTimeout));
-                    _expiry = nanoTimeMin(_expiry, _currentMessageTimeout);
+                    expiry = (expiry == Long.MAX_VALUE) ? _currentMessageTimeout : nanoTimeMin(expiry, _currentMessageTimeout);
                 }
                 else
                 {
                     long messageExpiry = Math.addExact(currentTime, TimeUnit.MILLISECONDS.toNanos(_messageTimeout));
-                    _expiry = nanoTimeMin(_expiry, messageExpiry);
+                    expiry = (expiry == Long.MAX_VALUE) ? messageExpiry : nanoTimeMin(expiry, messageExpiry);
                 }
             }
-
+            _expiry = expiry;
         }
 
         @Override
