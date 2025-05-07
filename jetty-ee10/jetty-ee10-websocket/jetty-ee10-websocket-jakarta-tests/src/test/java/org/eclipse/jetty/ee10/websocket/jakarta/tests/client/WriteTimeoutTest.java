@@ -14,6 +14,7 @@
 package org.eclipse.jetty.ee10.websocket.jakarta.tests.client;
 
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import jakarta.websocket.EndpointConfig;
@@ -36,6 +37,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WriteTimeoutTest
 {
+    private static final CountDownLatch MESSAGE_LATCH = new CountDownLatch(1);
+
     @ServerEndpoint("/")
     public static class ServerSocket extends EventSocket
     {
@@ -52,7 +55,7 @@ public class WriteTimeoutTest
         {
             try
             {
-                Thread.sleep(5000);
+                assertTrue(MESSAGE_LATCH.await(10, TimeUnit.SECONDS));
             }
             catch (InterruptedException e)
             {
@@ -99,6 +102,9 @@ public class WriteTimeoutTest
         });
         assertThat(exception.getCause(), instanceOf(WebSocketWriteTimeoutException.class));
 
+        // Unblock the thread in onMessage() on the server endpoint.
+        MESSAGE_LATCH.countDown();
+
         assertTrue(clientEndpoint.closeLatch.await(5, TimeUnit.SECONDS));
         assertTrue(clientEndpoint.errorLatch.await(5, TimeUnit.SECONDS));
         assertThat(clientEndpoint.error, instanceOf(WebSocketWriteTimeoutException.class));
@@ -110,6 +116,7 @@ public class WriteTimeoutTest
         EventSocket clientEndpoint = new EventSocket();
         Session session = client.connectToServer(clientEndpoint, server.getWsUri());
         session.getAsyncRemote().setSendTimeout(1000);
+        MESSAGE_LATCH.countDown();
 
         RemoteEndpoint.Basic basicRemote = session.getBasicRemote();
         basicRemote.sendText("hello", false);

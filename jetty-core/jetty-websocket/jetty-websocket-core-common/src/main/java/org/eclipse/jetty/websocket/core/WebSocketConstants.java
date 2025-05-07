@@ -75,7 +75,7 @@ public final class WebSocketConstants
     /**
      * The default maximum time a frame may be waiting to be sent.
      */
-    @Deprecated
+    @Deprecated(since = "12.0.21", forRemoval = true)
     public static final Duration DEFAULT_WRITE_TIMEOUT = DEFAULT_FRAME_WRITE_TIMEOUT;
 
     // Attributes for storing API requests as attributes on the base jetty-core request.

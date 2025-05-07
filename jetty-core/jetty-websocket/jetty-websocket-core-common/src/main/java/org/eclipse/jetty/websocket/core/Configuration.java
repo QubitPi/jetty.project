@@ -30,7 +30,7 @@ public interface Configuration
      * @return the write timeout
      * @deprecated use {@link #getFrameWriteTimeout()} or {@link #getMessageWriteTimeout()}.
      */
-    @Deprecated
+    @Deprecated(since = "12.0.21", forRemoval = true)
     Duration getWriteTimeout();
 
     /**
@@ -60,7 +60,7 @@ public interface Configuration
      * @param timeout the timeout duration (timeout &lt;= 0 implies an infinite timeout)
      * @deprecated use {@link #setFrameWriteTimeout(Duration)} or {@link #setMessageWriteTimeout(Duration)}.
      */
-    @Deprecated
+    @Deprecated(since = "12.0.21", forRemoval = true)
     void setWriteTimeout(Duration timeout);
 
     /**

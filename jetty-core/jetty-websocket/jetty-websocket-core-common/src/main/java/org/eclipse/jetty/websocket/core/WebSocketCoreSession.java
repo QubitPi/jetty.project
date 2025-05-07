@@ -22,6 +22,7 @@ import java.nio.channels.WritePendingException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -169,17 +170,19 @@ public class WebSocketCoreSession implements CoreSession, Dumpable
     @Override
     public void setFrameWriteTimeout(Duration timeout)
     {
-        frameWriteTimeout = timeout;
-        if (getConnection() != null)
-            getConnection().setFrameWriteTimeout(timeout.toMillis());
+        frameWriteTimeout = Objects.requireNonNull(timeout);
+        WebSocketConnection connection = getConnection();
+        if (connection != null)
+            connection.setFrameWriteTimeout(timeout.toMillis());
     }
 
     @Override
     public void setMessageWriteTimeout(Duration timeout)
     {
-        messageWriteTimeout = timeout;
-        if (getConnection() != null)
-            getConnection().setMessageWriteTimeout(timeout.toMillis());
+        messageWriteTimeout = Objects.requireNonNull(timeout);
+        WebSocketConnection connection = getConnection();
+        if (connection != null)
+            connection.setMessageWriteTimeout(timeout.toMillis());
     }
 
     public SocketAddress getLocalAddress()

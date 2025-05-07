@@ -179,7 +179,7 @@ public class WebSocketConnection extends AbstractConnection implements Connectio
         return useInputDirectByteBuffers;
     }
 
-    @Deprecated
+    @Deprecated(since = "12.0.21", forRemoval = true)
     public void setWriteTimeout(long writeTimeout)
     {
         flusher.setIdleTimeout(writeTimeout);
