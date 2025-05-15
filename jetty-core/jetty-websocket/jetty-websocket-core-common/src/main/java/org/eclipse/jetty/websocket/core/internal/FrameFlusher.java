@@ -74,9 +74,7 @@ public class FrameFlusher extends IteratingCallback
     private boolean _canEnqueue = true;
     private Throwable _closedCause;
     private long _frameTimeout;
-    private long _messageTimeout;
     private boolean _useDirectByteBuffers;
-    private long _currentMessageTimeout;
 
     public FrameFlusher(ByteBufferPool bufferPool, Scheduler scheduler, Generator generator, EndPoint endPoint, int bufferSize, int maxGather)
     {
@@ -475,29 +473,9 @@ public class FrameFlusher extends IteratingCallback
         }
     }
 
-    /**
-     * @deprecated use {@link #setFrameWriteTimeout(long)} or {@link #setMessageWriteTimeout(long)}.
-     */
-    @Deprecated
-    public void setIdleTimeout(long idleTimeout)
+    public void setFrameWriteTimeout(long idleTimeout)
     {
         _frameTimeout = idleTimeout;
-    }
-
-    @Deprecated
-    public long getIdleTimeout()
-    {
-        return _frameTimeout;
-    }
-
-    public void setFrameWriteTimeout(long writeTimeout)
-    {
-        _frameTimeout = writeTimeout;
-    }
-
-    public void setMessageWriteTimeout(long writeTimeout)
-    {
-        _messageTimeout = writeTimeout;
     }
 
     public long getMessagesOut()
@@ -533,21 +511,7 @@ public class FrameFlusher extends IteratingCallback
             {
                 expiry = Math.addExact(currentTime, TimeUnit.MILLISECONDS.toNanos(_frameTimeout));
             }
-            if (_messageTimeout > 0)
-            {
-                if (frame.isDataFrame())
-                {
-                    // If this is the first frame of the message remember the message timeout.
-                    if (frame.getOpCode() != OpCode.CONTINUATION)
-                        _currentMessageTimeout = Math.addExact(currentTime, TimeUnit.MILLISECONDS.toNanos(_messageTimeout));
-                    expiry = (expiry == Long.MAX_VALUE) ? _currentMessageTimeout : nanoTimeMin(expiry, _currentMessageTimeout);
-                }
-                else
-                {
-                    long messageExpiry = Math.addExact(currentTime, TimeUnit.MILLISECONDS.toNanos(_messageTimeout));
-                    expiry = (expiry == Long.MAX_VALUE) ? messageExpiry : nanoTimeMin(expiry, messageExpiry);
-                }
-            }
+
             _expiry = expiry;
         }
 
@@ -560,11 +524,6 @@ public class FrameFlusher extends IteratingCallback
         public boolean isExpired()
         {
             return (_expiry != Long.MAX_VALUE) && NanoTime.isBeforeOrSame(_expiry, NanoTime.now());
-        }
-
-        private static long nanoTimeMin(long nanoTime1, long nanoTime2)
-        {
-            return NanoTime.isBeforeOrSame(nanoTime1, nanoTime2) ? nanoTime1 : nanoTime2;
         }
 
         @Override

@@ -70,8 +70,7 @@ public class WebSocketCoreSession implements CoreSession, Dumpable
     private long maxBinaryMessageSize = WebSocketConstants.DEFAULT_MAX_BINARY_MESSAGE_SIZE;
     private long maxTextMessageSize = WebSocketConstants.DEFAULT_MAX_TEXT_MESSAGE_SIZE;
     private Duration idleTimeout = WebSocketConstants.DEFAULT_IDLE_TIMEOUT;
-    private Duration frameWriteTimeout = WebSocketConstants.DEFAULT_FRAME_WRITE_TIMEOUT;
-    private Duration messageWriteTimeout = WebSocketConstants.DEFAULT_MESSAGE_WRITE_TIMEOUT;
+    private Duration frameWriteTimeout = WebSocketConstants.DEFAULT_WRITE_TIMEOUT;
     private ClassLoader classLoader;
 
     public WebSocketCoreSession(FrameHandler handler, Behavior behavior, Negotiated negotiated, WebSocketComponents components)
@@ -146,43 +145,16 @@ public class WebSocketCoreSession implements CoreSession, Dumpable
     @Override
     public Duration getWriteTimeout()
     {
-        return getFrameWriteTimeout();
-    }
-
-    @Override
-    public Duration getFrameWriteTimeout()
-    {
         return frameWriteTimeout;
-    }
-
-    @Override
-    public Duration getMessageWriteTimeout()
-    {
-        return messageWriteTimeout;
     }
 
     @Override
     public void setWriteTimeout(Duration timeout)
     {
-        setFrameWriteTimeout(timeout);
-    }
-
-    @Override
-    public void setFrameWriteTimeout(Duration timeout)
-    {
         frameWriteTimeout = Objects.requireNonNull(timeout);
         WebSocketConnection connection = getConnection();
         if (connection != null)
-            connection.setFrameWriteTimeout(timeout.toMillis());
-    }
-
-    @Override
-    public void setMessageWriteTimeout(Duration timeout)
-    {
-        messageWriteTimeout = Objects.requireNonNull(timeout);
-        WebSocketConnection connection = getConnection();
-        if (connection != null)
-            connection.setMessageWriteTimeout(timeout.toMillis());
+            connection.setWriteTimeout(timeout.toMillis());
     }
 
     public SocketAddress getLocalAddress()
@@ -219,8 +191,7 @@ public class WebSocketCoreSession implements CoreSession, Dumpable
     public void setWebSocketConnection(WebSocketConnection connection)
     {
         connection.getEndPoint().setIdleTimeout(idleTimeout.toMillis());
-        connection.setFrameWriteTimeout(frameWriteTimeout.toMillis());
-        connection.setMessageWriteTimeout(messageWriteTimeout.toMillis());
+        connection.setWriteTimeout(frameWriteTimeout.toMillis());
         extensionStack.setLastDemand(connection::demand);
         this.connection = connection;
     }

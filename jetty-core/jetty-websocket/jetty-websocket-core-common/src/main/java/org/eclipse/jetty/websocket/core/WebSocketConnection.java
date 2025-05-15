@@ -182,17 +182,7 @@ public class WebSocketConnection extends AbstractConnection implements Connectio
     @Deprecated(since = "12.0.21", forRemoval = true)
     public void setWriteTimeout(long writeTimeout)
     {
-        flusher.setIdleTimeout(writeTimeout);
-    }
-
-    public void setFrameWriteTimeout(long writeTimeout)
-    {
         flusher.setFrameWriteTimeout(writeTimeout);
-    }
-
-    public void setMessageWriteTimeout(long writeTimeout)
-    {
-        flusher.setMessageWriteTimeout(writeTimeout);
     }
 
     public void setUseInputDirectByteBuffers(boolean useInputDirectByteBuffers)
