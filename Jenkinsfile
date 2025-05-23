@@ -158,7 +158,7 @@ def mavenBuild(jdk, cmdline, mvnName) {
             archiveArtifacts artifacts: ".repository/org/eclipse/jetty/jetty-home/**/jetty-home-*", allowEmptyArchive: true, onlyIfSuccessful: false
           }
           // temporary logs to remove
-          sh "ls -lrt ls -lrt ~/.mimir/"
+          sh "ls -lrt ~/.mimir/"
         }
       }
     }
