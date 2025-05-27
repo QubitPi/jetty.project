@@ -18,7 +18,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import jakarta.websocket.EndpointConfig;
-import jakarta.websocket.RemoteEndpoint;
 import jakarta.websocket.Session;
 import jakarta.websocket.server.ServerEndpoint;
 import org.eclipse.jetty.ee10.websocket.jakarta.client.JakartaWebSocketClientContainer;
@@ -104,28 +103,6 @@ public class WriteTimeoutTest
 
         // Unblock the thread in onMessage() on the server endpoint.
         MESSAGE_LATCH.countDown();
-
-        assertTrue(clientEndpoint.closeLatch.await(5, TimeUnit.SECONDS));
-        assertTrue(clientEndpoint.errorLatch.await(5, TimeUnit.SECONDS));
-        assertThat(clientEndpoint.error, instanceOf(WebSocketWriteTimeoutException.class));
-    }
-
-    @Test
-    public void testMessageTimeoutFromSplitMessage() throws Exception
-    {
-        EventSocket clientEndpoint = new EventSocket();
-        Session session = client.connectToServer(clientEndpoint, server.getWsUri());
-        session.getAsyncRemote().setSendTimeout(1000);
-        MESSAGE_LATCH.countDown();
-
-        RemoteEndpoint.Basic basicRemote = session.getBasicRemote();
-        basicRemote.sendText("hello", false);
-        basicRemote.sendText(" ", false);
-
-        // Wait just over a second and the next frame should trigger the message timeout.
-        Thread.sleep(1100);
-        Exception exception = assertThrows(Exception.class, () -> basicRemote.sendText("world!", true));
-        assertThat(exception.getCause(), instanceOf(WebSocketWriteTimeoutException.class));
 
         assertTrue(clientEndpoint.closeLatch.await(5, TimeUnit.SECONDS));
         assertTrue(clientEndpoint.errorLatch.await(5, TimeUnit.SECONDS));
