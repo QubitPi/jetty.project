@@ -508,10 +508,7 @@ public class FrameFlusher extends IteratingCallback
             long currentTime = NanoTime.now();
             long expiry = Long.MAX_VALUE;
             if (_frameTimeout > 0)
-            {
-                expiry = Math.addExact(currentTime, TimeUnit.MILLISECONDS.toNanos(_frameTimeout));
-            }
-
+                expiry = currentTime + TimeUnit.MILLISECONDS.toNanos(_frameTimeout);
             _expiry = expiry;
         }
 
@@ -523,13 +520,13 @@ public class FrameFlusher extends IteratingCallback
 
         public boolean isExpired()
         {
-            return (_expiry != Long.MAX_VALUE) && NanoTime.isBeforeOrSame(_expiry, NanoTime.now());
+            return (_expiry != Long.MAX_VALUE) && NanoTime.until(_expiry) < 0;
         }
 
         @Override
         public String toString()
         {
-            return String.format("%s{%s,%s,%b,%s}", getClass().getSimpleName(), frame, callback, batch, _expiry);
+            return String.format("%s{%s,%s,batch=%b,expire=%s}", TypeUtil.toShortName(getClass()), frame, callback, batch, NanoTime.millisUntil(_expiry));
         }
     }
 }
