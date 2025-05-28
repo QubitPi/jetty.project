@@ -77,6 +77,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static org.awaitility.Awaitility.await;
+import static org.eclipse.jetty.tests.testers.ProcessWrapper.JETTY_START_SEARCH;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
@@ -416,8 +417,9 @@ public class DistributionTests extends AbstractJettyHomeTest
         );
         try (JettyHomeTester.Run run1 = distribution.start("--approve-all-licenses", "--add-modules=" + mods))
         {
-            assertTrue(run1.awaitFor(START_TIMEOUT, TimeUnit.SECONDS));
+            assertTrue(run1.awaitForStart());
             assertEquals(0, run1.getExitValue());
+            LOG.atInfo().setMessage(run1.logs().get()).log();
             assertTrue(Files.exists(distribution.getJettyBase().resolve("resources/log4j2.xml")));
 
             Path war = distribution.resolveArtifact("org.eclipse.jetty." + env + ".demos:jetty-" + env + "-demo-jsp-webapp:war:" + jettyVersion);
@@ -426,8 +428,7 @@ public class DistributionTests extends AbstractJettyHomeTest
             int port = Tester.freePort();
             try (JettyHomeTester.Run run2 = distribution.start("jetty.http.port=" + port))
             {
-                assertTrue(run2.awaitConsoleLogsFor("Started oejs.Server@", START_TIMEOUT, TimeUnit.SECONDS));
-
+                assertTrue(run2.awaitForJettyStart());
                 startHttpClient();
                 ContentResponse response = client.GET("http://localhost:" + port + "/test/index.jsp");
                 assertEquals(HttpStatus.OK_200, response.getStatus());
@@ -576,8 +577,8 @@ public class DistributionTests extends AbstractJettyHomeTest
         );
         try (JettyHomeTester.Run run1 = distribution.start("--add-modules=" + mods))
         {
-            assertTrue(run1.awaitFor(START_TIMEOUT, TimeUnit.SECONDS));
-            assertEquals(0, run1.getExitValue());
+            assertTrue(run1.awaitForStart());
+            assertEquals(0, run1.getExitValue(), run1.logs());
 
             Path war = distribution.resolveArtifact("org.eclipse.jetty." + env + ".demos:jetty-" + env + "-demo-proxy-webapp:war:" + jettyVersion);
             distribution.installWar(war, "proxy");
@@ -716,9 +717,8 @@ public class DistributionTests extends AbstractJettyHomeTest
 
         try (JettyHomeTester.Run run1 = distribution.start("--approve-all-licenses", "--add-modules=http,logging-log4j2"))
         {
-            assertTrue(run1.awaitFor(START_TIMEOUT, TimeUnit.SECONDS));
-            assertEquals(0, run1.getExitValue());
-
+            assertTrue(run1.awaitForStart());
+            assertEquals(0, run1.getExitValue(), run1.logs());
             Files.copy(Paths.get("src/test/resources/log4j2.xml"),
                 distribution.getJettyBase().resolve("resources").resolve("log4j2.xml"),
                 StandardCopyOption.REPLACE_EXISTING);
@@ -728,13 +728,9 @@ public class DistributionTests extends AbstractJettyHomeTest
             {
                 Path logFile = distribution.getJettyBase().resolve("logs").resolve("jetty.log");
                 await().atMost(10, TimeUnit.SECONDS).until(() -> Files.exists(logFile));
-                await().atMost(10, TimeUnit.SECONDS).until(() ->
-                {
-                    try (Stream<String> lines = Files.lines(logFile))
-                    {
-                        return lines.anyMatch(line -> line.contains("Started oejs.Server@"));
-                    }
-                });
+
+                await().atMost(10, TimeUnit.SECONDS)
+                        .until(() -> Files.readAllLines(logFile).stream().anyMatch(l -> l.contains(JETTY_START_SEARCH)));
 
                 startHttpClient();
                 ContentResponse response = client.GET("http://localhost:" + port);
@@ -758,8 +754,8 @@ public class DistributionTests extends AbstractJettyHomeTest
 
         try (JettyHomeTester.Run run1 = distribution.start("--approve-all-licenses", "--add-modules=http,logging-jul"))
         {
-            assertTrue(run1.awaitFor(START_TIMEOUT, TimeUnit.SECONDS));
-            assertEquals(0, run1.getExitValue());
+            assertTrue(run1.awaitForStart());
+            assertEquals(0, run1.getExitValue(), run1.logs());
 
             Path julConfig = run1.getConfig().getJettyBase().resolve("resources/java-util-logging.properties");
             assertTrue(Files.exists(julConfig));
@@ -768,7 +764,8 @@ public class DistributionTests extends AbstractJettyHomeTest
             int port = Tester.freePort();
             try (JettyHomeTester.Run run2 = distribution.start("jetty.http.port=" + port))
             {
-                assertTrue(run2.awaitConsoleLogsFor("Started oejs.Server@", START_TIMEOUT, TimeUnit.SECONDS));
+                assertTrue(run2.awaitConsoleLogsFor("Started oejs.Server@", START_TIMEOUT, TimeUnit.SECONDS),
+                    () -> String.join("\n", run2.getLogs()));
                 assertThat(run2.getLogs().stream()
                     // Check that the level formatting is that of the j.u.l. configuration file.
                     .filter(log -> log.contains("[FINE]"))
@@ -793,8 +790,8 @@ public class DistributionTests extends AbstractJettyHomeTest
 
         try (JettyHomeTester.Run run1 = distribution.start("--approve-all-licenses", "--add-modules=http,logging-jul-capture"))
         {
-            assertTrue(run1.awaitFor(START_TIMEOUT, TimeUnit.SECONDS));
-            assertEquals(0, run1.getExitValue());
+            assertTrue(run1.awaitForStart());
+            assertEquals(0, run1.getExitValue(), run1.logs());
 
             //Path jettyBase = run1.getConfig().getJettyBase();
 
@@ -943,8 +940,8 @@ public class DistributionTests extends AbstractJettyHomeTest
 
         try (JettyHomeTester.Run run1 = distribution1.start("--approve-all-licenses", "--add-modules=logging-logback,http"))
         {
-            assertTrue(run1.awaitFor(START_TIMEOUT, TimeUnit.SECONDS));
-            assertEquals(0, run1.getExitValue());
+            assertTrue(run1.awaitForStart());
+            assertEquals(0, run1.getExitValue(), run1.logs());
 
             //Path jettyBase = run1.getConfig().getJettyBase();
 
