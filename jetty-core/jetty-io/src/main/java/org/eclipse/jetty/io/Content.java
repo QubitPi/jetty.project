@@ -298,7 +298,7 @@ public class Content
                         return inputStream.read(buffer, 0, buffer.length);
 
                     int toReadInt = (int)Math.min(Integer.MAX_VALUE, toRead);
-                    int len = toReadInt > -1 ? Math.min(toReadInt, buffer.length) : buffer.length;
+                    int len = Math.min(toReadInt, buffer.length);
                     int read = inputStream.read(buffer, 0, len);
 
                     if (read > 0)

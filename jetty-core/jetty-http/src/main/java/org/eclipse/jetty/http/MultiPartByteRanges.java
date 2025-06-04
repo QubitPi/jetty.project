@@ -158,7 +158,8 @@ public class MultiPartByteRanges
             int toReadInt = (int)Math.min(Integer.MAX_VALUE, toRead);
             int len = Math.min(toReadInt, buffer.length);
             int read = inputStream.read(buffer, 0, len);
-            toRead -= read;
+            if (read > 0)
+                toRead -= read;
             return read;
         }
     }
