@@ -245,17 +245,28 @@ public class HttpConnectionOverFCGI extends AbstractConnection implements IConne
             }
             case COMPLETE ->
             {
-                // For the complete event, handle==false, and cannot
-                // differentiate between a complete event and a parse()
-                // with zero or not enough bytes, so the state is reset
-                // here to avoid calling responseSuccess() again.
-                state = State.STATUS;
-                channel.responseSuccess();
+                // Do not call channel.responseSuccess() here to give HttpReceiverOverFCGI.read(boolean) a chance to read
+                // the chunk field before channel.responseSuccess() resets it to null.
             }
             default -> throw new IllegalStateException("Invalid state " + state);
         }
 
         return handle;
+    }
+
+    boolean isComplete()
+    {
+        return state == State.COMPLETE;
+    }
+
+    void complete()
+    {
+        // For the complete event, handle==false, and cannot
+        // differentiate between a complete event and a parse()
+        // with zero or not enough bytes, so the state is reset
+        // here to avoid calling responseSuccess() again.
+        state = State.STATUS;
+        channel.responseSuccess();
     }
 
     private void shutdown()
