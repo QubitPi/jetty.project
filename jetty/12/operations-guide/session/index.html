@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>HTTP Session Management :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="../keystore/index.html">
+    <link rel="next" href="../quickstart/index.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Operations Guide</a></li>
+    <li><a href="index.html">HTTP Session Management</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/operations-guide/pages/session/index.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">HTTP Session Management</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>HTTP sessions are a concept within the Servlet API which allow requests to store and retrieve information across the time a user spends in an application.
+Jetty offers a number of pluggable alternatives for managing and distributing/persisting sessions.
+Choosing the best alternative is an important consideration for every application as is the correct configuration to achieve optimum performance.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="anchor" href="#overview"></a>HTTP Session Overview</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="terminology"><a class="anchor" href="#terminology"></a>Terminology</h3>
+<div class="paragraph">
+<p>Before diving into the specifics of how to plug-in and configure various alternative HTTP session management modules, let&#8217;s review some useful terminology:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Session</dt>
+<dd>
+<p>is a means of retaining information across requests for a particular user.
+The Servlet Specification defines the semantics of sessions.
+Some of the most important characteristics of sessions is that they have a unique id and that their contents cannot be shared between different contexts (although the id can be): if a session is invalidated in one context, then all other sessions that share the same id in other contexts will also be invalidated.
+Sessions can expire or they can be explicitly invalidated.</p>
+</dd>
+<dt class="hdlist1">SessionIdManager</dt>
+<dd>
+<p>is responsible for allocating session ids.
+A Jetty server can have at most 1 SessionIdManager.</p>
+</dd>
+<dt class="hdlist1">HouseKeeper</dt>
+<dd>
+<p>is responsible for periodically orchestrating the removal of expired sessions.
+This process is referred to as <a href="#base-scavenge">"scavenging"</a>.</p>
+</dd>
+<dt class="hdlist1">SessionHandler</dt>
+<dd>
+<p>is responsible for managing the lifecycle of sessions.
+A context can have at most 1 <code>SessionHandler</code>.</p>
+</dd>
+<dt class="hdlist1">SessionCache</dt>
+<dd>
+<p>is a L1 cache of in-use session objects.
+The <code>SessionCache</code> is used by the <code>SessionHandler</code>.</p>
+</dd>
+<dt class="hdlist1">SessionDataStore</dt>
+<dd>
+<p>is responsible for all clustering/persistence operations on sessions.
+A <code>SessionCache</code> uses a <code>SessionDataStore</code> as a backing store.</p>
+</dd>
+<dt class="hdlist1">CachingSessionDataStore</dt>
+<dd>
+<p>is an L2 cache of session data.
+A <code>SessionCache</code> can use a <code>CachingSessionDataStore</code> as its backing store.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>More details on these concepts can be found in the <a href="../../programming-guide/server/session.html" class="xref page">Programming Guide</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>SessionDataStore</code>s implementations interact with other, usually third party, systems responsible for storing and/or distributing session information.
+Sessions can be distributed without being persisted.
+They can also be persisted without being distributed.
+Because persisting session information to a shared store is a very common way of distributing (also known as "clustering") sessions, in the documentation we will often refer to just "persisting".</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="modules"><a class="anchor" href="#modules"></a>Session Modules</h3>
+<div class="paragraph">
+<p>There are a number of modules that offer pluggable alternatives for http session management.
+You can design how you want to cache and store http sessions by selecting alternative combinations of session modules.</p>
+</div>
+<div class="paragraph">
+<p>For example, Jetty ships with two alternative implementations of the <code>SessionCache</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>one that caches sessions in memory: <a href="#cache-hash"><code>session-cache-hash</code></a></p>
+</li>
+<li>
+<p>one that does not actually cache: <a href="#cache-null"><code>session-cache-null</code></a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are at least 6 alternative implementations of the <code>SessionDataStore</code> that you can use to persist/distribute your http sessions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>file system storage: <a href="#filesystem"><code>session-store-file</code></a></p>
+</li>
+<li>
+<p>relational database storage: <a href="#jdbc"><code>session-store-jdbc</code></a></p>
+</li>
+<li>
+<p>NoSQL database storage: <a href="#mongo"><code>session-store-mongo</code></a></p>
+</li>
+<li>
+<p>Google Cloud datastore storage: <a href="#gcloud"><code>session-store-gcloud</code></a></p>
+</li>
+<li>
+<p>Hazelcast: <a href="#hazelcast-remote"><code>session-store-hazelcast-remote</code></a> or <a href="#hazelcast-embedded"><code>session-store-hazelcast-embedded</code></a></p>
+</li>
+<li>
+<p>Infinispan: <a href="#infinispan"><code>session-store-infinispan-remote</code></a> or <a href="#infinispan-embedded"><code>session-store-infinispan-embedded</code></a></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+It is worth noting that if you do not configure <em>any</em> session modules, Jetty will still provide HTTP sessions that are cached in memory but are never persisted.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="base"><a class="anchor" href="#base"></a>The Base Session Module</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>sessions</code> module is the base module that all other session modules depend upon.
+As such it will be <em>transitively</em> enabled if you enable any of the other session modules: you need to <em>explicitly</em> enable it if you wish to <em>change</em> any settings from their defaults.</p>
+</div>
+<div class="paragraph">
+<p>Enabling the <code>sessions</code> module puts the <code>$JETTY_HOME/etc/sessions/id-manager.xml</code> file onto the execution path and generates a <code>$JETTY_BASE/start.d/sessions.ini</code> file.</p>
+</div>
+<div class="paragraph">
+<p>The <code>id-manager.xml</code> file instantiates a <code>DefaultSessionIdManager</code> and <code>HouseKeeper</code>.
+The former is used to generate and manage session ids whilst the latter is responsible for periodic <a href="#base-scavenge">scavenging</a> of expired sessions.</p>
+</div>
+<div class="sect2">
+<h3 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h3>
+<div class="paragraph">
+<p>The <code>$JETTY_BASE/start.d/sessions.ini</code> file contains these configuration properties:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.sessionIdManager.workerName</dt>
+<dd>
+<p>This uniquely identifies the jetty server instance and is applied to the <code>SessionIdManager</code>.
+You can either provide a value for this property, or you can allow Jetty to try and synthesize a <code>workerName</code> - the latter option is <em>only</em> advisable in the case of a single, non-clustered deployment.
+There are two ways a default <code>workerName</code> can be synthesized:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>if running on Google AppEngine, the <code>workerName</code> will be formed by concatenating the values of the environment variables <code>JETTY_WORKER_INSTANCE</code> and <code>GAE_MODULE_INSTANCE</code></p>
+</li>
+<li>
+<p>otherwise, the <code>workerName</code> will be formed by concatenating the environment variable <code>JETTY_WORKER_INSTANCE</code> and the literal <code>0</code>.</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>So, if you&#8217;re not running on Google AppEngine, and you haven&#8217;t configured one, the workerName will always be: <code>node0</code>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If you have more than one Jetty instance, it is <strong>crucial</strong> that you configure the <code>workerName</code> differently for each instance.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.sessionScavengeInterval.seconds</dt>
+<dd>
+<p>This is the period in <em>seconds</em> between runs of the <code>HouseKeeper</code>, responsible for orchestrating the removal of expired sessions.
+By default it will run approximately every 600 secs (ie 10 mins).
+As a rule of thumb, you should ensure that the <a href="#base-scavenge">scavenge</a> interval is shorter than the <code>&lt;session-timeout&gt;</code> of your sessions to ensure that they are promptly scavenged.
+On the other hand, if you have a backend store configured for your sessions, <a href="#base-scavenge">scavenging</a> too frequently can increase the load on it.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Don&#8217;t forget that the <code>&lt;session-timeout&gt;</code> is specified in <code>web.xml</code> in <em>minutes</em> and the value of the <code>jetty.sessionScavengeInterval.seconds</code> is in <em>seconds</em>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="base-scavenge"><a class="anchor" href="#base-scavenge"></a>Session Scavenging</h3>
+<div class="paragraph">
+<p>The <code>HouseKeeper</code> is responsible for the periodic initiation of session scavenge cycles.
+The <code>jetty.sessionScavengeInterval.seconds</code> property in <code>$JETTY_BASE/start.d/sessions.ini</code> controls the periodicity of the cycle.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The HouseKeeper semi-randomly adds an additional 10% to the configured <code>sessionScavengeInterval</code>.
+This is to prevent multiple nodes in a cluster that are all started at once from syncing up scavenge cycles and placing extra load on the configured persistence mechanism.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A session whose expiry time has been exceeded is considered eligible for scavenging.
+The session might be present in a <code>SessionCache</code> and/or present in the session persistence/clustering mechanism.</p>
+</div>
+<div class="paragraph">
+<p>Scavenging occurs for all contexts on a server at every cycle.
+The <code>HouseKeeper</code> sequentially asks the <code>SessionHandler</code> in each context to find and remove expired sessions.
+The <code>SessionHandler</code> works with the <code>SessionDataStore</code> to evaluate candidates for expiry held in the <code>SessionCache</code>, and also to sweep the persistence mechanism to find expired sessions.</p>
+</div>
+<div class="paragraph">
+<p>The sweep takes two forms: once per cycle the <code>SessionDataStore</code> searches for sessions for its own context that have expired; infrequently, the <code>SessionDataStore</code> will widen the search to expired sessions in all contexts.
+The former finds sessions that are no longer in this context&#8217;s <code>SessionCache</code>, and using some heuristics, are unlikely to be in the <code>SessionCache</code> of the same context on another node either.
+These sessions will be loaded and fully expired, meaning that <code>HttpSessionListener.destroy()</code> will be called for them.
+The latter finds sessions that have not been disposed of by scavenge cycles on any other context/node.
+As these will be sessions that expired a long time ago, and may not be appropriate to load by the context doing the scavenging, these are summarily deleted without <code>HttpSessionListener.destroy()</code> being called.</p>
+</div>
+<div class="paragraph">
+<p>A combination of these sweeps should ensure that the persistence mechanism does not fill over time with expired sessions.</p>
+</div>
+<div class="paragraph">
+<p>As aforementioned, the sweep period needs to be short enough to find expired sessions in a timely fashion, but not so often that it overloads the persistence mechanism.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cache"><a class="anchor" href="#cache"></a>Modules for HTTP Session Caching</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section we will look at the alternatives for the <code>SessionCache</code>, i.e. the L1 cache of in-use session objects.
+Jetty ships with 2 alternatives: an in-memory cache, and a null cache.
+The latter does not actually do any caching of sessions, and can be useful if you either want to minimize your support for sessions, or you are in a clustered deployment without a sticky loadbalancer.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="#usecases">scenarios</a> go into more detail on this.</p>
+</div>
+<div class="sect2">
+<h3 id="cache-hash"><a class="anchor" href="#cache-hash"></a>Caching in Memory</h3>
+<div class="paragraph">
+<p>If you wish to change any of the default configuration values you should enable the <code>session-cache-hash</code> <a href="../modules/index.html" class="xref page">module</a>.
+The name <code>"hash"</code> harks back to historical Jetty session implementations, whereby sessions were kept in memory using a HashMap.</p>
+</div>
+<div class="sect3">
+<h4 id="configuration-2"><a class="anchor" href="#configuration-2"></a>Configuration</h4>
+<div class="paragraph">
+<p>The <code>$JETTY_BASE/start.d/session-cache-hash.ini</code> contains the following configurable properties:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.evictionPolicy</dt>
+<dd>
+<p>Integer, default -1.
+This controls whether session objects that are held in memory are subject to eviction from the cache.
+Eviction means that the session is removed from the cache.
+This can reduce the memory footprint of the cache and can be useful if you have a lot of sessions.
+Eviction is usually used in conjunction with a <code>SessionDataStore</code> that persists sessions.
+The eviction strategies and their corresponding values are:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">-1 (NO EVICTION)</dt>
+<dd>
+<p>sessions are never evicted from the cache.
+The only way they leave are via expiration or invalidation.</p>
+</dd>
+<dt class="hdlist1">0 (EVICT AFTER USE)</dt>
+<dd>
+<p>sessions are evicted from the cache as soon as the last active request for it finishes.
+The session will be passed to the <code>SessionDataStore</code> to be written out before eviction.</p>
+</dd>
+<dt class="hdlist1">&gt;= 1 (EVICT ON INACTIVITY)</dt>
+<dd>
+<p>any positive number is the time in seconds after which a session that is in the cache but has not experienced any activity will be evicted.
+Use the <code>jetty.session.saveOnInactiveEvict</code> property to force a session write before eviction.</p>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you are not using one of the session store modules, ie one of the <code>session-store-xxxx</code>s, then sessions will be lost when the context is stopped, or the session is evicted.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.saveOnInactiveEvict</dt>
+<dd>
+<p>Boolean, default <code>false</code>.
+This controls whether a session will be persisted to the <code>SessionDataStore</code> if it is being evicted due to the EVICT ON INACTIVITY policy.
+Usually sessions will be written to the <code>SessionDataStore</code> whenever the last simultaneous request exits the session.
+However, as <code>SessionDataStores</code> can be configured to skip some writes (see the documentation for the <code>session-store-xxx</code> module that you are using), this option is provided to ensure that the session will be written out.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Be careful with this option, as in clustered scenarios it would be possible to "re-animate" a session that has actually been deleted by another node.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.saveOnCreate</dt>
+<dd>
+<p>Boolean, default <code>false</code>.
+Controls whether a session that is newly created will be immediately saved to the <code>SessionDataStore</code> or lazily saved as the last request for the session exits.
+This can be useful if the request dispatches to another context and needs to re-use the same session id.</p>
+</dd>
+<dt class="hdlist1">jetty.session.removeUnloadableSessions</dt>
+<dd>
+<p>Boolean, default <code>false</code>.
+Controls whether the session cache should ask a <code>SessionDataStore</code> to delete a session that cannot be restored - for example because it is corrupted.</p>
+</dd>
+<dt class="hdlist1">jetty.session.flushOnResponseCommit</dt>
+<dd>
+<p>Boolean, default <code>false</code>.
+If true, if a session is "dirty" - ie its attributes have changed - it will be written to the <code>SessionDataStore</code> as the response is about to commit.
+This ensures that all subsequent requests whether to the same or different node will see the updated session data.
+If false, a dirty session will only be written to the backing store when the last simultaneous request for it leaves the session.</p>
+</dd>
+<dt class="hdlist1">jetty.session.invalidateOnShutdown</dt>
+<dd>
+<p>Boolean, default <code>false</code>.
+If true, when a context is shutdown, all sessions in the cache are invalidated and deleted both from the cache and from the <code>SessionDataStore</code>.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cache-null"><a class="anchor" href="#cache-null"></a>No Caching</h3>
+<div class="paragraph">
+<p>You may need to use the <code>session-cache-null</code> module if your clustering setup does not have a sticky load balancer, or if you want absolutely minimal support for sessions.
+If you enable this module, but you don&#8217;t enable a module that provides session persistence (ie one of the <code>session-store-xxx</code> modules), then sessions will <em>neither</em> be retained in memory <em>nor</em> persisted.</p>
+</div>
+<div class="sect3">
+<h4 id="configuration-3"><a class="anchor" href="#configuration-3"></a>Configuration</h4>
+<div class="paragraph">
+<p>The <code>$JETTY_BASE/start.d/session-cache-null.ini</code> contains the following configurable properties:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.saveOnCreate</dt>
+<dd>
+<p>Boolean, default <code>false</code>.
+Controls whether a session that is newly created will be immediately saved to the <code>SessionDataStore</code> or lazily saved as the last request for the session exits.
+This can be useful if the request dispatches to another context and needs to re-use the same session id.</p>
+</dd>
+<dt class="hdlist1">jetty.session.removeUnloadableSessions</dt>
+<dd>
+<p>Boolean, default <code>false</code>.
+Controls whether the session cache should ask a <code>SessionDataStore</code> to delete a session that cannot be restored - for example because it is corrupted.</p>
+</dd>
+<dt class="hdlist1">jetty.session.flushOnResponseCommit</dt>
+<dd>
+<p>Boolean, default <code>false</code>.
+If true, if a session is "dirty" - ie its attributes have changed - it will be written to the backing store as the response is about to commit.
+This ensures that all subsequent requests whether to the same or different node will see the updated session data.
+If false, a dirty session will only be written to the backing store when the last simultaneous request for it leaves the session.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="filesystem"><a class="anchor" href="#filesystem"></a>Modules for Persistent HTTP Sessions: File System</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>session-store-file</code> Jetty module supports persistent storage of session data in a filesystem.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Persisting sessions to the local file system should <strong>never</strong> be used in a clustered environment.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Enabling this module creates the <code>$JETTY_BASE/sessions</code> directory.
+By default session data will be saved to this directory, one file representing each session.</p>
+</div>
+<div class="paragraph">
+<p>File names follow this pattern:</p>
+</div>
+<div class="paragraph">
+<p><code>[expiry]_[contextpath]_[virtualhost]_[id]</code></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">expiry</dt>
+<dd>
+<p>This is the expiry time in milliseconds since the epoch.</p>
+</dd>
+<dt class="hdlist1">contextpath</dt>
+<dd>
+<p>This is the context path with any special characters, including <code>/</code>, replaced by the <code><em></code> underscore character.
+For example, a context path of <code>/catalog</code> would become <code>_catalog</code>.
+A context path of simply <code>/</code> becomes just <code>_</em></code>.</p>
+</dd>
+<dt class="hdlist1">virtualhost</dt>
+<dd>
+<p>This is the first virtual host associated with the context and has the form of 4 digits separated by <code>.</code> characters: <code>[digit].[digit].[digit].[digit]</code>.
+If there are no virtual hosts associated with a context, then <code>0.0.0.0</code> is used.</p>
+</dd>
+<dt class="hdlist1">id</dt>
+<dd>
+<p>This is the unique id of the session.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Putting all of the above together as an example, a session with an id of <code>node0ek3vx7x2y1e7pmi3z00uqj1k0</code> for the context with path <code>/test</code> with no virtual hosts and an expiry of <code>1599558193150</code> would have a file name of:</p>
+</div>
+<div class="paragraph">
+<p><code>1599558193150__test_0.0.0.0_node0ek3vx7x2y1e7pmi3z00uqj1k0</code></p>
+</div>
+<div class="sect2">
+<h3 id="configuration-4"><a class="anchor" href="#configuration-4"></a>Configuration</h3>
+<div class="paragraph">
+<p>The <code>$JETTY_BASE/start.d/sessions.ini</code> file contains the following properties which may be modified to customise filesystem session storage:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.storeDir</dt>
+<dd>
+<p>The default is <code>$JETTY_BASE/sessions</code>.
+This is a path that defines the location for storage of session files.</p>
+</dd>
+<dt class="hdlist1">jetty.session.file.deleteUnrestorableFiles</dt>
+<dd>
+<p>Boolean, default <code>false</code>.
+If set to <code>true</code>, unreadable files will be deleted.
+This is useful to prevent repeated logging of the same error when the scavenger periodically (re-)attempts to load the corrupted information for a session in order to expire it.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gracePeriod.seconds</dt>
+<dd>
+<p>Integer, default 3600.
+Used during session <a href="#base-scavenge">scavenging</a>.
+Multiples of this period are used to define how long ago a stored session must have expired before it should be <a href="#base-scavenge">scavenged</a>.</p>
+</dd>
+<dt class="hdlist1">jetty.session.savePeriod.seconds</dt>
+<dd>
+<p>Integer, in seconds, default is <code>0</code>.
+Whenever a session is accessed by a request, its <code>lastAccessTime</code> and <code>expiry</code> are updated.
+Even if your sessions are read-mostly, the <code>lastAccessTime</code> and  <code>expiry</code> will always change.
+For heavily-used, read-mostly sessions you can save some time by skipping some writes for sessions for which only these fields have changed (ie no session attributes changed).
+The value of this property is used to skip writes for these kinds of sessions: the session will only be written out if the time since the last write exceeds the value of this property.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You should be careful in the use of this property in clustered environments: if you set too large a value for this property, the session may not be written out sufficiently often to update its <code>expiry</code> time thus making it appear to other nodes that it has expired.
+Thorough consideration of the <code>maxIdleTime</code> of the session when setting the <code>savePeriod</code> is imperative - it would be undesirable to set a <code>savePeriod</code> that is larger than the <code>maxIdleTime</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jdbc"><a class="anchor" href="#jdbc"></a>Modules for Persistent HTTP Sessions: JDBC</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Enabling the <code>session-store-jdbc</code> module configures Jetty to persist session data in a relational database.</p>
+</div>
+<div class="sect2">
+<h3 id="configuration-5"><a class="anchor" href="#configuration-5"></a>Configuration</h3>
+<div class="paragraph">
+<p>After enabling the module, the <code>$JETTY_BASE/start.d/session-store-jdbc.ini</code> file contains the following customizable properties:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.gracePeriod.seconds</dt>
+<dd>
+<p>Integer, default 3600.
+Used during session <a href="#base-scavenge">scavenging</a>.
+Multiples of this period are used to define how long ago a stored session must have expired before it should be <a href="#base-scavenge">scavenged</a>.</p>
+</dd>
+<dt class="hdlist1">jetty.session.savePeriod.seconds</dt>
+<dd>
+<p>Integer, in seconds, default is <code>0</code>.
+Whenever a session is accessed by a request, its <code>lastAccessTime</code> and <code>expiry</code> are updated.
+Even if your sessions are read-mostly, the <code>lastAccessTime</code> and  <code>expiry</code> will always change.
+For heavily-used, read-mostly sessions you can save some time by skipping some writes for sessions for which only these fields have changed (ie no session attributes changed).
+The value of this property is used to skip writes for these kinds of sessions: the session will only be written out if the time since the last write exceeds the value of this property.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You should be careful in the use of this property in clustered environments: if you set too large a value for this property, the session may not be written out sufficiently often to update its <code>expiry</code> time thus making it appear to other nodes that it has expired.
+Thorough consideration of the <code>maxIdleTime</code> of the session when setting the <code>savePeriod</code> is imperative - it would be undesirable to set a <code>savePeriod</code> that is larger than the <code>maxIdleTime</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">db-connection-type</dt>
+<dd>
+<p>Default <code>datasource</code>.
+Set to either <code>datasource</code> or <code>driver</code> depending on the type of connection being used.
+Depending which you select, there are additional properties available:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>datasource</code></dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.jdbc.datasourceName</dt>
+<dd>
+<p>Name of the remote datasource.</p>
+</dd>
+</dl>
+</div>
+</dd>
+<dt class="hdlist1"><code>driver</code></dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.jdbc.driverClass</dt>
+<dd>
+<p>Name of the JDBC driver that controls access to the remote database, such as <code>com.mysql.jdbc.Driver</code></p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.driverUrl</dt>
+<dd>
+<p>URL of the database which includes the driver type, host name and port, service name and any specific attributes unique to the database, such as a username.
+As an example, here is a mysql connection with the username appended: <code>jdbc:mysql://127.0.0.1:3306/sessions?user=sessionsadmin</code>.</p>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.blobType</dt>
+<dd>
+<p>Optional.
+Default <code>blob</code> or <code>bytea</code> for Postgres.
+This is the keyword used by the particular database to identify the blob data type.
+If netiher default is suitable you can set this value explicitly.</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.longType</dt>
+<dd>
+<p>Optional.
+Default <code>bigint</code> or <code>number(20)</code> for Oracle.
+This is the keyword used by the particular database to identify the long integer data type.
+Set this explicitly if neither of the default values is appropriate.</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.stringType</dt>
+<dd>
+<p>Optional.
+Default <code>varchar</code>.
+This is the keyword used by the particular database to identify character type.
+If the default is not suitable, you can set this value explicitly.</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.schema.schemaName</dt>
+<dt class="hdlist1">jetty.session.jdbc.schema.catalogName</dt>
+<dd>
+<p>Optional.
+The exact meaning of these two properties is dependent on your database vendor, but can broadly be described as further scoping for the session table name.
+See <a href="https://en.wikipedia.org/wiki/Database_schema" class="bare">https://en.wikipedia.org/wiki/Database_schema</a> and <a href="https://en.wikipedia.org/wiki/Database_catalog" class="bare">https://en.wikipedia.org/wiki/Database_catalog</a>.
+These extra scoping names can come into play at startup time when Jetty determines if the session table already exists, or otherwise creates it on-the-fly.
+If you have employed either of these concepts when you pre-created the session table, or you want to ensure that Jetty uses them when it auto-creates the session table, then you have two options: either set them explicitly, or let Jetty infer them from a database connection (obtained using either a Datasource or Driver according to the <code>db-connection-type</code> you have configured).
+To set them explicitly, uncomment and supply appropriate values for the <code>jetty.session.jdbc.schema.schemaName</code> and/or <code>jetty.session.jdbc.schema.catalogName</code> properties.
+Alternatively, to allow Jetty to infer them from a database connection, use the special string <code>INFERRED</code> instead.
+If you leave them blank or commented out, then the sessions table will not be scoped by schema or catalog name.</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.schema.table</dt>
+<dd>
+<p>Default <code>JettySessions</code>.
+This is the name of the table in which session data is stored.</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.schema.accessTimeColumn</dt>
+<dd>
+<p>Default <code>accessTime</code>.
+This is the name of the column that stores the time - in ms since the epoch - at which a session was last accessed</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.schema.contextPathColumn</dt>
+<dd>
+<p>Default <code>contextPath</code>.
+This is the name of the column that stores the <code>contextPath</code> of a session.</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.schema.cookieTimeColumn</dt>
+<dd>
+<p>Default <code>cookieTime</code>.
+This is the name of the column that stores the time - in ms since the epoch - that the cookie was last set for a session.</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.schema.createTimeColumn</dt>
+<dd>
+<p>Default <code>createTime</code>.
+This is the name of the column that stores the time - in ms since the epoch - at which a session was created.</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.schema.expiryTimeColumn</dt>
+<dd>
+<p>Default <code>expiryTime</code>.
+This is name of the column that stores - in ms since the epoch - the time at which a session will expire.</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.schema.lastAccessTimeColumn</dt>
+<dd>
+<p>Default <code>lastAccessTime</code>.
+This is the name of the column that stores the time - in ms since the epoch - that a session was previously accessed.</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.schema.lastSavedTimeColumn</dt>
+<dd>
+<p>Default <code>lastSavedTime</code>.
+This is the name of the column that stores the time - in ms since the epoch - at which a session was last written.</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.schema.idColumn</dt>
+<dd>
+<p>Default <code>sessionId</code>.
+This is the name of the column that stores the id of a session.</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.schema.lastNodeColumn</dt>
+<dd>
+<p>Default <code>lastNode</code>.
+This is the name of the column that stores the <code>workerName</code> of the last node to write a session.</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.schema.virtualHostColumn</dt>
+<dd>
+<p>Default <code>virtualHost</code>.
+This is the name of the column that stores the first virtual host of the context of a session.</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.schema.maxIntervalColumn</dt>
+<dd>
+<p>Default <code>maxInterval</code>.
+This is the name of the column that stores the interval - in ms - during which a session can be idle before being considered expired.</p>
+</dd>
+<dt class="hdlist1">jetty.session.jdbc.schema.mapColumn</dt>
+<dd>
+<p>Default <code>map</code>.
+This is the name of the column that stores the serialized attributes of a session.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mongo"><a class="anchor" href="#mongo"></a>Modules for Persistent HTTP Sessions: MongoDB</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Enabling the <code>session-store-mongo</code> module configures Jetty to store session data in MongoDB.</p>
+</div>
+<div class="paragraph">
+<p>Because MongoDB is not a technology provided by the Eclipse Foundation, you will be prompted to assent to the licenses of the external vendor (Apache in this case) during the install.
+Jars needed by MongoDB are downloaded and stored into a directory named <code>$JETTY_BASE/lib/nosql/</code>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If you want to use updated versions of the jar files automatically downloaded by Jetty, you can place them in the associated <code>$JETTY_BASE/lib/</code> directory and use the <code>--skip-create-files=&lt;module name&gt;</code> command line option to prevent errors when starting your server.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="configuration-6"><a class="anchor" href="#configuration-6"></a>Configuration</h3>
+<div class="paragraph">
+<p>The <code>$JETTY_BASE/start.d/session-store-mongo.ini</code> file contains these configurable properties:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.mongo.dbName</dt>
+<dd>
+<p>Default is "HttpSessions".
+This is the name of the database in MongoDB used to store the session collection.</p>
+</dd>
+<dt class="hdlist1">jetty.session.mongo.collectionName</dt>
+<dd>
+<p>Default is "jettySessions".
+This is the name of the collection in MongoDB used to store all of the sessions.</p>
+</dd>
+<dt class="hdlist1">The connection type-</dt>
+<dd>
+<p>You can connect to MongoDB either using a host/port combination, or a URI.
+By default, the host/port method is selected, but you can change this by commenting out the unwanted method, and uncommenting the other one.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">connection-type=address</dt>
+<dd>
+<p>Used when utilizing a direct connection to the MongoDB server.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.mongo.host</dt>
+<dd>
+<p>Host name or address for the remote MongoDB instance.</p>
+</dd>
+<dt class="hdlist1">jetty.session.mongo.port</dt>
+<dd>
+<p>Port number for the remote MongoDB instance.</p>
+</dd>
+</dl>
+</div>
+</dd>
+<dt class="hdlist1">connection-type=uri</dt>
+<dd>
+<p>Used when utilizing MongoURI for secured connections.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.mongo.connectionString</dt>
+<dd>
+<p>The string defining the MongoURI value, such as <code>mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]</code>.
+More information on how to format the MongoURI string can be found in the <a href="https://docs.mongodb.com/manual/reference/connection-string/">official documentation for mongo</a>.</p>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You will only use <strong>one</strong> <code>connection-type</code> at a time, either <code>address</code> or <code>uri</code>.
+If both are utilized in your <code>session-store-mongo.ini</code>, only the <em>last</em> <code>connection-type</code> configured in the file will be used.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.gracePeriod.seconds</dt>
+<dd>
+<p>Integer, in seconds.
+Default 3600.
+Used during session <a href="#base-scavenge">scavenging</a>.
+Multiples of this period are used to define how long ago a stored session must have expired before it should be <a href="#base-scavenge">scavenged</a>.</p>
+</dd>
+<dt class="hdlist1">jetty.session.savePeriod.seconds</dt>
+<dd>
+<p>Integer, in seconds, default is <code>0</code>.
+Whenever a session is accessed by a request, its <code>lastAccessTime</code> and <code>expiry</code> are updated.
+Even if your sessions are read-mostly, the <code>lastAccessTime</code> and  <code>expiry</code> will always change.
+For heavily-used, read-mostly sessions you can save some time by skipping some writes for sessions for which only these fields have changed (ie no session attributes changed).
+The value of this property is used to skip writes for these kinds of sessions: the session will only be written out if the time since the last write exceeds the value of this property.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You should be careful in the use of this property in clustered environments: if you set too large a value for this property, the session may not be written out sufficiently often to update its <code>expiry</code> time thus making it appear to other nodes that it has expired.
+Thorough consideration of the <code>maxIdleTime</code> of the session when setting the <code>savePeriod</code> is imperative - it would be undesirable to set a <code>savePeriod</code> that is larger than the <code>maxIdleTime</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="infinispan"><a class="anchor" href="#infinispan"></a>Modules for Persistent HTTP Sessions: Infinispan</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In order to persist/cluster sessions using Infinispan, Jetty needs to know how to contact Infinispan.
+There are two options: a remote Infinispan instance, or an in-process Infinispan instance.
+The former is referred to as "remote" Infinispan and the latter as "embedded" Infinispan.
+If you wish Jetty to be able to <a href="#base-scavenge">scavenge</a> expired sessions, you will also need to enable the appropriate <code>infinispan-[remote|embedded]-query</code> module.</p>
+</div>
+<div class="sect2">
+<h3 id="infinispan-remote"><a class="anchor" href="#infinispan-remote"></a>Remote Infinispan Session Module</h3>
+<div class="paragraph">
+<p>The <code>session-store-infinispan-remote</code> module configures Jetty to talk to an external Infinispan instance to store session data.</p>
+</div>
+<div class="paragraph">
+<p>Because Infinispan is not a technology provided by the Eclipse Foundation, you will be prompted to assent to the licenses of the external vendor (Apache in this case).</p>
+</div>
+<div class="paragraph">
+<p>Infinispan-specific jar files are download to the directory named <code>$JETTY_BASE/lib/infinispan/</code>.</p>
+</div>
+<div class="paragraph">
+<p>In addition to adding these modules to the classpath of the server it also added several ini configuration files to the <code>$JETTY_BASE/start.d</code> directory.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you have updated versions of the jar files automatically downloaded by Jetty, you can place them in the associated <code>$JETTY_BASE/lib/</code> directory and use the <code>--skip-create-files=&lt;module name&gt;</code> command line option to prevent errors when starting your server.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="configuration-7"><a class="anchor" href="#configuration-7"></a>Configuration</h4>
+<div class="paragraph">
+<p>The <code>$JETTY_BASE/start.d/session-store-infinispan-remote.ini</code> contains the following configurable properties:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.infinispan.remoteCacheName</dt>
+<dd>
+<p>Default <code>"sessions"</code>.
+This is the name of the cache in Infinispan where sessions will be stored.</p>
+</dd>
+<dt class="hdlist1">jetty.session.infinispan.idleTimeout.seconds</dt>
+<dd>
+<p>Integer, in seconds, default <code>0</code>.
+This is the amount of time, in seconds, that a session entry in Infinispan can be idle (ie neither read nor written) before Infinispan will delete its entry.
+Usually, you do <strong>not</strong> want to set a value for this, as you want Jetty to manage all session expiration (and call any HttpSessionListeners).
+You <strong>should</strong> enable the <a href="#infinispan-remote-query">infinispan-remote-query</a> to allow jetty to <a href="#base-scavenge">scavenge</a> for expired sessions.
+If you do not, then there is the possibility that sessions can be left in Infinispan but no longer referenced by any Jetty node (so called "zombie" or "orphan" sessions), in which case you can use this feature to ensure their removal.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+You should make sure that the number of seconds you specify is larger than the configured <code>maxIdleTime</code> for sessions.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.gracePeriod.seconds</dt>
+<dd>
+<p>Integer, default 3600.
+Used during session <a href="#base-scavenge">scavenging</a>.
+Multiples of this period are used to define how long ago a stored session must have expired before it should be <a href="#base-scavenge">scavenged</a>.</p>
+</dd>
+<dt class="hdlist1">jetty.session.savePeriod.seconds</dt>
+<dd>
+<p>Integer, in seconds, default is <code>0</code>.
+Whenever a session is accessed by a request, its <code>lastAccessTime</code> and <code>expiry</code> are updated.
+Even if your sessions are read-mostly, the <code>lastAccessTime</code> and  <code>expiry</code> will always change.
+For heavily-used, read-mostly sessions you can save some time by skipping some writes for sessions for which only these fields have changed (ie no session attributes changed).
+The value of this property is used to skip writes for these kinds of sessions: the session will only be written out if the time since the last write exceeds the value of this property.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You should be careful in the use of this property in clustered environments: if you set too large a value for this property, the session may not be written out sufficiently often to update its <code>expiry</code> time thus making it appear to other nodes that it has expired.
+Thorough consideration of the <code>maxIdleTime</code> of the session when setting the <code>savePeriod</code> is imperative - it would be undesirable to set a <code>savePeriod</code> that is larger than the <code>maxIdleTime</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="infinispan-remote-query"><a class="anchor" href="#infinispan-remote-query"></a>Remote Infinispan Query Module</h3>
+<div class="paragraph">
+<p>The <code>infinispan-remote-query</code> module allows Jetty to <a href="#base-scavenge">scavenge</a> expired sessions.
+Note that this is an <strong>additional</strong> module, to be used in conjunction with the <code>session-store-infinispan-remote</code> module.</p>
+</div>
+<div class="paragraph">
+<p>There are no configuration properties associated with this module.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="infinispan-embedded"><a class="anchor" href="#infinispan-embedded"></a>Embedded Infinispan Session Module</h3>
+<div class="paragraph">
+<p>Enabling the <code>session-store-infinispan-embedded</code> module runs an in-process instance of Infinispan.</p>
+</div>
+<div class="paragraph">
+<p>Because Infinispan is not a technology provided by the Eclipse Foundation, you will be prompted to assent to the licenses of the external vendor (Apache in this case).
+Infinispan-specific jar files will be downloaded and saved to a directory named <code>$JETTY_BASE/lib/infinispan/</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you have updated versions of the jar files automatically downloaded by Jetty, you can place them in the associated <code>$JETTY_BASE/lib/</code> directory and use the <code>--skip-create-files=&lt;module name&gt;</code> command line option to prevent errors when starting your server.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="configuration-8"><a class="anchor" href="#configuration-8"></a>Configuration</h4>
+<div class="paragraph">
+<p>The <code>$JETTY_BASE/start.d/session-store-infinispan-embedded.ini</code> contains the following configurable properties:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.infinispan.idleTimeout.seconds</dt>
+<dd>
+<p>Integer, in seconds, default <code>0</code>.
+This is the amount of time, in seconds, that a session entry in Infinispan can be idle (ie neither read nor written) before Infinispan will delete its entry.
+Usually, you do <strong>not</strong> want to set a value for this, as you want Jetty to manage all session expiration (and call any HttpSessionListeners).
+You <strong>should</strong> enable the <a href="#infinispan-embedded-query">infinispan-embedded-query</a> to allow Jetty to <a href="#base-scavenge">scavenge</a> for expired sessions.
+If you do not, then there is the possibility that expired sessions can be left in Infinispan.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+You should make sure that the number of seconds you specify is larger than the configured <code>maxIdleTime</code> for sessions.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.gracePeriod.seconds</dt>
+<dd>
+<p>Integer, default 3600.
+Used during session <a href="#base-scavenge">scavenging</a>.
+Multiples of this period are used to define how long ago a stored session must have expired before it should be <a href="#base-scavenge">scavenged</a>.</p>
+</dd>
+<dt class="hdlist1">jetty.session.savePeriod.seconds</dt>
+<dd>
+<p>Integer, in seconds, default is <code>0</code>.
+Whenever a session is accessed by a request, its <code>lastAccessTime</code> and <code>expiry</code> are updated.
+Even if your sessions are read-mostly, the <code>lastAccessTime</code> and  <code>expiry</code> will always change.
+For heavily-used, read-mostly sessions you can save some time by skipping some writes for sessions for which only these fields have changed (ie no session attributes changed).
+The value of this property is used to skip writes for these kinds of sessions: the session will only be written out if the time since the last write exceeds the value of this property.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Thorough consideration of the <code>maxIdleTime</code> of the session when setting the <code>savePeriod</code> is imperative - it would be undesirable to set a <code>savePeriod</code> that is larger than the <code>maxIdleTime</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="infinispan-embedded-query"><a class="anchor" href="#infinispan-embedded-query"></a>Embedded Infinispan Query Module</h3>
+<div class="paragraph">
+<p>The <code>infinispan-embedded-query</code> module allows Jetty to <a href="#base-scavenge">scavenge</a> expired sessions.</p>
+</div>
+<div class="paragraph">
+<p>There are no configuration properties associated with this module.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="converting-session-format-for-jetty-9-4-13"><a class="anchor" href="#converting-session-format-for-jetty-9-4-13"></a>Converting Session Format for Jetty-9.4.13</h3>
+<div class="paragraph">
+<p>From Jetty-9.4.13 onwards, we have changed the format of the serialized session when using a remote cache (ie using hotrod).
+Prior to release 9.4.13 we used the default Infinispan serialization, however this was not able to store sufficient information to allow Jetty to properly deserialize session attributes in all circumstances.
+See issue <a href="https://github.com/jetty/jetty.project/issues/2919" class="bare">https://github.com/jetty/jetty.project/issues/2919</a> for more background.</p>
+</div>
+<div class="paragraph">
+<p>We have provided a conversion program which will convert any sessions stored in Infinispan to the new format.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+We recommend that you backup your stored sessions before running the conversion program.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>How to use the converter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">java -cp jakarta.servlet-api-6.0.0.jar:jetty-util-12.0.23-SNAPSHOT.jar:jetty-server-12.0.23-SNAPSHOT.jar:infinispan-remote-9.1.0.Final.jar:jetty-infinispan-12.0.23-SNAPSHOT.jar:[other classpath]  org.eclipse.jetty.session.infinispan.InfinispanSessionLegacyConverter
+
+Usage:  InfinispanSessionLegacyConverter [-Dhost=127.0.0.1] [-Dverbose=true|false] <cache-name> [check]</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">The classpath</dt>
+<dd>
+<p>Must contain the servlet-api, jetty-util, jetty-server, jetty-infinispan and infinispan-remote jars. If your sessions contain attributes that use application classes, you will also need to also put those classes onto the classpath. If your session has been authenticated, you may also need to include the jetty-security and jetty-http jars on the classpath.</p>
+</dd>
+<dt class="hdlist1">Parameters</dt>
+<dd>
+<p>When used with no arguments the usage message is printed. When used with the <code>cache-name</code> parameter the conversion is performed. When used with both <code>cache-name</code> and <code>check</code> parameters, sessions are checked for whether or not they are converted.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">-Dhost</dt>
+<dd>
+<p>you can optionally provide a system property with the address of your remote Infinispan server. Defaults to the localhost.</p>
+</dd>
+<dt class="hdlist1">-Dverbose</dt>
+<dd>
+<p>defaults to false. If true, prints more comprehensive stacktrace information about failures. Useful to diagnose why a session is not converted.</p>
+</dd>
+<dt class="hdlist1">cache-name</dt>
+<dd>
+<p>the name of the remote cache containing your sessions. This is mandatory.</p>
+</dd>
+<dt class="hdlist1">check</dt>
+<dd>
+<p>the optional check command will verify sessions have been converted. Use it <em>after</em> doing the conversion.</p>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>To perform the conversion, run the InfinispanSessionLegacyConverter with just the <code>cache-name</code>, and optionally the <code>host</code> system property.
+The following command will attempt to convert all sessions in the cached named <code>my-remote-cache</code> on the machine <code>myhost</code>, ensuring that application classes in the <code>/my/custom/classes</code> directory are on the classpath:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">java -cp jakarta.servlet-api-6.0.0.jar:jetty-util-12.0.23-SNAPSHOT.jar:jetty-server-12.0.23-SNAPSHOT.jar:infinispan-remote-9.1.0.Final.jar:jetty-infinispan-12.0.23-SNAPSHOT.jar:/my/custom/classes  org.eclipse.jetty.session.infinispan.InfinispanSessionLegacyConverter -Dhost=myhost my-remote-cache</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the converter fails to convert a session, an error message and stacktrace will be printed and the conversion will abort. The failed session should be untouched, however <em>it is prudent to take a backup of your cache before attempting the conversion</em>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="hazelcast"><a class="anchor" href="#hazelcast"></a>Modules for Persistent HTTP Sessions: Hazelcast</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hazelcast can be used to cluster session information in one of two modes: either remote or embedded.
+Remote mode means that Hazelcast will create a client to talk to other instances, possibly on other nodes.
+Embedded mode means that Hazelcast will start a local instance and communicate with that.</p>
+</div>
+<div class="sect2">
+<h3 id="hazelcast-remote"><a class="anchor" href="#hazelcast-remote"></a>Remote Hazelcast Clustering</h3>
+<div class="paragraph">
+<p>Enabling the <code>session-store-hazelcast-remote</code> module allows jetty to communicate with a remote Hazelcast instance to cluster session data.</p>
+</div>
+<div class="paragraph">
+<p>Because Hazelcast is not a technology provided by the Eclipse Foundation, you will be prompted to assent to the licenses of the external vendor (Apache in this case).</p>
+</div>
+<div class="paragraph">
+<p>Hazelcast-specific jar files will be downloaded and saved to a directory named <code>$JETTY_BASE/lib/hazelcast/</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you have updated versions of the jar files automatically downloaded by Jetty, you can place them in the associated <code>$JETTY_BASE/lib/</code> directory and use the <code>--skip-create-files=&lt;module name&gt;</code> command line option to prevent errors when starting your server.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="configuration-9"><a class="anchor" href="#configuration-9"></a>Configuration</h4>
+<div class="paragraph">
+<p>The <code>start.d/session-store-hazelcast-remote.ini</code> contains a list of all the configurable options for the Hazelcast module:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.hazelcast.mapName</dt>
+<dd>
+<p>The default is "jetty-distributed-session-map".
+This is the name of the Map in Hazelcast where sessions will be stored.</p>
+</dd>
+<dt class="hdlist1">jetty.session.hazelcast.onlyClient</dt>
+<dd>
+<p>Boolean, default <code>true</code>.
+The Hazelcast instance will be configured in client mode.</p>
+</dd>
+<dt class="hdlist1">jetty.session.hazelcast.configurationLocation</dt>
+<dd>
+<p>Optional.
+This is the path to an external Hazelcast xml configuration file.</p>
+</dd>
+<dt class="hdlist1">jetty.session.hazelcast.useQueries</dt>
+<dd>
+<p>Boolean, default <code>false</code>.
+If <code>true</code>, Jetty will use Hazelcast queries to find sessions to <a href="#base-scavenge">scavenge</a>.
+If <code>false</code> sessions that are not currently in a <a href="#cache">session cache</a> cannot be <a href="#base-scavenge">scavenged</a>, and will need to be removed by some external process.</p>
+</dd>
+<dt class="hdlist1">jetty.session.hazelcast.addresses</dt>
+<dd>
+<p>Optional.
+These are the addresses of remote Hazelcast instances with which to communicate.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gracePeriod.seconds</dt>
+<dd>
+<p>Integer, in seconds.
+Default 3600.
+Used during session <a href="#base-scavenge">scavenging</a>.
+Multiples of this period are used to define how long ago a stored session must have expired before it should be <a href="#base-scavenge">scavenged</a>.</p>
+</dd>
+<dt class="hdlist1">jetty.session.savePeriod.seconds</dt>
+<dd>
+<p>Integer, in seconds, default is <code>0</code>.
+Whenever a session is accessed by a request, its <code>lastAccessTime</code> and <code>expiry</code> are updated.
+Even if your sessions are read-mostly, the <code>lastAccessTime</code> and  <code>expiry</code> will always change.
+For heavily-used, read-mostly sessions you can save some time by skipping some writes for sessions for which only these fields have changed (ie no session attributes changed).
+The value of this property is used to skip writes for these kinds of sessions: the session will only be written out if the time since the last write exceeds the value of this property.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You should be careful in the use of this property in clustered environments: if you set too large a value for this property, the session may not be written out sufficiently often to update its <code>expiry</code> time thus making it appear to other nodes that it has expired.
+Thorough consideration of the <code>maxIdleTime</code> of the session when setting the <code>savePeriod</code> is imperative - it would be undesirable to set a <code>savePeriod</code> that is larger than the <code>maxIdleTime</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Be aware that if your session attributes contain classes from inside your webapp (or Jetty classes) then you will need to put these classes onto the classpath of all of your Hazelcast instances.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="hazelcast-embedded"><a class="anchor" href="#hazelcast-embedded"></a>Embedded Hazelcast Clustering</h3>
+<div class="paragraph">
+<p>This will run an in-process instance of Hazelcast.
+This can be useful for example during testing.
+To enable this you enable the <code>session-store-hazelcast-embedded</code> module.</p>
+</div>
+<div class="paragraph">
+<p>Because Hazelcast is not a technology provided by the Eclipse Foundation, you will be prompted to assent to the licenses of the external vendor (Apache in this case).</p>
+</div>
+<div class="paragraph">
+<p>Hazelcast-specific jar files will be downloaded to a directory named <code>$JETTY_BASE/lib/hazelcast/</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="configuration-10"><a class="anchor" href="#configuration-10"></a>Configuration</h4>
+<div class="paragraph">
+<p>The <code>$JETTY_BASE/start.d/start.d/session-store-hazelcast-embedded.ini</code> contains a list of all the configurable options for the Hazelcast module:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.hazelcast.mapName</dt>
+<dd>
+<p>The default is "jetty-distributed-session-map".
+This is the name of the Map in Hazelcast where sessions will be stored.
+jetty.session.hazelcast.hazelcastInstanceName
+Default is "JETTY_DISTRIBUTED_SESSION_INSTANCE".
+This is the unique name of the Hazelcast instance that will be created.</p>
+</dd>
+<dt class="hdlist1">jetty.session.hazelcast.configurationLocation</dt>
+<dd>
+<p>Optional.
+This is the path to an external Hazelcast xml configuration file.</p>
+</dd>
+<dt class="hdlist1">jetty.session.hazelcast.useQueries</dt>
+<dd>
+<p>Boolean, default <code>false'.
+If `true</code>, Jetty will use Hazelcast queries to find expired sessions to <a href="#base-scavenge">scavenge</a>.
+If <code>false</code> sessions that are not currently in a <a href="#cache">session cache</a> cannot be <a href="#base-scavenge">scavenged</a>, and will need to be removed by some external process.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gracePeriod.seconds</dt>
+<dd>
+<p>Integer, in seconds.
+Default 3600.
+Used during session <a href="#base-scavenge">scavenging</a>.
+Multiples of this period are used to define how long ago a stored session must have expired before it should be <a href="#base-scavenge">scavenged</a>.</p>
+</dd>
+<dt class="hdlist1">jetty.session.savePeriod.seconds</dt>
+<dd>
+<p>Integer, in seconds, default is <code>0</code>.
+Whenever a session is accessed by a request, its <code>lastAccessTime</code> and <code>expiry</code> are updated.
+Even if your sessions are read-mostly, the <code>lastAccessTime</code> and  <code>expiry</code> will always change.
+For heavily-used, read-mostly sessions you can save some time by skipping some writes for sessions for which only these fields have changed (ie no session attributes changed).
+The value of this property is used to skip writes for these kinds of sessions: the session will only be written out if the time since the last write exceeds the value of this property.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You should be careful in the use of this property in clustered environments: if you set too large a value for this property, the session may not be written out sufficiently often to update its <code>expiry</code> time thus making it appear to other nodes that it has expired.
+Thorough consideration of the <code>maxIdleTime</code> of the session when setting the <code>savePeriod</code> is imperative - it would be undesirable to set a <code>savePeriod</code> that is larger than the <code>maxIdleTime</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If your session attributes contain classes from inside your webapp (or jetty classes) then you will need to put these classes onto the classpath of all of your hazelcast instances. In the case of embedded hazelcast, as it is started before your webapp, it will NOT have access to your webapp&#8217;s classes - you will need to extract these classes and put them onto the jetty server&#8217;s classpath.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gcloud"><a class="anchor" href="#gcloud"></a>Modules for Persistent HTTP Sessions: Google Cloud DataStore</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jetty can store http session information into GCloud by enabling the <code>session-store-gcloud</code> module.</p>
+</div>
+<div class="sect2">
+<h3 id="preparation"><a class="anchor" href="#preparation"></a>Preparation</h3>
+<div class="paragraph">
+<p>You will first need to create a project and enable the Google Cloud API: <a href="https://cloud.google.com/docs/authentication#preparation" class="bare">https://cloud.google.com/docs/authentication#preparation</a>.
+Take note of the project id that you create in this step as you need to supply it in later steps.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="communicating-with-gclouddatastore"><a class="anchor" href="#communicating-with-gclouddatastore"></a>Communicating with GCloudDataStore</h3>
+<div class="sect3">
+<h4 id="when-running-jetty-outside-of-google-infrastructure"><a class="anchor" href="#when-running-jetty-outside-of-google-infrastructure"></a>When Running Jetty Outside of Google Infrastructure</h4>
+<div class="paragraph">
+<p>Before running Jetty, you will need to choose one of the following methods to set up the local environment to enable remote GCloud DataStore communications.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Using the GCloud SDK:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ensure you have the GCloud SDK installed: <a href="https://cloud.google.com/sdk/?hl=en" class="bare">https://cloud.google.com/sdk/?hl=en</a></p>
+</li>
+<li>
+<p>Use the GCloud tool to set up the project you created in the preparation step: <code>gcloud config set project PROJECT_ID</code></p>
+</li>
+<li>
+<p>Use the GCloud tool to authenticate a Google account associated with the project created in the preparation step: <code>gcloud auth login ACCOUNT</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Using environment variables</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Define the environment variable <code>GCLOUD_PROJECT</code> with the project id you created in the preparation step.</p>
+</li>
+<li>
+<p>Generate a JSON <a href="https://cloud.google.com/storage/docs/authentication?hl=en#service_accounts">service account key</a> and then define the environment variable <code>GOOGLE_APPLICATION_CREDENTIALS=/path/to/my/key.json</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="when-running-jetty-inside-of-google-infrastructure"><a class="anchor" href="#when-running-jetty-inside-of-google-infrastructure"></a>When Running Jetty Inside of Google Infrastructure</h4>
+<div class="paragraph">
+<p>The Google deployment tools will automatically configure the project and authentication information for you.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuring-indexes-for-session-data"><a class="anchor" href="#configuring-indexes-for-session-data"></a>Configuring Indexes for Session Data</h3>
+<div class="paragraph">
+<p>Using some special, composite indexes can speed up session search operations, although it may make write operations slower.
+By default, indexes will <em>not</em> be used.
+In order to use them, you will need to manually upload a file that defines the indexes.
+This file is named <code>index.yaml</code> and you can find it in your distribution in <code>$JETTY_BASE/etc/sessions/gcloud/index.yaml</code>.</p>
+</div>
+<div class="paragraph">
+<p>Follow the instructions <a href="https://cloud.google.com/datastore/docs/tools/#the_development_workflow_using_gcloud">here</a> to upload the pre-generated <code>index.yaml</code> file.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="communicating-with-the-gclouddatastore-emulator"><a class="anchor" href="#communicating-with-the-gclouddatastore-emulator"></a>Communicating with the GCloudDataStore Emulator</h3>
+<div class="paragraph">
+<p>To enable communication using the GCloud Emulator:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ensure you have the GCloud SDK installed: <a href="https://cloud.google.com/sdk/?hl=en" class="bare">https://cloud.google.com/sdk/?hl=en</a></p>
+</li>
+<li>
+<p>Follow the instructions <a href="https://cloud.google.com/datastore/docs/tools/datastore-emulator">here</a> on how to start the GCloud datastore emulator, and how to propagate the environment variables that it creates to the terminal in which you run Jetty.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enabling-the-google-cloud-datastore-module"><a class="anchor" href="#enabling-the-google-cloud-datastore-module"></a>Enabling the Google Cloud DataStore Module</h3>
+<div class="paragraph">
+<p>The <code>session-store-gcloud</code> module provides GCloud support for storing session data.</p>
+</div>
+<div class="paragraph">
+<p>Because the Google Cloud DataStore is not a technology provided by the Eclipse Foundation, when enabling the module you will be prompted to assent to the licenses of the external vendor.</p>
+</div>
+<div class="paragraph">
+<p>As GCloud requires certain Java Commons Logging features to work correctly, Jetty routes these through SLF4J.
+By default, Jetty implements the SLF4J api, but you can choose a different logging implementation by following the instructions <a href="../server/index.html#logging" class="xref page">here</a></p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If you want to use updated versions of the jar files automatically downloaded during the module enablement, you can place them in the associated <code>$JETTY_BASE/lib/</code> directory and use the <code>--skip-create-files=&lt;module name&gt;</code> command line option to prevent errors when starting your server.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration-11"><a class="anchor" href="#configuration-11"></a>Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>$JETTY_BASE/start.d/session-store-gcloud.ini</code> file contains all of the configurable properties for the <code>session-store-gcloud</code> module:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.gcloud.maxRetries</dt>
+<dd>
+<p>Integer.
+Default 5.
+Maximum number of retries to connect to GCloud DataStore to write a session.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gcloud.backoffMs</dt>
+<dd>
+<p>Integer in milliseconds.
+Default 1000.
+Number of milliseconds between successive attempts to connect to the GCloud DataStore to write a session.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gracePeriod.seconds</dt>
+<dd>
+<p>Integer, in seconds.
+Default 3600.
+Used during session <a href="#base-scavenge">scavenging</a>.
+Multiples of this period are used to define how long ago a stored session must have expired before it should be <a href="#base-scavenge">scavenged</a>.</p>
+</dd>
+<dt class="hdlist1">jetty.session.savePeriod.seconds</dt>
+<dd>
+<p>Integer, in seconds, default is <code>0</code>.
+Whenever a session is accessed by a request, its <code>lastAccessTime</code> and <code>expiry</code> are updated.
+Even if your sessions are read-mostly, the <code>lastAccessTime</code> and  <code>expiry</code> will always change.
+For heavily-used, read-mostly sessions you can save some time by skipping some writes for sessions for which only these fields have changed (ie no session attributes changed).
+The value of this property is used to skip writes for these kinds of sessions: the session will only be written out if the time since the last write exceeds the value of this property.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You should be careful in the use of this property in clustered environments: if you set too large a value for this property, the session may not be written out sufficiently often to update its <code>expiry</code> time thus making it appear to other nodes that it has expired.
+Thorough consideration of the <code>maxIdleTime</code> of the session when setting the <code>savePeriod</code> is imperative - it would be undesirable to set a <code>savePeriod</code> that is larger than the <code>maxIdleTime</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.gcloud.namespace</dt>
+<dd>
+<p>Optional.
+Sets the namespace for GCloud Datastore to use.
+If set, partitions the visibility of session data between webapps, which is helpful for multi-tenant deployments.
+More information can be found <a href="https://cloud.google.com/datastore/docs/concepts/multitenancy">here.</a></p>
+</dd>
+<dt class="hdlist1">Configuration of the stored session object and its fields names-</dt>
+<dd>
+<p>You should very rarely, if ever, need to change these defaults.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.gcloud.model.kind</dt>
+<dd>
+<p>The default is "GCloudSession".
+This is the type of the object that is stored in GCloud.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gcloud.model.id</dt>
+<dd>
+<p>The default is "id".
+This is the session id.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gcloud.model.contextPath</dt>
+<dd>
+<p>The default is "contextPath".
+This is the canonicalized context path of the context to which the session belongs.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gcloud.model.vhost</dt>
+<dd>
+<p>The default is "vhost".
+This is the canonicalized virtual host of the context to which the session belongs.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gcloud.model.accessed</dt>
+<dd>
+<p>The default is "accessed".
+This is the current access time of the session.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gcloud.model.lastAccessed</dt>
+<dd>
+<p>The default is "lastAccessed".
+This is the last access time of the session.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gcloud.model.createTime</dt>
+<dd>
+<p>The default is "createTime".
+This is the time, in ms since the epoch, at which the session was created.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gcloud.model.cookieSetTime</dt>
+<dd>
+<p>The default is "cookieSetTime".
+This is the time at which the session cookie was last set.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gcloud.model.lastNode</dt>
+<dd>
+<p>The default is "lastNode".
+This is the <code>workerName</code> of the last node to manage the session.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gcloud.model.expiry</dt>
+<dd>
+<p>The default is "expiry".
+This is the time, in ms since the epoch, at which the session will expire.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gcloud.model.maxInactive</dt>
+<dd>
+<p>The default is "maxInactive".
+This is the session timeout in ms.</p>
+</dd>
+<dt class="hdlist1">jetty.session.gcloud.model.attributes</dt>
+<dd>
+<p>The default is "attributes".
+This is a map of all the session attributes.</p>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="memcached"><a class="anchor" href="#memcached"></a>Modules for Persistent HTTP Sessions: The L2 Session Data Cache</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If your chosen persistence technology is slow, it can be helpful to locally cache the session data.
+The <code>CachingSessionDataStore</code> is a special type of <code>SessionDataStore</code> that locally caches session data, which makes reads faster. It writes-through to your chosen type of <code>SessionDataStore</code> when session data changes.</p>
+</div>
+<div class="sect2">
+<h3 id="memcachedsessiondatamap"><a class="anchor" href="#memcachedsessiondatamap"></a>MemcachedSessionDataMap</h3>
+<div class="paragraph">
+<p>The <code>MemcachedSessionDataMap</code> uses <code>memcached</code> to perform caching of <code>SessionData</code>.</p>
+</div>
+<div class="paragraph">
+<p>To enable it with the Jetty distribution, enable the <code>session-store-cache</code> module, along with your chosen <code>session-store-xxxx</code> module.</p>
+</div>
+<div class="sect3">
+<h4 id="configuration-12"><a class="anchor" href="#configuration-12"></a>Configuration</h4>
+<div class="paragraph">
+<p>The <code>$JETTY_BASE/start.d/session-store-cache.ini</code> contains the following configurable properties:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.session.memcached.host</dt>
+<dd>
+<p>Default value is <code>localhost</code>.
+This is the host on which the memcached server resides.</p>
+</dd>
+<dt class="hdlist1">jetty.session.memcached.port</dt>
+<dd>
+<p>Default value is <code>11211</code>.
+This is the port on which the memcached server is listening.</p>
+</dd>
+<dt class="hdlist1">jetty.session.memcached.expirySec</dt>
+<dd>
+<p>Default value <code>0</code>.
+This is the length of time in seconds that an item can remain in the memcached cache, where 0 indicates indefinitely.</p>
+</dd>
+<dt class="hdlist1">jetty.session.memcached.heartbeats</dt>
+<dd>
+<p>Default value <code>true</code>.
+Whether the memcached system should generate heartbeats.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="usecases"><a class="anchor" href="#usecases"></a>Session Scenarios</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="minimizing-support-for-sessions"><a class="anchor" href="#minimizing-support-for-sessions"></a>Minimizing Support for Sessions</h3>
+<div class="paragraph">
+<p>The standard support for webapps in Jetty will use sessions cached in memory, but not persisted/clustered, with a scavenge for expired sessions that occurs every 10 minutes.
+If you wish to pare back support for sessions because you know your app doesn&#8217;t use them (or use JSPs that use them), then you can do the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>enable the <a href="#base">base sessions module</a> and <a href="#base">configure the scavenge interval</a> to 0 to prevent scavenging</p>
+</li>
+<li>
+<p>enable the <a href="#cache-null">null session cache module</a> to prevent sessions being cached in memory</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you wish to do any further minimization, you should consult the <a href="../../programming-guide/server/session.html" class="xref page">Programming Guide</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clustering-with-a-sticky-load-balancer"><a class="anchor" href="#clustering-with-a-sticky-load-balancer"></a>Clustering with a Sticky Load Balancer</h3>
+<div class="paragraph">
+<p>Preferably, your cluster will utilize a sticky load balancer.
+This will route requests for the same session to the same Jetty instance.
+In this case, the <a href="#cache-hash"><code>DefaultSessionCache</code></a> can be used to keep in-use session objects <a href="#cache-hash">in memory</a>.
+You can fine-tune the cache by controlling how long session objects remain in memory with the <a href="#cache-hash">eviction policy settings</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you have a large number of sessions or very large session objects, then you may want to manage your memory allocation by controlling the amount of time session objects spend in the cache.
+The <code>EVICT_ON_SESSION_EXIT</code> eviction policy will remove a session object from the cache as soon as the last simultaneous request referencing it exits.
+Alternatively, the <code>EVICT_ON_INACTIVITY</code> policy will remove a session object from the cache after a configurable amount of time has passed without a request referencing it.</p>
+</div>
+<div class="paragraph">
+<p>If your sessions are very long lived and infrequently referenced, you might use the <code>EVICT_ON_INACTIVITY_POLICY</code> to control the size of the cache.</p>
+</div>
+<div class="paragraph">
+<p>If your sessions are small, or relatively few or stable in number or they are read-mostly, then you might select the <code>NEVER_EVICT</code> policy.
+With this policy, session objects will remain in the cache until they either expire or are explicitly invalidated.</p>
+</div>
+<div class="paragraph">
+<p>If you have a high likelihood of simultaneous requests for the same session object, then the <code>EVICT_ON_SESSION_EXIT</code> policy will ensure the session object stays in the cache as long as it is needed.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clustering-without-a-sticky-load-balancer"><a class="anchor" href="#clustering-without-a-sticky-load-balancer"></a>Clustering Without a Sticky Load Balancer</h3>
+<div class="paragraph">
+<p>Without a sticky load balancer requests for the same session may arrive on any node in the cluster.
+This means it is likely that the copy of the session object in any <code>SessionCache</code> is likely to be out-of-date, as the session was probably last accessed on a different node.
+In this case, your choices are to use either the <a href="#cache-null"><code>NullSessionCache</code></a> or to de-tune the <a href="#cache-hash"><code>DefaultSessionCache</code></a>.
+If you use the <code>NullSessionCache</code> all session object caching is avoided.
+This means that every time a request references a session it must be read in from persistent storage.
+It also means that there can be no sharing of session objects for multiple requests for the same session: each will have their own independent session object.
+Furthermore, the outcome of session writes are indeterminate because the Servlet Specification does not mandate ACID transactions for sessions.</p>
+</div>
+<div class="paragraph">
+<p>If you use the <code>DefaultSessionCache</code>, there is a risk that the caches on some nodes will contain out-of-date session information as simultaneous requests for the same session are scattered over the cluster.
+To mitigate this somewhat you can use the <code>EVICT_ON_SESSION_EXIT</code> eviction policy: this will ensure that the session is removed from the cache as soon as the last simultaneous request for it exits.
+Again, due to the lack of session transactionality, the ordering outcome of write operations cannot be guaranteed.
+As the session is cached while at least one request is accessing it, it is possible for multiple simultaneous requests to share the same session object.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="handling-corrupted-or-unreadable-session-data"><a class="anchor" href="#handling-corrupted-or-unreadable-session-data"></a>Handling Corrupted or Unreadable Session Data</h3>
+<div class="paragraph">
+<p>For various reasons it might not be possible for the <code>SessionDataStore</code> to re-read a stored session.
+One scenario is that the session stores a serialized object in its attributes, and after a re-deployment there in an incompatible class change.
+Setting the <code>$JETTY_BASE/start.d/session-cache-hash.ini</code> or <code>$JETTY_BASE/start.d/session-cache-null.ini</code> property <code>jetty.session.removeUnloadableSessions</code> to <code>true</code> will allow the unreadable session to be removed from persistent storage.
+This can be useful for preventing the <a href="#base-scavenge">scavenger</a> from continually generating errors on the same expired, but un-readable session.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../keystore/index.html">Configuring SSL/TLS KeyStores</a></span>
+  <span class="next"><a href="../quickstart/index.html">Faster Web Application Deployment</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

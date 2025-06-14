@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Using Maven :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="../server/io-arch.html">
+    <link rel="next" href="jetty-maven-plugin.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Programming Guide</a></li>
+    <li>Maven and Jetty</li>
+    <li><a href="jetty-maven-helloworld.html">Using Maven</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/programming-guide/pages/maven-jetty/jetty-maven-helloworld.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Using Maven</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="http://maven.apache.org/">Apache Maven</a> is a software project management and comprehension tool.
+Based on the concept of a project object model (POM), Maven can manage a project&#8217;s build, reporting and documentation from a central piece of information.</p>
+</div>
+<div class="paragraph">
+<p>It is an ideal tool to build a web application project, and such projects can use the <a href="jetty-maven-plugin.html" class="xref page">jetty-maven-plugin</a> to easily run the web application and save time in development.
+You can also use Maven to build, test and run a project which embeds Jetty.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Use of Maven and the jetty-maven-plugin is <strong>not</strong> required.
+Using Maven for Jetty implementations is a popular choice, but users encouraged to manage their projects in whatever way suits their needs.
+Other popular tools include Ant and Gradle.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring-embedded-jetty-with-maven"><a class="anchor" href="#configuring-embedded-jetty-with-maven"></a>Using Embedded Jetty with Maven</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Maven uses convention over configuration, so it is best to use the project structure Maven recommends.
+You can use <em><a href="http://maven.apache.org/guides/introduction/introduction-to-archetypes.html">archetypes</a></em> to quickly setup Maven projects, but we will set up the structure manually for this simple tutorial example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt; mkdir JettyMavenHelloWorld
+&gt; cd JettyMavenHelloWorld
+&gt; mkdir -p src/main/java/org/example</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-helloworld-class"><a class="anchor" href="#creating-helloworld-class"></a>Creating the HelloWorld Class</h3>
+<div class="paragraph">
+<p>Use an editor to create the file <code>src/main/java/org/example/HelloWorld.java</code> with the following contents:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package org.example;
+
+import org.eclipse.jetty.http.HttpHeader;
+import org.eclipse.jetty.io.Content;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Response;
+import org.eclipse.jetty.util.Callback;
+
+class HelloWorldHandler extends Handler.Abstract.NonBlocking
+{
+    @Override
+    public boolean handle(Request request, Response response, Callback callback)
+    {
+        response.setStatus(200);
+        response.getHeaders().put(HttpHeader.CONTENT_TYPE, "text/html; charset=UTF-8");
+
+        // Write a Hello World response.
+        Content.Sink.write(response, true, """
+            &lt;!DOCTYPE html&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+              &lt;title&gt;Jetty Hello World Handler&lt;/title&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+              &lt;p&gt;Hello World&lt;/p&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+            """, callback);
+        return true;
+    }
+}
+
+Server server = new Server();
+Connector connector = new ServerConnector(server);
+server.addConnector(connector);
+
+// Set the Hello World Handler.
+server.setHandler(new HelloWorldHandler());
+
+server.start();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-embedded-pom-descriptor"><a class="anchor" href="#creating-embedded-pom-descriptor"></a>Creating the POM Descriptor</h3>
+<div class="paragraph">
+<p>The <code>pom.xml</code> file declares the project name and its dependencies.
+Use an editor to create the file <code>pom.xml</code> in the <code>JettyMavenHelloWorld</code> directory with the following contents:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
+
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;org.example&lt;/groupId&gt;
+  &lt;artifactId&gt;hello-world&lt;/artifactId&gt;
+  &lt;version&gt;0.1-SNAPSHOT&lt;/version&gt;
+  &lt;packaging&gt;jar&lt;/packaging&gt;
+  &lt;name&gt;Jetty HelloWorld&lt;/name&gt;
+
+  &lt;properties&gt;
+    &lt;jettyVersion&gt;12.0.23-SNAPSHOT&lt;/jettyVersion&gt;
+  &lt;/properties&gt;
+
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+      &lt;artifactId&gt;jetty-server&lt;/artifactId&gt;
+      &lt;version&gt;${jettyVersion}&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+
+  &lt;build&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+        &lt;artifactId&gt;exec-maven-plugin&lt;/artifactId&gt;
+        &lt;executions&gt;
+          &lt;execution&gt;&lt;goals&gt;&lt;goal&gt;java&lt;/goal&gt;&lt;/goals&gt;&lt;/execution&gt;
+        &lt;/executions&gt;
+        &lt;configuration&gt;
+          &lt;mainClass&gt;org.example.HelloWorld&lt;/mainClass&gt;
+        &lt;/configuration&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+&lt;/project&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="buildng-and-running-embedded-helloworld"><a class="anchor" href="#buildng-and-running-embedded-helloworld"></a>Building and Running Embedded HelloWorld</h3>
+<div class="paragraph">
+<p>You can now compile and execute the HelloWorld class by using these commands:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt; mvn clean compile exec:java</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Point your browser to <code>http://localhost:8080</code> to see the <em>Hello World</em> page.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="developing-standard-webapp-with-jetty-and-maven"><a class="anchor" href="#developing-standard-webapp-with-jetty-and-maven"></a>Developing a Standard WebApp with Jetty and Maven</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The previous section demonstrated how to use Maven with an application that embeds Jetty.
+We can instead develop a standard webapp using Maven and Jetty.
+First create the Maven structure (you can use the maven webapp archetype instead if you prefer):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt; mkdir JettyMavenHelloWarApp
+&gt; cd JettyMavenHelloWebApp
+&gt; mkdir -p src/main/java/org/example
+&gt; mkdir -p src/main/webapp/WEB-INF</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-servlet"><a class="anchor" href="#creating-servlet"></a>Creating a Servlet</h3>
+<div class="paragraph">
+<p>Use an editor to create the file <code>src/main/java/org/example/HelloServlet.java</code> with the following contents:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package org.example;
+
+import java.io.IOException;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class HelloServlet extends HttpServlet
+{
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        response.setContentType("text/html");
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.getWriter().println("&lt;h1&gt;Hello Servlet&lt;/h1&gt;");
+        response.getWriter().println("session=" + request.getSession(true).getId());
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This servlet must be declared in the web deployment descriptor, so create the file <code>src/main/webapp/WEB-INF/web.xml</code> and add the following contents:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;web-app
+   xmlns="https://jakarta.ee/xml/ns/jakartaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+   metadata-complete="false"
+   version="6.0"&gt;
+
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;Hello&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.example.HelloServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;Hello&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/hello/*&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+&lt;/web-app&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-plugin-pom-descriptor"><a class="anchor" href="#creating-plugin-pom-descriptor"></a>Creating the POM Descriptor</h3>
+<div class="paragraph">
+<p>The <code>pom.xml</code> file declares the project name and its dependencies.
+Use an editor to create the file <code>pom.xml</code> with the following contents in the <code>JettyMavenHelloWarApp</code> directory, noting particularly the declaration of the <a href="jetty-maven-plugin.html" class="xref page">jetty-maven-plugin</a> for the Jakarta EE 10 environment:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
+
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;org.example&lt;/groupId&gt;
+  &lt;artifactId&gt;hello-world&lt;/artifactId&gt;
+  &lt;version&gt;0.1-SNAPSHOT&lt;/version&gt;
+  &lt;packaging&gt;war&lt;/packaging&gt;
+  &lt;name&gt;Jetty HelloWorld WebApp&lt;/name&gt;
+
+  &lt;properties&gt;
+    &lt;jettyVersion&gt;12.0.23-SNAPSHOT&lt;/jettyVersion&gt;
+  &lt;/properties&gt;
+
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;jakarta.servlet&lt;/groupId&gt;
+      &lt;artifactId&gt;jakarta.servlet-api&lt;/artifactId&gt;
+      &lt;version&gt;6.0.0&lt;/version&gt;
+      &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+
+  &lt;build&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.eclipse.jetty.ee10&lt;/groupId&gt;
+        &lt;artifactId&gt;jetty-ee10-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;${jettyVersion}&lt;/version&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+
+&lt;/project&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="building-and-running-web-application"><a class="anchor" href="#building-and-running-web-application"></a>Building and Running the Web Application</h3>
+<div class="paragraph">
+<p>The web application can now be built and run without first needing to assemble it into a war by using the <a href="jetty-maven-plugin.html" class="xref page">jetty-maven-plugin</a> via the command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt; mvn jetty:run</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can see the static and dynamic content at <code>http://localhost:8080/hello</code></p>
+</div>
+<div class="paragraph">
+<p>There are a great deal of configuration options available for the jetty-maven-plugin to help you build and run your webapp.
+The full reference is at <a href="jetty-maven-plugin.html" class="xref page">Configuring the Jetty Maven Plugin</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="building-war-file"><a class="anchor" href="#building-war-file"></a>Building a WAR file</h3>
+<div class="paragraph">
+<p>A Web Application Archive (WAR) file can be produced from the project with the command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt; mvn package</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The resulting war file is in the <code>target</code> directory and may be deployed on any standard servlet server, including <a href="../../operations-guide/deploy/index.html" class="xref page">Jetty</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../server/io-arch.html">Server I/O Architecture</a></span>
+  <span class="next"><a href="jetty-maven-plugin.html">Using the Jetty Maven Plugin</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

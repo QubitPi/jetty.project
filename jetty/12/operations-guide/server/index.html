@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Jetty Server :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="../deploy/index.html">
+    <link rel="next" href="../protocols/index.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Operations Guide</a></li>
+    <li><a href="index.html">Jetty Server</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/operations-guide/pages/server/index.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Jetty Server</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jetty <code>Server</code> object is the central component that links protocol connectors to web applications.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Server</code> component is defined by the <a href="../modules/standard.html#server" class="xref page"><code>server</code> Jetty module</a>, that in turn depends on other Jetty modules that provide key functionalities, in particular:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#logging">Logging</a></p>
+</li>
+<li>
+<p><a href="../modules/standard.html#bytebufferpool" class="xref page"><code>ByteBuffer</code> pooling</a></p>
+</li>
+<li>
+<p><a href="#threadpool"><code>Thread</code> pooling</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="logging"><a class="anchor" href="#logging"></a>Logging</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can configure two types of logging in Jetty: <em>server logging</em> and <em>request logging</em>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#logging-server">Server logging</a> refers to the console output produced by Jetty itself.</p>
+</li>
+<li>
+<p><a href="#logging-request">Request logging</a> refers to the information that Jetty can capture about incoming HTTP requests and responses.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="logging-server"><a class="anchor" href="#logging-server"></a>Server Logging</h3>
+<div class="paragraph">
+<p>Jetty uses the <a href="http://slf4j.org/">SLF4J</a> API for its logging.
+SLF4J is a generic abstraction layer that is supported by many different logging frameworks (or SLF4J <em>bindings</em>).</p>
+</div>
+<div class="paragraph">
+<p>Jetty provides a default binding via the <code>jetty-slf4j-impl</code> Maven artifact, but you can plug in the SLF4J <em>binding</em> <a href="#logging-server-custom">of your choice</a> provided by other logging frameworks.</p>
+</div>
+<div class="paragraph">
+<p>Jetty&#8217;s server logging is enabled by default with the <code>logging</code> Jetty module.
+You typically won&#8217;t have to enable the <code>logging</code> module directly, since it is a transitive dependency of the <code>server</code> module, and thus pulled in by many of the most commonly used modules.</p>
+</div>
+<div class="paragraph">
+<p>The <code>logging</code> module is a <a href="../modules/index.html#names" class="xref page"><em>virtual</em> module</a> and its default implementation is provided by the <code>logging-jetty</code> Jetty module, which uses the Jetty SLF4J binding.</p>
+</div>
+<div class="sect3">
+<h4 id="logging-server-default"><a class="anchor" href="#logging-server-default"></a>Default Configuration</h4>
+<div class="paragraph">
+<p>Jetty&#8217;s default SLF4J binding uses an <em>appender</em> (<code>org.eclipse.jetty.logging.StdErrAppender</code>) to format a logging message with metadata (like a timestamp) before sending it to <code>System.err</code>.
+The default <code>StdErrAppender</code> format is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;datetime&gt;:&lt;level&gt;:&lt;logger name&gt;:&lt;thread name&gt;:&lt;message&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>&lt;datetime&gt;</code> is a timestamp with the format <code>yyyy-MM-dd HH:mm:ss.SSS</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can configure the appender via a file named <code>jetty-logging.properties</code>, which must be found in the server <a href="../start/index.html#start-class-path" class="xref page">class-path</a>.
+When you enable the <code>logging-jetty</code> module&#8201;&#8212;&#8201;either directly or by transitive dependency, as in the following example&#8201;&#8212;&#8201;Jetty automatically generates a <code>jetty-logging.properties</code> file in <code>$JETTY_BASE/resources/</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=http</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+args=--add-modules=http
+highlight=(logging-jetty *transitively enabled|copy.*\.properties)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can specify the following configuration options in <code>jetty-logging.properties</code>:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>org.eclipse.jetty.LEVEL=</code>&lt;logging level&gt;</dt>
+<dd>
+<p>Sets the logging level for the logger tree based at <code>org.eclipse.jetty</code>.
+You can specify any of the usual SLF4J logging levels&#8201;&#8212;&#8201;<code>TRACE</code>, <code>DEBUG</code>, <code>INFO</code> (default), <code>WARN</code> and <code>ERROR</code>&#8201;&#8212;&#8201;plus two additional levels: <code>ALL</code> (an alias for <code>TRACE</code>) and <code>OFF</code> (disables logging entirely).
+You can also configure a default logging level for specific loggers, or arbitrary logger trees:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>com.example.MyComponent.LEVEL=DEBUG</code> (sets logging level of logger <code>com.example.MyComponent</code> to <code>DEBUG</code>)</p>
+</li>
+<li>
+<p><code>com.example.LEVEL=DEBUG</code> (sets logging level of tree <code>com.example.*</code> to <code>DEBUG</code>)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1"><code>com.example.STACKS=</code>&lt;boolean&gt;</dt>
+<dd>
+<p>Specifies whether to hide stack traces for some arbitrary logger tree <code>com.example.*</code>.
+The exception type and message are logged normally; only stack traces are hidden.
+Default value is <code>false</code></p>
+</dd>
+<dt class="hdlist1"><code>org.eclipse.jetty.logging.appender.NAME_CONDENSE=</code>&lt;boolean&gt;</dt>
+<dd>
+<p>Specifies whether to condense logger names, so that for example <code>org.eclipse.jetty.util.QueuedThreadPool</code> becomes <code>oeju.QueuedThreadPool</code>.
+Default value is <code>true</code>.</p>
+</dd>
+<dt class="hdlist1"><code>org.eclipse.jetty.logging.appender.MESSAGE_ALIGN=</code>&lt;integer&gt;</dt>
+<dd>
+<p>Specifies the column at which the logging <code>&lt;message&gt;</code> should be printed.
+The value <code>0</code> specifies no alignment.
+Default value is <code>0</code>.</p>
+</dd>
+<dt class="hdlist1"><code>org.eclipse.jetty.logging.appender.MESSAGE_ESCAPE=</code>&lt;boolean&gt;</dt>
+<dd>
+<p>Specifies whether to escape ISO control characters such as <code>\r</code> or <code>\n</code> present in the message.
+Character <code>\r</code> is replaced with <code>&lt;</code> and character <code>\n</code> is replaced with <code>|</code>; all other ISO control characters are replaced with <code>?</code>.
+Default value is <code>false</code>.</p>
+</dd>
+<dt class="hdlist1"><code>org.eclipse.jetty.logging.appender.ZONE_ID=</code>&lt;timezone id&gt;</dt>
+<dd>
+<p>Specifies the timezone ID (such as <code>PST</code>, or <code>America/Los_Angeles</code> or <code>GMT-8:00</code>) for the <code>&lt;datetime&gt;</code> part of the logging line.
+The empty string specifies the <code>UTC</code> timezone.
+Default value is the local timezone.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>When using the Jetty SLF4J binding, the logging levels can be dynamically changed via JMX, see <a href="../troubleshooting/index.html#logging" class="xref page">the troubleshooting section</a> for more information.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="logging-server-default-rolling"><a class="anchor" href="#logging-server-default-rolling"></a>Capturing Logs to a Rolling File</h4>
+<div class="paragraph">
+<p>Logging to <code>System.err</code> may be fine at development time, but you will typically want to capture logs on disk for later inspection, or if you don&#8217;t have a terminal access (for example, if you started Jetty as a service).</p>
+</div>
+<div class="paragraph">
+<p>The <code>console-capture</code> Jetty module allows you to capture what is written to <code>System.out</code> and <code>System.err</code> and write it to a log file.
+By default, <code>console-capture</code> logs to a file in the <code>$JETTY_BASE/logs/</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="../modules/standard.html#console-capture" class="xref page"><code>console-capture</code> module documentation</a> for details on configuring how logs are written to the <code>log</code> directory.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>console-capture</code> Jetty module should be used only in conjunction with the <code>logging-jetty</code> module, as other SLF4J bindings such as LogBack or Log4j2 have their own, more sophisticated, rolling file appenders.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="logging-server-custom"><a class="anchor" href="#logging-server-custom"></a>Custom Configuration</h4>
+<div class="paragraph">
+<p>You can use a different SLF4J binding if you are more familiar with other logging libraries, or if you need custom logging appenders.
+There are a number of out-of-the-box Jetty modules that you can use:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>logging-logback</code>, to use the <a href="http://logback.qos.ch/">LogBack</a> binding</p>
+</li>
+<li>
+<p><code>logging-log4j2</code>, to use the <a href="https://logging.apache.org/log4j/2.x/">Log4j2</a> binding</p>
+</li>
+<li>
+<p><code>logging-log4j1</code>, to use the <a href="https://logging.apache.org/log4j/1.2/">Log4j1</a> binding (note that Log4j 1.x is end-of-life)</p>
+</li>
+<li>
+<p><code>logging-jul</code>, to use the <code>java.util.logging</code> binding</p>
+</li>
+<li>
+<p><code>logging-noop</code>, to use the SLF4J no-operation binding (discards all logging)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="logging-server-custom-logback"><a class="anchor" href="#logging-server-custom-logback"></a>Logging with LogBack</h4>
+<div class="paragraph">
+<p>To enable the <code>logging-logback</code> module, run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=logging-logback,http</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Since LogBack is released under a license that is different from Jetty&#8217;s, you will be prompted to accept the LogBack license.
+Once you accept the LogBack license, your <code>$JETTY_BASE</code> directory will have the following structure.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$JETTY_BASE
+├── lib
+│   └── logging
+│       ├── logback-classic-&lt;version&gt;.jar
+│       └── logback-core-&lt;version&gt;.jar
+├── resources
+│   └── logback.xml
+└── start.d
+    ├── http.ini
+    └── logging-logback.ini</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Jetty downloaded the required LogBack <code>*.jar</code> files, and created a <code>$JETTY_BASE/resources/logback.xml</code> file for configuring your LogBack logging.
+Please refer to the <a href="http://logback.qos.ch/manual/configuration.html">LogBack configuration manual</a> for more information about how to configure LogBack.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="logging-server-custom-log4j2"><a class="anchor" href="#logging-server-custom-log4j2"></a>Logging with Log4j2</h4>
+<div class="paragraph">
+<p>To enable the <code>logging-log4j2</code> module, run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=logging-log4j2,http</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After accepting the Log4j2 license, you will have the following directory structure:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$JETTY_BASE
+├── lib
+│   └── logging
+│       ├── log4j-api-&lt;version&gt;.jar
+│       ├── log4j-core-&lt;version&gt;.jar
+│       └── log4j-slf4j2-impl-&lt;version&gt;.jar
+├── resources
+│   └── log4j2.xml
+└── start.d
+    ├── http.ini
+    └── logging-log4j2.ini</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Jetty downloaded the required Log4j2 <code>*.jar</code> files, and created a <code>$JETTY_BASE/resources/log4j2.xml</code> file that you can configure to customize your Log4j2 logging.</p>
+</div>
+<div class="paragraph">
+<p>Please refer to the <a href="https://logging.apache.org/log4j/2.x/manual/configuration.html">Log4j2 configuration manual</a> for more information about how to configure Log4j2.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="logging-server-bridges"><a class="anchor" href="#logging-server-bridges"></a>Bridging Logging to SLF4J</h4>
+<div class="paragraph">
+<p>When you use libraries that provide the features you need (for example, JDBC drivers), it may be possible that those libraries use a different logging framework than SLF4J.</p>
+</div>
+<div class="paragraph">
+<p>SLF4J provides <a href="http://www.slf4j.org/legacy.html">bridges for legacy logging APIs</a> that allows you to bridge logging from one of these legacy logging frameworks to SLF4J.
+Once the logging is bridged to SLF4J, you can use Jetty&#8217;s <a href="#logging-server-default">default configuration</a> or a <a href="#logging-server-custom">custom configuration</a> so that your logging is centralized in one place.</p>
+</div>
+<div class="paragraph">
+<p>Jetty provides the <code>logging-jul-capture</code> module for bridging from <code>java.util.logging</code> to SLF4J.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The modules <code>logging-jcl-capture</code> and <code>logging-log4j1-capture</code> similarly provide bridges from Jakarta Commons Logging (JCL) and Apache Log4j, respectively; however, these modules are obsolete and should not be used anymore.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="logging-server-bridge-jul"><a class="anchor" href="#logging-server-bridge-jul"></a>Bridging from <code>java.util.logging</code></h4>
+<div class="paragraph">
+<p>For libraries that use <code>java.util.logging</code> as their logging framework, you can enable Jetty&#8217;s <code>logging-jul-capture</code> module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=logging-jul-capture</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>logging-jul-capture</code> module implies <code>--exec</code> and therefore <a href="../start/index.html#start" class="xref page">spawns a second JVM</a> because it needs to provide the system property <code>java.util.logging.config.file</code> (so that <code>java.util.logging</code> can read the configuration from the specified file), and because it needs to make available on the System ClassLoader the class <code>org.slf4j.bridge.SLF4JBridgeHandler</code>.</p>
+</div>
+<div class="paragraph">
+<p>For example, a library that uses <code>java.util.logging</code> as its logging library is the Postgresql JDBC driver.
+With the <code>logging-jul-capture</code> Jetty module, the logging follows this diagram:</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNp1jkEOgjAQRfecomEvK9cuwBhDXJh4goHWUikz2BaNt7fQiDbgrvPfn86zrcIeDHSsgrqVhgbkBWkyzBlA65FAl9i51RFS3RjqhC8M4ofYBjg9FUp2BW1FkvjYqVr1gI6lZ7JOGmHvmpX7vEgZWNbPWdS9wQOywSmdaZLSfxjRy-mwLXOjuBRHQK6FiXApnHstF2KZqRQAyxVyf2MSqsI78e5f3c1uxWiRjLUVtWU0FwMbx8_ZoPWXvwEWmJXQ" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>Note how Jetty logs directly to SLF4J, while the Postgresql JDBC driver logs to SLF4J through the <code>SLF4JBridgeHandler</code>.
+They both arrive to the SLF4J binding, in this case the Jetty SLF4J binding (but could be any other SLF4J binding such as LogBack).</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging-request"><a class="anchor" href="#logging-request"></a>Request Logging</h3>
+<div class="paragraph">
+<p>HTTP requests and responses can be logged to provide data that can be later analyzed with other tools, that can provide information such as the most frequently accessed request URIs, the response status codes, the request/response content lengths, geographical information about the clients, etc.</p>
+</div>
+<div class="paragraph">
+<p>Request logging is enabled by enabling the <code>requestlog</code> Jetty module.
+In the example below, both the <code>http</code> Jetty module and the <code>requestlog</code> module are enabled, so that you can make HTTP requests to the server and have them logged:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ cd $JETTY_BASE
+$ java -jar $JETTY_HOME/start.jar --add-modules=http,requestlog</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>$JETTY_BASE</code> directory looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">$JETTY_BASE
+├── logs
+├── resources
+│   └── jetty-logging.properties
+└── start.d
+    ├── http.ini
+    └── requestlog.ini</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>$JETTY_BASE/start.d/requestlog.ini</code> file is the Jetty module configuration file that allows you to configure the <code>requestlog</code> module, see <a href="../modules/standard.html#requestlog" class="xref page">this section</a> for more details.</p>
+</div>
+<div class="paragraph">
+<p>By default the <code>requestlog</code> Jetty module produces the <code>$JETTY_BASE/logs/yyyy_MM_dd.request.log</code>, where the pattern <code>yyyy_MM_dd</code> is replaced with the current date, for example <code>2020_01_31</code>.</p>
+</div>
+<div class="paragraph">
+<p>The format of the request log lines is the result of a <em>format string</em> that uses formatting symbols to log relevant request/response data.</p>
+</div>
+<div class="paragraph">
+<p>The default format is the <a href="https://en.wikipedia.org/wiki/Common_Log_Format">NCSA Format</a> extended with referrer data and user-agent data.
+A typical log line looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">192.168.0.100 - - [31/Jan/2020:20:30:40 +0000] "GET / HTTP/1.1" 200 6789 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The line above (that uses fake values) shows <code>192.168.0.100</code> for the client IP address, a hard-coded <code>-</code> for the identity, <code>-</code> for the authenticated user name, <code>[31/Jan/2020:20:30:40 +0000]</code> for the date and time with timezone, <code>"GET / HTTP/1.1"</code> for the HTTP request line, <code>200</code> for the HTTP response status code, <code>6789</code> for the HTTP response content length, <code>"-"</code> for the referrer and <code>"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"</code> for the user-agent.</p>
+</div>
+<div class="paragraph">
+<p>The format string can be customized as described in <a href="../modules/standard.html#requestlog" class="xref page">this section</a>.
+Request log files are rolled every day, and retained for customizable number of days, by default 90 days.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When Jetty is behind a load balancer, you want to log the remote client IP address, not the load balancer IP address. Refer to <a href="../protocols/index.html#proxy" class="xref page">this section</a> to configure the load balancer and Jetty to retain the remote client IP address information.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="threadpool"><a class="anchor" href="#threadpool"></a>Thread Pooling</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jetty uses thread pooling to efficiently execute tasks that provide Jetty functionalities.</p>
+</div>
+<div class="paragraph">
+<p>Like any other component, the Jetty thread pool is configured and enabled via the <a href="../modules/standard.html#threadpool" class="xref page"><code>threadpool</code> Jetty module</a>, that is transitively enabled by the <a href="../modules/standard.html#server" class="xref page"><code>server</code> Jetty module</a> which, in turn, is transitively enabled by a protocol module such as the <a href="../protocols/index.html#http" class="xref page"><code>http</code> Jetty module</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=http</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The command above gives you the default configuration for the thread pool.</p>
+</div>
+<div class="paragraph">
+<p>If you want to explicitly configure the thread pool, it is enough to explicitly specify the <a href="../modules/standard.html#threadpool" class="xref page"><code>threadpool</code></a> module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=threadpool,http</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After the command above, the <code>$JETTY_BASE</code> directory looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">$JETTY_BASE
+├── resources
+│   └── jetty-logging.properties
+└── start.d
+    ├── http.ini
+    └── threadpool.ini</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you can customize the <code>threadpool.ini</code> file to explicitly configure the thread pool.</p>
+</div>
+<div class="sect2">
+<h3 id="threadpool-virtual"><a class="anchor" href="#threadpool-virtual"></a>Virtual Threads Support</h3>
+<div class="paragraph">
+<p>Virtual threads have been introduced as a preview feature in Java 19 and Java 20, and have become an official feature since Java 21.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="../modules/standard.html#threadpool-virtual-preview" class="xref page"><code>threadpool-virtual-preview</code></a> Jetty module provides support for virtual threads in Java 19 and Java 20, and it is mutually exclusive with the <code>threadpool</code> Jetty module.</p>
+</div>
+<div class="paragraph">
+<p>When using Java 21, there are two Jetty modules available:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../modules/standard.html#threadpool-virtual" class="xref page"><code>threadpool-virtual</code></a></p>
+</li>
+<li>
+<p><a href="../modules/standard.html#threadpool-all-virtual" class="xref page"><code>threadpool-all-virtual</code></a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Both are mutually exclusive with the <code>threadpool</code> Jetty module.</p>
+</div>
+<div class="paragraph">
+<p>If you have already enabled the <code>threadpool</code> Jetty module, it is sufficient to remove it by removing the <code>$JETTY_BASE/start.d/threadpool.ini</code> file.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="../modules/standard.html#threadpool-virtual" class="xref page"><code>threadpool-virtual</code></a> Jetty module provides a mixed thread mode, where platform threads are used to run internal Jetty tasks, but application code is invoked using virtual threads.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="../modules/standard.html#threadpool-all-virtual" class="xref page"><code>threadpool-all-virtual</code></a> Jetty module provides a thread mode where all threads are virtual threads, including those used internally by Jetty.</p>
+</div>
+<div class="paragraph">
+<p>You can enable either module using:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=threadpool-virtual,http</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=threadpool-all-virtual,http</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After the command above, the <code>$JETTY_BASE/start.d/</code> directory will contain the corresponding <code>threadpool-virtual.ini</code> or <code>threadpool-all-virtual.ini</code> file.
+You can now explicitly configure the thread pool module properties inside the <code>*.ini</code> file and then start Jetty.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../deploy/index.html">Web Application Deployment</a></span>
+  <span class="next"><a href="../protocols/index.html">Jetty Connectors and Protocols</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

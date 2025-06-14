@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Configuring SSL/TLS KeyStores :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="../protocols/index.html">
+    <link rel="next" href="../session/index.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Operations Guide</a></li>
+    <li><a href="index.html">Configuring SSL/TLS KeyStores</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/operations-guide/pages/keystore/index.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Configuring SSL/TLS KeyStores</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A KeyStore is a file on the file system that contains a private key and a public certificate, along with the certificate chain of the certificate authorities that issued the certificate.
+The private key, the public certificate and the certificate chain, but more generally the items present in a KeyStore, are typically referred to as "cryptographic material".</p>
+</div>
+<div class="paragraph">
+<p>Keystores may encode the cryptographic material with different encodings, the most common being <a href="https://en.wikipedia.org/wiki/PKCS_12">PKCS12</a>, and are typically protected by a password.</p>
+</div>
+<div class="paragraph">
+<p>Refer to the <a href="../protocols/index.html#ssl" class="xref page">secure protocols section</a> for more information about how to configure a secure connector using a KeyStore.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create"><a class="anchor" href="#create"></a>Creating a KeyStore</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>KeyStores are created with the JDK tool <code>$JAVA_HOME/bin/keytool</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following command creates a KeyStore file containing a private key and a self-signed certificate:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">keytool
+    -genkeypair <i class="conum" data-value="1"></i><b>(1)</b>
+    -alias mykey <i class="conum" data-value="2"></i><b>(2)</b>
+    -validity 90 <i class="conum" data-value="3"></i><b>(3)</b>
+    -keyalg RSA <i class="conum" data-value="4"></i><b>(4)</b>
+    -keysize 2048 <i class="conum" data-value="5"></i><b>(5)</b>
+    -keystore /path/to/keystore.p12 <i class="conum" data-value="6"></i><b>(6)</b>
+    -storetype pkcs12 <i class="conum" data-value="7"></i><b>(7)</b>
+    -dname "CN=domain.com, OU=Unit, O=Company, L=City, S=State, C=Country" <i class="conum" data-value="8"></i><b>(8)</b>
+    -ext san=dns:www.domain.com,dns:domain.org <i class="conum" data-value="9"></i><b>(9)</b>
+    -v <i class="conum" data-value="10"></i><b>(10)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>the command to generate a key and certificate pair</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>the alias name of the key and certificate pair</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>specifies the number of days after which the certificate expires</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>the algorithm <em>must</em> be RSA (the DSA algorithm does not work for web sites)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>indicates the strength of the key</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>the KeyStore file</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>the KeyStore type, stick with the standard PKCS12</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>the distinguished name (more below)&#8201;&#8212;&#8201;customize it with your values for CN, OU, O, L, S and C</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>the extension with the subject alternative names (more below)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>verbose output</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The command prompts for the KeyStore password that you must choose to protect the access to the KeyStore.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The important parts of the command above are the <em>Common Name</em> (CN) part of the distinguished name, and the subject alternative names (SAN).</p>
+</div>
+<div class="paragraph">
+<p>The CN value must be the main domain you own and that you want to use for your web applications.
+For example, if you have bought domains <code>domain.com</code> and <code>domain.org</code>, you want to specify <code>CN=domain.com</code> as your main domain.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, to specify additional domains or subdomains within the same certificate, you must specify the SAN extension.
+In the example above, <code>san=dns:www.domain.com,dns:domain.org</code> specifies <code>www.domain.com</code> and <code>domain.org</code> as alternative names for your web applications (that you can configure using <a href="../deploy/index.html#virtual-hosts" class="xref page">virtual hosts</a>).</p>
+</div>
+<div class="paragraph">
+<p>In rare cases, you may want to specify IP addresses, rather than domains, in the SAN extension.
+The syntax in such case is <code>san=ip:127.0.0.1,ip:[::1]</code>, which specifies as subject alternative names IPv4 <code>127.0.0.1</code> and IPv6 <code>[::1]</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="create-many"><a class="anchor" href="#create-many"></a>KeyStores with Multiple Entries</h3>
+<div class="paragraph">
+<p>A single KeyStore may contain multiple key/certificate pairs.
+This is useful when you need to support multiple domains on the same Jetty server (typically accomplished using <a href="../deploy/index.html#virtual-hosts" class="xref page">virtual hosts</a>).</p>
+</div>
+<div class="paragraph">
+<p>You can create multiple key/certificate pairs as detailed in the <a href="#create">previous section</a>, provided that you assign each one to a different alias.</p>
+</div>
+<div class="paragraph">
+<p>Compliant TLS clients will send the <a href="../protocols/index.html#ssl-sni" class="xref page">TLS SNI extension</a> when creating new connections, and Jetty will automatically choose the right certificate by matching the SNI name sent by the client with the CN or SAN of certificates present in the KeyStore.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="csr"><a class="anchor" href="#csr"></a>Creating a Certificate Signing Request</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Self-signed certificates are not trusted by browsers and generic clients: you need to establish a trust chain by having your self-signed certificate signed by a certificate authority (CA).</p>
+</div>
+<div class="paragraph">
+<p>Browsers and generic clients (e.g. Java clients) have an internal list of trusted certificate authorities root certificates; they use these trusted certificates to verify the certificate they received from the server when they connect to your web applications.</p>
+</div>
+<div class="paragraph">
+<p>To have your self-signed certificate signed by a certificate authority you first need to produce a <em>certificate signing request</em> (CSR):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">keytool
+    -certreq <i class="conum" data-value="1"></i><b>(1)</b>
+    -file domain.com.csr <i class="conum" data-value="2"></i><b>(2)</b>
+    -keystore keystore.p12 <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>the command to generate a certificate signing request</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>the file to save the CSR</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>the keystore that contains the self-signed certificate</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Then, you have to send the CSR file to the certificate authority of your choice, and wait for their reply (they will probably require a proof that you really own the domains indicated in your certificate).</p>
+</div>
+<div class="paragraph">
+<p>Eventually, the certificate authority will reply to you with one or more files containing the CA certificate chain, and your certificate signed by their certificate chain.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="csr-import"><a class="anchor" href="#csr-import"></a>Importing the Signed Certificate</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The file you receive from the CA is typically in PEM format, and you <strong>must</strong> import it back into the same KeyStore file you used to generate the CSR.
+You must import <strong>both</strong> the certificate chain and your signed certificate.</p>
+</div>
+<div class="paragraph">
+<p>First, import the certificate chain:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">keytool
+    -importcert <i class="conum" data-value="1"></i><b>(1)</b>
+    -alias ca <i class="conum" data-value="2"></i><b>(2)</b>
+    -file chain_from_ca.pem <i class="conum" data-value="3"></i><b>(3)</b>
+    -keystore keystore.p12 <i class="conum" data-value="4"></i><b>(4)</b>
+    -trustcacerts <i class="conum" data-value="5"></i><b>(5)</b>
+    -v <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>the command to import certificates</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>use the <code>ca</code> alias to differentiate from the alias of the server certificate</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>the file containing the certificate chain received from the CA</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>your KeyStore file</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>specify that you trust CA certificates</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>verbose output</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Then, import the signed certificate:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>keytool
+    -importcert
+    -file signed_certificate.pem
+    -keystore keystore.p12
+    -trustcacerts
+    -v</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you have a trusted certificate in your KeyStore that you can use for the domains of your web applications.</p>
+</div>
+<div class="paragraph">
+<p>Refer to the section about configuring <a href="../protocols/index.html#ssl" class="xref page">secure protocols</a> to configure the secure connector with your newly created KeyStore.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="client-authn"><a class="anchor" href="#client-authn"></a>Creating a KeyStore for Client Certificate Authentication</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For the majority of secure web sites, it is the client (typically the browser) that validates the certificate sent by the server (by verifying the certificate chain).
+This is the <em>server domain certificate</em>.</p>
+</div>
+<div class="paragraph">
+<p>However, the TLS protocol supports a <em>mutual authentication</em> mode where also the client must send a certificate to the server, that the server validates.</p>
+</div>
+<div class="paragraph">
+<p>You typically want to sign the client certificate(s) with a server certificate that you control, and you must distribute the client certificate(s) to all the clients that need it, and redistribute the client certificates when they expire.
+The <em>server authentication certificate</em> may be different from the <em>server domain certificate</em>, but it&#8217;s typically stored in the same KeyStore for simplicity (although under a different alias).</p>
+</div>
+<div class="paragraph">
+<p>First, you want to create the private key and server authentication certificate that you will use to sign client certificates:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">keytool
+    -genkeypair
+    -alias server_authn <i class="conum" data-value="1"></i><b>(1)</b>
+    -validity 90
+    -keyalg RSA
+    -keysize 2048
+    -keystore keystore.p12 <i class="conum" data-value="2"></i><b>(2)</b>
+    -storetype pkcs12
+    -dname "CN=server_authn, OU=Unit, O=Company, L=City, S=State, C=Country" <i class="conum" data-value="3"></i><b>(3)</b>
+    -ext bc=ca:true <i class="conum" data-value="4"></i><b>(4)</b>
+    -v</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>use the <code>server_authn</code> alias to differentiate from the alias of the server certificate</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>the KeyStore file</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>the CN is not that important, since this certificate will not be validated by clients</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>the extension with the basic constraints (more below)</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The important difference with the <a href="#create">creation of a server certificate</a> is the <em>basic constraints</em> extension (<code>bc</code>) that indicates that this certificates acts as a certificate authority (<code>ca:true</code>).
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now you want to export both the private key and server authentication certificate.
+Unfortunately, the <code>keytool</code> program cannot export private keys, so you need to use a different command line program like <code>openssl</code>, or a graphical program like <a href="https://keystore-explorer.org/">KeyStore Explorer</a>.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s use <code>openssl</code> to export the server authentication private key:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>openssl
+    pkcs12
+    -in keystore.p12
+    -nodes
+    -nocerts
+    -out server_authn.key</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s export the server authentication certificate:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>keytool
+    -exportcert
+    -keystore keystore.p12
+    -rfc
+    -file server_authn.crt
+    -v</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>At this point, you want to create a client KeyStore, so that you can sign the client certificate with the server authentication cryptographic material:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">keytool
+    -genkeypair
+    -validity 90
+    -keyalg RSA
+    -keysize 2048
+    -keystore client_keystore.p12 <i class="conum" data-value="1"></i><b>(1)</b>
+    -storetype pkcs12
+    -dname "CN=client, OU=Unit, O=Company, L=City, S=State, C=Country" <i class="conum" data-value="2"></i><b>(2)</b>
+    -v</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>the client KeyStore file</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>the CN is not that important, since it will not be validated by the server</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now produce a certificate signing request (CSR):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>keytool
+    -certreq
+    -file client.csr
+    -keystore client_keystore.p12</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you need to sign the CSR, but again the <code>keytool</code> program does not have this functionality, and you must resort again to use <code>openssl</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>openssl
+    x509
+    -req
+    -days 90
+    -in client.csr
+    -CA server_authn.crt
+    -CAkey server_authn.key
+    -CAcreateserial
+    -sha256
+    -out signed.crt</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you need to import the server authentication certificate and the signed client certificate into the client KeyStore.</p>
+</div>
+<div class="paragraph">
+<p>First, the server authentication certificate:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>keytool
+    -importcert
+    -alias ca
+    -file server_authn.crt
+    -keystore client_keystore.p12
+    -v</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, the signed client certificate:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>keytool
+    -importcert
+    -file signed.crt
+    -keystore client_keystore.p12
+    -v</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you can distribute <code>client_keystore.p12</code> to your client(s).</p>
+</div>
+<div class="paragraph">
+<p>Refer to the section about configuring <a href="../protocols/index.html#ssl" class="xref page">secure protocols</a> to configure the secure connector to require client authentication.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../protocols/index.html">Jetty Connectors and Protocols</a></span>
+  <span class="next"><a href="../session/index.html">HTTP Session Management</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

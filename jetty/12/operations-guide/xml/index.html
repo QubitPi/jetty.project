@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Jetty XML :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="../troubleshooting/index.html">
+    <link rel="next" href="../../programming-guide/index.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Operations Guide</a></li>
+    <li><a href="index.html">Jetty XML</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/operations-guide/pages/xml/index.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Jetty XML</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jetty XML format is a straightforward mapping of XML elements to Java APIs so that any object can be instantiated and getters, setters, and methods can be called.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty XML format is very similar to that of frameworks like Spring or Plexus, although it predates all of them and it&#8217;s typically more powerful as it can invoke any Java API.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty XML format is used in <a href="../modules/index.html" class="xref page">Jetty modules</a> to create the Jetty server components, as well as in <a href="../deploy/index.html" class="xref page">Jetty XML context files</a> to configure web applications, but it can be used to call any Java API.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="syntax"><a class="anchor" href="#syntax"></a>Jetty XML Syntax</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jetty XML syntax defines XML element that allow you to call any Java API and that allow you to interact in a simpler way with the <a href="../modules/index.html" class="xref page">Jetty module system</a> and the <a href="../deploy/index.html" class="xref page">Jetty deploy system</a>.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty XML elements define attributes such as <code>id</code>, <code>name</code>, <code>class</code>, etc. that may be replaced by correspondent elements, so that these XML documents are equivalent:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure&gt;
+  &lt;Get id="stderr" class="java.lang.System" name="err"&gt;
+    &lt;Call name="println" arg="HELLO" /&gt;
+  &lt;/Get&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure&gt;
+  &lt;Get&gt;
+    &lt;Id&gt;stderr&lt;/Id&gt;
+    &lt;Name&gt;err&lt;/Name&gt;
+    &lt;Class&gt;java.lang.System&lt;/Class&gt;
+    &lt;Call&gt;
+      &lt;Name&gt;println&lt;/Name&gt;
+      &lt;Arg&gt;HELLO&lt;/Arg&gt;
+    &lt;/Call&gt;
+  &lt;/Get&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The version using attributes is typically shorter and nicer to read, but sometimes the attribute value cannot be a literal string (for example, it could be the value of a system property) and that&#8217;s where elements gives you the required flexibility.</p>
+</div>
+<div class="sect2">
+<h3 id="syntax-configure"><a class="anchor" href="#syntax-configure"></a><code>&lt;Configure&gt;</code></h3>
+<div class="paragraph">
+<p>Element <code>Configure</code> must be the root element of the XML document.</p>
+</div>
+<div class="paragraph">
+<p>The following Jetty XML creates an empty <code>String</code> and assigns it the id <code>mystring</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure id="mystring" class="java.lang.String" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is equivalent to the following Java code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">var mystring = new String();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If an object with the id <code>mystring</code> already exists, then it is not created again but rather just referenced.</p>
+</div>
+<div class="paragraph">
+<p>Within element <code>&lt;Configure&gt;</code>, the created object (if any) is in <a href="#syntax-scope">scope</a> and may be the implicit target of other, nested, elements.</p>
+</div>
+<div class="paragraph">
+<p>Typically the <code>&lt;Configure&gt;</code> element is used to configure a <code>Server</code> instance or <code>ContextHandler</code> subclasses such as <code>WebAppContext</code> that represent web applications.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="syntax-arg"><a class="anchor" href="#syntax-arg"></a><code>&lt;Arg&gt;</code></h3>
+<div class="paragraph">
+<p>Element <code>Arg</code> is used to pass arguments to <a href="#syntax-new">constructors</a> and <a href="#syntax-call">method calls</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following example creates a minimal Jetty <code>Server</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.server.Server"&gt;
+  &lt;Arg type="int"&gt;8080&lt;/Arg&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Arguments may have a <code>type</code> attribute that explicitly performs <a href="#syntax-types">type coercion</a>.</p>
+</div>
+<div class="paragraph">
+<p>Arguments may also have a <code>name</code> attribute, which is matched with the corresponding Java annotation in the source class, that helps to identify arguments:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.server.Server"&gt;
+  &lt;Arg name="port" type="int"&gt;8080&lt;/Arg&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="syntax-new"><a class="anchor" href="#syntax-new"></a><code>&lt;New&gt;</code></h3>
+<div class="paragraph">
+<p>Element <code>&lt;New&gt;</code> creates a new object of the type specified by the mandatory <code>class</code> attribute.
+A sequence of <code>Arg</code> elements, that must be contiguous and before other elements, may be present to specify the constructor arguments.</p>
+</div>
+<div class="paragraph">
+<p>Within element <code>&lt;New&gt;</code> the newly created object is in <a href="#syntax-scope">scope</a> and may be the implicit target of other, nested, elements.</p>
+</div>
+<div class="paragraph">
+<p>The following example creates an <code>ArrayList</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure&gt;
+  &lt;New id="mylist" class="java.util.ArrayList"&gt;
+    &lt;Arg type="int"&gt;16&lt;/Arg&gt;
+  &lt;/New&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is equivalent to the following Java code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">var mylist = new ArrayList(16);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="syntax-call"><a class="anchor" href="#syntax-call"></a><code>&lt;Call&gt;</code></h3>
+<div class="paragraph">
+<p>Element <code>&lt;Call&gt;</code> invokes a method specified by the mandatory <code>name</code> attribute.
+A sequence of <code>Arg</code> elements, that must be contiguous and before other elements, may be present to specify the method arguments.</p>
+</div>
+<div class="paragraph">
+<p>Within element <code>&lt;Call&gt;</code> the return value, if the return type is not <code>void</code>, is in <a href="#syntax-scope">scope</a> and may be the implicit target of other, nested, elements.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure&gt;
+  &lt;New class="java.util.ArrayList"&gt;
+    &lt;Call name="listIterator"&gt;
+      &lt;Arg type="int"&gt;0&lt;/Arg&gt;
+    &lt;/Call&gt;
+    &lt;Call name="next" /&gt;
+  &lt;/New&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is equivalent to the following Java code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">new ArrayList().listIterator(0).next();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is possible to call <code>static</code> methods by specifying the <code>class</code> attribute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure&gt;
+  &lt;Call id="myhost" name="getByName" class="java.net.InetAddress"&gt;
+    &lt;Arg&gt;jdk.java.net&lt;/Arg&gt;
+  &lt;/Call&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is equivalent to the following Java code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">var myhost = InetAddress.getByName("jdk.java.net");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>class</code> attribute (or <code>&lt;Class&gt;</code> element) can also be used to specify the Java class or interface to use to lookup the non-<code>static</code> method name.
+This is necessary when the object in scope, onto which the <code>&lt;Call&gt;</code> would be applied, is an instance of a class that is not visible to Jetty classes, or not accessible because it is not <code>public</code>.
+For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure&gt;
+  &lt;Call class="java.util.concurrent.Executors" name="newSingleThreadScheduledExecutor"&gt;
+    <mark>&lt;Call class="java.util.concurrent.ExecutorService" name="shutdown" /&gt;</mark>
+  &lt;/Call&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above, <code>Executors.newSingleThreadScheduledExecutor()</code> returns an object whose class is a private JDK implementation class.
+Without an explicit <code>class</code> attribute (or <code>&lt;Class&gt;</code> element), it is not possible to invoke the method <code>shutdown()</code> when it is obtained via reflection from the private JDK implementation class, because while the method is <code>public</code>, the private JDK implementation class is not, therefore this exception is thrown:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">java.lang.IllegalAccessException: class org.eclipse.jetty.xml.XmlConfiguration$JettyXmlConfiguration (in module org.eclipse.jetty.xml) cannot access a member of class java.util.concurrent.Executors$DelegatedExecutorService (in module java.base) with modifiers "public"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The solution is to explicitly use the <code>class</code> attribute (or <code>&lt;Class&gt;</code> element) of the <code>&lt;Call&gt;</code> element that is invoking the <code>shutdown()</code> method, specifying a publicly accessible class or interface that the object in scope extends or implements (in the example above <code>java.util.concurrent.ExecutorService</code>).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="syntax-get"><a class="anchor" href="#syntax-get"></a><code>&lt;Get&gt;</code></h3>
+<div class="paragraph">
+<p>Element <code>&lt;Get&gt;</code> retrieves the value of a JavaBean property specified by the mandatory <code>name</code> attribute.</p>
+</div>
+<div class="paragraph">
+<p>If the JavaBean property is <code>foo</code> (or <code>Foo</code>), <code>&lt;Get&gt;</code> first attempts to invoke <em>method</em> <code>getFoo()</code> or <em>method</em> <code>isFoo()</code>; failing that, attempts to retrieve the value from <em>field</em> <code>foo</code> (or <code>Foo</code>).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure id="server" class="org.eclipse.jetty.server.Server"&gt;
+  &lt;!-- Invokes getter method server.getVersion() --&gt;
+  &lt;Get id="version" name="version" /&gt;
+
+  &lt;!-- Gets the System.err field --&gt;
+  &lt;Get class="java.lang.System" name="err"&gt;
+    &lt;Call name="println"&gt;
+      &lt;Arg&gt;Jetty&lt;/Arg&gt;
+    &lt;/Call&gt;
+  &lt;/Get&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>class</code> attribute (or <code>&lt;Class&gt;</code> element) allows to perform <code>static</code> calls, or to lookup the getter method from the specified class, as described in the <a href="#syntax-call"><code>&lt;Call&gt;</code> section</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="syntax-set"><a class="anchor" href="#syntax-set"></a><code>&lt;Set&gt;</code></h3>
+<div class="paragraph">
+<p>Element <code>&lt;Set&gt;</code> stores the value of a JavaBean property specified by the mandatory <code>name</code> attribute.</p>
+</div>
+<div class="paragraph">
+<p>If the JavaBean property is <code>foo</code> (or <code>Foo</code>), <code>&lt;Set&gt;</code> first attempts to invoke <em>method</em> <code>setFoo(&#8230;&#8203;)</code> with the value in the <a href="#syntax-scope">scope</a> as argument; failing that, attempts to store the value in the scope to <em>field</em> <code>foo</code> (or <code>Foo</code>).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure id="server" class="org.eclipse.jetty.server.Server"&gt;
+  &lt;!-- The value in the &lt;Set&gt; scope is the string "true" --&gt;
+  &lt;Set name="dryRun"&gt;true&lt;/Set&gt;
+
+  &lt;!-- The value in the &lt;Set&gt; scope is the instance created by &lt;New&gt; --&gt;
+  &lt;Set name="requestLog"&gt;
+    &lt;New class="org.eclipse.jetty.server.CustomRequestLog" /&gt;
+  &lt;/Set&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>class</code> attribute (or <code>&lt;Class&gt;</code> element) allows to perform <code>static</code> calls, or to lookup the setter method from the specified class, as described in the <a href="#syntax-call"><code>&lt;Call&gt;</code> section</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="syntax-map"><a class="anchor" href="#syntax-map"></a><code>&lt;Map&gt;</code> and <code>&lt;Entry&gt;</code></h3>
+<div class="paragraph">
+<p>Element <code>&lt;Map&gt;</code> allows the creation of a new <code>java.util.Map</code> implementation, specified by the <code>class</code> attribute&#8201;&#8212;&#8201;by default a <code>HashMap</code>.</p>
+</div>
+<div class="paragraph">
+<p>The map entries are specified with a sequence of <code>&lt;Entry&gt;</code> elements, each with exactly 2 <code>&lt;Item&gt;</code> elements, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure&gt;
+  &lt;Map class="java.util.concurrent.ConcurrentHashMap"&gt;
+    &lt;Entry&gt;
+      &lt;Item&gt;host&lt;/Item&gt;
+      &lt;Item&gt;
+        &lt;Call class="java.net.InetAddress" name="getByName"&gt;
+          &lt;Arg&gt;localhost&lt;/Arg&gt;
+        &lt;/Call&gt;
+      &lt;/Item&gt;
+    &lt;/Entry&gt;
+  &lt;/Map&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="syntax-put"><a class="anchor" href="#syntax-put"></a><code>&lt;Put&gt;</code></h3>
+<div class="paragraph">
+<p>Element <code>&lt;Put&gt;</code> is a convenience element that puts a key/value pair into objects that implement <code>java.util.Map</code>.
+You can only specify the key value via the <code>name</code> attribute, so the key can only be a literal string (for keys that are not literal strings, use the <code>&lt;Call&gt;</code> element).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure&gt;
+  &lt;New class="java.util.Properties"&gt;
+    &lt;Put name="host"&gt;
+      &lt;Call class="java.net.InetAddress" name="getByName"&gt;
+        &lt;Arg&gt;localhost&lt;/Arg&gt;
+      &lt;/Call&gt;
+    &lt;/Put&gt;
+  &lt;/New&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="syntax-array"><a class="anchor" href="#syntax-array"></a><code>&lt;Array&gt;</code> and <code>&lt;Item&gt;</code></h3>
+<div class="paragraph">
+<p>Element <code>&lt;Array&gt;</code> creates a new array, whose component type may be specified by the <code>type</code> attribute, or by a <code>Type</code> child element.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure&gt;
+  &lt;Array type="java.lang.Object"&gt;
+    &lt;Item /&gt; &lt;!-- null --&gt;
+    &lt;Item&gt;literalString&lt;/Item&gt;
+    &lt;Item type="String"&gt;&lt;/Item&gt; &lt;!-- empty string --&gt;
+    &lt;Item type="Double"&gt;1.0D&lt;/Item&gt;
+    &lt;Item&gt;
+      &lt;New class="java.lang.Exception" /&gt;
+    &lt;/Item&gt;
+  &lt;/Array&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="syntax-ref"><a class="anchor" href="#syntax-ref"></a><code>&lt;Ref&gt;</code></h3>
+<div class="paragraph">
+<p>Element <code>&lt;Ref&gt;</code> allows you to reference an object via the <code>refid</code> attribute`, putting it into <a href="#syntax-scope">scope</a> so that nested elements can operate on it.
+You must give a unique <code>id</code> attribute to the objects you want to reference.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;!-- The Jetty Server has id="server" --&gt;
+&lt;Configure id="server" class="org.eclipse.jetty.server.Server"&gt;
+  &lt;Get class="java.lang.System" name="err"&gt;
+    &lt;!-- Here the System.err field is in scope, but you
+         want to operate on the server to get its version --&gt;
+    &lt;Ref refid="server"&gt;
+      &lt;!-- Store the server version under id="myversion" --&gt;
+      &lt;Get id="myversion" name="version" /&gt;
+    &lt;/Ref&gt;
+
+    &lt;Call name="println"&gt;
+      &lt;!-- Reference the server version stored above --&gt;
+      &lt;Arg&gt;Server version is: &lt;Ref refid="myversion" /&gt;&lt;/Arg&gt;
+    &lt;/Call&gt;
+  &lt;/Get&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="syntax-property"><a class="anchor" href="#syntax-property"></a><code>&lt;Property&gt;</code></h3>
+<div class="paragraph">
+<p>Element <code>&lt;Property&gt;</code> retrieves the value of the Jetty module property specified by the <code>name</code> attribute, and it is mostly used when creating <a href="../modules/custom.html" class="xref page">custom Jetty modules</a> or when using <a href="../deploy/index.html#jetty" class="xref page">Jetty context XML files</a>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>deprecated</code> attribute allows you to specify a comma separated list of old, deprecated, property names for backward compatibility.</p>
+</div>
+<div class="paragraph">
+<p>The <code>default</code> attribute allows you to specify a default value for the property, if it has not been explicitly defined.</p>
+</div>
+<div class="paragraph">
+<p>For example, you may want to configure the context path of your web application in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.ee9.webapp.WebAppContext"&gt;
+  &lt;Set name="contextPath"&gt;
+    <mark>&lt;Property name="com.myapps.mywiki.context.path" default="/wiki" /&gt;</mark>
+  &lt;/Set&gt;
+  &lt;Set name="war"&gt;/opt/myapps/mywiki.war&lt;/Set&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>contextPath</code> value is resolved by looking for the Jetty module property <code>com.myapps.mywiki.context.path</code>; if this property is not set, then the default value of <code>/wiki</code> is used.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="syntax-system-property"><a class="anchor" href="#syntax-system-property"></a><code>&lt;SystemProperty&gt;</code></h3>
+<div class="paragraph">
+<p>Element <code>&lt;SystemProperty&gt;</code> retrieves the value of the JVM system property specified by the <code>name</code> attribute, via <code>System.getProperty(&#8230;&#8203;)</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>deprecated</code> attribute allows you to specify a comma separated list of old, deprecated, system property names for backward compatibility.</p>
+</div>
+<div class="paragraph">
+<p>The <code>default</code> attribute allows you to specify a default value for the system property value, if it has not been explicitly defined.</p>
+</div>
+<div class="paragraph">
+<p>The following example creates a minimal Jetty <code>Server</code> that listens on a port specified by the <code>com.acme.http.port</code> system property:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure id="server" class="org.eclipse.jetty.server.Server"&gt;
+  &lt;Arg type="int"&gt;
+    &lt;SystemProperty name="com.acme.http.port" default="8080" /&gt;
+  &lt;/Arg&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="syntax-env"><a class="anchor" href="#syntax-env"></a><code>&lt;Env&gt;</code></h3>
+<div class="paragraph">
+<p>Element <code>&lt;Env&gt;</code> retrieves the value of the environment variable specified by the <code>name</code> attribute, via <code>System.getenv(&#8230;&#8203;)</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>deprecated</code> attribute allows you to specify a comma separated list of old, deprecated, environment variable names for backward compatibility.</p>
+</div>
+<div class="paragraph">
+<p>The <code>default</code> attribute allows you to specify a default value for the environment variable value, if it has not been explicitly defined.</p>
+</div>
+<div class="paragraph">
+<p>The following example creates a minimal Jetty <code>Server</code> that listens on a port specified by the <code>COM_ACME_HTTP_PORT</code> environment variable:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure id="server" class="org.eclipse.jetty.server.Server"&gt;
+  &lt;Arg type="int"&gt;
+    &lt;Env name="COM_ACME_HTTP_PORT" default="8080" /&gt;
+  &lt;/Arg&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="syntax-types"><a class="anchor" href="#syntax-types"></a>Type Coercion</h3>
+<div class="paragraph">
+<p>Elements that have the <code>type</code> attribute explicitly perform the type coercion of the string value present in the XML document to the Java type specified by the <code>type</code> attribute.</p>
+</div>
+<div class="paragraph">
+<p>Supported types are the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>all primitive types and their boxed equivalents, for example <code>type="int"</code> but also <code>type="Integer"</code> (short form) and <code>type="java.lang.Integer"</code> (fully qualified form)</p>
+</li>
+<li>
+<p><code>java.lang.String</code>, in both short form and fully qualified form</p>
+</li>
+<li>
+<p><code>java.net.URL</code>, in both short form and fully qualified form</p>
+</li>
+<li>
+<p><code>java.net.InetAddress</code>, in both short form and fully qualified form</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="syntax-scope"><a class="anchor" href="#syntax-scope"></a>Scopes</h3>
+<div class="paragraph">
+<p>Elements that create new objects or that return a value create a <em>scope</em>.
+Within these elements there may be nested elements that will operate on that scope, i.e. on the new object or returned value.</p>
+</div>
+<div class="paragraph">
+<p>The following example illustrates how scopes work:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure id="server" class="org.eclipse.jetty.server.Server"&gt;
+  &lt;Arg type="int"&gt;8080&lt;/Arg&gt;
+  &lt;!-- Here the Server object has been created and is in scope --&gt;
+
+  &lt;!-- Calls the setter on the Server object that is in scope --&gt;
+  &lt;Set name="stopTimeout"&gt;5000&lt;/Set&gt;
+
+  &lt;!-- Creates a new object --&gt;
+  &lt;New id="httpConfig" class="org.eclipse.jetty.server.HttpConfiguration"&gt;
+    &lt;!-- Here the HttpConfiguration just created is in a nested scope --&gt;
+
+    &lt;!-- Calls the setter on the HttpConfiguration object that is in scope --&gt;
+    &lt;Set name="secureScheme"&gt;https&lt;/Set&gt;
+  &lt;/New&gt;
+
+  &lt;!-- Calls the getter on the Server object that is in scope --&gt;
+  &lt;Get name="ThreadPool"&gt;
+    &lt;!-- Here the ThreadPool object returned by the getter is in a nested scope --&gt;
+
+    &lt;!-- Calls the setter on the ThreadPool object that is in scope --&gt;
+    &lt;Set name="maxThreads" type="int"&gt;256&lt;/Set&gt;
+  &lt;/Get&gt;
+
+  &lt;!-- Gets the System.err field --&gt;
+  &lt;Get class="java.lang.System" name="err"&gt;
+    &lt;!-- Here the System.err object is in scope --&gt;
+
+    &lt;!-- Equivalent to: var myversion = server.getVersion() --&gt;
+    &lt;Ref refid="server"&gt;
+      &lt;!-- Here the "server" object is in scope --&gt;
+      &lt;Get id="myversion" name="version" /&gt;
+    &lt;/Ref&gt;
+
+    &lt;!-- Calls println() on the System.err object --&gt;
+    &lt;Call name="println"&gt;
+      &lt;Arg&gt;Server version is: &lt;Ref refid="myversion" /&gt;&lt;/Arg&gt;
+    &lt;/Call&gt;
+  &lt;/Get&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../troubleshooting/index.html">Troubleshooting</a></span>
+  <span class="next"><a href="../../programming-guide/index.html">Programming Guide</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

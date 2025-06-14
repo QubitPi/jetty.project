@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Jetty I/O Architecture :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="threads.html">
+    <link rel="next" href="listener.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Programming Guide</a></li>
+    <li>Jetty Architecture</li>
+    <li><a href="io.html">Jetty I/O Architecture</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/programming-guide/pages/arch/io.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Jetty I/O Architecture</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jetty libraries (both client and server) use Java NIO to handle I/O, so that at its core Jetty I/O is completely non-blocking.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="selector-manager"><a class="anchor" href="#selector-manager"></a>Jetty I/O: <code>SelectorManager</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The main class of The Jetty I/O library is <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/io/SelectorManager.html"><code>SelectorManager</code></a>.</p>
+</div>
+<div class="paragraph">
+<p><code>SelectorManager</code> manages internally a configurable number of <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/io/ManagedSelector.html"><code>ManagedSelector</code></a>s.
+Each <code>ManagedSelector</code> wraps an instance of <code>java.nio.channels.Selector</code> that in turn manages a number of <code>java.nio.channels.SocketChannel</code> instances.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+TODO: add image
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>SocketChannel</code> instances are typically created by the Jetty implementation, on client-side when connecting to a server and on server-side when accepting connections from clients.
+In both cases the <code>SocketChannel</code> instance is passed to <code>SelectorManager</code> (which passes it to <code>ManagedSelector</code> and eventually to <code>java.nio.channels.Selector</code>) to be registered for use within Jetty.</p>
+</div>
+<div class="paragraph">
+<p>It is possible for an application to create the <code>SocketChannel</code> instances outside Jetty, even perform some initial network traffic also outside Jetty (for example for authentication purposes), and then pass the <code>SocketChannel</code> instance to <code>SelectorManager</code> for use within Jetty.</p>
+</div>
+<div class="paragraph">
+<p>This example shows how a client can connect to a server:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public void connect(SelectorManager selectorManager, Map&lt;String, Object&gt; context) throws IOException
+{
+    String host = "host";
+    int port = 8080;
+
+    // Create an unconnected SocketChannel.
+    SocketChannel socketChannel = SocketChannel.open();
+    socketChannel.configureBlocking(false);
+
+    // Connect and register to Jetty.
+    if (socketChannel.connect(new InetSocketAddress(host, port)))
+        selectorManager.accept(socketChannel, context);
+    else
+        selectorManager.connect(socketChannel, context);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This example shows how a server accepts a client connection:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public void accept(ServerSocketChannel acceptor, SelectorManager selectorManager) throws IOException
+{
+    // Wait until a client connects.
+    SocketChannel socketChannel = acceptor.accept();
+    socketChannel.configureBlocking(false);
+
+    // Accept and register to Jetty.
+    Object attachment = null;
+    selectorManager.accept(socketChannel, attachment);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="endpoint-connection"><a class="anchor" href="#endpoint-connection"></a>Jetty I/O: <code>EndPoint</code> and <code>Connection</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>SocketChannel</code>s that are passed to <code>SelectorManager</code> are wrapped into two related components: an <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/io/EndPoint.html"><code>EndPoint</code></a> and a <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/io/Connection.html"><code>Connection</code></a>.</p>
+</div>
+<div class="paragraph">
+<p><code>EndPoint</code> is the Jetty abstraction for a <code>SocketChannel</code> or a <code>DatagramChannel</code>: you can read bytes from an <code>EndPoint</code>, you can write bytes to an <code>EndPoint</code> , you can close an <code>EndPoint</code>, etc.</p>
+</div>
+<div class="paragraph">
+<p><code>Connection</code> is the Jetty abstraction that is responsible to read bytes from the <code>EndPoint</code> and to deserialize the read bytes into objects.
+For example, an HTTP/1.1 server-side <code>Connection</code> implementation is responsible to deserialize HTTP/1.1 request bytes into an HTTP request object.
+Conversely, an HTTP/1.1 client-side <code>Connection</code> implementation is responsible to deserialize HTTP/1.1 response bytes into an HTTP response object.</p>
+</div>
+<div class="paragraph">
+<p><code>Connection</code> is the abstraction that implements the reading side of a specific protocol such as HTTP/1.1, or HTTP/2, or HTTP/3, or WebSocket: it is able to read and parse incoming bytes in that protocol.</p>
+</div>
+<div class="paragraph">
+<p>The writing side for a specific protocol <em>may</em> be implemented in the <code>Connection</code> but may also be implemented in other components, although eventually the bytes to write will be written through the <code>EndPoint</code>.</p>
+</div>
+<div class="paragraph">
+<p>While there are primarily only two implementations of <code>EndPoint</code>,<a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/io/SocketChannelEndPoint.html"><code>SocketChannelEndPoint</code></a> for TCP and <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/io/DatagramChannelEndPoint.html"><code>DatagramChannelEndPoint</code></a> for UDP (used both on the client-side and on the server-side), there are many implementations of <code>Connection</code>, typically two for each protocol (one for the client-side and one for the server-side).</p>
+</div>
+<div class="paragraph">
+<p>The <code>EndPoint</code> and <code>Connection</code> pairs can be chained, for example in case of encrypted communication using the TLS protocol.
+There is an <code>EndPoint</code> and <code>Connection</code> TLS pair where the <code>EndPoint</code> reads the encrypted bytes from the socket and the <code>Connection</code> decrypts them; next in the chain there is an <code>EndPoint</code> and <code>Connection</code> pair where the <code>EndPoint</code> "reads" decrypted bytes (provided by the previous <code>Connection</code>) and the <code>Connection</code> deserializes them into specific protocol objects (for example HTTP/2 frame objects).</p>
+</div>
+<div class="paragraph">
+<p>Certain protocols, such as WebSocket, start the communication with the server using one protocol (for example, HTTP/1.1), but then change the communication to use another protocol (for example, WebSocket).
+<code>EndPoint</code> supports changing the <code>Connection</code> object on-the-fly via <code>EndPoint.upgrade(Connection)</code>.
+This allows to use the HTTP/1.1 <code>Connection</code> during the initial communication and later to replace it with a WebSocket <code>Connection</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>SelectorManager</code> is an abstract class because while it knows how to create concrete <code>EndPoint</code> instances, it does not know how to create protocol specific <code>Connection</code> instances.</p>
+</div>
+<div class="paragraph">
+<p>Creating <code>Connection</code> instances is performed on the server-side by <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/server/ConnectionFactory.html"><code>ConnectionFactory</code></a>s and on the client-side by <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/io/ClientConnectionFactory.html"><code>ClientConnectionFactory</code></a>s.</p>
+</div>
+<div class="paragraph">
+<p>On the server-side, the component that aggregates a <code>SelectorManager</code> with a set of <code>ConnectionFactory</code>s is <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/server/ServerConnector.html"><code>ServerConnector</code></a> for TCP sockets, <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/quic/server/QuicServerConnector.html"><code>QuicServerConnector</code></a> for QUIC sockets, and <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/unixdomain/server/UnixDomainServerConnector.html"><code>UnixDomainServerConnector</code></a> for Unix-Domain sockets (see the <a href="../server/io-arch.html" class="xref page">server-side architecture section</a> for more information).</p>
+</div>
+<div class="paragraph">
+<p>On the client-side, the components that aggregates a <code>SelectorManager</code> with a set of <code>ClientConnectionFactory</code>s are <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/client/HttpClientTransport.html"><code>HttpClientTransport</code></a> subclasses (see the <a href="../client/io-arch.html" class="xref page">client-side architecture section</a> for more information).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="endpoint"><a class="anchor" href="#endpoint"></a>Jetty I/O: <code>EndPoint</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jetty I/O library use Java NIO to handle I/O, so that I/O is non-blocking.</p>
+</div>
+<div class="paragraph">
+<p>At the Java NIO level, in order to be notified when a <code>SocketChannel</code> or <code>DatagramChannel</code> has data to be read, the <code>SelectionKey.OP_READ</code> flag must be set.</p>
+</div>
+<div class="paragraph">
+<p>In the Jetty I/O library, you can call <code>EndPoint.fillInterested(Callback)</code> to declare interest in the "read" (also called "fill") event, and the <code>Callback</code> parameter is the object that is notified when such an event occurs.</p>
+</div>
+<div class="paragraph">
+<p>At the Java NIO level, a <code>SocketChannel</code> or <code>DatagramChannel</code> is always writable, unless it becomes congested.
+In order to be notified when a channel uncongests and it is therefore writable again, the <code>SelectionKey.OP_WRITE</code> flag must be set.</p>
+</div>
+<div class="paragraph">
+<p>In the Jetty I/O library, you can call <code>EndPoint.write(Callback, ByteBuffer&#8230;&#8203;)</code> to write the <code>ByteBuffer</code>s and the <code>Callback</code> parameter is the object that is notified when the whole write is finished (i.e. <em>all</em> <code>ByteBuffer</code>s have been fully written, even if they are delayed by congestion/uncongestion).</p>
+</div>
+<div class="paragraph">
+<p>The <code>EndPoint</code> APIs abstract out the Java NIO details by providing non-blocking APIs based on <code>Callback</code> objects for I/O operations.
+The <code>EndPoint</code> APIs are typically called by <code>Connection</code> implementations, see <a href="#connection">this section</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="connection"><a class="anchor" href="#connection"></a>Jetty I/O: <code>Connection</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>Connection</code> is the abstraction that deserializes incoming bytes into objects, for example an HTTP request object or a WebSocket frame object, that can be used by more abstract layers.</p>
+</div>
+<div class="paragraph">
+<p><code>Connection</code> instances have two lifecycle methods:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Connection.onOpen()</code>, invoked when the <code>Connection</code> is associated with the <code>EndPoint</code>.</p>
+</li>
+<li>
+<p><code>Connection.onClose(Throwable)</code>, invoked when the <code>Connection</code> is disassociated from the <code>EndPoint</code>, where the <code>Throwable</code> parameter indicates whether the disassociation was normal (when the parameter is <code>null</code>) or was due to an error (when the parameter is not <code>null</code>).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When a <code>Connection</code> is first created, it is not registered for any Java NIO event.
+It is therefore typical to implement <code>onOpen()</code> to call <code>EndPoint.fillInterested(Callback)</code> so that the <code>Connection</code> declares interest for read events, and it is invoked (via the <code>Callback</code>) when the read event happens.</p>
+</div>
+<div class="paragraph">
+<p>The abstract class <code>AbstractConnection</code> partially implements <code>Connection</code> and provides simpler APIs.
+The example below shows a typical implementation that extends <code>AbstractConnection</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Extend AbstractConnection to inherit basic implementation.
+class MyConnection extends AbstractConnection
+{
+    public MyConnection(EndPoint endPoint, Executor executor)
+    {
+        super(endPoint, executor);
+    }
+
+    @Override
+    public void onOpen()
+    {
+        super.onOpen();
+
+        // Declare interest for fill events.
+        // When the fill event happens, method onFillable() below is invoked.
+        fillInterested();
+    }
+
+    @Override
+    public void onFillable()
+    {
+        // Invoked when a fill event happens.
+    }
+}</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="connection-listener"><a class="anchor" href="#connection-listener"></a>Jetty I/O: <code>Connection.Listener</code></h3>
+<div class="paragraph">
+<p>The Jetty I/O library allows applications to register <a href="listener.html" class="xref page">event listeners</a> for the <code>Connection</code> events "opened" and "closed" via the interface <code>Connection.Listener</code>.</p>
+</div>
+<div class="paragraph">
+<p>This is useful in many cases, for example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Gather statistics about connection lifecycle, such as time of creation and duration.</p>
+</li>
+<li>
+<p>Gather statistics about the number of concurrent connections, and take action if a threshold is exceeded.</p>
+</li>
+<li>
+<p>Gather statistics about the number of bytes read and written, and the number of "messages" read and written, where "messages" may mean HTTP/1.1 requests or responses, or WebSocket frames, or HTTP/2 frames, etc.</p>
+</li>
+<li>
+<p>Gather statistics about the different types of connections being opened (TLS, HTTP/1.1, HTTP/2, WebSocket, etc.).</p>
+</li>
+<li>
+<p>Etc.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>Connection.Listener</code> implementations must be added as beans to a server-side <code>Connector</code>, or to client-side <code>HttpClient</code>, <code>WebSocketClient</code>, <code>HTTP2Client</code> or <code>HTTP3Client</code>.
+You can add as beans many <code>Connection.Listener</code> objects, each with its own logic, so that you can separate different logics into different <code>Connection.Listener</code> implementations.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty I/O library provides useful <code>Connection.Listener</code> implementations that you should evaluate before writing your own:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/io/ConnectionStatistics.html"><code>ConnectionStatistics</code></a></p>
+</li>
+<li>
+<p><a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/server/ConnectionLimit.html"><code>ConnectionLimit</code></a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Here is a simple example of a <code>Connection.Listener</code> used both on the client and on the server:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">class ThresholdConnectionListener implements Connection.Listener
+{
+    private final AtomicInteger connections = new AtomicInteger();
+
+    private int threshold;
+    private boolean notified;
+
+    public ThresholdConnectionListener(int threshold)
+    {
+        this.threshold = threshold;
+    }
+
+    @Override
+    public void onOpened(Connection connection)
+    {
+        int count = connections.incrementAndGet();
+        if (count &gt; threshold &amp;&amp; !notified)
+        {
+            notified = true;
+            System.getLogger("connection.threshold").log(System.Logger.Level.WARNING, "Connection threshold exceeded");
+        }
+    }
+
+    @Override
+    public void onClosed(Connection connection)
+    {
+        int count = connections.decrementAndGet();
+        // Reset the alert when we are below 90% of the threshold.
+        if (count &lt; threshold * 0.9F)
+            notified = false;
+    }
+}
+
+// Configure server-side connectors with Connection.Listeners.
+Server server = new Server();
+ServerConnector connector = new ServerConnector(server);
+server.addConnector(connector);
+// Add statistics.
+connector.addBean(new ConnectionStatistics());
+// Add your own Connection.Listener.
+connector.addBean(new ThresholdConnectionListener(2048));
+server.start();
+
+// Configure client-side HttpClient with Connection.Listeners.
+HttpClient httpClient = new HttpClient();
+// Add statistics.
+httpClient.addBean(new ConnectionStatistics());
+// Add your own Connection.Listener.
+httpClient.addBean(new ThresholdConnectionListener(512));
+httpClient.start();</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="echo"><a class="anchor" href="#echo"></a>Jetty I/O: TCP Network Echo</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With the concepts above it is now possible to write a simple, fully non-blocking, <code>Connection</code> implementation that simply echoes the bytes that it reads back to the other peer.</p>
+</div>
+<div class="paragraph">
+<p>A naive, but wrong, implementation may be the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">class WrongEchoConnection extends AbstractConnection implements Callback
+{
+    public WrongEchoConnection(EndPoint endPoint, Executor executor)
+    {
+        super(endPoint, executor);
+    }
+
+    @Override
+    public void onOpen()
+    {
+        super.onOpen();
+
+        // Declare interest for fill events.
+        fillInterested();
+    }
+
+    @Override
+    public void onFillable()
+    {
+        try
+        {
+            ByteBuffer buffer = BufferUtil.allocate(1024);
+            int filled = getEndPoint().fill(buffer);
+            if (filled &gt; 0)
+            {
+                // Filled some bytes, echo them back.
+                getEndPoint().write(this, buffer);
+            }
+            else if (filled == 0)
+            {
+                // No more bytes to fill, declare
+                // again interest for fill events.
+                fillInterested();
+            }
+            else
+            {
+                // The other peer closed the
+                // connection, close it back.
+                getEndPoint().close();
+            }
+        }
+        catch (Exception x)
+        {
+            getEndPoint().close(x);
+        }
+    }
+
+    @Override
+    public void succeeded()
+    {
+        // The write is complete, fill again.
+        onFillable();
+    }
+
+    @Override
+    public void failed(Throwable x)
+    {
+        getEndPoint().close(x);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The implementation above is wrong and leads to <code>StackOverflowError</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The problem with this implementation is that if the writes always complete synchronously (i.e. without being delayed by TCP congestion), you end up with this sequence of calls:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Connection.onFillable()
+  EndPoint.write()
+    Connection.succeeded()
+      Connection.onFillable()
+        EndPoint.write()
+          Connection.succeeded()
+          ...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>which leads to <code>StackOverflowError</code>.</p>
+</div>
+<div class="paragraph">
+<p>This is a typical side effect of asynchronous programming using non-blocking APIs, and happens in the Jetty I/O library as well.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The callback is invoked synchronously for efficiency reasons.
+Submitting the invocation of the callback to an <code>Executor</code> to be invoked in a different thread would cause a context switch and make simple writes extremely inefficient.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This side effect of asynchronous programming leading to <code>StackOverflowError</code> is so common that the Jetty libraries have a generic solution for it: a specialized <code>Callback</code> implementation named <code>org.eclipse.jetty.util.IteratingCallback</code> that turns recursion into iteration, therefore avoiding the <code>StackOverflowError</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>IteratingCallback</code> is a <code>Callback</code> implementation that should be passed to non-blocking APIs such as <code>EndPoint.write(Callback, ByteBuffer&#8230;&#8203;)</code> when they are performed in a loop.</p>
+</div>
+<div class="paragraph">
+<p><code>IteratingCallback</code> works by starting the loop with <code>IteratingCallback.iterate()</code>.
+In turn, this calls <code>IteratingCallback.process()</code>, an abstract method that must be implemented with the code that should be executed for each loop.</p>
+</div>
+<div class="paragraph">
+<p>Method <code>process()</code> must return:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Action.SCHEDULED</code>, to indicate whether the loop has performed a non-blocking, possibly asynchronous, operation</p>
+</li>
+<li>
+<p><code>Action.IDLE</code>, to indicate that the loop should temporarily be suspended to be resumed later</p>
+</li>
+<li>
+<p><code>Action.SUCCEEDED</code> to indicate that the loop exited successfully</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Any exception thrown within <code>process()</code> exits the loops with a failure.</p>
+</div>
+<div class="paragraph">
+<p>Now that you know how <code>IteratingCallback</code> works, a correct implementation for the echo <code>Connection</code> is the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">class EchoConnection extends AbstractConnection
+{
+    private final IteratingCallback callback = new EchoIteratingCallback();
+
+    public EchoConnection(EndPoint endp, Executor executor)
+    {
+        super(endp, executor);
+    }
+
+    @Override
+    public void onOpen()
+    {
+        super.onOpen();
+
+        // Declare interest for fill events.
+        fillInterested();
+    }
+
+    @Override
+    public void onFillable()
+    {
+        // Start the iteration loop that reads and echoes back.
+        callback.iterate();
+    }
+
+    class EchoIteratingCallback extends IteratingCallback
+    {
+        private ByteBuffer buffer;
+
+        @Override
+        protected Action process() throws Throwable
+        {
+            // Obtain a buffer if we don't already have one.
+            if (buffer == null)
+                buffer = BufferUtil.allocate(1024);
+
+            int filled = getEndPoint().fill(buffer);
+            if (filled &gt; 0)
+            {
+                // We have filled some bytes, echo them back.
+                getEndPoint().write(this, buffer);
+
+                // Signal that the iteration should resume
+                // when the write() operation is completed.
+                return Action.SCHEDULED;
+            }
+            else if (filled == 0)
+            {
+                // We don't need the buffer anymore, so
+                // don't keep it around while we are idle.
+                buffer = null;
+
+                // No more bytes to read, declare
+                // again interest for fill events.
+                fillInterested();
+
+                // Signal that the iteration is now IDLE.
+                return Action.IDLE;
+            }
+            else
+            {
+                // The other peer closed the connection,
+                // the iteration completed successfully.
+                return Action.SUCCEEDED;
+            }
+        }
+
+        @Override
+        protected void onCompleteSuccess()
+        {
+            // The iteration completed successfully.
+            getEndPoint().close();
+        }
+
+        @Override
+        protected void onCompleteFailure(Throwable cause)
+        {
+            // The iteration completed with a failure.
+            getEndPoint().close(cause);
+        }
+
+        @Override
+        public InvocationType getInvocationType()
+        {
+            return InvocationType.NON_BLOCKING;
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When <code>onFillable()</code> is called, for example the first time that bytes are available from the network, the iteration is started.
+Starting the iteration calls <code>process()</code>, where a buffer is allocated and filled with bytes read from the network via <code>EndPoint.fill(ByteBuffer)</code>; the buffer is subsequently written back via <code>EndPoint.write(Callback, ByteBuffer&#8230;&#8203;)</code>&#8201;&#8212;&#8201;note that the callback passed to <code>EndPoint.write()</code> is <code>this</code>, i.e. the <code>IteratingCallback</code> itself; finally <code>Action.SCHEDULED</code> is returned, returning from the <code>process()</code> method.</p>
+</div>
+<div class="paragraph">
+<p>At this point, the call to <code>EndPoint.write(Callback, ByteBuffer&#8230;&#8203;)</code> may have completed synchronously; <code>IteratingCallback</code> would know that and call <code>process()</code> again; within <code>process()</code>, the buffer has already been allocated so it will be reused, saving further allocations; the buffer will be filled and possibly written again; <code>Action.SCHEDULED</code> is returned again, returning again from the <code>process()</code> method.</p>
+</div>
+<div class="paragraph">
+<p>At this point, the call to <code>EndPoint.write(Callback, ByteBuffer&#8230;&#8203;)</code> may have not completed synchronously, so <code>IteratingCallback</code> will not call <code>process()</code> again; the processing thread is free to return to the Jetty I/O system where it may be put back into the thread pool.
+If this was the only active network connection, the system would now be idle, with no threads blocked, waiting that the <code>write()</code> completes. This thread-less wait is one of the most important features that make non-blocking asynchronous servers more scalable: they use less resources.</p>
+</div>
+<div class="paragraph">
+<p>Eventually, the Jetty I/O system will notify that the <code>write()</code> completed; this notifies the <code>IteratingCallback</code> that can now resume the loop and call <code>process()</code> again.</p>
+</div>
+<div class="paragraph">
+<p>When <code>process()</code> is called, it is possible that zero bytes are read from the network; in this case, you want to deallocate the buffer since the other peer may never send more bytes for the <code>Connection</code> to read, or it may send them after a long pause&#8201;&#8212;&#8201;in both cases we do not want to retain the memory allocated by the buffer; next, you want to call <code>fillInterested()</code> to declare again interest for read events, and return <code>Action.IDLE</code> since there is nothing to write back and therefore the loop may be suspended.
+When more bytes are again available to be read from the network, <code>onFillable()</code> will be called again and that will start the iteration again.</p>
+</div>
+<div class="paragraph">
+<p>Another possibility is that during <code>process()</code> the read returns <code>-1</code> indicating that the other peer has closed the connection; this means that there will not be more bytes to read and the loop can be exited, so you return <code>Action.SUCCEEDED</code>; <code>IteratingCallback</code> will then call <code>onCompleteSuccess()</code> where you can close the <code>EndPoint</code>.</p>
+</div>
+<div class="paragraph">
+<p>The last case is that during <code>process()</code> an exception is thrown, for example by <code>EndPoint.fill(ByteBuffer)</code> or, in more advanced implementations, by code that parses the bytes that have been read and finds them unacceptable; any exception thrown within <code>process()</code> will be caught by <code>IteratingCallback</code> that will exit the loop with a failure and call <code>onCompleteFailure(Throwable)</code> with the exception that has been thrown, where you can close the <code>EndPoint</code>, passing the exception that is the reason for closing prematurely the <code>EndPoint</code>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Asynchronous programming is hard.</p>
+</div>
+<div class="paragraph">
+<p>Rely on the Jetty classes to implement <code>Connection</code> to avoid mistakes that will be difficult to diagnose and reproduce.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="content-source"><a class="anchor" href="#content-source"></a><code>Content.Source</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The high-level abstraction that Jetty offers to read bytes is <code>org.eclipse.jetty.io.Content.Source</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>Content.Source</code> offers a non-blocking demand/read model where a read returns a <code>Content.Chunk</code> (see also <a href="#content-source-chunk">this section</a>).</p>
+</div>
+<div class="paragraph">
+<p>A <code>Content.Chunk</code> groups the following information:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A <code>ByteBuffer</code> with the bytes that have been read; it may be empty.</p>
+</li>
+<li>
+<p>Whether the read reached end-of-file, via its <code>last</code> flag.</p>
+</li>
+<li>
+<p>A failure that might have happened during the read, via its <code>getFailure()</code> method.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>Content.Chunk</code> returned from <code>Content.Source.read()</code> can either be a <em>normal</em> chunk (a chunk containing a <code>ByteBuffer</code> and a <code>null</code> failure), or a <em>failure</em> chunk (a chunk containing an empty <code>ByteBuffer</code> and a non-<code>null</code> failure).</p>
+</div>
+<div class="paragraph">
+<p>A failure chunk also indicates (via the <code>last</code> flag) whether the failure is a fatal (when <code>last=true</code>) or transient (when <code>last=false</code>) failure.</p>
+</div>
+<div class="paragraph">
+<p>A transient failure is a temporary failure that happened during the read, it may be ignored, and it is recoverable: it is possible to call <code>read()</code> again and obtain a normal chunk (or a <code>null</code> chunk).
+Typical cases of transient failures are idle timeout failures, where the read timed out, but the application may decide to insist reading until some other event happens.
+The application may convert a transient failure into a fatal failure by calling <code>Content.Source.fail(Throwable)</code>.</p>
+</div>
+<div class="paragraph">
+<p>A <code>Content.Source</code> must be fully consumed by reading all its content, or failed by calling <code>Content.Source.fail(Throwable)</code> to signal that the reader is not interested in reading anymore, otherwise it may leak underlying resources.</p>
+</div>
+<div class="paragraph">
+<p>Fully consuming a <code>Content.Source</code> means reading from it until it returns a <code>Content.Chunk</code> whose <code>last</code> flag is <code>true</code>.
+Reading or demanding from an already fully consumed <code>Content.Source</code> is always immediately serviced with the last state of the <code>Content.Source</code>: a <code>Content.Chunk</code> with the <code>last</code> flag set to <code>true</code>, either an end-of-file chunk, or a failure chunk.</p>
+</div>
+<div class="paragraph">
+<p>Once failed, a <code>Content.Source</code> is considered fully consumed.
+Further attempts to read from a failed <code>Content.Source</code> return a failure chunk whose <code>getFailure()</code> method returns the exception passed to <code>Content.Source.fail(Throwable)</code>.</p>
+</div>
+<div class="paragraph">
+<p>When reading a normal chunk, its <code>ByteBuffer</code> is typically a slice of a different <code>ByteBuffer</code> that has been read by a lower layer.
+There may be multiple layers between the bottom layer (where the initial read typically happens) and the application layer that calls <code>Content.Source.read()</code>.</p>
+</div>
+<div class="paragraph">
+<p>By slicing the <code>ByteBuffer</code> (rather than copying its bytes), there is no copy of the bytes between the layers, which yields greater performance.
+However, this comes with the cost that the <code>ByteBuffer</code>, and the associated <code>Content.Chunk</code>, have an intrinsic lifecycle: the final consumer of a <code>Content.Chunk</code> at the application layer must indicate when it has consumed the chunk, so that the bottom layer may reuse/recycle the <code>ByteBuffer</code>.</p>
+</div>
+<div class="paragraph">
+<p>Consuming the chunk means that the bytes in the <code>ByteBuffer</code> are read (or ignored), and that the application will not look at or reference that <code>ByteBuffer</code> ever again.</p>
+</div>
+<div class="paragraph">
+<p><code>Content.Chunk</code> offers a retain/release model to deal with the <code>ByteBuffer</code> lifecycle, with a simple rule:</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+A <code>Content.Chunk</code> returned by a call to <code>Content.Source.read()</code> <strong>must</strong> be released, except for <code>Content.Chunk</code>s that are failure chunks.
+Failure chunks <em>may</em> be released, but they do not <em>need</em> to be.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The example below is the idiomatic way of reading from a <code>Content.Source</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public void read(Content.Source source)
+{
+    // Read from the source in a loop.
+    while (true)
+    {
+        // Read a chunk, must be eventually released.
+        Content.Chunk chunk = source.read(); <i class="conum" data-value="1"></i><b>(1)</b>
+
+        // If no chunk, demand to be called back when there are more chunks.
+        if (chunk == null)
+        {
+            source.demand(() -&gt; read(source));
+            return;
+        }
+
+        // If there is a failure reading, handle it.
+        if (Content.Chunk.isFailure(chunk))
+        {
+            boolean fatal = chunk.isLast();
+            if (fatal)
+            {
+                // A fatal failure, such as a network failure.
+                handleFatalFailure(chunk.getFailure());
+                // No recovery is possible, stop reading
+                // by returning without demanding.
+                return;
+            }
+            else
+            {
+                // A transient failure such as a read timeout.
+                handleTransientFailure(chunk.getFailure());
+                // Recovery is possible, try to read again.
+                continue;
+            }
+        }
+
+        // A normal chunk of content, consume it.
+        consume(chunk);
+
+        // Release the chunk.
+        chunk.release(); <i class="conum" data-value="2"></i><b>(2)</b>
+
+        // Stop reading if EOF was reached.
+        if (chunk.isLast())
+            return;
+
+        // Loop around to read another chunk.
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code>read()</code> that must be paired with a <code>release()</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <code>release()</code> that pairs the <code>read()</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Note how the reads happen in a loop, consuming the <code>Content.Source</code> as soon as it has content available to be read, and therefore no backpressure is applied to the reads.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Calling <code>Content.Chunk.release()</code> must be done only after the bytes in the <code>ByteBuffer</code> returned by <code>Content.Chunk.getByteBuffer()</code> have been consumed.
+When the <code>Content.Chunk</code> is released, the implementation may reuse the <code>ByteBuffer</code> and overwrite the bytes with different bytes; if the application looks at the <code>ByteBuffer</code> <em>after</em> having released the <code>Content.Chunk</code> is may see other, unrelated, bytes.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>An alternative way to read from a <code>Content.Source</code>, to use when the chunk is consumed asynchronously, and you don&#8217;t want to read again until the <code>Content.Chunk</code> is consumed, is the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public void read(Content.Source source)
+{
+    // Read a chunk, must be eventually released.
+    Content.Chunk chunk = source.read(); <i class="conum" data-value="1"></i><b>(1)</b>
+
+    // If no chunk, demand to be called back when there are more chunks.
+    if (chunk == null)
+    {
+        source.demand(() -&gt; read(source));
+        return;
+    }
+
+    // If there is a failure reading, always treat it as fatal.
+    if (Content.Chunk.isFailure(chunk))
+    {
+        // If the failure is transient, fail the source
+        // to indicate that there will be no more reads.
+        if (!chunk.isLast())
+            source.fail(chunk.getFailure());
+
+        // Handle the failure and stop reading by not demanding.
+        handleFatalFailure(chunk.getFailure());
+        return;
+    }
+
+    // Consume the chunk asynchronously, and do not
+    // read more chunks until this has been consumed.
+    CompletableFuture&lt;Void&gt; consumed = consumeAsync(chunk);
+
+    // Release the chunk.
+    chunk.release(); <i class="conum" data-value="2"></i><b>(2)</b>
+
+    // Only when the chunk has been consumed try to read more.
+    consumed.whenComplete((result, failure) -&gt;
+    {
+        if (failure == null)
+        {
+            // Continue reading if EOF was not reached.
+            if (!chunk.isLast())
+                source.demand(() -&gt; read(source));
+        }
+        else
+        {
+            // If there is a failure reading, handle it,
+            // and stop reading by not demanding.
+            handleFatalFailure(failure);
+        }
+    });
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code>read()</code> that must be paired with a <code>release()</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <code>release()</code> that pairs the <code>read()</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Note how the reads do not happen in a loop, and therefore backpressure is applied to the reads, because there is not a next read until the chunk from the previous read has been consumed (and this may take time).</p>
+</div>
+<div class="paragraph">
+<p>Since the <code>Chunk</code> is consumed asynchronously, you may need to retain it to extend its lifecycle, as explained in <a href="#content-source-chunk">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>You can use <code>Content.Source</code> static methods to conveniently read (in a blocking way or non-blocking way), for example via <code>static Content.Source.asStringAsync(Content.Source, Charset)</code>, or via an <code>InputStream</code> using <code>static Content.Source.asInputStream(Content.Source)</code>.</p>
+</div>
+<div class="paragraph">
+<p>Refer to the <code>Content.Source</code> <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/io/Content.Source.html"><code>javadocs</code></a> for further details.</p>
+</div>
+<div class="sect2">
+<h3 id="content-source-chunk"><a class="anchor" href="#content-source-chunk"></a><code>Content.Chunk</code></h3>
+<div class="paragraph">
+<p><code>Content.Chunk</code> offers a retain/release API to control the lifecycle of its <code>ByteBuffer</code>.</p>
+</div>
+<div class="paragraph">
+<p>When <code>Content.Chunk</code>s are consumed synchronously, no additional retain/release API call is necessary, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public void consume(Content.Chunk chunk) throws IOException
+{
+    // Consume the chunk synchronously within this method.
+
+    // For example, parse the bytes into other objects,
+    // or copy the bytes elsewhere (e.g. the file system).
+    fileChannel.write(chunk.getByteBuffer());
+
+    if (chunk.isLast())
+        fileChannel.close();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>On the other hand, if the <code>Content.Chunk</code> is not consumed immediately, then it must be retained, and you must arrange for the <code>Content.Chunk</code> to be released at a later time, thus pairing the retain.
+For example, you may accumulate the <code>Content.Chunk</code>s in a <code>List</code> to convert them to a <code>String</code> when all the <code>Content.Chunk</code>s have been read.</p>
+</div>
+<div class="paragraph">
+<p>Since reading from a <code>Content.Source</code> is asynchronous, the <code>String</code> result is produced via a <code>CompletableFuture</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// CompletableTask is-a CompletableFuture.
+public class ChunksToString extends CompletableTask&lt;String&gt;
+{
+    private final List&lt;Content.Chunk&gt; chunks = new ArrayList&lt;&gt;();
+    private final Content.Source source;
+
+    public ChunksToString(Content.Source source)
+    {
+        this.source = source;
+    }
+
+    @Override
+    public void run()
+    {
+        while (true)
+        {
+            // Read a chunk, must be eventually released.
+            Content.Chunk chunk = source.read(); <i class="conum" data-value="1"></i><b>(1)</b>
+
+            if (chunk == null)
+            {
+                source.demand(this);
+                return;
+            }
+
+            if (Content.Chunk.isFailure(chunk))
+            {
+                handleFatalFailure(chunk.getFailure());
+                return;
+            }
+
+            // A normal chunk of content, consume it.
+            consume(chunk);
+
+            // Release the chunk.
+            // This pairs the call to read() above.
+            chunk.release(); <i class="conum" data-value="2"></i><b>(2)</b>
+
+            if (chunk.isLast())
+            {
+                // Produce the result.
+                String result = getResult();
+
+                // Complete this CompletableFuture with the result.
+                complete(result);
+
+                // The reading is complete.
+                return;
+            }
+        }
+    }
+
+    public void consume(Content.Chunk chunk)
+    {
+        // The chunk is not consumed within this method, but
+        // stored away for later use, so it must be retained.
+        chunk.retain(); <i class="conum" data-value="3"></i><b>(3)</b>
+        chunks.add(chunk);
+    }
+
+    public String getResult()
+    {
+        Utf8StringBuilder builder = new Utf8StringBuilder();
+        // Iterate over the chunks, copying and releasing.
+        for (Content.Chunk chunk : chunks)
+        {
+            // Copy the chunk bytes into the builder.
+            builder.append(chunk.getByteBuffer());
+
+            // The chunk has been consumed, release it.
+            // This pairs the retain() in consume().
+            chunk.release(); <i class="conum" data-value="4"></i><b>(4)</b>
+        }
+        return builder.toCompleteString();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code>read()</code> that must be paired with a <code>release()</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <code>release()</code> that pairs the <code>read()</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The <code>retain()</code> that must be paired with a <code>release()</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The <code>release()</code> that pairs the <code>retain()</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Note how method <code>consume(Content.Chunk)</code> retains the <code>Content.Chunk</code> because it does not consume it, but rather stores it away for later use.
+With this additional retain, the retain count is now <code>2</code>: one implicitly from the <code>read()</code> that returned the <code>Content.Chunk</code>, and one explicit in <code>consume(Content.Chunk)</code>.</p>
+</div>
+<div class="paragraph">
+<p>However, just after returning from <code>consume(Content.Chunk)</code> the <code>Content.Chunk</code> is released (pairing the implicit retain from <code>read()</code>), so that the retain count goes to <code>1</code>, and an additional release is still necessary.</p>
+</div>
+<div class="paragraph">
+<p>Method <code>getResult()</code> arranges to release all the <code>Content.Chunk</code>s that have been accumulated, pairing the retains done in <code>consume(Content.Chunk)</code>, so that the retain count for the <code>Content.Chunk</code>s goes finally to <code>0</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="content-sink"><a class="anchor" href="#content-sink"></a><code>Content.Sink</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The high-level abstraction that Jetty offers to write bytes is <code>org.eclipse.jetty.io.Content.Sink</code>.</p>
+</div>
+<div class="paragraph">
+<p>The primary method to use is <code>Content.Sink.write(boolean, ByteBuffer, Callback)</code>, which performs a non-blocking write of the given <code>ByteBuffer</code>, with the indication of whether the write is the last.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Callback</code> parameter is completed, successfully or with a failure, and possibly asynchronously by a different thread, when the write is complete.</p>
+</div>
+<div class="paragraph">
+<p>Your application can typically perform zero or more non-last writes, and one final last write.</p>
+</div>
+<div class="paragraph">
+<p>However, because the writes may be asynchronous, you cannot start a next write before the previous write is completed.</p>
+</div>
+<div class="paragraph">
+<p>This code is wrong:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public void wrongWrite(Content.Sink sink, ByteBuffer content1, ByteBuffer content2)
+{
+    // Initiate a first write.
+    sink.write(false, content1, Callback.NOOP);
+
+    // WRONG! Cannot initiate a second write before the first is complete.
+    sink.write(true, content2, Callback.NOOP);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You must initiate a second write only when the first is finished, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public void manyWrites(Content.Sink sink, ByteBuffer content1, ByteBuffer content2)
+{
+    // Initiate a first write.
+    Callback.Completable resultOfWrites = Callback.Completable.with(callback1 -&gt; sink.write(false, content1, callback1))
+        // Chain a second write only when the first is complete.
+        .compose(callback2 -&gt; sink.write(true, content2, callback2));
+
+    // Use the resulting Callback.Completable as you would use a CompletableFuture.
+    // For example:
+    resultOfWrites.whenComplete((ignored, failure) -&gt;
+    {
+        if (failure == null)
+            System.getLogger("sink").log(INFO, "writes completed successfully");
+        else
+            System.getLogger("sink").log(INFO, "writes failed", failure);
+    });
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When you need to perform an unknown number of writes, you must use an <code>IteratingCallback</code>, explained in <a href="#echo">this section</a>, to avoid <code>StackOverFlowError</code>s.</p>
+</div>
+<div class="paragraph">
+<p>For example, to copy from a <code>Content.Source</code> to a <code>Content.Sink</code> you should use the convenience method <code>Content.copy(Content.Source, Content.Sink, Callback)</code>.
+For illustrative purposes, below you can find the implementation of <code>copy(Content.Source, Content.Sink, Callback)</code> that uses an <code>IteratingCallback</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@SuppressWarnings("InnerClassMayBeStatic")
+class Copy extends IteratingCallback
+{
+    private final Content.Source source;
+    private final Content.Sink sink;
+    private final Callback callback;
+    private Content.Chunk chunk;
+
+    public Copy(Content.Source source, Content.Sink sink, Callback callback)
+    {
+        this.source = source;
+        this.sink = sink;
+        // The callback to notify when the copy is completed.
+        this.callback = callback;
+    }
+
+    @Override
+    protected Action process() throws Throwable
+    {
+        // If the last write completed, succeed this IteratingCallback,
+        // causing onCompleteSuccess() to be invoked.
+        if (chunk != null &amp;&amp; chunk.isLast())
+            return Action.SUCCEEDED;
+
+        // Read a chunk.
+        chunk = source.read();
+
+        // No chunk, demand to be called back when there will be more chunks.
+        if (chunk == null)
+        {
+            source.demand(this::iterate);
+            return Action.IDLE;
+        }
+
+        // The read failed, re-throw the failure
+        // causing onCompleteFailure() to be invoked.
+        if (Content.Chunk.isFailure(chunk))
+            throw chunk.getFailure();
+
+        // Copy the chunk.
+        sink.write(chunk.isLast(), chunk.getByteBuffer(), this);
+        return Action.SCHEDULED;
+    }
+
+    @Override
+    protected void onSuccess()
+    {
+        // After every successful write, release the chunk.
+        chunk.release();
+    }
+
+    @Override
+    protected void onCompleteSuccess()
+    {
+        // The copy is succeeded, succeed the callback.
+        callback.succeeded();
+    }
+
+    @Override
+    protected void onCompleteFailure(Throwable failure)
+    {
+        // In case of a failure, either on the
+        // read or on the write, release the chunk.
+        chunk.release();
+
+        // The copy is failed, fail the callback.
+        callback.failed(failure);
+    }
+
+    @Override
+    public InvocationType getInvocationType()
+    {
+        return InvocationType.NON_BLOCKING;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Non-blocking writes can be easily turned in blocking writes.
+This leads to perhaps code that is simpler to read, but that also comes with a price: greater resource usage that may lead to less scalability and less performance.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public void blockingWrite(Content.Sink sink, ByteBuffer content1, ByteBuffer content2) throws IOException
+{
+    // First blocking write, returns only when the write is complete.
+    Content.Sink.write(sink, false, content1);
+
+    // Second blocking write, returns only when the write is complete.
+    // It is legal to perform the writes sequentially, since they are blocking.
+    Content.Sink.write(sink, true, content2);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="threads.html">Jetty Threading Architecture</a></span>
+  <span class="next"><a href="listener.html">Jetty Listeners</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

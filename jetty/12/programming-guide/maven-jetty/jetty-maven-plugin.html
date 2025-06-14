@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Using the Jetty Maven Plugin :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="jetty-maven-helloworld.html">
+    <link rel="next" href="jetty-jspc-maven-plugin.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Programming Guide</a></li>
+    <li>Maven and Jetty</li>
+    <li><a href="jetty-maven-plugin.html">Using the Jetty Maven Plugin</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/programming-guide/pages/maven-jetty/jetty-maven-plugin.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Using the Jetty Maven Plugin</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jetty Maven plugin is useful for rapid development and testing.
+It can optionally periodically scan a project for changes and automatically redeploy the webapp if any are found.
+This makes the development cycle more productive by eliminating the build and deploy steps: use an IDE to make changes to the project, and the running web container automatically picks them up, allowing them to be tested straight away.</p>
+</div>
+<div class="paragraph">
+<p>There are only 4 goals to run a webapp in Jetty:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#jetty-run-goal">jetty:run</a></p>
+</li>
+<li>
+<p><a href="#jetty-run-war-goal">jetty:run-war</a></p>
+</li>
+<li>
+<p><a href="#jetty-start-goal">jetty:start</a></p>
+</li>
+<li>
+<p><a href="#jetty-start-war-goal">jetty:start-war</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Plus two utility goals:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#jetty-stop-goal">jetty:stop</a></p>
+</li>
+<li>
+<p><a href="#jetty-effective-web-xml-goal">jetty:effective-web-xml</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>jetty:run</code> and <code>jetty:start</code> are alike in that they both run an <em>unassembled</em> webapp in Jetty,however <code>jetty:run</code> is designed to be used at the command line, whereas <code>jetty:start</code> is specifically designed to be bound to execution phases in the build lifecycle.
+<code>jetty:run</code> will pause Maven while jetty is running, echoing all output to the console, and then stop Maven when jetty exits.
+<code>jetty:start</code> will not pause Maven, will write all its output to a file, and will not stop Maven when jetty exits.</p>
+</div>
+<div class="paragraph">
+<p><code>jetty:run-war</code> and <code>jetty:start-war</code> are similar in that they both run an <em>assembled</em> war file in Jetty.
+However, <code>jetty:run-war</code> is designed to be run at the command line, whereas <code>jetty:start-war</code> is specifically designed to be bound to execution phases in the build lifecycle.
+<code>jetty:run-war</code> will pause Maven while Jetty is running, echoing all output to the console, and then stop Maven when Jetty exits.
+<code>jetty:start-war</code> will not pause Maven, will write all its output to a file, and will not stop Maven when Jetty exits.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>While the Jetty Maven Plugin can be very useful for development we do not recommend its use in a <em>production capacity</em>.
+In order for the plugin to work it needs to leverage many internal Maven APIs and Maven itself it not a production deployment tool.
+We recommend either the traditional xrefr:og-deploy[distribution] deployment approach or using <a href="../../operations-guide/arch/index.html" class="xref page">embedded Jetty</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="get-up-and-running"><a class="anchor" href="#get-up-and-running"></a>Get Up and Running</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Since Jetty 12, Jetty Maven plugin is repackaged for the corresponding Jakarta EE version with an <code>eeX</code> classifier in the groupId and artifactId.</p>
+</div>
+<div class="paragraph">
+<p>First, add <code>jetty-ee{8,9,10}-maven-plugin</code> to your <code>pom.xml</code> definition. Here&#8217;s an example of how to do that for Jakarta EE 10:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.jetty.ee10&lt;/groupId&gt;
+  &lt;artifactId&gt;jetty-ee10-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, from the same directory as the project&#8217;s root <code>pom.xml</code>, type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>mvn jetty:run</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This starts Jetty and serves up the project on <code>http://localhost:8080/</code>.</p>
+</div>
+<div class="paragraph">
+<p>Jetty will continue to run until you stop it.
+By default, it will not automatically restart your webapp.
+Set a non-zero <code>&lt;scan&gt;</code> value to have Jetty scan your webapp for changes and automatically redeploy, or set <code>&lt;scan&gt;</code> to <code>0</code> to cause manual redeployment by hitting the <kbd>Enter</kbd> key.</p>
+</div>
+<div class="paragraph">
+<p>Terminate the plugin with a <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>c</kbd></span> in the terminal window where it is running.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The classpath of the running Jetty instance and its deployed webapp are managed by Maven, and may not be exactly what you expect.
+For example: a webapp&#8217;s dependent jars might be referenced via the local repository, or other projects in the reactor, not the <code>WEB-INF/lib</code> directory.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="supported-goals"><a class="anchor" href="#supported-goals"></a>Supported Goals</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The goals prefixed with <code>"run-"</code> are designed to be used at the <em>command line</em>.
+They first run a Maven build on your project to ensure at least the classes are all built.
+They then start Jetty and pause the Maven build process until Jetty is manually terminated, at which time the build will also be terminated.
+Jetty can scan various files in your project for changes and redeploy the webapp as necessary, or you can choose to manually trigger a redeploy if you prefer.
+All output from Jetty is echoed to the console.</p>
+</div>
+<div class="paragraph">
+<p>The goals prefixed with <code>"start-"</code> are designed to be used with <em>build lifecycle bindings in the pom</em>, and <em>not</em> at the command line.
+No part of your project will be rebuilt by invoking these goals - you should ensure that your bind the execution to a build phase where all necessary parts of your project have been built.
+Maven will start and terminate Jetty at the appropriate points in the build lifecycle, continuing with the build.
+Jetty will <em>not</em> scan any files in your project for changes, and your webapp will <em>not</em> be redeployed either automatically or manually.
+Output from Jetty is directed to a file in the <code>target</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>To see a list of all goals supported by the Jetty Maven plugin, do:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>mvn jetty:help</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To see the detailed list of parameters that can be configured for a particular goal, in addition to its description, do:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>mvn jetty:help -Ddetail=true -Dgoal=&lt;goalName&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deployment-modes"><a class="anchor" href="#deployment-modes"></a>Deployment Modes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>All of the <code>"run-"</code> and <code>"start-"</code> goals can deploy your webapp either into the running maven process, or forked into a new child process, or forked into a Jetty distribution on disk.</p>
+</div>
+<div class="paragraph">
+<p>This is controlled by setting the <code>deployMode</code> configuration parameter in the pom, but can also be set by defining the Maven property 'jetty.deployMode'.</p>
+</div>
+<div class="sect2">
+<h3 id="embedded"><a class="anchor" href="#embedded"></a>Embedded</h3>
+<div class="paragraph">
+<p><code>deployMode</code> of <code>EMBED</code>.
+This is the "classic" Jetty Maven plugin deployment mode, running in-process with Maven.
+This is the <em>default</em> mode.</p>
+</div>
+<div class="paragraph">
+<p>These extra configuration parameters are available:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">httpConnector</dt>
+<dd>
+<p>Optional.
+Note that to configure a https connector, you will need to use xml configuration files instead, setting the <code>jettyXmls</code> parameter.
+This parameter can only be used to configure a standard http connector.
+If not specified, Jetty will create a <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/server/ServerConnector.html">ServerConnector</a> instance listening on port 8080.
+You can change this default port number by using the system property <code>jetty.http.port</code> on the command line, for example, <code>mvn -Djetty.http.port=9999 jetty:run</code>.
+Alternatively, you can use this configuration element to set up the information for the ServerConnector.
+The following are the valid configuration sub-elements:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">port</dt>
+<dd>
+<p>The port number for the connector to listen on.
+By default it is 8080.</p>
+</dd>
+<dt class="hdlist1">host</dt>
+<dd>
+<p>The particular interface for the connector to listen on.
+By default, all interfaces.</p>
+</dd>
+<dt class="hdlist1">name</dt>
+<dd>
+<p>The name of the connector, which is useful for configuring contexts to respond only on particular connectors.</p>
+</dd>
+<dt class="hdlist1">idleTimeout</dt>
+<dd>
+<p>Maximum idle time for a connection.
+You could instead configure the connectors in a standard <a href="../../operations-guide/xml/index.html" class="xref page">jetty xml config file</a> and put its location into the <code>jettyXml</code> parameter.
+Note that since Jetty 9.0 it is no longer possible to configure a https connector directly in the pom.xml: you need to use jetty xml config files to do it.</p>
+</dd>
+</dl>
+</div>
+</dd>
+<dt class="hdlist1">loginServices</dt>
+<dd>
+<p>Optional.
+A list of <code>org.eclipse.jetty.security.LoginService</code> implementations. Note that there is no default realm.
+If you use a realm in your <code>web.xml</code> you can specify a corresponding realm here.
+You could instead configure the login services in a jetty xml file and add its location to the <code>jettyXml</code> parameter.
+See <a href="#configuring-security-settings">Configuring Security</a>.</p>
+</dd>
+<dt class="hdlist1">requestLog</dt>
+<dd>
+<p>Optional.
+An implementation of the <code>org.eclipse.jetty.server.RequestLog</code> request log interface.
+There are three other ways to configure the <code>RequestLog</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>In a Jetty xml config file, as specified in the <code>jettyXml</code> parameter.</p>
+</li>
+<li>
+<p>In a context xml config file, as specified in the <code>contextXml</code> parameter.</p>
+</li>
+<li>
+<p>In the <code>webApp</code> element.</p>
+<div class="paragraph">
+<p>See <a href="../server/http.html#request-logging" class="xref page">Configuring Request Logs</a> for more information.</p>
+</div>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">server</dt>
+<dd>
+<p>Optional as of Jetty 9.3.1.
+This would configure an instance of <code>org.eclipse.jetty.server.Server</code> for the plugin to use, however it is usually <em>not</em> necessary to configure this, as the plugin will automatically configure one for you.
+In particular, if you use the <code>jettyXmls</code> element, then you generally <em>don&#8217;t</em> want to define this element, as you are probably using the <code>jettyXmls</code> file/s to configure up a Server with a special constructor argument, such as a custom threadpool.
+If you define both a <code>server</code> element and use a <code>jettyXmls</code> element which points to a config file that has a line like <code>&lt;Configure id="Server" class="org.eclipse.jetty.server.Server"&gt;</code> then the the xml configuration will override what you configure for the <code>server</code> in the <code>pom.xml</code>.</p>
+</dd>
+<dt class="hdlist1">useProvidedScope</dt>
+<dd>
+<p>Default value is <code>false</code>.
+If true, the dependencies with <code>&lt;scope&gt;provided&lt;/scope&gt;</code> are placed onto the <em>container classpath</em>.
+Be aware that this is <em>not</em> the webapp classpath, as <code>provided</code> indicates that these dependencies would normally be expected to be provided by the container.
+You should very rarely ever need to use this.
+See <a href="#container-classpath">Container Classpath vs WebApp Classpath</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="forked"><a class="anchor" href="#forked"></a>Forked</h3>
+<div class="paragraph">
+<p><code>deployMode</code> of <code>FORK</code>.
+This is similar to the old "jetty:run-forked" goal - a separate process is forked to run your webapp embedded into jetty.
+These extra configuration parameters are available:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">env</dt>
+<dd>
+<p>Optional.
+Map of key/value pairs to pass as environment to the forked JVM.</p>
+</dd>
+<dt class="hdlist1">jvmArgs</dt>
+<dd>
+<p>Optional.
+A space separated string representing arbitrary arguments to pass to the forked JVM.</p>
+</dd>
+<dt class="hdlist1">forkWebXml</dt>
+<dd>
+<p>Optional.
+Defaults to <code>target/fork-web.xml</code>.
+This is the location of a quickstart web xml file that will be <em>generated</em> during the forking of the jetty process.
+You should not need to set this parameter, but it is available if you wish to control the name and location of that file.</p>
+</dd>
+<dt class="hdlist1">useProvidedScope</dt>
+<dd>
+<p>Default value is <code>false</code>.
+If true, the dependencies with <code>&lt;scope&gt;provided&lt;/scope&gt;</code> are placed onto the <em>container classpath</em>.
+Be aware that this is NOT the webapp classpath, as "provided" indicates that these dependencies would normally be expected to be provided by the container.
+You should very rarely ever need to use this.
+See <a href="#container-classpath">Container Classpath vs WebApp Classpath</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="in-a-jetty-distribution"><a class="anchor" href="#in-a-jetty-distribution"></a>In a jetty distribution</h3>
+<div class="paragraph">
+<p><code>deployMode</code> of <code>EXTERNAL</code>.
+This is similar to the old "jetty:run-distro" goal - your webapp is deployed into a dynamically downloaded, unpacked and configured Jetty distribution.
+A separate process is forked to run it.
+These extra configuration parameters are available:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jettyBase</dt>
+<dd>
+<p>Optional.
+The location of an existing Jetty base directory to use to deploy the webapp.
+The existing base will be copied to the <code>target/</code> directory before the webapp is deployed.
+If there is no existing jetty base, a fresh one will be made in <code>target/jetty-base</code>.</p>
+</dd>
+<dt class="hdlist1">jettyHome</dt>
+<dd>
+<p>Optional.
+The location of an existing unpacked Jetty distribution.
+If one does not exist, a fresh Jetty distribution will be downloaded from Maven and installed to the <code>target</code> directory.</p>
+</dd>
+<dt class="hdlist1">jettyOptions</dt>
+<dd>
+<p>Optional.
+A space separated string representing extra arguments to the synthesized Jetty command line.
+Values for these arguments can be found in the section titled "Options" in the output of <code>java -jar $jetty.home/start.jar --help</code>.</p>
+</dd>
+<dt class="hdlist1">jvmArgs</dt>
+<dd>
+<p>Optional.
+A space separated string representing arguments that should be passed to the jvm of the child process running the distro.</p>
+</dd>
+<dt class="hdlist1">modules</dt>
+<dd>
+<p>Optional.
+An array of names of additional Jetty modules that the Jetty child process will activate.
+Use this to change the <a href="#container-classpath">container classpath</a> instead of <code>useProvidedScope</code>.
+These modules are enabled by default: <code>server,http,webapp,deploy</code>.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="common-configuration"><a class="anchor" href="#common-configuration"></a>Common Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following configuration parameters are common to all of the <code>"run-"</code> and <code>"start-"</code> goals:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">deployMode</dt>
+<dd>
+<p>One of <code>EMBED</code>, <code>FORK</code> or <code>EXTERNAL</code>.
+Default <code>EMBED</code>.
+Can also be configured by setting the Maven property <code>jetty.deployMode</code>.
+This parameter determines whether the webapp will run in Jetty in-process with Maven, forked into a new process, or deployed into a Jetty distribution.
+See <a href="#deployment-modes">Deployment Modes</a>.</p>
+</dd>
+<dt class="hdlist1">jettyXmls</dt>
+<dd>
+<p>Optional.
+A comma separated list of locations of Jetty xml files to apply in addition to any plugin configuration parameters.
+You might use it if you have other webapps, handlers, specific types of connectors etc., to deploy, or if you have other Jetty objects that you cannot configure from the plugin.</p>
+</dd>
+<dt class="hdlist1">skip</dt>
+<dd>
+<p>Default is false.
+If true, the execution of the plugin exits.
+Same as setting the SystemProperty <code>-Djetty.skip</code> on the command line.
+This is most useful when configuring Jetty for execution during integration testing and you want to skip the tests.</p>
+</dd>
+<dt class="hdlist1">excludedGoals</dt>
+<dd>
+<p>Optional.
+A list of Jetty plugin goal names that will cause the plugin to print an informative message and exit.
+Useful if you want to prevent users from executing goals that you know cannot work with your project.</p>
+</dd>
+<dt class="hdlist1">supportedPackagings</dt>
+<dd>
+<p>Optional.
+Defaults to <code>war</code>.
+This is a list of maven &lt;packaging&gt; types that can work with the jetty plugin.
+Usually, only <code>war</code> projects are suitable, however, you may configure other types.
+The plugin will refuse to start if the &lt;packaging&gt; type in the pom is not in list of <code>supportedPackagings</code>.</p>
+</dd>
+<dt class="hdlist1">systemProperties</dt>
+<dd>
+<p>Optional.
+A map of property name, value pairs.
+Allows you to configure System properties for the execution of the plugin.
+For more information, see <a href="#setting-system-properties">Setting System Properties</a>.</p>
+</dd>
+<dt class="hdlist1">systemPropertiesFile</dt>
+<dd>
+<p>Optional.
+A file containing System properties to set for the execution of the plugin.
+By default, settings that you make here <strong>do not</strong> override any system properties already set on the command line, by the JVM, or in the POM via <code>systemProperties</code>.
+Read <a href="#setting-system-properties">Setting System Properties</a> for how to force overrides.</p>
+</dd>
+<dt class="hdlist1">jettyProperties</dt>
+<dd>
+<p>Optional.
+A map of property name, value pairs.
+Allows you to configure standard jetty properties.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="container-classpath"><a class="anchor" href="#container-classpath"></a>Container Classpath vs WebApp Classpath</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Servlet Specification makes a strong distinction between the classpath for a <em>webapp</em>, and the classpath of the <em>container</em>.
+When running in Maven, the plugin&#8217;s classpath is equivalent to the <em>container</em> classpath.
+It will make a classpath for the <em>webapp</em> to be deployed comprised of &lt;dependencies&gt; specified in the pom.</p>
+</div>
+<div class="paragraph">
+<p>If your production environment places specific jars onto the container&#8217;s classpath, the equivalent way to do this with Maven is to define these as &lt;dependencies&gt; for the <em>plugin</em> itself, not the <em>project</em>. See <a href="http://maven.apache.org/pom.html#Plugins">configuring maven plugins</a>.
+This is suitable if you are using either <code>EMBED</code> or <code>FORK</code> mode.
+If you are using <code>EXTERNAL</code> mode, then you should configure the <code>modules</code> parameter with the names of the Jetty modules that place these jars onto the container classpath.</p>
+</div>
+<div class="paragraph">
+<p>Note that in <code>EMBED</code> or <code>FORK</code> mode, you could also influence the container classpath by setting the <code>useProvidedScope</code> parameter to <code>true</code>: this will place any dependencies with &lt;scope&gt;provided&lt;scope&gt; onto the plugin&#8217;s classpath.
+Use this very cautiously: as the plugin already automatically places most Jetty jars onto the classpath, you could wind up with duplicate jars.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jetty-run-goal"><a class="anchor" href="#jetty-run-goal"></a>jetty:run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>run</code> goal deploys a webapp that is <em>not</em> first built into a WAR.
+A virtual webapp is constructed from the project&#8217;s sources and its dependencies.
+It looks for the constituent parts of a webapp in the Maven default project locations, although you can override these in the plugin configuration.
+For example, by default it looks for:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>resources in <code>${project.basedir}/src/main/webapp</code></p>
+</li>
+<li>
+<p>classes in <code>${project.build.outputDirectory}</code></p>
+</li>
+<li>
+<p><code>web.xml</code> in <code>${project.basedir}/src/main/webapp/WEB-INF/</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The plugin first runs a Maven parallel build to ensure that the classes are built and up-to-date before deployment.
+If you change the source of a class and your IDE automatically compiles it in the background, the plugin picks up the changed class (note you need to configure a non-zero <code>scan</code> interval for automatic redeployment).</p>
+</div>
+<div class="paragraph">
+<p>If the plugin is invoked in a multi-module build, any dependencies that are also in the Maven reactor are used from their compiled classes.</p>
+</div>
+<div class="paragraph">
+<p>Once invoked, you can configure the plugin to run continuously, scanning for changes in the project and automatically performing a hot redeploy when necessary.
+Any changes you make are immediately reflected in the running instance of Jetty, letting you quickly jump from coding to testing, rather than going through the cycle of: code, compile, reassemble, redeploy, test.</p>
+</div>
+<div class="paragraph">
+<p>The Maven build will be paused until Jetty exits, at which time Maven will also exit.</p>
+</div>
+<div class="paragraph">
+<p>Stopping Jetty is accomplished by typing <code>cntrl-c</code> at the command line.</p>
+</div>
+<div class="paragraph">
+<p>Output from Jetty will be logged to the console.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example, which turns on scanning for changes every ten seconds, and sets the webapp context path to <code>/test</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.jetty.ee10&lt;/groupId&gt;
+  &lt;artifactId&gt;jetty-ee10-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;scan&gt;10&lt;/scan&gt;
+    &lt;webApp&gt;
+      &lt;contextPath&gt;/test&lt;/contextPath&gt;
+    &lt;/webApp&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">webApp</dt>
+<dd>
+<p>This is an instance of <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/ee10}/maven/plugin/MavenWebAppContext.html">org.eclipse.jetty.ee10.maven.plugin.MavenWebAppContext</a>, which is an extension to the class  <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/ee10/webapp/WebAppContext.hml"><code>org.eclipse.jetty.ee10.webapp.WebAppContext</code></a>.
+You can use any of the setter methods on this object to configure your webapp.
+Here are a few of the most useful ones:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">contextPath</dt>
+<dd>
+<p>The context path for your webapp. By default, this is set to <code>/</code>.
+If using a custom value for this parameter, you should include the leading <code>/</code>, example <code>/mycontext</code>.</p>
+</dd>
+<dt class="hdlist1">descriptor</dt>
+<dd>
+<p>The path to the <code>web.xml</code> file for your webapp.
+By default, the plugin will look in <code>src/main/webapp/WEB-INF/web.xml</code>.</p>
+</dd>
+<dt class="hdlist1">defaultsDescriptor</dt>
+<dd>
+<p>The path to a <code>webdefault.xml</code> file that will be applied to your webapp before the <code>web.xml</code>.
+If you don&#8217;t supply one, Jetty uses a default file baked into the <code>jetty-ee10-webapp.jar</code>.</p>
+</dd>
+<dt class="hdlist1">overrideDescriptor</dt>
+<dd>
+<p>The path to a <code>web.xml</code> file that Jetty applies after reading your <code>web.xml</code>.
+You can use this to replace or add configuration.</p>
+</dd>
+<dt class="hdlist1">jettyEnvXml</dt>
+<dd>
+<p>Optional.
+Location of a <code>jetty-env.xml</code> file, which allows you to make JNDI bindings that satisfy <code>env-entry</code>, <code>resource-env-ref</code>, and <code>resource-ref</code> linkages in the <code>web.xml</code> that are scoped  only to the webapp and not shared with other webapps that you might be deploying at the same time (for example, by using a <code>jettyXml</code> file).</p>
+</dd>
+<dt class="hdlist1">tempDirectory</dt>
+<dd>
+<p>The path to a dir that Jetty can use to expand or copy jars and jsp compiles when your webapp is running.
+The default is <code>${project.build.outputDirectory}/tmp</code>.</p>
+</dd>
+<dt class="hdlist1">baseResource</dt>
+<dd>
+<p>The path from which Jetty serves static resources.
+Defaults to <code>src/main/webapp</code>.
+If this location does not exist (because, for example, your project does not use static content), then the plugin will synthesize a virtual static resource location of <code>target/webapp-synth</code>.</p>
+</dd>
+<dt class="hdlist1">resourceBases</dt>
+<dd>
+<p>Use instead of <code>baseResource</code> if you have multiple directories from which you want to serve static content.
+This is an array of directory locations, either as urls or file paths.</p>
+</dd>
+<dt class="hdlist1">baseAppFirst</dt>
+<dd>
+<p>Defaults to "true".
+Controls whether any overlaid wars are added before or after the original base resource(s) of the webapp.
+See the section on <a href="#using-overlaid-wars">overlaid wars</a> for more information.</p>
+</dd>
+<dt class="hdlist1">containerIncludeJarPattern</dt>
+<dd>
+<p>Defaults to <code>.<strong>/jetty-jakarta-servlet-api-[<sup>/]</strong>\.jar$|.<strong>jakarta.servlet.jsp.jstl-[</sup>/]</strong>\.jar|.<strong>taglibs-standard-impl-.</strong>\.jar</code>.
+This is a pattern that is applied to the names of the jars on the container&#8217;s classpath (ie the classpath of the plugin, not that of the webapp) that should be scanned for fragments, tlds, annotations etc.
+This is analogous to the context attribute <a href="../../operations-guide/annotations/index.html#og-container-include-jar-pattern" class="xref page">org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern</a> that is documented <a href="../../operations-guide/annotations/index.html#og-container-include-jar-pattern" class="xref page">here</a>.
+You can define extra patterns of jars that will be included in the scan.</p>
+</dd>
+<dt class="hdlist1">webInfIncludeJarPattern</dt>
+<dd>
+<p>Defaults to matching <em>all</em> of the dependency jars for the webapp (ie the equivalent of WEB-INF/lib).
+You can make this pattern more restrictive to only match certain jars by using this setter.
+This is analogous to the context attribute <a href="../../operations-guide/annotations/index.html#og-web-inf-include-jar-pattern" class="xref page">org.eclipse.jetty.server.webapp.WebInfIncludeJarPattern</a> that is documented <a href="../../operations-guide/annotations/index.html#og-web-inf-include-jar-pattern" class="xref page">here</a>.</p>
+</dd>
+</dl>
+</div>
+</dd>
+<dt class="hdlist1">contextXml</dt>
+<dd>
+<p>The path to a context xml file that is applied to your webapp AFTER the <code>webApp</code> element.</p>
+</dd>
+<dt class="hdlist1">classesDirectory</dt>
+<dd>
+<p>Location of your compiled classes for the webapp.
+You should rarely need to set this parameter.
+Instead, you should set <code>&lt;build&gt;&lt;outputDirectory&gt;</code> in your <code>pom.xml</code>.</p>
+</dd>
+<dt class="hdlist1">testClassesDirectory</dt>
+<dd>
+<p>Location of the compiled test classes for your webapp. By default this is <code>${project.build.testOutputDirectory}</code>.</p>
+</dd>
+<dt class="hdlist1">useTestScope</dt>
+<dd>
+<p>If true, the classes from <code>testClassesDirectory</code> and dependencies of scope "test" are placed first on the classpath.
+By default this is false.</p>
+</dd>
+<dt class="hdlist1">scan</dt>
+<dd>
+<p>The pause in seconds between sweeps of the webapp to check for changes and automatically hot redeploy if any are detected.
+<strong>By default this is <code>-1</code>, which disables hot redeployment scanning.</strong>
+A value of <code>0</code> means no hot redeployment is done, and that you must use the <kbd>Enter</kbd> key to manually force a redeploy.
+Any positive integer will enable hot redeployment, using the number as the sweep interval in seconds.</p>
+</dd>
+<dt class="hdlist1">scanTargetPatterns</dt>
+<dd>
+<p>Optional.
+List of extra directories with glob-style include/excludes patterns (see <a href="http://docs.oracle.com/javase/8/docs/api/java/nio/file/FileSystem.html#getPathMatcher-java.lang.String-">javadoc</a> for <a href="http://docs.oracle.com/javase/8/docs/api/java/nio/file/FileSystem.html#getPathMatcher-java.lang.String-">FileSystem.getPathMatcher</a>) to specify other files to periodically scan for changes.</p>
+</dd>
+<dt class="hdlist1">scanClassesPattern</dt>
+<dd>
+<p>Optional.
+Include and exclude patterns that can be applied to the classesDirectory for the purposes of scanning, it does <strong>not</strong> affect the classpath.
+If a file or directory is excluded by the patterns then a change in that file (or subtree in the case of a directory) is ignored and will not cause the webapp to redeploy.
+Patterns are specified as a relative path using a glob-like syntax as described in the <a href="http://docs.oracle.com/javase/8/docs/api/java/nio/file/FileSystem.html#getPathMatcher-java.lang.String-">javadoc</a> for <a href="http://docs.oracle.com/javase/8/docs/api/java/nio/file/FileSystem.html#getPathMatcher-java.lang.String-">FileSystem.getPathMatcher</a>.</p>
+</dd>
+<dt class="hdlist1">scanTestClassesPattern</dt>
+<dd>
+<p>Optional.
+Include and exclude patterns that can be applied to the testClassesDirectory for the purposes of scanning, it does <strong>not</strong> affect the classpath.
+If a file or directory is excluded by the patterns then a change in that file (or subtree in the case of a directory) is ignored and will not cause the webapp to redeploy.
+Patterns are specified as a relative path using a glob-like syntax as described in the <a href="http://docs.oracle.com/javase/8/docs/api/java/nio/file/FileSystem.html#getPathMatcher-java.lang.String-">javadoc</a> for <a href="http://docs.oracle.com/javase/8/docs/api/java/nio/file/FileSystem.html#getPathMatcher-java.lang.String-">FileSystem.getPathMatcher</a>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>See <a href="#deployment-modes">Deployment Modes</a> for other configuration parameters available when using the <code>run</code> goal in EMBED, FORK or EXTERNAL modes.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example of a pom configuration for the plugin with the <code>run</code> goal:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;project&gt;
+  ...
+  &lt;plugins&gt;
+    ...
+    &lt;plugin&gt;
+      &lt;groupId&gt;org.eclipse.jetty.ee10&lt;/groupId&gt;
+      &lt;artifactId&gt;jetty-ee10-maven-plugin&lt;/artifactId&gt;
+      &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+      &lt;configuration&gt;
+        &lt;webApp&gt;
+          &lt;contextPath&gt;/&lt;/contextPath&gt;
+          &lt;descriptor&gt;${project.basedir}/src/over/here/web.xml&lt;/descriptor&gt;
+          &lt;jettyEnvXml&gt;${project.basedir}/src/over/here/jetty-env.xml&lt;/jettyEnvXml&gt;
+          &lt;baseResource&gt;${project.basedir}/src/staticfiles&lt;/baseResource&gt;
+        &lt;/webApp&gt;
+        &lt;classesDirectory&gt;${project.basedir}/somewhere/else&lt;/classesDirectory&gt;
+        &lt;scanClassesPattern&gt;
+          &lt;excludes&gt;
+             &lt;exclude&gt;**/Foo.class&lt;/exclude&gt;
+          &lt;/excludes&gt;
+        &lt;/scanClassesPattern&gt;
+        &lt;scanTargetPatterns&gt;
+          &lt;scanTargetPattern&gt;
+            &lt;directory&gt;src/other-resources&lt;/directory&gt;
+            &lt;includes&gt;
+              &lt;include&gt;**/*.xml&lt;/include&gt;
+              &lt;include&gt;**/*.properties&lt;/include&gt;
+            &lt;/includes&gt;
+            &lt;excludes&gt;
+              &lt;exclude&gt;**/myspecial.xml&lt;/exclude&gt;
+              &lt;exclude&gt;**/myspecial.properties&lt;/exclude&gt;
+            &lt;/excludes&gt;
+          &lt;/scanTargetPattern&gt;
+        &lt;/scanTargetPatterns&gt;
+      &lt;/configuration&gt;
+    &lt;/plugin&gt;
+  &lt;/plugins&gt;
+  ...
+&lt;/project&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If, for whatever reason, you cannot run on an unassembled webapp, the goal <code>run-war</code> works on assembled webapps.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jetty-run-war-goal"><a class="anchor" href="#jetty-run-war-goal"></a>jetty:run-war</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When invoked at the command line this goal first executes a maven build of your project to the package phase.</p>
+</div>
+<div class="paragraph">
+<p>By default it then deploys the resultant war to Jetty, but you can use this goal instead to deploy <em>any</em> war file by simply setting the <code>&lt;webApp&gt;&lt;war&gt;</code> configuration parameter to its location.</p>
+</div>
+<div class="paragraph">
+<p>If you set a non-zero <code>scan</code>, Jetty watches your <code>pom.xml</code> and the WAR file; if either changes, it redeploys the war.</p>
+</div>
+<div class="paragraph">
+<p>The maven build is held up until Jetty exits, which is achieved by typing <code>cntrl-c</code> at the command line.</p>
+</div>
+<div class="paragraph">
+<p>All Jetty output is directed to the console.</p>
+</div>
+<div class="sect2">
+<h3 id="configuration-2"><a class="anchor" href="#configuration-2"></a>Configuration</h3>
+<div class="paragraph">
+<p>Configuration parameters are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">webApp</dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">war</dt>
+<dd>
+<p>The location of the built WAR file. This defaults to <code>${project.build.directory}/${project.build.finalName}.war</code>.
+You can set it to the location of any pre-built war file.</p>
+</dd>
+<dt class="hdlist1">contextPath</dt>
+<dd>
+<p>The context path for your webapp. By default, this is set to <code>/</code>.
+If using a custom value for this parameter, you should include the leading <code>/</code>, example <code>/mycontext</code>.</p>
+</dd>
+<dt class="hdlist1">defaultsDescriptor</dt>
+<dd>
+<p>The path to a <code>webdefault.xml</code> file that will be applied to your webapp before the <code>web.xml</code>.
+If you don&#8217;t supply one, Jetty uses a default file baked into the <code>jetty-ee10-webapp.jar</code>.</p>
+</dd>
+<dt class="hdlist1">overrideDescriptor</dt>
+<dd>
+<p>The path to a <code>web.xml</code> file that Jetty applies after reading your <code>web.xml</code>.
+You can use this to replace or add configuration.</p>
+</dd>
+<dt class="hdlist1">containerIncludeJarPattern</dt>
+<dd>
+<p>Defaults to <code>.<strong>/jetty-jakarta-servlet-api-[<sup>/]</strong>\.jar$|.<strong>jakarta.servlet.jsp.jstl-[</sup>/]</strong>\.jar|.<strong>taglibs-standard-impl-.</strong>\.jar</code>.
+This is a pattern that is applied to the names of the jars on the container&#8217;s classpath (ie the classpath of the plugin, not that of the webapp) that should be scanned for fragments, tlds, annotations etc.
+This is analogous to the context attribute <a href="../../operations-guide/annotations/index.html#og-container-include-jar-pattern" class="xref page">org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern</a> that is documented <a href="../../operations-guide/annotations/index.html#og-container-include-jar-pattern" class="xref page">here</a>.
+You can define extra patterns of jars that will be included in the scan.</p>
+</dd>
+<dt class="hdlist1">webInfIncludeJarPattern</dt>
+<dd>
+<p>Defaults to matching <em>all</em> of the dependency jars for the webapp (ie the equivalent of WEB-INF/lib).
+You can make this pattern more restrictive to only match certain jars by using this setter.
+This is analogous to the context attribute <a href="../../operations-guide/annotations/index.html#og-web-inf-include-jar-pattern" class="xref page">org.eclipse.jetty.server.webapp.WebInfIncludeJarPattern</a> that is documented <a href="../../operations-guide/annotations/index.html#og-web-inf-include-jar-pattern" class="xref page">here</a>.</p>
+</dd>
+<dt class="hdlist1">tempDirectory</dt>
+<dd>
+<p>The path to a dir that Jetty can use to expand or copy jars and jsp compiles when your webapp is running.
+The default is <code>${project.build.outputDirectory}/tmp</code>.</p>
+</dd>
+<dt class="hdlist1">contextXml</dt>
+<dd>
+<p>The path to a context xml file that is applied to your webapp AFTER the <code>webApp</code> element.</p>
+</dd>
+</dl>
+</div>
+</dd>
+<dt class="hdlist1">scan</dt>
+<dd>
+<p>The pause in seconds between sweeps of the webapp to check for changes and automatically hot redeploy if any are detected.
+<strong>By default this is <code>-1</code>, which disables hot redeployment scanning.</strong>
+A value of <code>0</code> means no hot redeployment is done, and that you must use the <kbd>Enter</kbd> key to manually force a redeploy.
+Any positive integer will enable hot redeployment, using the number as the sweep interval in seconds.</p>
+</dd>
+<dt class="hdlist1">scanTargetPatterns</dt>
+<dd>
+<p>Optional.
+List of directories with ant-style include/excludes patterns to specify other files to periodically scan for changes.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>See <a href="#deployment-modes">Deployment Modes</a> for other configuration parameters available when using the <code>run-war</code> goal in EMBED, FORK or EXTERNAL modes.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jetty-start-goal"><a class="anchor" href="#jetty-start-goal"></a>jetty:start</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This is similar to the <code>jetty:run</code> goal, however it is <em>not</em> designed to be run from the command line and does <em>not</em> first execute the build up until the <code>test-compile</code> phase to ensure that all necessary classes and files of the webapp have been generated.
+It will <em>not</em> scan your project for changes and restart your webapp.
+It does <em>not</em> pause maven until Jetty is stopped.</p>
+</div>
+<div class="paragraph">
+<p>Instead, it is designed to be used with build phase bindings in your pom.
+For example to you can have Maven start your webapp at the beginning of your tests and stop at the end.</p>
+</div>
+<div class="paragraph">
+<p>If the plugin is invoked as part of a multi-module build, any dependencies that are also in the maven reactor are used from their compiled classes.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example of using the <code>pre-integration-test</code> and <code>post-integration-test</code> Maven build phases to trigger the execution and termination of Jetty:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.jetty.ee10&lt;/groupId&gt;
+  &lt;artifactId&gt;jetty-ee10-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;stopKey&gt;foo&lt;/stopKey&gt;
+    &lt;stopPort&gt;9999&lt;/stopPort&gt;
+  &lt;/configuration&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;id&gt;start-jetty&lt;/id&gt;
+      &lt;phase&gt;pre-integration-test&lt;/phase&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;start&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+    &lt;execution&gt;
+      &lt;id&gt;stop-jetty&lt;/id&gt;
+      &lt;phase&gt;post-integration-test&lt;/phase&gt;
+       &lt;goals&gt;
+         &lt;goal&gt;stop&lt;/goal&gt;
+       &lt;/goals&gt;
+     &lt;/execution&gt;
+  &lt;/executions&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This goal will generate output from jetty into the <code>target/jetty-start.out</code> file.</p>
+</div>
+<div class="sect2">
+<h3 id="configuration-3"><a class="anchor" href="#configuration-3"></a>Configuration</h3>
+<div class="paragraph">
+<p>These configuration parameters are available:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">webApp</dt>
+<dd>
+<p>This is an instance of <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/ee10/maven/plugin/MavenWebAppContext.html">org.eclipse.jetty.ee10.maven.plugin.MavenWebAppContext</a>, which is an extension to the class  <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/webapp/WebAppContext.hml"><code>org.eclipse.jetty.ee9.webapp.WebAppContext</code></a>.
+You can use any of the setter methods on this object to configure your webapp.
+Here are a few of the most useful ones:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">contextPath</dt>
+<dd>
+<p>The context path for your webapp. By default, this is set to <code>/</code>.
+If using a custom value for this parameter, you should include the leading <code>/</code>, example <code>/mycontext</code>.</p>
+</dd>
+<dt class="hdlist1">descriptor</dt>
+<dd>
+<p>The path to the <code>web.xml</code> file for your webapp.
+The default is <code>src/main/webapp/WEB-INF/web.xml</code>.</p>
+</dd>
+<dt class="hdlist1">defaultsDescriptor</dt>
+<dd>
+<p>The path to a <code>webdefault.xml</code> file that will be applied to your webapp before the <code>web.xml</code>.
+If you don&#8217;t supply one, Jetty uses a default file baked into the <code>jetty-ee10-webapp.jar</code>.</p>
+</dd>
+<dt class="hdlist1">overrideDescriptor</dt>
+<dd>
+<p>The path to a <code>web.xml</code> file that Jetty applies after reading your <code>web.xml</code>.
+You can use this to replace or add configuration.</p>
+</dd>
+<dt class="hdlist1">jettyEnvXml</dt>
+<dd>
+<p>Optional.
+Location of a <code>jetty-env.xml</code> file, which allows you to make JNDI bindings that satisfy <code>env-entry</code>, <code>resource-env-ref</code>, and <code>resource-ref</code> linkages in the <code>web.xml</code> that are scoped  only to the webapp and not shared with other webapps that you might be deploying at the same time (for example, by using a <code>jettyXml</code> file).</p>
+</dd>
+<dt class="hdlist1">tempDirectory</dt>
+<dd>
+<p>The path to a dir that Jetty can use to expand or copy jars and jsp compiles when your webapp is running.
+The default is <code>${project.build.outputDirectory}/tmp</code>.</p>
+</dd>
+<dt class="hdlist1">baseResource</dt>
+<dd>
+<p>The path from which Jetty serves static resources.
+Defaults to <code>src/main/webapp</code>.</p>
+</dd>
+<dt class="hdlist1">resourceBases</dt>
+<dd>
+<p>Use instead of <code>baseResource</code> if you have multiple directories from which you want to serve static content.
+This is an array of directory names.</p>
+</dd>
+<dt class="hdlist1">baseAppFirst</dt>
+<dd>
+<p>Defaults to "true".
+Controls whether any overlaid wars are added before or after the original base resource(s) of the webapp.
+See the section on <a href="#using-overlaid-wars">overlaid wars</a> for more information.</p>
+</dd>
+<dt class="hdlist1">containerIncludeJarPattern</dt>
+<dd>
+<p>Defaults to <code>.<strong>/jetty-jakarta-servlet-api-[<sup>/]</strong>\.jar$|.<strong>jakarta.servlet.jsp.jstl-[</sup>/]</strong>\.jar|.<strong>taglibs-standard-impl-.</strong>\.jar</code>.
+This is a pattern that is applied to the names of the jars on the container&#8217;s classpath (ie the classpath of the plugin, not that of the webapp) that should be scanned for fragments, tlds, annotations etc.
+This is analogous to the context attribute <a href="../../operations-guide/annotations/index.html#og-container-include-jar-pattern" class="xref page">org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern</a> that is documented <a href="../../operations-guide/annotations/index.html#og-container-include-jar-pattern" class="xref page">here</a>.
+You can define extra patterns of jars that will be included in the scan.</p>
+</dd>
+<dt class="hdlist1">webInfIncludeJarPattern</dt>
+<dd>
+<p>Defaults to matching <em>all</em> of the dependency jars for the webapp (ie the equivalent of WEB-INF/lib).
+You can make this pattern more restrictive to only match certain jars by using this setter.
+This is analogous to the context attribute <a href="../../operations-guide/annotations/index.html#og-web-inf-include-jar-pattern" class="xref page">org.eclipse.jetty.server.webapp.WebInfIncludeJarPattern</a> that is documented <a href="../../operations-guide/annotations/index.html#og-web-inf-include-jar-pattern" class="xref page">here</a>.</p>
+</dd>
+</dl>
+</div>
+</dd>
+<dt class="hdlist1">contextXml</dt>
+<dd>
+<p>The path to a context xml file that is applied to your webapp AFTER the <code>webApp</code> element.</p>
+</dd>
+<dt class="hdlist1">classesDirectory</dt>
+<dd>
+<p>Location of your compiled classes for the webapp.
+You should rarely need to set this parameter.
+Instead, you should set <code>build outputDirectory</code> in your <code>pom.xml</code>.</p>
+</dd>
+<dt class="hdlist1">testClassesDirectory</dt>
+<dd>
+<p>Location of the compiled test classes for your webapp. By default this is <code>${project.build.testOutputDirectory}</code>.</p>
+</dd>
+<dt class="hdlist1">useTestScope</dt>
+<dd>
+<p>If true, the classes from <code>testClassesDirectory</code> and dependencies of scope "test" are placed first on the classpath.
+By default this is false.</p>
+</dd>
+<dt class="hdlist1">stopPort</dt>
+<dd>
+<p>Optional.
+Port to listen on for stop commands.
+Useful to use in conjunction with the <a href="#jetty-stop-goal">stop</a> and <a href="#jetty-start-goal">start</a> goals.</p>
+</dd>
+<dt class="hdlist1">stopKey</dt>
+<dd>
+<p>Optional.
+Used in conjunction with stopPort for stopping jetty.
+Useful to use in conjunction with the <a href="#jetty-stop-goal">stop</a> and <a href="#jetty-start-goal">start</a> goals.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>These additional configuration parameters are available when running in <code>FORK</code> or <code>EXTERNAL</code> mode:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">maxChildStartChecks</dt>
+<dd>
+<p>Default is <code>10</code>.
+This is maximum number of times the parent process checks to see if the forked jetty process has started correctly</p>
+</dd>
+<dt class="hdlist1">maxChildStartCheckMs</dt>
+<dd>
+<p>Default is <code>200</code>.
+This is the time in milliseconds between checks on the startup of the forked jetty process.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jetty-start-war-goal"><a class="anchor" href="#jetty-start-war-goal"></a>jetty:start-war</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Similarly to the <code>jetty:start</code> goal, <code>jetty:start-war</code> is designed to be bound to build lifecycle phases in your pom.</p>
+</div>
+<div class="paragraph">
+<p>It will <em>not</em> scan your project for changes and restart your webapp.
+It does <em>not</em> pause maven until Jetty is stopped.</p>
+</div>
+<div class="paragraph">
+<p>By default, if your pom is for a webapp project, it will deploy the war file for the project to jetty.
+However, like the <code>jetty:run-war</code> project, you can nominate any war file to deploy by defining its location in the <code>&lt;webApp&gt;&lt;war&gt;</code> parameter.</p>
+</div>
+<div class="paragraph">
+<p>If the plugin is invoked as part of a multi-module build, any dependencies that are also in the Maven reactor are used from their compiled classes.</p>
+</div>
+<div class="paragraph">
+<p>This goal will generate output from jetty into the <code>target/jetty-start-war.out</code> file.</p>
+</div>
+<div class="sect2">
+<h3 id="configuration-4"><a class="anchor" href="#configuration-4"></a>Configuration</h3>
+<div class="paragraph">
+<p>These configuration parameters are available:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">webApp</dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">war</dt>
+<dd>
+<p>The location of the built WAR file. This defaults to <code>${project.build.directory}/${project.build.finalName}.war</code>.
+You can set it to the location of any pre-built war file.</p>
+</dd>
+<dt class="hdlist1">contextPath</dt>
+<dd>
+<p>The context path for your webapp. By default, this is set to <code>/</code>.
+If using a custom value for this parameter, you should include the leading <code>/</code>, example <code>/mycontext</code>.</p>
+</dd>
+<dt class="hdlist1">defaultsDescriptor</dt>
+<dd>
+<p>The path to a <code>webdefault.xml</code> file that will be applied to your webapp before the <code>web.xml</code>.
+If you don&#8217;t supply one, Jetty uses a default file baked into the <code>jetty-ee10-webapp.jar</code>.</p>
+</dd>
+<dt class="hdlist1">overrideDescriptor</dt>
+<dd>
+<p>The path to a <code>web.xml</code> file that Jetty applies after reading your <code>web.xml</code>.
+You can use this to replace or add configuration.</p>
+</dd>
+<dt class="hdlist1">containerIncludeJarPattern</dt>
+<dd>
+<p>Defaults to <code>.<strong>/jetty-jakarta-servlet-api-[<sup>/]</strong>\.jar$|.<strong>jakarta.servlet.jsp.jstl-[</sup>/]</strong>\.jar|.<strong>taglibs-standard-impl-.</strong>\.jar</code>.
+This is a pattern that is applied to the names of the jars on the container&#8217;s classpath (ie the classpath of the plugin, not that of the webapp) that should be scanned for fragments, tlds, annotations etc.
+This is analogous to the context attribute <a href="../../operations-guide/annotations/index.html#og-container-include-jar-pattern" class="xref page">org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern</a> that is documented <a href="../../operations-guide/annotations/index.html#og-container-include-jar-pattern" class="xref page">here</a>.
+You can define extra patterns of jars that will be included in the scan.</p>
+</dd>
+<dt class="hdlist1">webInfIncludeJarPattern</dt>
+<dd>
+<p>Defaults to matching <em>all</em> of the dependency jars for the webapp (ie the equivalent of WEB-INF/lib).
+You can make this pattern more restrictive to only match certain jars by using this setter.
+This is analogous to the context attribute <a href="../../operations-guide/annotations/index.html#og-web-inf-include-jar-pattern" class="xref page">org.eclipse.jetty.server.webapp.WebInfIncludeJarPattern</a> that is documented <a href="../../operations-guide/annotations/index.html#og-web-inf-include-jar-pattern" class="xref page">here</a>.</p>
+</dd>
+<dt class="hdlist1">tempDirectory</dt>
+<dd>
+<p>The path to a dir that Jetty can use to expand or copy jars and jsp compiles when your webapp is running.
+The default is <code>${project.build.outputDirectory}/tmp</code>.</p>
+</dd>
+<dt class="hdlist1">contextXml</dt>
+<dd>
+<p>The path to a context xml file that is applied to your webapp AFTER the <code>webApp</code> element.</p>
+</dd>
+</dl>
+</div>
+</dd>
+<dt class="hdlist1">stopPort</dt>
+<dd>
+<p>Optional.
+Port to listen on for stop commands.
+Useful to use in conjunction with the <a href="#jetty-stop-goal">stop</a>.</p>
+</dd>
+<dt class="hdlist1">stopKey</dt>
+<dd>
+<p>Optional.
+Used in conjunction with stopPort for stopping jetty.
+Useful to use in conjunction with the <a href="#jetty-stop-goal">stop</a>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>These additional configuration parameters are available when running in FORK or EXTERNAL mode:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">maxChildStartChecks</dt>
+<dd>
+<p>Default is <code>10</code>.
+This is maximum number of times the parent process checks to see if the forked Jetty process has started correctly</p>
+</dd>
+<dt class="hdlist1">maxChildStartCheckMs</dt>
+<dd>
+<p>Default is <code>200</code>.
+This is the time in milliseconds between checks on the startup of the forked Jetty process.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jetty-stop-goal"><a class="anchor" href="#jetty-stop-goal"></a>jetty:stop</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The stop goal stops a FORK or EXTERNAL mode running instance of Jetty.
+To use it, you need to configure the plugin with a special port number and key.
+That same port number and key will also be used by the other goals that start Jetty.</p>
+</div>
+<div class="sect2">
+<h3 id="configuration-5"><a class="anchor" href="#configuration-5"></a>Configuration</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">stopPort</dt>
+<dd>
+<p>A port number for Jetty to listen on to receive a stop command to cause it to shutdown.</p>
+</dd>
+<dt class="hdlist1">stopKey</dt>
+<dd>
+<p>A string value sent to the <code>stopPort</code> to validate the stop command.</p>
+</dd>
+<dt class="hdlist1">stopWait</dt>
+<dd>
+<p>The maximum time in seconds that the plugin will wait for confirmation that Jetty has stopped.
+If false or not specified, the plugin does not wait for confirmation but exits after issuing the stop command.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s a configuration example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.jetty.ee10&lt;/groupId&gt;
+  &lt;artifactId&gt;jetty-ee10-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;stopPort&gt;9966&lt;/stopPort&gt;
+    &lt;stopKey&gt;foo&lt;/stopKey&gt;
+    &lt;stopWait&gt;10&lt;/stopWait&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, while Jetty is running (in another window), type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>mvn jetty:stop</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>stopPort</code> must be free on the machine you are running on.
+If this is not the case, you will get an "Address already in use" error message after the "Started ServerConnector &#8230;&#8203;" message.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jetty-effective-web-xml-goal"><a class="anchor" href="#jetty-effective-web-xml-goal"></a>jetty:effective-web-xml</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This goal calculates a synthetic <code>web.xml</code> (the "effective web.xml") according to the rules of the Servlet Specification taking into account all sources of discoverable configuration of web components in your application: descriptors (<code>webdefault.xml</code>, <code>web.xml</code>, <code>web-fragment.xml`s, `web-override.xml</code>) and discovered annotations (<code>@WebServlet</code>, <code>@WebFilter</code>, <code>@WebListener</code>).
+No programmatic declarations of servlets, filters and listeners can be taken into account.</p>
+</div>
+<div class="paragraph">
+<p>You can calculate the effective web.xml for any pre-built war file by setting the <code>&lt;webApp&gt;&lt;war&gt;</code> parameter, or you can calculate it for the unassembled webapp by setting all of the usual <code>&lt;webApp&gt;</code> parameters as for <code>jetty:run</code>.</p>
+</div>
+<div class="paragraph">
+<p>Other useful information about your webapp that is produced as part of the analysis is also stored as context parameters in the effective-web.xml.
+The effective-web.xml can be used in conjunction with the <a href="../../operations-guide/quickstart/index.html" class="xref page">Quickstart</a> feature to quickly start your webapp (note that Quickstart is not appropriate for the mvn jetty goals).</p>
+</div>
+<div class="paragraph">
+<p>The effective web.xml from these combined sources is generated into a file, which by default is <code>target/effective-web.xml</code>, but can be changed by setting the <code>effectiveWebXml</code> configuration parameter.</p>
+</div>
+<div class="sect2">
+<h3 id="configuration-6"><a class="anchor" href="#configuration-6"></a>Configuration</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">effectiveWebXml</dt>
+<dd>
+<p>The full path name of a file into which you would like the effective web xml generated.</p>
+</dd>
+<dt class="hdlist1">webApp</dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">war</dt>
+<dd>
+<p>The location of the built WAR file. This defaults to <code>${project.build.directory}/${project.build.finalName}.war</code>.
+You can set it to the location of any pre-built war file.
+Or you can leave it blank and set up the other <code>webApp</code> parameters as per <a href="#jetty-run-goal">jetty:run</a>, as well as the <code>webAppSourceDirectory</code>, <code>classes</code> and <code>testClasses</code> parameters.</p>
+</dd>
+<dt class="hdlist1">contextPath</dt>
+<dd>
+<p>The context path for your webapp. By default, this is set to <code>/</code>.
+If using a custom value for this parameter, you should include the leading <code>/</code>, example <code>/mycontext</code>.</p>
+</dd>
+<dt class="hdlist1">defaultsDescriptor</dt>
+<dd>
+<p>The path to a <code>webdefault.xml</code> file that will be applied to your webapp before the <code>web.xml</code>.
+If you don&#8217;t supply one, Jetty uses a default file baked into the <code>jetty-ee10-webapp.jar</code>.</p>
+</dd>
+<dt class="hdlist1">overrideDescriptor</dt>
+<dd>
+<p>The path to a <code>web.xml</code> file that Jetty applies after reading your <code>web.xml</code>.
+You can use this to replace or add configuration.</p>
+</dd>
+<dt class="hdlist1">containerIncludeJarPattern</dt>
+<dd>
+<p>Defaults to <code>.<strong>/jetty-jakarta-servlet-api-[<sup>/]</strong>\.jar$|.<strong>jakarta.servlet.jsp.jstl-[</sup>/]</strong>\.jar|.<strong>taglibs-standard-impl-.</strong>\.jar</code>.
+This is a pattern that is applied to the names of the jars on the container&#8217;s classpath (ie the classpath of the plugin, not that of the webapp) that should be scanned for fragments, tlds, annotations etc.
+This is analogous to the context attribute <a href="../../operations-guide/annotations/index.html#og-container-include-jar-pattern" class="xref page">org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern</a> that is documented <a href="../../operations-guide/annotations/index.html#og-container-include-jar-pattern" class="xref page">here</a>.
+You can define extra patterns of jars that will be included in the scan.</p>
+</dd>
+<dt class="hdlist1">webInfIncludeJarPattern</dt>
+<dd>
+<p>Defaults to matching <em>all</em> of the dependency jars for the webapp (ie the equivalent of WEB-INF/lib).
+You can make this pattern more restrictive to only match certain jars by using this setter.
+This is analogous to the context attribute <a href="../../operations-guide/annotations/index.html#og-web-inf-include-jar-pattern" class="xref page">org.eclipse.jetty.server.webapp.WebInfIncludeJarPattern</a> that is documented <a href="../../operations-guide/annotations/index.html#og-web-inf-include-jar-pattern" class="xref page">here</a>.</p>
+</dd>
+<dt class="hdlist1">tempDirectory</dt>
+<dd>
+<p>The path to a dir that Jetty can use to expand or copy jars and jsp compiles when your webapp is running.
+The default is <code>${project.build.outputDirectory}/tmp</code>.</p>
+</dd>
+<dt class="hdlist1">contextXml</dt>
+<dd>
+<p>The path to a context xml file that is applied to your webapp AFTER the <code>webApp</code> element.</p>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>You can also generate the origin of each element into the effective web.xml file.
+The origin is either a descriptor eg web.xml,web-fragment.xml,override-web.xml file, or an annotation eg @WebServlet.
+Some examples of elements with origin attribute information are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;listener origin="DefaultsDescriptor(file:///path/to/distro/etc/webdefault.xml):21"&gt;
+&lt;listener origin="WebDescriptor(file:///path/to/base/webapps/test-spec/WEB-INF/web.xml):22"&gt;
+&lt;servlet-class origin="FragmentDescriptor(jar:file:///path/to/base/webapps/test-spec/WEB-INF/lib/test-web-fragment.jar!/META-INF/web-fragment.xml):23"&gt;
+&lt;servlet-class origin="@WebServlet(com.acme.test.TestServlet):24"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To generate origin information, use the following configuration parameters on the  <code>webApp</code> element:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">originAttribute</dt>
+<dd>
+<p>The name of the attribute that will contain the origin.
+By default it is <code>origin</code>.</p>
+</dd>
+<dt class="hdlist1">generateOrigin</dt>
+<dd>
+<p>False by default. If true, will force the generation of the <code>originAttribute</code> onto each element.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using-overlaid-wars"><a class="anchor" href="#using-overlaid-wars"></a>Using Overlaid wars</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If your webapp depends on other war files, the <a href="#jetty-run-goal">jetty:run</a> and <a href="#jetty-start-goal">jetty:start</a> goals are able to merge resources from all of them.
+It can do so based on the settings of the <a href="http://maven.apache.org/plugins/maven-war-plugin/">maven-war-plugin</a>, or if your project does not use the <a href="http://maven.apache.org/plugins/maven-war-plugin/">maven-war-plugin</a> to handle the overlays, it can fall back to a simple algorithm to determine the ordering of resources.</p>
+</div>
+<div class="sect2">
+<h3 id="with-maven-war-plugin"><a class="anchor" href="#with-maven-war-plugin"></a>With maven-war-plugin</h3>
+<div class="paragraph">
+<p>The <code>maven-war-plugin</code> has a rich set of capabilities for merging resources.
+The <code>jetty:run</code> and <code>jetty:start</code> goals are able to interpret most of them and apply them during execution of your unassembled webapp.
+This is probably best seen by looking at a concrete example.</p>
+</div>
+<div class="paragraph">
+<p>Suppose your webapp depends on the following wars:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;com.acme&lt;/groupId&gt;
+  &lt;artifactId&gt;X&lt;/artifactId&gt;
+  &lt;type&gt;war&lt;/type&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;com.acme&lt;/groupId&gt;
+  &lt;artifactId&gt;Y&lt;/artifactId&gt;
+  &lt;type&gt;war&lt;/type&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Containing:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>WebAppX:
+
+ /foo.jsp
+ /bar.jsp
+ /WEB-INF/web.xml
+
+WebAppY:
+
+ /bar.jsp
+ /baz.jsp
+ /WEB-INF/web.xml
+ /WEB-INF/special.xml</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>They are configured for the <a href="http://maven.apache.org/plugins/maven-war-plugin/overlays.html">maven-war-plugin</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+  &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
+  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;overlays&gt;
+      &lt;overlay&gt;
+        &lt;groupId&gt;com.acme&lt;/groupId&gt;
+        &lt;artifactId&gt;X&lt;/artifactId&gt;
+        &lt;excludes&gt;
+          &lt;exclude&gt;bar.jsp&lt;/exclude&gt;
+        &lt;/excludes&gt;
+      &lt;/overlay&gt;
+      &lt;overlay&gt;
+        &lt;groupId&gt;com.acme&lt;/groupId&gt;
+        &lt;artifactId&gt;Y&lt;/artifactId&gt;
+        &lt;excludes&gt;
+          &lt;exclude&gt;baz.jsp&lt;/exclude&gt;
+        &lt;/excludes&gt;
+      &lt;/overlay&gt;
+      &lt;overlay&gt;
+      &lt;/overlay&gt;
+    &lt;/overlays&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then executing jetty:run would yield the following ordering of resources: <code>com.acme.X.war : com.acme.Y.war: ${project.basedir}/src/main/webapp</code>.
+Note that the current project&#8217;s resources are placed last in the ordering due to the empty &lt;overlay/&gt; element in the <code>maven-war-plugin</code>.
+You can either use that, or specify the <code>&lt;baseAppFirst&gt;false&lt;/baseAppFirst&gt;</code> parameter to the <code>jetty-ee10-maven-plugin</code>.</p>
+</div>
+<div class="paragraph">
+<p>Moreover, due to the <code>exclusions</code> specified above, a request for the resource ` bar.jsp` would only be satisfied from <code>com.acme.Y.war.</code>
+Similarly as <code>baz.jsp</code> is excluded, a request for it would result in a 404 error.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="without-maven-war-plugin"><a class="anchor" href="#without-maven-war-plugin"></a>Without maven-war-plugin</h3>
+<div class="paragraph">
+<p>The algorithm is fairly simple, is based on the ordering of declaration of the dependent wars, and does not support exclusions.
+The configuration parameter <code>&lt;baseAppFirst&gt;</code> (see for example <a href="#jetty-run-goal">jetty:run</a> for more information) can be used to control whether your webapp&#8217;s resources are placed first or last on the resource path at runtime.</p>
+</div>
+<div class="paragraph">
+<p>For example, suppose our webapp depends on these two wars:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;com.acme&lt;/groupId&gt;
+  &lt;artifactId&gt;X&lt;/artifactId&gt;
+  &lt;type&gt;war&lt;/type&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;com.acme&lt;/groupId&gt;
+  &lt;artifactId&gt;Y&lt;/artifactId&gt;
+  &lt;type&gt;war&lt;/type&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Suppose the webapps contain:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>WebAppX:
+
+ /foo.jsp
+ /bar.jsp
+ /WEB-INF/web.xml
+
+WebAppY:
+
+ /bar.jsp
+ /baz.jsp
+ /WEB-INF/web.xml
+ /WEB-INF/special.xml</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then our webapp has available these additional resources:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>/foo.jsp (X)
+/bar.jsp (X)
+/baz.jsp (Y)
+/WEB-INF/web.xml (X)
+/WEB-INF/special.xml (Y)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring-security-settings"><a class="anchor" href="#configuring-security-settings"></a>Configuring Security Settings</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can configure LoginServices in the plugin.
+Here&#8217;s an example of setting up the <code>HashLoginService</code> for a webapp:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.jetty.ee10&lt;/groupId&gt;
+  &lt;artifactId&gt;jetty-ee10-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;scan&gt;10&lt;/scan&gt;
+    &lt;webApp&gt;
+      &lt;contextPath&gt;/test&lt;/contextPath&gt;
+    &lt;/webApp&gt;
+    &lt;loginServices&gt;
+      &lt;loginService implementation="org.eclipse.jetty.security.HashLoginService"&gt;
+        &lt;name&gt;Test Realm&lt;/name&gt;
+        &lt;config implementation="org.eclipse.jetty.maven.MavenResource"&gt;
+          &lt;resourceAsString&gt;${project.basedir}/src/etc/realm.properties&lt;/resourceAsString&gt;
+        &lt;/config&gt;
+      &lt;/loginService&gt;
+    &lt;/loginServices&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using-multiple-webapp-root-directories"><a class="anchor" href="#using-multiple-webapp-root-directories"></a>Using Multiple Webapp Root Directories</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you have external resources that you want to incorporate in the execution of a webapp, but which are not assembled into war files, you can&#8217;t use the overlaid wars method described above, but you can tell Jetty the directories in which these external resources are located.
+At runtime, when Jetty receives a request for a resource, it searches all the locations to retrieve the resource.
+It&#8217;s a lot like the overlaid war situation, but without the war.</p>
+</div>
+<div class="paragraph">
+<p>Here is a configuration example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;configuration&gt;
+  &lt;webApp&gt;
+    &lt;contextPath&gt;/${build.finalName}&lt;/contextPath&gt;
+    &lt;resourceBases&gt;
+      &lt;resourceBase&gt;src/main/webapp&lt;/resourceBase&gt;
+      &lt;resourceBase&gt;/home/johndoe/path/to/my/other/source&lt;/resourceBase&gt;
+      &lt;resourceBase&gt;/yet/another/folder&lt;/resourceBase&gt;
+    &lt;/resourceBases&gt;
+  &lt;/webApp&gt;
+&lt;/configuration&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="running-more-than-one-webapp"><a class="anchor" href="#running-more-than-one-webapp"></a>Running More than One Webapp</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="with-jettyrun"><a class="anchor" href="#with-jettyrun"></a>With jetty:run</h3>
+<div class="paragraph">
+<p>You can use either a <code>jetty.xml</code> file to configure extra (pre-compiled) webapps that you want to deploy, or you can use the <code>&lt;contextHandlers&gt;</code> configuration element to do so.
+If you want to deploy webapp A, and webapps B and C in the same Jetty instance:</p>
+</div>
+<div class="paragraph">
+<p>Putting the configuration in webapp A&#8217;s <code>pom.xml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.jetty.ee10&lt;/groupId&gt;
+  &lt;artifactId&gt;jetty-ee10-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;scan&gt;10&lt;/scan&gt;
+    &lt;webApp&gt;
+      &lt;contextPath&gt;/test&lt;/contextPath&gt;
+    &lt;/webApp&gt;
+    &lt;contextHandlers&gt;
+      &lt;contextHandler implementation="org.eclipse.jetty.ee10.maven.plugin.MavenWebAppContext"&gt;
+        &lt;war&gt;${project.basedir}../../B.war&lt;/war&gt;
+        &lt;contextPath&gt;/B&lt;/contextPath&gt;
+      &lt;/contextHandler&gt;
+      &lt;contextHandler implementation="org.eclipse.jetty.ee10.maven.plugin.MavenWebAppContext"&gt;
+        &lt;war&gt;${project.basedir}../../C.war&lt;/war&gt;
+        &lt;contextPath&gt;/C&lt;/contextPath&gt;
+      &lt;/contextHandler&gt;
+    &lt;/contextHandlers&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If the <code>ContextHandler</code> you are deploying is a webapp, it is <strong>essential</strong> that you use an <code>org.eclipse.jetty.ee10.maven.plugin.MavenWebAppContext</code> instance rather than a standard <code>org.eclipse.jetty.ee10.webapp.WebAppContext</code> instance.
+Only the former will allow the webapp to function correctly in the Maven environment.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Alternatively, add a <code>jetty.xml</code> file to webapp A.
+Copy the <code>jetty.xml</code> file from the Jetty distribution, and then add WebAppContexts for the other 2 webapps:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;Ref refid="Contexts"&gt;
+  &lt;Call name="addHandler"&gt;
+    &lt;Arg&gt;
+      &lt;New class="org.eclipse.jetty.{ee-current}.maven.plugin.MavenWebAppContext"&gt;
+        &lt;Set name="contextPath"&gt;/B&lt;/Set&gt;
+        &lt;Set name="war"&gt;../../B.war&lt;/Set&gt;
+      &lt;/New&gt;
+    &lt;/Arg&gt;
+  &lt;/Call&gt;
+  &lt;Call&gt;
+    &lt;Arg&gt;
+      &lt;New class="org.eclipse.jetty.{ee-current}.maven.plugin.MavenWebAppContext"&gt;
+        &lt;Set name="contextPath"&gt;/C&lt;/Set&gt;
+        &lt;Set name="war"&gt;../../C.war&lt;/Set&gt;
+      &lt;/New&gt;
+    &lt;/Arg&gt;
+  &lt;/Call&gt;
+&lt;/Ref&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then configure the location of this <code>jetty.xml</code> file into webapp A&#8217;s Jetty plugin:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.jetty.ee10&lt;/groupId&gt;
+  &lt;artifactId&gt;jetty-ee10-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;scan&gt;10&lt;/scan&gt;
+    &lt;webApp&gt;
+      &lt;contextPath&gt;/test&lt;/contextPath&gt;
+    &lt;/webApp&gt;
+    &lt;jettyXml&gt;src/main/etc/jetty.xml&lt;/jettyXml&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For either of these solutions, the other webapps must already have been built, and they are not automatically monitored for changes.
+You can refer either to the packed WAR file of the pre-built webapps or to their expanded equivalents.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="setting-system-properties"><a class="anchor" href="#setting-system-properties"></a>Setting System Properties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can specify property name/value pairs that Jetty sets as System properties for the execution of the plugin.
+This feature is useful to tidy up the command line and save a lot of typing.</p>
+</div>
+<div class="paragraph">
+<p>However, <strong>sometimes it is not possible to use this feature to set System properties</strong> - sometimes the software component using the System property is already initialized by the time that maven runs (in which case you will need to provide the System property on the command line), or by the time that Jetty runs.
+In the latter case, you can use the <a href="http://www.mojohaus.org/">maven properties plugin</a> to define the system properties instead. Here&#8217;s an example that configures the logback logging system as the Jetty logger:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+  &lt;artifactId&gt;properties-maven-plugin&lt;/artifactId&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;set-system-properties&lt;/goal&gt;
+      &lt;/goals&gt;
+      &lt;configuration&gt;
+        &lt;properties&gt;
+          &lt;property&gt;
+            &lt;name&gt;logback.configurationFile&lt;/name&gt;
+            &lt;value&gt;${project.baseUri}/resources/logback.xml&lt;/value&gt;
+          &lt;/property&gt;
+        &lt;/properties&gt;
+      &lt;/configuration&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If a System property is already set (for example, from the command line or by the JVM itself), then by default these configured properties <strong>DO NOT</strong> override them.
+However, they can override system properties set from a file instead, see <a href="#specifying-properties-in-file">specifying system properties in a file</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="specifying-properties-in-pom"><a class="anchor" href="#specifying-properties-in-pom"></a>Specifying System Properties in the POM</h3>
+<div class="paragraph">
+<p>Here&#8217;s an example of how to specify System properties in the POM:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.jetty.{ee-current}&lt;/groupId&gt;
+  &lt;artifactId&gt;jetty-{ee-current}-maven-plugin&lt;/artifactId&gt;
+  &lt;configuration&gt;
+    &lt;systemProperties&gt;
+        &lt;fooprop&gt;222&lt;/fooprop&gt;
+    &lt;/systemProperties&gt;
+    &lt;webApp&gt;
+      &lt;contextPath&gt;/test&lt;/contextPath&gt;
+    &lt;/webApp&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="specifying-properties-in-file"><a class="anchor" href="#specifying-properties-in-file"></a>Specifying System Properties in a File</h3>
+<div class="paragraph">
+<p>You can also specify your System properties in a file.
+System properties you specify in this way <strong>do not</strong> override System properties that set on the command line, by the JVM, or directly in the POM via <code>systemProperties</code>.</p>
+</div>
+<div class="paragraph">
+<p>Suppose we have a file called <code>mysys.props</code> which contains the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>fooprop=222</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This can be configured on the plugin like so:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.jetty.{ee-current}&lt;/groupId&gt;
+  &lt;artifactId&gt;jetty-{ee-current}-maven-plugin&lt;/artifactId&gt;
+  &lt;configuration&gt;
+    &lt;systemPropertiesFile&gt;${project.basedir}/mysys.props&lt;/systemPropertiesFile&gt;
+    &lt;webApp&gt;
+      &lt;contextPath&gt;/test&lt;/contextPath&gt;
+    &lt;/webApp&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can instead specify the file by setting the System property <code>jetty.systemPropertiesFile</code> on the command line.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="jetty-maven-helloworld.html">Using Maven</a></span>
+  <span class="next"><a href="jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

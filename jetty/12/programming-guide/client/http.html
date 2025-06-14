@@ -1,0 +1,2433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>HTTP Client :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="io-arch.html">
+    <link rel="next" href="http2.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Programming Guide</a></li>
+    <li><a href="index.html">Client Libraries</a></li>
+    <li><a href="http.html">HTTP Client</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/programming-guide/pages/client/http.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">HTTP Client</h1>
+<div class="sect1">
+<h2 id="intro"><a class="anchor" href="#intro"></a>HttpClient Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jetty HTTP client module provides easy-to-use APIs and utility classes to perform HTTP (or HTTPS) requests.</p>
+</div>
+<div class="paragraph">
+<p>Jetty&#8217;s HTTP client is non-blocking and asynchronous.
+It offers an asynchronous API that never blocks for I/O, making it very efficient in thread utilization and well suited for high performance scenarios such as load testing or parallel computation.</p>
+</div>
+<div class="paragraph">
+<p>However, when all you need to do is to perform a <code>GET</code> request to a resource, Jetty&#8217;s HTTP client offers also a synchronous API; a programming interface where the thread that issued the request blocks until the request/response conversation is complete.</p>
+</div>
+<div class="paragraph">
+<p>Jetty&#8217;s HTTP client supports different <a href="#transport">HTTP formats</a>: HTTP/1.1, HTTP/2, HTTP/3 and FastCGI.
+Each format has a different <code>HttpClientTransport</code> implementation, that in turn use a <a href="io-arch.html#transport" class="xref page">low-level transport</a> to communicate with the server.</p>
+</div>
+<div class="paragraph">
+<p>This means that the semantic of an HTTP request such as: " <code>GET</code> the resource <code>/index.html</code> " can be carried over the low-level transport in different formats.
+The most common and default format is HTTP/1.1.
+That said, Jetty&#8217;s HTTP client can carry the same request using the HTTP/2 format, the HTTP/3 format, or the FastCGI format.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, every format can be transported over different low-level transport, such as TCP, Unix-Domain sockets, QUIC or memory.
+Supports for Unix-Domain sockets requires Java 16 or later, since Unix-Domain sockets support has been introduced in OpenJDK with <a href="https://openjdk.java.net/jeps/380">JEP 380</a>.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="#transport-fcgi">FastCGI format</a> is used in Jetty&#8217;s <a href="../server/fastcgi.html" class="xref page">FastCGI support</a> that allows Jetty to work as a reverse proxy to PHP (exactly like Apache or Nginx do) and therefore be able to serve, for example, WordPress websites, often in conjunction with Unix-Domain sockets (although it is possible to use FastCGI via network too).</p>
+</div>
+<div class="paragraph">
+<p>The HTTP/2 format allows Jetty&#8217;s HTTP client to perform requests using HTTP/2 to HTTP/2 enabled websites, see also Jetty&#8217;s <a href="http2.html" class="xref page">HTTP/2 support</a>.</p>
+</div>
+<div class="paragraph">
+<p>The HTTP/3 format allows Jetty&#8217;s HTTP client to perform requests using HTTP/3 to HTTP/3 enabled websites, see also Jetty&#8217;s <a href="http3.html" class="xref page">HTTP/3 support</a>.</p>
+</div>
+<div class="paragraph">
+<p>Out of the box features that you get with the Jetty HTTP client include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Redirect support&#8201;&#8212;&#8201;redirect codes such as 302 or 303 are automatically followed.</p>
+</li>
+<li>
+<p>Cookies support&#8201;&#8212;&#8201;cookies sent by servers are stored and sent back to servers in matching requests.</p>
+</li>
+<li>
+<p>Authentication support&#8201;&#8212;&#8201;HTTP "Basic", "Digest" and "SPNEGO" authentications are supported, others are pluggable.</p>
+</li>
+<li>
+<p>Forward proxy support&#8201;&#8212;&#8201;HTTP proxying, SOCKS4 and SOCKS5 proxying.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="start"><a class="anchor" href="#start"></a>Starting HttpClient</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jetty artifact that provides the main HTTP client implementation is <code>jetty-client</code>.
+The Maven artifact coordinates are the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+  &lt;artifactId&gt;jetty-client&lt;/artifactId&gt;
+  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The main class is named <code>org.eclipse.jetty.client.HttpClient</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can think of a <code>HttpClient</code> instance as a browser instance.
+Like a browser it can make requests to different domains, it manages redirects, cookies and authentication, you can configure it with a forward proxy, and it provides you with the responses to the requests you make.</p>
+</div>
+<div class="paragraph">
+<p>In order to use <code>HttpClient</code>, you must instantiate it, configure it, and then start it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Instantiate HttpClient.
+HttpClient httpClient = new HttpClient();
+
+// Configure HttpClient, for example:
+httpClient.setFollowRedirects(false);
+
+// Start HttpClient.
+httpClient.start();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may create multiple instances of <code>HttpClient</code>, but typically one instance is enough for an application.
+There are several reasons for having multiple <code>HttpClient</code> instances including, but not limited to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You want to specify different configuration parameters (for example, one instance is configured with a forward proxy while another is not).</p>
+</li>
+<li>
+<p>You want the two instances to behave like two different browsers and hence have different cookies, different authentication credentials, etc.</p>
+</li>
+<li>
+<p>You want to use <a href="#transport">different <code>HttpClientTransport</code>s</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Like browsers, HTTPS requests are supported out-of-the-box (see <a href="#configuration-tls">this section</a> for the TLS configuration), as long as the server provides a valid certificate.
+In case the server does not provide a valid certificate (or in case it is self-signed) you want to customize <code>HttpClient</code>'s TLS configuration as described in <a href="#configuration-tls">this section</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="stop"><a class="anchor" href="#stop"></a>Stopping HttpClient</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It is recommended that when your application stops, you also stop the <code>HttpClient</code> instance (or instances) that you are using.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Stop HttpClient.
+httpClient.stop();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Stopping <code>HttpClient</code> makes sure that the memory it holds (for example, <code>ByteBuffer</code> pools, authentication credentials, cookies, etc.) is released, and that the thread pool and scheduler are properly stopped allowing all threads used by <code>HttpClient</code> to exit.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You cannot call <code>HttpClient.stop()</code> from one of its own threads, as it would cause a deadlock.
+It is recommended that you stop <code>HttpClient</code> from an unrelated thread, or from a newly allocated thread, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Stop HttpClient from a new thread.
+// Use LifeCycle.stop(...) to rethrow checked exceptions as unchecked.
+new Thread(() -&gt; LifeCycle.stop(httpClient)).start();</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="arch"><a class="anchor" href="#arch"></a>HttpClient Architecture</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <code>HttpClient</code> instance can be thought as a browser instance, and it manages the following components:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A <code>CookieStore</code> (see <a href="#cookie">this section</a>).</p>
+</li>
+<li>
+<p>A <code>AuthenticationStore</code> (see <a href="#authentication">this section</a>).</p>
+</li>
+<li>
+<p>A <code>ProxyConfiguration</code> (see <a href="#proxy">this section</a>).</p>
+</li>
+<li>
+<p>A set of <code>Destination</code>s</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A <code>Destination</code> is the client-side component that represents an <em>origin</em> server, and manages a queue of requests for that origin, and a <a href="#connection-pool">pool of connections</a> to that origin.</p>
+</div>
+<div class="paragraph">
+<p>An <em>origin</em> may be simply thought as the tuple <code>(scheme, host, port)</code> and it is where the client connects to in order to communicate with the server.
+However, this is not enough.</p>
+</div>
+<div class="paragraph">
+<p>If you use <code>HttpClient</code> to write a proxy you may have different clients that want to contact the same server.
+In this case, you may not want to use the same proxy-to-server connection to proxy requests for both clients, for example for authentication reasons: the server may associate the connection with authentication credentials, and you do not want to use the same connection for two different users that have different credentials.
+Instead, you want to use different connections for different clients and this can be achieved by "tagging" a destination with a tag object that represents the remote client (for example, it could be the remote client IP address).</p>
+</div>
+<div class="paragraph">
+<p>Two origins with the same <code>(scheme, host, port)</code> but different <code>tag</code> create two different destinations and therefore two different connection pools.
+However, also this is not enough.</p>
+</div>
+<div class="paragraph">
+<p>It is possible for a server to speak different protocols on the same <code>port</code>.
+A connection may start by speaking one protocol, for example HTTP/1.1, but then be upgraded to speak a different protocol, for example HTTP/2. After a connection has been upgraded to a second protocol, it cannot speak the first protocol anymore, so it can only be used to communicate using the second protocol.</p>
+</div>
+<div class="paragraph">
+<p>Two origins with the same <code>(scheme, host, port, tag)</code> but different <code>protocol</code> create two different destinations and therefore two different connection pools.</p>
+</div>
+<div class="paragraph">
+<p>Finally, it is possible for a server to speak the same protocol over different <a href="io-arch.html#transport" class="xref page">low-level transports</a> (represented by <code>Transport</code>), for example TCP and Unix-Domain.</p>
+</div>
+<div class="paragraph">
+<p>Two origins with the same <code>(scheme, host, port, tag, protocol)</code> but different low-level transports create two different destinations and therefore two different connection pools.</p>
+</div>
+<div class="paragraph">
+<p>Therefore, an origin is identified by the tuple <code>(scheme, host, port, tag, protocol, transport)</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="connection-pool"><a class="anchor" href="#connection-pool"></a>HttpClient Connection Pooling</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <code>Destination</code> manages a <code>org.eclipse.jetty.client.ConnectionPool</code>, where connections to a particular origin are pooled for performance reasons: opening a connection is a costly operation, and it&#8217;s better to reuse them for multiple requests.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Remember that to select a specific <code>Destination</code> you must select a specific origin, and that an origin is identified by the tuple <code>(scheme, host, port, tag, protocol, transport)</code>, so you can have multiple <code>Destination</code>s for the same <code>host</code> and <code>port</code>, and therefore multiple <code>ConnectionPool</code>s
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can access the <code>ConnectionPool</code> in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpClient httpClient = new HttpClient();
+httpClient.start();
+
+ConnectionPool connectionPool = httpClient.getDestinations().stream()
+    // Find the destination by filtering on the Origin.
+    .filter(destination -&gt; destination.getOrigin().getAddress().getHost().equals("domain.com"))
+    .findAny()
+    // Get the ConnectionPool.
+    .map(Destination::getConnectionPool)
+    .orElse(null);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Jetty&#8217;s client library provides the following <code>ConnectionPool</code> implementations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>DuplexConnectionPool</code>, historically the first implementation, only used by the HTTP/1.1 transport.</p>
+</li>
+<li>
+<p><code>MultiplexConnectionPool</code>, the generic implementation valid for any transport where connections are reused with a most recently used algorithm (that is, the connections most recently returned to the connection pool are the more likely to be used again).</p>
+</li>
+<li>
+<p><code>RoundRobinConnectionPool</code>, similar to <code>MultiplexConnectionPool</code> but where connections are reused with a round-robin algorithm.</p>
+</li>
+<li>
+<p><code>RandomConnectionPool</code>, similar to <code>MultiplexConnectionPool</code> but where connections are reused with an algorithm that chooses them randomly.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>ConnectionPool</code> implementation can be customized for each destination in by setting a <code>ConnectionPool.Factory</code> on the <code>HttpClientTransport</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpClient httpClient = new HttpClient();
+httpClient.start();
+
+// The max number of connections in the pool.
+int maxConnectionsPerDestination = httpClient.getMaxConnectionsPerDestination();
+
+// The max number of requests per connection (multiplexing).
+// Start with 1, since this value is dynamically set to larger values if
+// the transport supports multiplexing requests on the same connection.
+int maxRequestsPerConnection = 1;
+
+HttpClientTransport transport = httpClient.getTransport();
+
+// Set the ConnectionPool.Factory using a lambda.
+transport.setConnectionPoolFactory(destination -&gt;
+    new RoundRobinConnectionPool(destination,
+        maxConnectionsPerDestination,
+        maxRequestsPerConnection));</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="connection-pool-precreate-connections"><a class="anchor" href="#connection-pool-precreate-connections"></a>Pre-Creating Connections</h3>
+<div class="paragraph">
+<p><code>ConnectionPool</code> offers the ability to pre-create connections by calling <code>ConnectionPool.preCreateConnections(int)</code>.</p>
+</div>
+<div class="paragraph">
+<p>Pre-creating the connections saves the time and processing spent to establish the TCP connection, performing the TLS handshake (if necessary) and, for HTTP/2 and HTTP/3, perform the initial protocol setup.
+This is particularly important for HTTP/2 because in the initial protocol setup the server informs the client of the maximum number of concurrent requests per connection (otherwise assumed to be just <code>1</code> by the client).</p>
+</div>
+<div class="paragraph">
+<p>The scenarios where pre-creating connections is useful are, for example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Load testing, where you want to prepare the system with connections already created to avoid paying of cost of connection setup.</p>
+</li>
+<li>
+<p>Proxying scenarios, often in conjunction with the use of <code>RoundRobinConnectionPool</code> or <code>RandomConnectionPool</code>, where the proxy creates early the connections to the backend servers.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This is an example of how to pre-create connections:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpClient httpClient = new HttpClient();
+httpClient.start();
+
+// For HTTP/1.1, you need to explicitly configure to initialize connections.
+if (httpClient.getTransport() instanceof HttpClientTransportOverHTTP http1)
+    http1.setInitializeConnections(true);
+
+// Create a dummy request to the server you want to pre-create connections to.
+Request request = httpClient.newRequest("https://host/");
+
+// Resolve the destination for that request.
+Destination destination = httpClient.resolveDestination(request);
+
+// Pre-create, for example, half of the connections.
+int preCreate = httpClient.getMaxConnectionsPerDestination() / 2;
+CompletableFuture&lt;Void&gt; completable = destination.getConnectionPool().preCreateConnections(preCreate);
+
+// Wait for the connections to be created.
+completable.get(5, TimeUnit.SECONDS);</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Pre-creating connections for secure HTTP/1.1 requires you to call <code>HttpClientTransportOverHTTP.setInitializeConnections(true)</code>, otherwise only the TCP connection is established, but the TLS handshake is not initiated.</p>
+</div>
+<div class="paragraph">
+<p>To initialize connections for secure HTTP/1.1, the client sends an initial <code>OPTIONS * HTTP/1.1</code> request to the server.
+The server must be able to handle this request without closing the connection (in particular it must not add the <code>Connection: close</code> header in the response).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="request-processing"><a class="anchor" href="#request-processing"></a>HttpClient Request Processing</h2>
+<div class="sectionbody">
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNqNkMFOAzEMRO_5Ch9pJX5gD0hoOXBE_EHImm3UrJ0mjvr7uCJFSdAirjMv45nks6dok93gw7rzmrjQMnPgBJIsZbWQxOQfamNid0q8oQIFGyef7MJXTyt82pDRGJXFOx8tCTzHGLyz4pk6_R0vBbN02qtInIO_3W3lF-U8_Y6YmQjdTX5jDjuWMU0DeHxqjsAEhNda5OFgGke5qsPxOCbcnQky0qIP78KYXu0-t1mj2UqtKKC_7hJaQdPaSvcbvx9Ucj-2Xq61DmNmjyIpVXCXHhpMYN2l-IQ6bLA6uKv6Z4EF_1tgHPYFfo_7jA==" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>When a request is sent, an origin is computed from the request; <code>HttpClient</code> uses that origin to find (or create if it does not exist) the correspondent destination.
+The request is then queued onto the destination, and this causes the destination to ask its connection pool for a free connection.
+If a connection is available, it is returned, otherwise a new connection is created.
+Once the destination has obtained the connection, it dequeues the request and sends it over the connection.</p>
+</div>
+<div class="paragraph">
+<p>The first request to a destination triggers the opening of the first connection.
+A second request with the same origin sent <em>after</em> the first request/response cycle is completed may reuse the same connection, depending on the connection pool implementation.
+A second request with the same origin sent <em>concurrently</em> with the first request will likely cause the opening of a second connection, depending on the connection pool implementation.
+The configuration parameter <code>HttpClient.maxConnectionsPerDestination</code> (see also the <a href="#configuration">configuration section</a>) controls the max number of connections that can be opened for a destination.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If opening connections to a given origin takes a long time, then requests for that origin will queue up in the corresponding destination until the connections are established.</p>
+</div>
+<div class="paragraph">
+<p>To save the time spent opening connections, you can <a href="#connection-pool-precreate-connections">pre-create connections</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Each connection can handle a limited number of concurrent requests.
+For HTTP/1.1, this number is always <code>1</code>: there can only be one outstanding request for each connection.
+For HTTP/2 this number is determined by the server <code>max_concurrent_stream</code> setting (typically around <code>100</code>, i.e. there can be up to <code>100</code> outstanding requests for every connection).</p>
+</div>
+<div class="paragraph">
+<p>When a destination has maxed out its number of connections, and all connections have maxed out their number of outstanding requests, more requests sent to that destination will be queued.
+When the request queue is full, the request will be failed.
+The configuration parameter <code>HttpClient.maxRequestsQueuedPerDestination</code> (see also the <a href="#configuration">configuration section</a>) controls the max number of requests that can be queued for a destination.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="api"><a class="anchor" href="#api"></a>HttpClient API Usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>HttpClient</code> provides two types of APIs: a blocking API and a non-blocking API.</p>
+</div>
+<div class="sect2">
+<h3 id="blocking"><a class="anchor" href="#blocking"></a>HttpClient Blocking APIs</h3>
+<div class="paragraph">
+<p>The simpler way to perform a HTTP request is the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpClient httpClient = new HttpClient();
+httpClient.start();
+
+// Perform a simple GET and wait for the response.
+ContentResponse response = httpClient.GET("http://domain.com/path?query");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The method <code>HttpClient.GET(...)</code> performs a HTTP <code>GET</code> request to the given URI and returns a <code>ContentResponse</code> when the request/response conversation completes successfully.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ContentResponse</code> object contains the HTTP response information: status code, headers and possibly content.
+The content length is limited by default to 2 MiB; for larger content see <a href="#content-response">the section on response content handling</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you want to customize the request, for example by issuing a <code>HEAD</code> request instead of a <code>GET</code>, and simulating a browser user agent, you can do it in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ContentResponse response = httpClient.newRequest("http://domain.com/path?query")
+    .method(HttpMethod.HEAD)
+    .agent("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:17.0) Gecko/20100101 Firefox/17.0")
+    .send();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is a shorthand for:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Request request = httpClient.newRequest("http://domain.com/path?query");
+request.method(HttpMethod.HEAD);
+request.agent("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:17.0) Gecko/20100101 Firefox/17.0");
+ContentResponse response = request.send();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You first create a request object using <code>httpClient.newRequest(...)</code>, and then you customize it using the fluent API style (that is, a chained invocation of methods on the request object).
+When the request object is customized, you call <code>request.send()</code> that produces the <code>ContentResponse</code> when the request/response conversation is complete.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The <code>Request</code> object, despite being mutable, cannot be reused for other requests.
+This is true also when trying to send two or more identical requests: you have to create two or more <code>Request</code> objects.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Simple <code>POST</code> requests also have a shortcut method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ContentResponse response = httpClient.POST("http://domain.com/entity/1")
+    .param("p", "value")
+    .send();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>POST</code> parameter values added via the <code>param()</code> method are automatically URL-encoded.</p>
+</div>
+<div class="paragraph">
+<p>Jetty&#8217;s <code>HttpClient</code> automatically follows redirects, so it handles the typical web pattern <a href="http://en.wikipedia.org/wiki/Post/Redirect/Get">POST/Redirect/GET</a>, and the response object contains the content of the response of the <code>GET</code> request.
+Following redirects is a feature that you can enable/disable on a per-request basis or globally.</p>
+</div>
+<div class="paragraph">
+<p>File uploads also require one line, and make use of <code>java.nio.file</code> classes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ContentResponse response = httpClient.POST("http://domain.com/upload")
+    .file(Paths.get("file_to_upload.txt"), "text/plain")
+    .send();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is possible to impose a total timeout for the request/response conversation using the <code>Request.timeout(...)</code> method as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ContentResponse response = httpClient.newRequest("http://domain.com/path?query")
+    .timeout(5, TimeUnit.SECONDS)
+    .send();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above, when the 5 seconds expire, the request/response cycle is aborted and a <code>java.util.concurrent.TimeoutException</code> is thrown.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="non-blocking"><a class="anchor" href="#non-blocking"></a>HttpClient Non-Blocking APIs</h3>
+<div class="paragraph">
+<p>So far we have shown how to use Jetty HTTP client in a blocking style&#8201;&#8212;&#8201;that is, the thread that issues the request blocks until the request/response conversation is complete.</p>
+</div>
+<div class="paragraph">
+<p>This section will look at Jetty&#8217;s <code>HttpClient</code> non-blocking, asynchronous APIs that are perfectly suited for large content downloads, for parallel processing of requests/responses and in cases where performance and efficient thread and resource utilization is a key factor.</p>
+</div>
+<div class="paragraph">
+<p>The asynchronous APIs rely heavily on listeners that are invoked at various stages of request and response processing.
+These listeners are implemented by applications and may perform any kind of logic.
+The implementation invokes these listeners in the same thread that is used to process the request or response.
+Therefore, if the application code in these listeners takes a long time to execute, the request or response processing is delayed until the listener returns.</p>
+</div>
+<div class="paragraph">
+<p>If you need to execute application code that takes long time inside a listener, it is typically better to spawn your own thread to execute the code that takes long time.
+In this way you return from the listener as soon as possible and allow the implementation to resume the processing of the request or response (or of other requests/responses).</p>
+</div>
+<div class="paragraph">
+<p>Request and response processing are executed by two different threads and therefore may happen concurrently.
+A typical example of this concurrent processing is an echo server, where a large upload may be concurrent with the large download echoed back.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Remember that responses may be processed and completed <em>before</em> requests; a typical example is a large upload that triggers a quick response, for example an error, by the server: the response may arrive and be completed while the request content is still being uploaded.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The application thread that calls <code>Request.send(Response.CompleteListener)</code> performs the <a href="#request-processing">processing of the request</a> until either the request is fully sent over the network or until it would block on I/O, then it returns (and therefore never blocks).
+If it would block on I/O, the thread asks the I/O system to emit an event when the I/O will be ready to continue, then returns.
+When such an event is fired, a thread taken from the <code>HttpClient</code> thread pool will resume the processing of the request.</p>
+</div>
+<div class="paragraph">
+<p>Response are processed from the I/O thread taken from the <code>HttpClient</code> thread pool that processes the event that bytes are ready to be read.
+Response processing continues until either the response is fully processed or until it would block for I/O.
+If it would block for I/O, the thread asks the I/O system to emit an event when the I/O will be ready to continue, then returns.
+When such an event is fired, a (possibly different) thread taken from the <code>HttpClient</code> thread pool will resume the processing of the response.</p>
+</div>
+<div class="paragraph">
+<p>When the request and the response are both fully processed, the thread that finished the last processing (usually the thread that processes the response, but may also be the thread that processes the request&#8201;&#8212;&#8201;if the request takes more time than the response to be processed) is used to dequeue the next request for the same destination and to process it.</p>
+</div>
+<div class="paragraph">
+<p>A simple non-blocking <code>GET</code> request that discards the response content can be written in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">httpClient.newRequest("http://domain.com/path")
+    .send(result -&gt;
+    {
+        // Your logic here
+    });</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Method <code>Request.send(Response.CompleteListener)</code> returns <code>void</code> and does not block; the <code>Response.CompleteListener</code> lambda provided as a parameter is notified when the request/response conversation is complete, and the <code>Result</code> parameter allows you to access the request and response objects as well as failures, if any.</p>
+</div>
+<div class="paragraph">
+<p>You can impose a total timeout for the request/response conversation in the same way used by the synchronous API:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">httpClient.newRequest("http://domain.com/path")
+    .timeout(3, TimeUnit.SECONDS)
+    .send(result -&gt;
+    {
+        /* Your logic here */
+    });</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The example above will impose a total timeout of 3 seconds on the request/response conversation.</p>
+</div>
+<div class="paragraph">
+<p>The HTTP client APIs use listeners extensively to provide hooks for all possible request and response events:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">httpClient.newRequest("http://domain.com/path")
+    // Add request hooks.
+    .onRequestQueued(request -&gt; { /* ... */ })
+    .onRequestBegin(request -&gt; { /* ... */ })
+    .onRequestHeaders(request -&gt; { /* ... */ })
+    .onRequestCommit(request -&gt; { /* ... */ })
+    .onRequestContent((request, content) -&gt; { /* ... */ })
+    .onRequestFailure((request, failure) -&gt; { /* ... */ })
+    .onRequestSuccess(request -&gt; { /* ... */ })
+    .onRequestListener(new Request.Listener() {}) // For all request events.
+    // Add response hooks.
+    .onResponseBegin(response -&gt; { /* ... */ })
+    .onResponseHeader((response, field) -&gt; true)
+    .onResponseHeaders(response -&gt; { /* ... */ })
+    .onResponseContentAsync((response, chunk, demander) -&gt; demander.run())
+    .onResponseFailure((response, failure) -&gt; { /* ... */ })
+    .onResponseSuccess(response -&gt; { /* ... */ })
+    .onResponseListener(new Response.Listener() {}) // For all response events.
+    // Result hook.
+    .send(result -&gt; { /* ... */ });</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This makes Jetty HTTP client suitable for HTTP load testing because, for example, you can accurately time every step of the request/response conversation (thus knowing where the request/response time is really spent).</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The code in request and response listeners <em>should not</em> block.</p>
+</div>
+<div class="paragraph">
+<p>It is allowed to call other blocking APIs, such as the Java file-system APIs.
+You should not call blocking APIs that:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Wait for other request or response events, such as receiving other request or response content chunks.</p>
+</li>
+<li>
+<p>Use wait/notify primitives such as those available in <code>java.lang.Object</code> or <code>java.util.concurrent.locks.Condition</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If the listener code blocks, the implementation also will be blocked and will not be able to advance the processing of the request or response that the listener code is likely waiting for, causing a deadlock.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Have a look at the <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/client/api/Request.Listener.html"><code>Request.Listener</code></a> class to know about request events, and to the <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/client/api/Response.Listener.html"><code>Response.Listener</code></a> class to know about response events.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="content-request"><a class="anchor" href="#content-request"></a>Request Content Handling</h3>
+<div class="paragraph">
+<p>Jetty&#8217;s <code>HttpClient</code> provides a number of utility classes off the shelf to handle request content.</p>
+</div>
+<div class="paragraph">
+<p>You can provide request content as <code>String</code>, <code>byte[]</code>, <code>ByteBuffer</code>, <code>java.nio.file.Path</code>, <code>InputStream</code>, and provide your own implementation of <code>org.eclipse.jetty.client.Request.Content</code>.
+Here’s an example that provides the request content using <code>java.nio.file.Paths</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ContentResponse response = httpClient.POST("http://domain.com/upload")
+    .body(new PathRequestContent("text/plain", Paths.get("file_to_upload.txt")))
+    .send();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can use <code>FileInputStream</code> via the <code>InputStreamRequestContent</code> utility class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ContentResponse response = httpClient.POST("http://domain.com/upload")
+    .body(new InputStreamRequestContent("text/plain", new FileInputStream("file_to_upload.txt")))
+    .send();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Since <code>InputStream</code> is blocking, then also the send of the request will block if the input stream blocks, even in case of usage of the non-blocking <code>HttpClient</code> APIs.</p>
+</div>
+<div class="paragraph">
+<p>If you have already read the content in memory, you can pass it as a <code>byte[]</code> (or a <code>String</code>) using the <code>BytesRequestContent</code> (or <code>StringRequestContent</code>) utility class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ContentResponse bytesResponse = httpClient.POST("http://domain.com/upload")
+    .body(new BytesRequestContent("text/plain", bytes))
+    .send();
+
+ContentResponse stringResponse = httpClient.POST("http://domain.com/upload")
+    .body(new StringRequestContent("text/plain", string))
+    .send();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the request content is not immediately available, but your application will be notified of the content to send, you can use <code>AsyncRequestContent</code> in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">AsyncRequestContent content = new AsyncRequestContent();
+httpClient.POST("http://domain.com/upload")
+    .body(content)
+    .send(result -&gt;
+    {
+        // Your logic here
+    });
+
+// Content not available yet here.
+
+// An event happens in some other class, in some other thread.
+class ContentPublisher
+{
+    void publish(byte[] bytes, boolean lastContent)
+    {
+        // Wrap the bytes into a new ByteBuffer.
+        ByteBuffer buffer = ByteBuffer.wrap(bytes);
+
+        // Write the content.
+        content.write(buffer, Callback.NOOP);
+
+        // Close AsyncRequestContent when all the content is arrived.
+        if (lastContent)
+            content.close();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>While the request content is awaited and consequently uploaded by the client application, the server may be able to respond (at least with the response headers) completely asynchronously.
+In this case, <code>Response.Listener</code> callbacks will be invoked before the request is fully sent.
+This allows fine-grained control of the request/response conversation: for example the server may reject contents that are too big, send a response to the client, which in turn may stop the content upload.</p>
+</div>
+<div class="paragraph">
+<p>Another way to provide request content is by using an <code>OutputStreamRequestContent</code>, which allows applications to write request content when it is available to the <code>OutputStream</code> provided by <code>OutputStreamRequestContent</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">OutputStreamRequestContent content = new OutputStreamRequestContent();
+
+// Use try-with-resources to close the OutputStream when all content is written.
+try (OutputStream output = content.getOutputStream())
+{
+    httpClient.POST("http://localhost:8080/")
+        .body(content)
+        .send(result -&gt;
+        {
+            // Your logic here
+        });
+
+    // Content not available yet here.
+
+    // Content is now available.
+    byte[] bytes = new byte[]{'h', 'e', 'l', 'l', 'o'};
+    output.write(bytes);
+}
+// End of try-with-resource, output.close() called automatically to signal end of content.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="content-response"><a class="anchor" href="#content-response"></a>Response Content Handling</h3>
+<div class="paragraph">
+<p>Jetty&#8217;s <code>HttpClient</code> allows applications to handle response content in different ways.</p>
+</div>
+<div class="paragraph">
+<p>You can buffer the response content in memory; this is done when using the <a href="#blocking">blocking APIs</a> and the content is buffered within a <code>ContentResponse</code> up to 2 MiB.</p>
+</div>
+<div class="paragraph">
+<p>If you want to control the length of the response content (for example limiting to values smaller than the default of 2 MiB), then you can use a <code>org.eclipse.jetty.client.CompletableResponseListener</code> in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Request request = httpClient.newRequest("http://domain.com/path");
+
+// Limit response content buffer to 512 KiB.
+CompletableFuture&lt;ContentResponse&gt; completable = new CompletableResponseListener(request, 512 * 1024)
+    .send();
+
+// You can attach actions to the CompletableFuture,
+// to be performed when the request+response completes.
+
+// Wait at most 5 seconds for request+response to complete.
+ContentResponse response = completable.get(5, TimeUnit.SECONDS);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the response content length is exceeded, the response will be aborted, and an exception will be thrown by method <code>get(...)</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can buffer the response content in memory also using the <a href="#non-blocking">non-blocking APIs</a>, via the <code>BufferingResponseListener</code> utility class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">httpClient.newRequest("http://domain.com/path")
+    // Buffer response content up to 8 MiB
+    .send(new BufferingResponseListener(8 * 1024 * 1024)
+    {
+        @Override
+        public void onComplete(Result result)
+        {
+            if (!result.isFailed())
+            {
+                byte[] responseContent = getContent();
+                // Your logic here
+            }
+        }
+    });</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to avoid buffering, you can wait for the response and then stream the content using the <code>InputStreamResponseListener</code> utility class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Use try-with-resources to make sure that resources
+// are released even if the InputStream is not used.
+try (InputStreamResponseListener listener = new InputStreamResponseListener())
+{
+    httpClient.newRequest("http://domain.com/path")
+        .send(listener);
+
+    // Wait for the response headers to arrive.
+    Response response = listener.get(5, TimeUnit.SECONDS);
+
+    // Look at the response before streaming the content.
+    if (response.getStatus() == HttpStatus.OK_200)
+    {
+        // Use try-with-resources to close input stream.
+        try (InputStream responseContent = listener.getInputStream())
+        {
+            // Your logic here
+        }
+    }
+    else
+    {
+        response.abort(new IOException("Unexpected HTTP response"));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to save the response content to a file, you can use the <code>PathResponseListener</code> utility class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Path savePath = Path.of("/path/to/save/file.bin");
+
+// Typical usage as a response listener.
+PathResponseListener listener = new PathResponseListener(savePath, true);
+httpClient.newRequest("http://domain.com/path")
+    .send(listener);
+// Wait for the response content to be saved.
+var result = listener.get(5, TimeUnit.SECONDS);
+
+// Alternative usage with CompletableFuture.
+var completable = PathResponseListener.write(httpClient.newRequest("http://domain.com/path"), savePath, true);
+completable.whenComplete((pathResponse, failure) -&gt;
+{
+    // Your logic here.
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, let&#8217;s look at the advanced usage of the response content handling.</p>
+</div>
+<div class="paragraph">
+<p>The response content is provided by the <code>HttpClient</code> implementation to application listeners following the read/demand model of <code>org.eclipse.jetty.io.Content.Source</code>.</p>
+</div>
+<div class="paragraph">
+<p>The listener that follows this model is <code>Response.ContentSourceListener</code>.</p>
+</div>
+<div class="paragraph">
+<p>After the response headers have been processed by the <code>HttpClient</code> implementation, <code>Response.ContentSourceListener.onContentSource(response, contentSource)</code> is invoked once and only once.
+This allows the application to control precisely the read/demand loop: when to read a chunk, how to process it and when to demand the next one.</p>
+</div>
+<div class="paragraph">
+<p>You must provide a <code>ContentSourceListener</code> whose implementation reads a <code>Content.Chunk</code> from the provided <code>Content.Source</code>, as explained in <a href="../arch/io.html#content-source" class="xref page">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>The invocation of <code>onContentSource(Request, Content.Source)</code> and of the demand callback passed to <code>contentSource.demand(Runnable)</code> are serialized with respect to asynchronous events such as timeouts or an asynchronous call to <code>Request.abort(Throwable)</code>.
+This means that these asynchronous events are not processed until the invocation of <code>onContentSource(Request, Content.Source)</code> returns, or until the invocation of the demand callback returns.
+With this model, applications should not worry too much about concurrent asynchronous events happening during response content handling, because they will eventually see the events as failures while reading the response content.</p>
+</div>
+<div class="paragraph">
+<p>Demanding for content and consuming the content are orthogonal activities.</p>
+</div>
+<div class="paragraph">
+<p>An application can read, store aside the <code>Content.Chunk</code> objects without releasing them (to consume them later), and demand for more chunks, but it must call <code>Chunk.retain()</code> on the stored chunks, and arrange to release them after they have been consumed later.</p>
+</div>
+<div class="paragraph">
+<p>If not done carefully, this may lead to excessive memory consumption, since the <code>ByteBuffer</code> bytes are not consumed.
+Releasing the <code>Content.Chunk</code>s will result in the <code>ByteBuffer</code>s to be disposed/recycled and may be performed at any time.</p>
+</div>
+<div class="paragraph">
+<p>An application can also read one chunk of content, consume it, release it, and then <em>not</em> demand for more content until a later time.</p>
+</div>
+<div class="paragraph">
+<p>Subclass <code>Response.AsyncContentListener</code> overrides the behavior of <code>Response.ContentSourceListener</code>; when an application implements <code>AsyncContentListener.onContent(response, chunk, demander)</code>, it can control the disposing/recycling of the <code>ByteBuffer</code> by releasing the chunk <em>and</em> it can control when to demand one more chunk by calling <code>demander.run()</code>.</p>
+</div>
+<div class="paragraph">
+<p>Subclass <code>Response.ContentListener</code> overrides the behavior of <code>Response.AsyncContentListener</code>; when an application implementing its <code>onContent(response, buffer)</code> returns from the method itself, it will <em>both</em> the effect of disposing/recycling the <code>buffer</code> <em>and</em> the effect of demanding one more chunk of content.</p>
+</div>
+<div class="paragraph">
+<p>An application that implements a forwarder between two servers can be implemented efficiently by handling the response content without copying the <code>ByteBuffer</code> bytes as in the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Prepare a request to server1, the source.
+Request request1 = httpClient.newRequest(host1, port1)
+    .path("/source");
+
+// Prepare a request to server2, the sink.
+AsyncRequestContent content2 = new AsyncRequestContent();
+Request request2 = httpClient.newRequest(host2, port2)
+    .path("/sink")
+    .body(content2);
+
+request1.onResponseContentSource(new Response.ContentSourceListener()
+{
+    @Override
+    public void onContentSource(Response response, Content.Source contentSource)
+    {
+        // Only execute this method the very first time
+        // to initialize the request to server2.
+
+        request2.onRequestCommit(request -&gt;
+        {
+            // Only when the request to server2 has been sent,
+            // then demand response content from server1.
+            contentSource.demand(() -&gt; forwardContent(response, contentSource));
+        });
+
+        // Send the request to server2.
+        request2.send(result -&gt; System.getLogger("forwarder").log(INFO, "Forwarding to server2 complete"));
+    }
+
+    private void forwardContent(Response response, Content.Source contentSource)
+    {
+        // Read one chunk of content.
+        Content.Chunk chunk = contentSource.read();
+        if (chunk == null)
+        {
+            // The read chunk is null, demand to be called back
+            // when the next one is ready to be read.
+            contentSource.demand(() -&gt; forwardContent(response, contentSource));
+            // Once a demand is in progress, the content source must not be read
+            // nor demanded again until the demand callback is invoked.
+            return;
+        }
+        // Check if the chunk is last and empty, in which case the
+        // read/demand loop is done. Demanding again when the terminal
+        // chunk has been read will invoke the demand callback with
+        // the same terminal chunk, so this check must be present to
+        // avoid infinitely demanding and reading the terminal chunk.
+        if (chunk.isLast() &amp;&amp; !chunk.hasRemaining())
+        {
+            chunk.release();
+            return;
+        }
+
+        // When a response chunk is received from server1, forward it to server2.
+        content2.write(chunk.getByteBuffer(), Callback.from(() -&gt;
+        {
+            // When the request chunk is successfully sent to server2,
+            // release the chunk to recycle the buffer.
+            chunk.release();
+            // Then demand more response content from server1.
+            contentSource.demand(() -&gt; forwardContent(response, contentSource));
+        }, x -&gt;
+        {
+            chunk.release();
+            response.abort(x);
+        }));
+    }
+});
+
+// When the response content from server1 is complete,
+// complete also the request content to server2.
+request1.onResponseSuccess(response -&gt; content2.close());
+
+// Send the request to server1.
+request1.send(result -&gt; System.getLogger("forwarder").log(INFO, "Sourcing from server1 complete"));</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="api-transport"><a class="anchor" href="#api-transport"></a>Request <code>Transport</code></h3>
+<div class="paragraph">
+<p>The communication between client and server happens over a <a href="io-arch.html#transport" class="xref page">low-level transport</a>, and applications can specify the low-level transport to use for each request.</p>
+</div>
+<div class="paragraph">
+<p>This gives client applications great flexibility, because they can use the same <code>HttpClient</code> instance to communicate, for example, with an external third party web application via TCP, to a different process via Unix-Domain sockets, and efficiently to the same process via memory.</p>
+</div>
+<div class="paragraph">
+<p>Client application can also choose more esoteric configurations such as using QUIC, typically used to transport HTTP/3, to transport HTTP/1.1 or HTTP/2, because QUIC provides reliable and ordered communication like TCP does.</p>
+</div>
+<div class="paragraph">
+<p>Provided you have configured a <a href="../server/http.html#connector" class="xref page"><code>UnixDomainServerConnector</code></a> on the server, this is how you can configure a request to use Unix-Domain sockets:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// This is the path where the server "listens" on.
+Path unixDomainPath = Path.of("/path/to/server.sock");
+
+// Creates a ClientConnector.
+ClientConnector clientConnector = new ClientConnector();
+
+// You can use Unix-Domain for HTTP/1.1.
+HttpClientTransportOverHTTP http1Transport = new HttpClientTransportOverHTTP(clientConnector);
+
+// You can use Unix-Domain also for HTTP/2.
+HTTP2Client http2Client = new HTTP2Client(clientConnector);
+HttpClientTransportOverHTTP2 http2Transport = new HttpClientTransportOverHTTP2(http2Client);
+
+// You can use Unix-Domain also for the dynamic transport.
+ClientConnectionFactory.Info http1 = HttpClientConnectionFactory.HTTP11;
+ClientConnectionFactoryOverHTTP2.HTTP2 http2 = new ClientConnectionFactoryOverHTTP2.HTTP2(http2Client);
+HttpClientTransportDynamic dynamicTransport = new HttpClientTransportDynamic(clientConnector, http1, http2);
+
+// Choose the transport you prefer for HttpClient, for example the dynamic transport.
+HttpClient httpClient = new HttpClient(dynamicTransport);
+httpClient.start();
+
+ContentResponse response = httpClient.newRequest("jetty.org", 80)
+    // Specify that the request must be sent over Unix-Domain.
+    .transport(new Transport.TCPUnix(unixDomainPath))
+    .send();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the same way, if you have configured a <a href="../server/http.html#connector" class="xref page"><code>MemoryConnector</code></a> on the server, this is how you can configure a request to use memory for communication:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// The server-side MemoryConnector speaking HTTP/1.1.
+Server server = new Server();
+MemoryConnector memoryConnector = new MemoryConnector(server, new HttpConnectionFactory());
+server.addConnector(memoryConnector);
+// ...
+
+// The code above is the server-side.
+// ----
+// The code below is the client-side.
+
+HttpClient httpClient = new HttpClient();
+httpClient.start();
+
+// Use the MemoryTransport to communicate with the server-side.
+Transport transport = new MemoryTransport(memoryConnector);
+
+httpClient.newRequest("http://localhost/")
+    // Specify the Transport to use.
+    .transport(transport)
+    .send();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is a fancy example of how to mix HTTP versions and low-level transports:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpClient httpClient = new HttpClient(new HttpClientTransportDynamic(clientConnector, http2, http1, http3));
+httpClient.start();
+
+// Make a TCP request to a 3rd party web application.
+ContentResponse thirdPartyResponse = httpClient.newRequest("https://third-party.com/api")
+    // No need to specify the Transport, TCP will be used by default.
+    .send();
+
+// Upload the third party response content to a validation process.
+ContentResponse validatedResponse = httpClient.newRequest("http://localhost/validate")
+    // The validation process is available via Unix-Domain.
+    .transport(new Transport.TCPUnix(unixDomainPath))
+    .method(HttpMethod.POST)
+    .body(new BytesRequestContent(thirdPartyResponse.getContent()))
+    .send();
+
+// Process the validated response intra-process by sending
+// it to another web application in the same Jetty server.
+ContentResponse response = httpClient.newRequest("http://localhost/process")
+    // The processing is in-memory.
+    .transport(new MemoryTransport(memoryConnector))
+    .method(HttpMethod.POST)
+    .body(new BytesRequestContent(validatedResponse.getContent()))
+    .send();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="connection-information"><a class="anchor" href="#connection-information"></a>Connection Information</h3>
+<div class="paragraph">
+<p>In order to send a request, it is necessary to obtain a connection, as explained in the <a href="#request-processing">request processing section</a>.</p>
+</div>
+<div class="paragraph">
+<p>The HTTP/1.1 protocol may send only one request at a time on a single connection, while multiplexed protocols such as HTTP/2 may send many requests at a time on a single connection.</p>
+</div>
+<div class="paragraph">
+<p>You can access the connection information, for example the local and remote <code>SocketAddress</code>, or the <code>SslSessionData</code> if the connection is secured, in the following way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpClient httpClient = new HttpClient();
+httpClient.start();
+
+ContentResponse response = httpClient.newRequest("http://domain.com/path")
+    // The connection information is only available starting from the request begin event.
+    .onRequestBegin(request -&gt;
+    {
+        Connection connection = request.getConnection();
+
+        // Obtain the address of the server.
+        SocketAddress remoteAddress = connection.getRemoteSocketAddress();
+        System.getLogger("connection").log(INFO, "Server address: %s", remoteAddress);
+
+        // Obtain the SslSessionData.
+        EndPoint.SslSessionData sslSessionData = connection.getSslSessionData();
+        if (sslSessionData != null)
+            System.getLogger("connection").log(INFO, "SslSessionData: %s", sslSessionData);
+    })
+    .send();</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The connection information is only available when the request is associated with a connection.</p>
+</div>
+<div class="paragraph">
+<p>This means that the connection is not available in the <em>request queued</em> event, but only starting from the <em>request begin</em> event.
+For more information about request events, see <a href="#non-blocking">this section</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="connection-events"><a class="anchor" href="#connection-events"></a>Connection Events</h3>
+<div class="paragraph">
+<p>In order to send HTTP requests, a connection is necessary, as explained in the <a href="#request-processing">request processing section</a>.</p>
+</div>
+<div class="paragraph">
+<p>HTTP/1.1 and HTTP/2 use <code>SocketChannel.connect(SocketAddress)</code> to establish a connection with the server, either via the TCP transport or via the Unix-Domain transport.</p>
+</div>
+<div class="paragraph">
+<p>You can listen to these <code>connect</code> events using a <code>ClientConnector.ConnectListener</code>, for example to record connection establishment times:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ClientConnector clientConnector = new ClientConnector();
+clientConnector.addEventListener(new ClientConnector.ConnectListener()
+{
+    private final ConcurrentMap&lt;SocketChannel, Long&gt; times = new ConcurrentHashMap&lt;&gt;();
+
+    @Override
+    public void onConnectBegin(SocketChannel socketChannel, SocketAddress socketAddress)
+    {
+        times.put(socketChannel, System.nanoTime());
+    }
+
+    @Override
+    public void onConnectSuccess(SocketChannel socketChannel)
+    {
+        Long begin = times.remove(socketChannel);
+        System.getLogger("connection").log(INFO, "established in %d ns", System.nanoTime() - begin);
+    }
+
+    @Override
+    public void onConnectFailure(SocketChannel socketChannel, SocketAddress socketAddress, Throwable failure)
+    {
+        Long begin = times.remove(socketChannel);
+        System.getLogger("connection").log(INFO, "failed in %d ns", System.nanoTime() - begin);
+    }
+});
+
+HttpClient httpClient = new HttpClient(new HttpClientTransportOverHTTP(clientConnector));
+httpClient.start();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This could be particularly useful when you notice that your client application seem "slow" to send requests.
+The <code>connect begin</code> and <code>connect success</code> events, along with the <code>request queued</code> and <code>request begin</code> event (detailed <a href="#non-blocking">here</a>), allow you to understand whether it is the server being slow at accepting connections, or it is the client being slow at processing queued requests.</p>
+</div>
+<div class="paragraph">
+<p>Once the low-level connection has been established, you can be notified of connection events using a <code>Connection.Listener</code>, or more concretely <code>ConnectionStatistics</code>, as described in <a href="../arch/io.html#connection-listener" class="xref page">this section</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration"><a class="anchor" href="#configuration"></a>HttpClient Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>HttpClient</code> has a quite large number of configuration parameters.
+Please refer to the <code>HttpClient</code> <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/client/HttpClient.html">javadocs</a> for the complete list of configurable parameters.</p>
+</div>
+<div class="paragraph">
+<p>The most common parameters are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>HttpClient.idleTimeout</code>: same as <code>ClientConnector.idleTimeout</code> described in <a href="io-arch.html#transport" class="xref page">this section</a>.</p>
+</li>
+<li>
+<p><code>HttpClient.connectBlocking</code>: same as <code>ClientConnector.connectBlocking</code> described in <a href="io-arch.html#transport" class="xref page">this section</a>.</p>
+</li>
+<li>
+<p><code>HttpClient.connectTimeout</code>: same as <code>ClientConnector.connectTimeout</code> described in <a href="io-arch.html#transport" class="xref page">this section</a>.</p>
+</li>
+<li>
+<p><code>HttpClient.maxConnectionsPerDestination</code>: the max number of TCP connections that are opened for a particular destination (defaults to 64).</p>
+</li>
+<li>
+<p><code>HttpClient.maxRequestsQueuedPerDestination</code>: the max number of requests queued (defaults to 1024).</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="configuration-tls"><a class="anchor" href="#configuration-tls"></a>HttpClient TLS Configuration</h3>
+<div class="paragraph">
+<p><code>HttpClient</code> supports HTTPS requests out-of-the-box like a browser does.</p>
+</div>
+<div class="paragraph">
+<p>The support for HTTPS request is provided by a <code>SslContextFactory.Client</code> instance, typically configured in the <code>ClientConnector</code>.
+If not explicitly configured, the <code>ClientConnector</code> will allocate a default one when started.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">SslContextFactory.Client sslContextFactory = new SslContextFactory.Client();
+
+ClientConnector clientConnector = new ClientConnector();
+clientConnector.setSslContextFactory(sslContextFactory);
+
+HttpClient httpClient = new HttpClient(new HttpClientTransportDynamic(clientConnector));
+httpClient.start();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The default <code>SslContextFactory.Client</code> verifies the certificate sent by the server by verifying the validity of the certificate with respect to the certificate chain, the expiration date, the server host name, etc.
+This means that requests to public websites that have a valid certificate (such as <code>https://google.com</code>) will work out-of-the-box, without the need to specify a KeyStore or a TrustStore.</p>
+</div>
+<div class="paragraph">
+<p>However, requests made to sites that return an invalid or a self-signed certificate will fail (like they will in a browser).
+An invalid certificate may be expired or have the wrong server host name; a self-signed certificate has a certificate chain that cannot be verified.</p>
+</div>
+<div class="paragraph">
+<p>The validation of the server host name present in the certificate is important, to guarantee that the client is connected indeed with the intended server.</p>
+</div>
+<div class="paragraph">
+<p>The validation of the server host name is performed at two levels: at the TLS level (in the JDK) and, optionally, at the application level.</p>
+</div>
+<div class="paragraph">
+<p>By default, the validation of the server host name at the TLS level is enabled, while it is disabled at the application level.</p>
+</div>
+<div class="paragraph">
+<p>You can configure the <code>SslContextFactory.Client</code> to skip the validation of the server host name at the TLS level:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">SslContextFactory.Client sslContextFactory = new SslContextFactory.Client();
+// Disable the validation of the server host name at the TLS level.
+sslContextFactory.setEndpointIdentificationAlgorithm(null);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When you disable the validation of the server host name at the TLS level, you are strongly recommended to enable it at the application level.
+Failing to do so puts you at risk of connecting to a server different from the one you intend to connect to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">SslContextFactory.Client sslContextFactory = new SslContextFactory.Client();
+// Only allow to connect to subdomains of domain.com.
+sslContextFactory.setHostnameVerifier((hostName, session) -&gt; hostName.endsWith(".domain.com"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Enabling server host name validation at both the TLS level and application level allow you to further restrict the set of server hosts the client can connect to, among those allowed in the certificate sent by the server.</p>
+</div>
+<div class="paragraph">
+<p>Entirely disabling server host name validation is not recommended, but may be done in controlled environments.</p>
+</div>
+<div class="paragraph">
+<p>Even with server host name validation disabled, the validation of the certificate chain, by validating cryptographic signatures and validity dates is still performed.</p>
+</div>
+<div class="paragraph">
+<p>Please refer to the <code>SslContextFactory.Client</code> <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/util/ssl/SslContextFactory.Client.html">javadocs</a> for the complete list of configurable parameters.</p>
+</div>
+<div class="sect3">
+<h4 id="configuration-tls-listener"><a class="anchor" href="#configuration-tls-listener"></a>HttpClient <code>SslHandshakeListener</code></h4>
+<div class="paragraph">
+<p>Applications may register a <code>org.eclipse.jetty.io.ssl.SslHandshakeListener</code> to be notified of TLS handshakes success or failure, by adding the <code>SslHandshakeListener</code> as a bean to <code>HttpClient</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java hljs" data-lang="java">// Create a SslHandshakeListener.
+SslHandshakeListener listener = new SslHandshakeListener()
+{
+    @Override
+    public void handshakeSucceeded(Event event) throws SSLException
+    {
+        SSLEngine sslEngine = event.getSSLEngine();
+        System.getLogger("tls").log(INFO, "TLS handshake successful to %s", sslEngine.getPeerHost());
+    }
+
+    @Override
+    public void handshakeFailed(Event event, Throwable failure)
+    {
+        SSLEngine sslEngine = event.getSSLEngine();
+        System.getLogger("tls").log(ERROR, "TLS handshake failure to %s", sslEngine.getPeerHost(), failure);
+    }
+};
+
+HttpClient httpClient = new HttpClient();
+
+// Add the SslHandshakeListener as bean to HttpClient.
+// The listener will be notified of TLS handshakes success and failure.
+httpClient.addBean(listener);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="configuration-tls-truststore"><a class="anchor" href="#configuration-tls-truststore"></a>HttpClient TLS TrustStore Configuration</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="configuration-tls-client-certs"><a class="anchor" href="#configuration-tls-client-certs"></a>HttpClient TLS Client Certificates Configuration</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cookie"><a class="anchor" href="#cookie"></a>HttpClient Cookie Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jetty&#8217;s <code>HttpClient</code> supports cookies out of the box.</p>
+</div>
+<div class="paragraph">
+<p>The <code>HttpClient</code> instance receives cookies from HTTP responses and stores them in a <code>java.net.CookieStore</code>, a class that is part of the JDK.
+When new requests are made, the cookie store is consulted and if there are matching cookies (that is, cookies that are not expired and that match domain and path of the request) then they are added to the requests.</p>
+</div>
+<div class="paragraph">
+<p>Applications can programmatically access the cookie store to find the cookies that have been set:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpCookieStore cookieStore = httpClient.getHttpCookieStore();
+List&lt;HttpCookie&gt; cookies = cookieStore.match(URI.create("http://domain.com/path"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Applications can also programmatically set cookies as if they were returned from a HTTP response:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpCookieStore cookieStore = httpClient.getHttpCookieStore();
+HttpCookie cookie = HttpCookie.build("foo", "bar")
+    .domain("domain.com")
+    .path("/")
+    .maxAge(TimeUnit.DAYS.toSeconds(1))
+    .build();
+cookieStore.add(URI.create("http://domain.com"), cookie);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Cookies may be added explicitly only for a particular request:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ContentResponse response = httpClient.newRequest("http://domain.com/path")
+    .cookie(HttpCookie.from("foo", "bar"))
+    .send();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can remove cookies that you do not want to be sent in future HTTP requests:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpCookieStore cookieStore = httpClient.getHttpCookieStore();
+URI uri = URI.create("http://domain.com");
+List&lt;HttpCookie&gt; cookies = cookieStore.match(uri);
+for (HttpCookie cookie : cookies)
+{
+    cookieStore.remove(uri, cookie);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to totally disable cookie handling, you can install a <code>HttpCookieStore.Empty</code>.
+This must be done when <code>HttpClient</code> is used in a proxy application, in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">httpClient.setHttpCookieStore(new HttpCookieStore.Empty());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can enable cookie filtering by installing a cookie store that performs the filtering logic in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">class GoogleOnlyCookieStore extends HttpCookieStore.Default
+{
+    @Override
+    public boolean add(URI uri, HttpCookie cookie)
+    {
+        if (uri.getHost().endsWith("google.com"))
+            return super.add(uri, cookie);
+        return false;
+    }
+}
+
+httpClient.setHttpCookieStore(new GoogleOnlyCookieStore());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The example above will retain only cookies that come from the <code>google.com</code> domain or sub-domains.</p>
+</div>
+<div class="sect2">
+<h3 id="special-characters-in-cookies"><a class="anchor" href="#special-characters-in-cookies"></a>Special Characters in Cookies</h3>
+<div class="paragraph">
+<p>Jetty is compliant with <a href="https://tools.ietf.org/html/rfc6265">RFC6265</a>, and as such care must be taken when setting a cookie value that includes special characters such as <code>;</code>.</p>
+</div>
+<div class="paragraph">
+<p>Previously, <code>Version=1</code> cookies defined in <a href="https://tools.ietf.org/html/rfc2109">RFC2109</a> (and continued in <a href="https://tools.ietf.org/html/rfc2965">RFC2965</a>) allowed for special/reserved characters to be enclosed within double quotes when declared in a <code>Set-Cookie</code> response header:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-screen hljs" data-lang="screen">Set-Cookie: foo="bar;baz";Version=1;Path="/secure"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This was added to the HTTP Response as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">protected void service(HttpServletRequest request, HttpServletResponse response)
+{
+    jakarta.servlet.http.Cookie cookie = new Cookie("foo", "bar;baz");
+    cookie.setPath("/secure");
+    response.addCookie(cookie);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The introduction of RFC6265 has rendered this approach no longer possible; users are now required to encode cookie values that use these special characters.
+This can be done utilizing <code>jakarta.servlet.http.Cookie</code> as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">jakarta.servlet.http.Cookie cookie = new Cookie("foo", URLEncoder.encode("bar;baz", "UTF-8"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Jetty validates all cookie names and values being added to the <code>HttpServletResponse</code> via the <code>addCookie(Cookie)</code> method.
+If an illegal value is discovered Jetty will throw an <code>IllegalArgumentException</code> with the details.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="authentication"><a class="anchor" href="#authentication"></a>HttpClient Authentication Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jetty&#8217;s <code>HttpClient</code> supports the <code>BASIC</code> and <code>DIGEST</code> authentication mechanisms defined by <a href="https://tools.ietf.org/html/rfc7235">RFC 7235</a>, as well as the SPNEGO authentication mechanism defined in <a href="https://tools.ietf.org/html/rfc4559">RFC 4559</a>.</p>
+</div>
+<div class="paragraph">
+<p>The HTTP <em>conversation</em>, the sequence of related HTTP requests, for a request that needs authentication is the following:</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNpdjjELwjAQhff8ittLsYpTB6EUUXBwUOh8prENTS8huerfN4Vio-v3vnv3wqDJoccRHiiHztuJ2toa64E9UoiRIhbha42WrOy9HVUUJpUkocfWvjV18EQTlBARs5baITFUzhktkbWlH35mdrXR848U35R_KS9Ecgb5YcFQwul4h41D7sWCYrhWRWFfbCGDpmnyauI-srlFicT5r8sgMeeZa3O6ooRdUcD18gFY_m3Z" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>Upon receiving a HTTP 401 response code, <code>HttpClient</code> looks at the <code>WWW-Authenticate</code> response header (the server <em>challenge</em>) and then tries to match configured authentication credentials to produce an <code>Authentication</code> header that contains the authentication credentials to access the resource.</p>
+</div>
+<div class="paragraph">
+<p>You can configure authentication credentials in the <code>HttpClient</code> instance as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Add authentication credentials.
+AuthenticationStore auth = httpClient.getAuthenticationStore();
+
+URI uri1 = new URI("http://mydomain.com/secure");
+auth.addAuthentication(new BasicAuthentication(uri1, "MyRealm", "userName1", "password1"));
+
+URI uri2 = new URI("http://otherdomain.com/admin");
+auth.addAuthentication(new BasicAuthentication(uri1, "AdminRealm", "admin", "password"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Authentication</code>s are matched against the server challenge first by mechanism (e.g. <code>BASIC</code> or <code>DIGEST</code>), then by realm and then by URI.</p>
+</div>
+<div class="paragraph">
+<p>If an <code>Authentication</code> match is found, the application does not receive events related to the HTTP 401 response.
+These events are handled internally by <code>HttpClient</code> which produces another (internal) request similar to the original request but with an additional <code>Authorization</code> header.</p>
+</div>
+<div class="paragraph">
+<p>If the authentication is successful, the server responds with a HTTP 200 and <code>HttpClient</code> caches the <code>Authentication.Result</code> so that subsequent requests for a matching URI will not incur in the additional rountrip caused by the HTTP 401 response.</p>
+</div>
+<div class="paragraph">
+<p>It is possible to clear <code>Authentication.Result</code>s in order to force authentication again:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">httpClient.getAuthenticationStore().clearAuthenticationResults();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Authentication results may be preempted to avoid the additional roundtrip due to the server challenge in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">AuthenticationStore auth = httpClient.getAuthenticationStore();
+URI uri = URI.create("http://domain.com/secure");
+auth.addAuthenticationResult(new BasicAuthentication.BasicResult(uri, "username", "password"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this way, requests for the given URI are enriched immediately with the <code>Authorization</code> header, and the server should respond with HTTP 200 (and the resource content) rather than with the 401 and the challenge.</p>
+</div>
+<div class="paragraph">
+<p>It is also possible to preempt the authentication for a single request only, in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">URI uri = URI.create("http://domain.com/secure");
+Authentication.Result authn = new BasicAuthentication.BasicResult(uri, "username", "password");
+Request request = httpClient.newRequest(uri);
+authn.apply(request);
+request.send();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See also the <a href="#proxy-authentication">proxy authentication section</a> for further information about how authentication works with HTTP proxies.</p>
+</div>
+<div class="sect2">
+<h3 id="authentication-spnego"><a class="anchor" href="#authentication-spnego"></a>HttpClient SPNEGO Authentication Support</h3>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="proxy"><a class="anchor" href="#proxy"></a>HttpClient Proxy Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jetty&#8217;s <code>HttpClient</code> can be configured to use proxies to connect to destinations.</p>
+</div>
+<div class="paragraph">
+<p>These types of proxies are available out of the box:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>HTTP proxy (provided by class <code>org.eclipse.jetty.client.HttpProxy</code>)</p>
+</li>
+<li>
+<p>SOCKS 4 proxy (provided by class <code>org.eclipse.jetty.client.Socks4Proxy</code>)</p>
+</li>
+<li>
+<p><a href="#proxy-socks5">SOCKS 5 proxy</a> (provided by class <code>org.eclipse.jetty.client.Socks5Proxy</code>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Other implementations may be written by subclassing <code>ProxyConfiguration.Proxy</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following is a typical configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpProxy proxy = new HttpProxy("proxyHost", 8888);
+
+// Do not proxy requests for localhost:8080.
+proxy.getExcludedAddresses().add("localhost:8080");
+
+// Add the new proxy to the list of proxies already registered.
+ProxyConfiguration proxyConfig = httpClient.getProxyConfiguration();
+proxyConfig.addProxy(proxy);
+
+ContentResponse response = httpClient.GET("http://domain.com/path");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You specify the proxy host and proxy port, and optionally also the addresses that you do not want to be proxied, and then add the proxy configuration on the <code>ProxyConfiguration</code> instance.</p>
+</div>
+<div class="paragraph">
+<p>Configured in this way, <code>HttpClient</code> makes requests to the HTTP proxy (for plain-text HTTP requests) or establishes a tunnel via HTTP <code>CONNECT</code> (for encrypted HTTPS requests).</p>
+</div>
+<div class="paragraph">
+<p>Proxying is supported for any version of the HTTP protocol.</p>
+</div>
+<div class="paragraph">
+<p>The communication between the client and the proxy may be encrypted, so that it would not be possible for another party on the same network as the client to know what servers the client connects to.</p>
+</div>
+<div class="sect2">
+<h3 id="proxy-socks5"><a class="anchor" href="#proxy-socks5"></a>SOCKS5 Proxy Support</h3>
+<div class="paragraph">
+<p>SOCKS 5 (defined in <a href="https://datatracker.ietf.org/doc/html/rfc1928">RFC 1928</a>) offers choices for authentication methods and supports IPv6 (things that SOCKS 4 does not support).</p>
+</div>
+<div class="paragraph">
+<p>A typical SOCKS 5 proxy configuration with the username/password authentication method is the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Socks5Proxy proxy = new Socks5Proxy("proxyHost", 8888);
+String socks5User = "jetty";
+String socks5Pass = "secret";
+var socks5AuthenticationFactory = new Socks5.UsernamePasswordAuthenticationFactory(socks5User, socks5Pass);
+// Add the authentication method to the proxy.
+proxy.putAuthenticationFactory(socks5AuthenticationFactory);
+
+// Do not proxy requests for localhost:8080.
+proxy.getExcludedAddresses().add("localhost:8080");
+
+// Add the new proxy to the list of proxies already registered.
+ProxyConfiguration proxyConfig = httpClient.getProxyConfiguration();
+proxyConfig.addProxy(proxy);
+
+ContentResponse response = httpClient.GET("http://domain.com/path");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proxy-authentication"><a class="anchor" href="#proxy-authentication"></a>HTTP Proxy Authentication Support</h3>
+<div class="paragraph">
+<p>Jetty&#8217;s <code>HttpClient</code> supports HTTP proxy authentication in the same way it supports <a href="#authentication">server authentication</a>.</p>
+</div>
+<div class="paragraph">
+<p>In the example below, the HTTP proxy requires <code>BASIC</code> authentication, but the server requires <code>DIGEST</code> authentication, and therefore:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">AuthenticationStore auth = httpClient.getAuthenticationStore();
+
+// Proxy credentials.
+URI proxyURI = new URI("http://proxy.net:8080");
+auth.addAuthentication(new BasicAuthentication(proxyURI, "ProxyRealm", "proxyUser", "proxyPass"));
+
+// Server credentials.
+URI serverURI = new URI("http://domain.com/secure");
+auth.addAuthentication(new DigestAuthentication(serverURI, "ServerRealm", "serverUser", "serverPass"));
+
+// Proxy configuration.
+ProxyConfiguration proxyConfig = httpClient.getProxyConfiguration();
+HttpProxy proxy = new HttpProxy("proxy.net", 8080);
+proxyConfig.addProxy(proxy);
+
+ContentResponse response = httpClient.newRequest(serverURI).send();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The HTTP conversation for successful authentications on both the proxy and the server is the following:</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNqdkU1rAjEQhu_5FXMv0m0RCj0URMSCB4UKe56u0Q3uZsJk1o_--kbiR4IK4vV5n33nDevXxjpkbOEXq_WKqbOLITXEIIzWh0hbUf5stWSpqplaHYROJ4mvcUFbY1ewxMZrpQIWUxmHVmDgXGMqFEM2498ibtiYw40Uz5h2-4z8aN5oViopgt5XFOETxqM5vDqUWkUSokt1yPvFB7xEuzfopA700KJVYt2qyz4iNn_xCecjcVY24IiStn7xFnrKssxP31t6U35qZ6AP775yr9_xXhQwndzZfQzznenfOin_3U3UrQ==" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>The application does not receive events related to the responses with code 407 and 401 since they are handled internally by <code>HttpClient</code>.</p>
+</div>
+<div class="paragraph">
+<p>Similarly to the <a href="#authentication">authentication section</a>, the proxy authentication result and the server authentication result can be preempted to avoid, respectively, the 407 and 401 roundtrips.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="transport"><a class="anchor" href="#transport"></a>HttpClient Pluggable Transports</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jetty&#8217;s <code>HttpClient</code> can be configured to use different HTTP formats to carry the semantic of HTTP requests and responses, by specifying different <code>HttpClientTransport</code> implementations.</p>
+</div>
+<div class="paragraph">
+<p>This means that the intention of a client to request resource <code>/index.html</code> using the <code>GET</code> method can be carried over a <a href="#api-transport">low-level transport</a> in different formats.</p>
+</div>
+<div class="paragraph">
+<p>An <code>HttpClientTransport</code> is the component that is in charge of converting a high-level, semantic, HTTP requests such as " <code>GET</code> resource <code>/index.html</code> " into the specific format understood by the server (for example, HTTP/2 or HTTP/3), and to convert the server response from the specific format (HTTP/2 or HTTP/3) into high-level, semantic objects that can be used by applications.</p>
+</div>
+<div class="paragraph">
+<p>The most common protocol format is HTTP/1.1, a textual protocol with lines separated by <code>\r\n</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-screen hljs" data-lang="screen">GET /index.html HTTP/1.1\r\n
+Host: domain.com\r\n
+...
+\r\n</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>However, the same request can be made using FastCGI, a binary protocol:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-screen hljs" data-lang="screen">x01 x01 x00 x01 x00 x08 x00 x00
+x00 x01 x01 x00 x00 x00 x00 x00
+x01 x04 x00 x01 xLL xLL x00 x00
+x0C x0B  D   O   C   U   M   E
+ N   T   _   U   R   I   /   i
+ n   d   e   x   .   h   t   m
+ l
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Similarly, HTTP/2 is a binary protocol that transports the same information in a yet different format via TCP, while HTTP/3 is a binary protocol that transports the same information in yet another format via QUIC.</p>
+</div>
+<div class="paragraph">
+<p>The HTTP protocol version may be <em>negotiated</em> between client and server.
+A request for a resource may be sent using one protocol (for example, HTTP/1.1), but the response may arrive in a different protocol (for example, HTTP/2).</p>
+</div>
+<div class="paragraph">
+<p><code>HttpClient</code> supports these <code>HttpClientTransport</code> implementations, each speaking only one protocol:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>HttpClientTransportOverHTTP</code>, for <a href="#transport-http11">HTTP/1.1</a> (both clear-text and TLS encrypted)</p>
+</li>
+<li>
+<p><code>HttpClientTransportOverHTTP2</code>, for <a href="#transport-http2">HTTP/2</a> (both clear-text and TLS encrypted)</p>
+</li>
+<li>
+<p><code>HttpClientTransportOverHTTP3</code>, for <a href="#transport-http3">HTTP/3</a> (only encrypted via QUIC)</p>
+</li>
+<li>
+<p><code>HttpClientTransportOverFCGI</code>, for <a href="#transport-fcgi">FastCGI</a> (both clear-text and TLS encrypted)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>HttpClient</code> also supports <code>HttpClientTransportDynamic</code>, a <a href="#transport-dynamic">dynamic transport</a> that can speak different HTTP formats and can select the right protocol by negotiating it with the server or by explicit indication from applications.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, every HTTP format can be sent over different <a href="#api-transport">low-level transports</a> such as TCP, Unix-Domain, QUIC or memory.
+Supports for Unix-Domain sockets requires Java 16 or later, since Unix-Domain sockets support has been introduced in OpenJDK with <a href="https://openjdk.java.net/jeps/380">JEP 380</a>.</p>
+</div>
+<div class="paragraph">
+<p>Applications are typically not aware of the actual HTTP format or low-level transport being used.
+This allows them to write their logic against a high-level API that hides the details of the specific HTTP format and low-level transport being used.</p>
+</div>
+<div class="sect2">
+<h3 id="transport-http11"><a class="anchor" href="#transport-http11"></a>HTTP/1.1 Transport</h3>
+<div class="paragraph">
+<p>HTTP/1.1 is the default transport.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// No transport specified, using default.
+HttpClient httpClient = new HttpClient();
+httpClient.start();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to customize the HTTP/1.1 transport, you can explicitly configure it in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Configure HTTP/1.1 transport.
+HttpClientTransportOverHTTP transport = new HttpClientTransportOverHTTP();
+transport.setHeaderCacheSize(16384);
+
+HttpClient client = new HttpClient(transport);
+client.start();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="transport-http2"><a class="anchor" href="#transport-http2"></a>HTTP/2 Transport</h3>
+<div class="paragraph">
+<p>The HTTP/2 transport can be configured in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// The HTTP2Client powers the HTTP/2 transport.
+HTTP2Client http2Client = new HTTP2Client();
+http2Client.setInitialSessionRecvWindow(64 * 1024 * 1024);
+
+// Create and configure the HTTP/2 transport.
+HttpClientTransportOverHTTP2 transport = new HttpClientTransportOverHTTP2(http2Client);
+transport.setUseALPN(true);
+
+HttpClient client = new HttpClient(transport);
+client.start();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>HTTP2Client</code> is the lower-level client that provides an API based on HTTP/2 concepts such as <em>sessions</em>, <em>streams</em> and <em>frames</em> that are specific to HTTP/2. See <a href="http2.html" class="xref page">the HTTP/2 client section</a> for more information.</p>
+</div>
+<div class="paragraph">
+<p><code>HttpClientTransportOverHTTP2</code> uses <code>HTTP2Client</code> to format high-level semantic HTTP requests into the HTTP/2 specific format.</p>
+</div>
+<div class="paragraph">
+<p>When the HTTP/2 server closes the connection (see <a href="http2.html#goaway" class="xref page">this section</a>), <code>RetryableStreamException</code>s are converted into <code>RetryableRequestException</code>s, so that the high-level APIs do not depend on the transport.</p>
+</div>
+<div class="paragraph">
+<p>See also <a href="http2.html#listeners" class="xref page">this section</a> to be able to interact with the low-level HTTP/2 APIs while using the high-level APIs.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="transport-http3"><a class="anchor" href="#transport-http3"></a>HTTP/3 Transport</h3>
+<div class="paragraph">
+<p>The HTTP/3 transport can be configured in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// HTTP/3 requires secure communication.
+SslContextFactory.Client sslContextFactory = new SslContextFactory.Client();
+// The HTTP3Client powers the HTTP/3 transport.
+ClientQuicConfiguration clientQuicConfig = new ClientQuicConfiguration(sslContextFactory, null);
+HTTP3Client http3Client = new HTTP3Client(clientQuicConfig);
+http3Client.getQuicConfiguration().setSessionRecvWindow(64 * 1024 * 1024);
+
+// Create and configure the HTTP/3 transport.
+HttpClientTransportOverHTTP3 transport = new HttpClientTransportOverHTTP3(http3Client);
+
+HttpClient client = new HttpClient(transport);
+client.start();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>HTTP3Client</code> is the lower-level client that provides an API based on HTTP/3 concepts such as <em>sessions</em>, <em>streams</em> and <em>frames</em> that are specific to HTTP/3. See <a href="http3.html" class="xref page">the HTTP/3 client section</a> for more information.</p>
+</div>
+<div class="paragraph">
+<p><code>HttpClientTransportOverHTTP3</code> uses <code>HTTP3Client</code> to format high-level semantic HTTP requests into the HTTP/3 specific format.</p>
+</div>
+<div class="paragraph">
+<p>When the HTTP/3 server closes the connection (see <a href="http3.html#goaway" class="xref page">this section</a>), <code>RetryableStreamException</code>s are converted into <code>RetryableRequestException</code>s, so that the high-level APIs do not depend on the transport.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="transport-fcgi"><a class="anchor" href="#transport-fcgi"></a>FastCGI Transport</h3>
+<div class="paragraph">
+<p>The FastCGI transport can be configured in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">String scriptRoot = "/var/www/wordpress";
+HttpClientTransportOverFCGI transport = new HttpClientTransportOverFCGI(scriptRoot);
+
+HttpClient client = new HttpClient(transport);
+client.start();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In order to make requests using the FastCGI transport, you need to have a FastCGI server such as <a href="https://en.wikipedia.org/wiki/PHP#PHPFPM">PHP-FPM</a> (see also link:http://php.net/manual/en/install.fpm.php).</p>
+</div>
+<div class="paragraph">
+<p>The FastCGI transport is primarily used by Jetty&#8217;s <a href="../server/fastcgi.html" class="xref page">FastCGI support</a> to serve PHP pages (WordPress for example).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="transport-dynamic"><a class="anchor" href="#transport-dynamic"></a>Dynamic Transport</h3>
+<div class="paragraph">
+<p>The static <code>HttpClientTransport</code> implementations work well if you know in advance the protocol you want to speak with the server, or if the server only supports one protocol (such as FastCGI).</p>
+</div>
+<div class="paragraph">
+<p>With the advent of HTTP/2 and HTTP/3, however, servers are now able to support multiple protocols.</p>
+</div>
+<div class="paragraph">
+<p>The HTTP/2 protocol is typically negotiated between client and server.
+This negotiation can happen via ALPN, a TLS extension that allows the client to tell the server the list of protocol that the client supports, so that the server can pick one of the client supported protocols that also the server supports; or via HTTP/1.1 upgrade by means of the <code>Upgrade</code> header.</p>
+</div>
+<div class="paragraph">
+<p>Applications can configure the dynamic transport with one or more HTTP versions such as HTTP/1.1, HTTP/2 or HTTP/3.
+The implementation will take care of using TLS for HTTPS URIs, using ALPN if necessary, negotiating protocols, upgrading from one protocol to another, etc.</p>
+</div>
+<div class="paragraph">
+<p>By default, the dynamic transport only speaks HTTP/1.1:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Dynamic transport speaks HTTP/1.1 by default.
+HttpClientTransportDynamic transport = new HttpClientTransportDynamic();
+
+HttpClient client = new HttpClient(transport);
+client.start();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The dynamic transport can be configured with just one protocol, making it equivalent to the corresponding static transport:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ClientConnector connector = new ClientConnector();
+
+// Equivalent to HttpClientTransportOverHTTP.
+HttpClientTransportDynamic http11Transport = new HttpClientTransportDynamic(connector, HttpClientConnectionFactory.HTTP11);
+
+// Equivalent to HttpClientTransportOverHTTP2.
+HTTP2Client http2Client = new HTTP2Client(connector);
+HttpClientTransportDynamic http2Transport = new HttpClientTransportDynamic(connector, new ClientConnectionFactoryOverHTTP2.HTTP2(http2Client));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The dynamic transport, however, has been implemented to support multiple transports, in particular HTTP/1.1, HTTP/2 and HTTP/3:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">SslContextFactory.Client sslContextFactory = new SslContextFactory.Client();
+
+ClientConnector connector = new ClientConnector();
+connector.setSslContextFactory(sslContextFactory);
+
+ClientConnectionFactory.Info http1 = HttpClientConnectionFactory.HTTP11;
+
+HTTP2Client http2Client = new HTTP2Client(connector);
+ClientConnectionFactoryOverHTTP2.HTTP2 http2 = new ClientConnectionFactoryOverHTTP2.HTTP2(http2Client);
+
+ClientQuicConfiguration quicConfiguration = new ClientQuicConfiguration(sslContextFactory, null);
+HTTP3Client http3Client = new HTTP3Client(quicConfiguration, connector);
+ClientConnectionFactoryOverHTTP3.HTTP3 http3 = new ClientConnectionFactoryOverHTTP3.HTTP3(http3Client);
+
+// The order of the protocols indicates the client's preference.
+// The first is the most preferred, the last is the least preferred, but
+// the protocol version to use can be explicitly specified in the request.
+HttpClientTransportDynamic transport = new HttpClientTransportDynamic(connector, http1, http2, http3);
+
+HttpClient client = new HttpClient(transport);
+client.start();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The order in which the protocols are specified to <code>HttpClientTransportDynamic</code> indicates what is the client preference (first the most preferred).</p>
+</div>
+<div class="paragraph">
+<p>When clear-text communication is used (i.e. URIs with the <code>http</code> scheme) there is no HTTP protocol version negotiation, and therefore the application must know <em>a priori</em> whether the server supports the HTTP version or not.
+For example, if the server only supports clear-text HTTP/2, and <code>HttpClientTransportDynamic</code> is configured as in the example above, where HTTP/1.1 has precedence over HTTP/2, the client will send, by default, a clear-text HTTP/1.1 request to a clear-text HTTP/2 only server, which will result in a communication failure.</p>
+</div>
+<div class="paragraph">
+<p>When using TLS (i.e. URIs with the <code>https</code> scheme), the HTTP protocol version is <em>negotiated</em> between client and server via ALPN, and it is the server that decides what is the application protocol to use for the communication, regardless of the client preference.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>HTTP/1.1 and HTTP/2 are <em>compatible</em> because they both use TCP, while HTTP/3 is incompatible with previous HTTP versions because it uses QUIC.</p>
+</div>
+<div class="paragraph">
+<p>Only compatible HTTP versions can negotiate the HTTP protocol version to use via ALPN, and only compatible HTTP versions can be upgraded from an older version to a newer version.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Provided that the server supports HTTP/1.1, HTTP/2 and HTTP/3, client applications can explicitly hint the version they want to use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java hljs" data-lang="java">HttpClientTransportDynamic transport = new HttpClientTransportDynamic(connector, http1, http2, http3);
+HttpClient client = new HttpClient(transport);
+client.start();
+
+// The server supports HTTP/1.1, HTTP/2 and HTTP/3.
+
+ContentResponse http1Response = client.newRequest("https://host/")
+    // Specify the version explicitly.
+    .version(HttpVersion.HTTP_1_1)
+    .send();
+
+ContentResponse http2Response = client.newRequest("https://host/")
+    // Specify the version explicitly.
+    .version(HttpVersion.HTTP_2)
+    .send();
+
+ContentResponse http3Response = client.newRequest("https://host/")
+    // Specify the version explicitly.
+    .version(HttpVersion.HTTP_3)
+    .send();
+
+// Make a clear-text upgrade request from HTTP/1.1 to HTTP/2.
+// The request will start as HTTP/1.1, but the response will be HTTP/2.
+ContentResponse upgradedResponse = client.newRequest("https://host/")
+    .headers(headers -&gt; headers
+        .put(HttpHeader.UPGRADE, "h2c")
+        .put(HttpHeader.HTTP2_SETTINGS, "")
+        .put(HttpHeader.CONNECTION, "Upgrade, HTTP2-Settings"))
+    .send();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the client application explicitly specifies the HTTP version, then ALPN is not used by the client.
+By specifying the HTTP version explicitly, the client application has prior-knowledge of what HTTP version the server supports, and therefore ALPN is not needed.
+If the server does not support the HTTP version chosen by the client, then the communication will fail.</p>
+</div>
+<div class="paragraph">
+<p>If the client application does not explicitly specify the HTTP version, then ALPN will be used by the client, but only for compatible protocols.
+If the server also supports ALPN, then the protocol will be negotiated via ALPN and the server will choose the protocol to use.
+If the server does not support ALPN, the client will try to use the first protocol configured in <code>HttpClientTransportDynamic</code>, and the communication may succeed or fail depending on whether the server supports the protocol chosen by the client.</p>
+</div>
+<div class="paragraph">
+<p>For example, HTTP/3 is not compatible with previous HTTP version; if <code>HttpClientTransportDynamic</code> is configured to prefer HTTP/3, it will be the only protocol attempted by the client:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java hljs" data-lang="java">// Client prefers HTTP/3.
+HttpClientTransportDynamic transport = new HttpClientTransportDynamic(connector, http3, http2, http1);
+HttpClient client = new HttpClient(transport);
+client.start();
+
+// No explicit HTTP version specified.
+// Either HTTP/3 succeeds, or communication failure.
+ContentResponse httpResponse = client.newRequest("https://host/")
+    .send();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the client application configures <code>HttpClientTransportDynamic</code> to prefer HTTP/2, there could be ALPN negotiation between HTTP/2 and HTTP/1.1 (but not HTTP/3 because it is incompatible); HTTP/3 will only be possible by specifying the HTTP version explicitly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java hljs" data-lang="java">// Client prefers HTTP/2.
+HttpClientTransportDynamic transport = new HttpClientTransportDynamic(connector, http2, http1, http3);
+HttpClient client = new HttpClient(transport);
+client.start();
+
+// No explicit HTTP version specified.
+// Either HTTP/1.1 or HTTP/2 will be negotiated via ALPN.
+// HTTP/3 only possible by specifying the version explicitly.
+ContentResponse httpResponse = client.newRequest("https://host/")
+    .send();</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="io-arch.html">I/O Architecture</a></span>
+  <span class="next"><a href="http2.html">HTTP/2 Client Library</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

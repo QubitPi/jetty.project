@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Server Compliance Modes :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="http3.html">
+    <link rel="next" href="session.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Programming Guide</a></li>
+    <li><a href="index.html">Server Libraries</a></li>
+    <li><a href="compliance.html">Server Compliance Modes</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/programming-guide/pages/server/compliance.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Server Compliance Modes</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jetty server strives to keep up with the latest <a href="https://en.wikipedia.org/wiki/Request_for_Comments">IETF RFC</a>s for compliance with internet specifications, which are periodically updated.</p>
+</div>
+<div class="paragraph">
+<p>When possible, Jetty will support backwards compatibility by providing compliance modes that can be configured to allow violations of the current specifications that may have been allowed in obsoleted specifications.</p>
+</div>
+<div class="paragraph">
+<p>There are compliance modes provided for:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#http">HTTP Compliance</a></p>
+</li>
+<li>
+<p><a href="#uri">URI Compliance</a></p>
+</li>
+<li>
+<p><a href="#cookie">Cookie Compliance</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Compliance modes can be configured to allow violations from the RFC requirements, or in some cases to allow additional behaviors that Jetty has implemented in excess of the RFC (for example, to allow <a href="#uri">ambiguous URIs</a>).</p>
+</div>
+<div class="paragraph">
+<p>For example, the HTTP RFCs require that request HTTP methods are <a href="https://datatracker.ietf.org/doc/html/rfc7230#section-3.1.1">case sensitive</a>, however Jetty can allow case-insensitive HTTP methods by including the <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/HttpCompliance.Violation.html#CASE_INSENSITIVE_METHOD"><code>HttpCompliance.Violation.CASE_INSENSITIVE_METHOD</code></a> in the <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/HttpCompliance.html"><code>HttpCompliance</code></a> set of allowed violations.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="http"><a class="anchor" href="#http"></a>HTTP Compliance Modes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In 1995, when Jetty was first implemented, there were no RFC specification of HTTP, only a W3C specification for <a href="https://www.w3.org/Protocols/HTTP/AsImplemented.html">HTTP/0.9</a>, which has since been obsoleted or augmented by:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://datatracker.ietf.org/doc/html/rfc1945">RFC 1945</a> for HTTP/1.0 in 1996</p>
+</li>
+<li>
+<p><a href="https://datatracker.ietf.org/doc/html/rfc2068">RFC 2068</a> for HTTP/1.1  in 1997</p>
+</li>
+<li>
+<p><a href="https://datatracker.ietf.org/doc/html/rfc2616">RFC 2616</a> for HTTP/1.1 bis in 1999</p>
+</li>
+<li>
+<p><a href="https://datatracker.ietf.org/doc/html/rfc7230">RFC 7230</a>, <a href="https://datatracker.ietf.org/doc/html/rfc7231">RFC 7231</a>, <a href="https://datatracker.ietf.org/doc/html/rfc7232">RFC 7232</a>, <a href="https://datatracker.ietf.org/doc/html/rfc7233">RFC 7233</a>, <a href="https://datatracker.ietf.org/doc/html/rfc7234">RFC 7234</a>, <a href="https://datatracker.ietf.org/doc/html/rfc7235">RFC 7235</a> again for HTTP/1.1 in 2014</p>
+</li>
+<li>
+<p><a href="https://datatracker.ietf.org/doc/html/rfc7540">RFC 7540</a> for HTTP/2.0 in 2015</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In addition to these evolving requirements, some earlier version of Jetty did not completely or strictly implement the RFC at the time (for example, case-insensitive HTTP methods).
+Therefore, upgrading to a newer Jetty version may cause runtime behavior differences that may break your applications.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/HttpCompliance.Violation.html"><code>HttpCompliance.Violation</code></a> enumeration defines the RFC requirements that may be optionally enforced by Jetty, to support legacy deployments. These possible violations are grouped into modes by the <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/HttpCompliance.html"><code>HttpCompliance</code></a> class, which also defines several named modes that support common deployed sets of violations (with the default being <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/HttpCompliance.html#RFC7230"><code>HttpCompliance.RFC7230</code></a>).</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpConfiguration httpConfiguration = new HttpConfiguration();
+httpConfiguration.setHttpCompliance(HttpCompliance.RFC7230);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to customize the violations that you want to allow, you can create your own mode using the <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/HttpCompliance.html#from(java.lang.String)"><code>HttpCompliance.from(String)</code></a> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpConfiguration httpConfiguration = new HttpConfiguration();
+
+// RFC7230 compliance, but allow Violation.MULTIPLE_CONTENT_LENGTHS.
+HttpCompliance customHttpCompliance = HttpCompliance.from("RFC7230,MULTIPLE_CONTENT_LENGTHS");
+
+httpConfiguration.setHttpCompliance(customHttpCompliance);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="uri"><a class="anchor" href="#uri"></a>URI Compliance Modes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Universal Resource Locators (URLs) where initially formalized in 1994 in <a href="https://datatracker.ietf.org/doc/html/rfc1738">RFC 1738</a> and then refined in 1995 with relative URLs by <a href="https://datatracker.ietf.org/doc/html/rfc1808">RFC 1808</a>.</p>
+</div>
+<div class="paragraph">
+<p>In 1998, URLs were generalized to Universal Resource Identifiers (URIs) by <a href="https://datatracker.ietf.org/doc/html/rfc2396">RFC 2396</a>, which also introduced features such a <a href="https://datatracker.ietf.org/doc/html/rfc2396#section-3.3">path parameter</a>s.</p>
+</div>
+<div class="paragraph">
+<p>This was then obsoleted in 2005 by <a href="https://datatracker.ietf.org/doc/html/rfc3986">RFC 3986</a> which removed the definition for path parameters.</p>
+</div>
+<div class="paragraph">
+<p>Unfortunately by this stage the existence and use of such parameters had already been codified in the Servlet specification.
+For example, the relative URI <code>/foo/bar;JSESSIONID=a8b38cd02b1c</code> would define the path parameter <code>JSESSIONID</code> for the path segment <code>bar</code>, but the most recent RFC does not specify a formal definition of what this relative URI actually means.</p>
+</div>
+<div class="paragraph">
+<p>The current situation is that there may be URIs that are entirely valid for <a href="https://datatracker.ietf.org/doc/html/rfc3986">RFC 3986</a>, but are ambiguous when handled by the Servlet APIs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A URI with <code>..</code> <em>and</em> path parameters such as <code>/some/..;/path</code> is not <a href="https://datatracker.ietf.org/doc/html/rfc3986#section-5.2"><em>resolved</em></a> by RFC 3986, since the resolution process only applies to the exact segment <code>..</code>, not to <code>..;</code>.
+However, once the path parameters are removed by the Servlet APIs, the resulting <code>/some/../path</code> can easily be resolved to <code>/path</code>, rather than be treated as a path that has <code>..;</code> as a segment.</p>
+</li>
+<li>
+<p>A URI such as <code>/some/%2e%2e/path</code> is not resolved by RFC 3986, yet when URL-decoded by the Servlet APIs will result in <code>/some/../path</code> which can easily be resolved to <code>/path</code>, rather than be treated as a path that has <code>..</code> as a segment.</p>
+</li>
+<li>
+<p>A URI with empty segments like <code>/some//../path</code> may be correctly resolved to <code>/some/path</code> (the <code>..</code> removes the previous empty segment) by the Servlet APIs.
+However, if the URI raw path is passed to some other APIs (for example, file system APIs) it can be interpreted as <code>/path</code> because the empty segment <code>//</code> is discarded and treated as <code>/</code>, and the <code>..</code> thus removes the <code>/some</code> segment.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In order to avoid ambiguous URIs, Jetty imposes additional URI requirements in excess of what is required by <a href="https://datatracker.ietf.org/doc/html/rfc3986">RFC 3986</a> compliance.</p>
+</div>
+<div class="paragraph">
+<p>These additional requirements may optionally be violated and are defined by the <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/UriCompliance.Violation.html"><code>UriCompliance.Violation</code></a> enumeration.</p>
+</div>
+<div class="paragraph">
+<p>These violations are then grouped into modes by the <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/UriCompliance.html"><code>UriCompliance</code></a> class, which also defines several named modes that support common deployed sets of violations, with the default being <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/UriCompliance.html#DEFAULT"><code>UriCompliance.DEFAULT</code></a>.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpConfiguration httpConfiguration = new HttpConfiguration();
+httpConfiguration.setUriCompliance(UriCompliance.RFC3986);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to customize the violations that you want to allow, you can create your own mode using the <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/UriCompliance.html#from(java.lang.String)"><code>UriCompliance.from(String)</code></a> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpConfiguration httpConfiguration = new HttpConfiguration();
+
+// RFC3986 compliance, but enforce Violation.AMBIGUOUS_PATH_SEPARATOR.
+UriCompliance customUriCompliance = UriCompliance.from("RFC3986,-AMBIGUOUS_PATH_SEPARATOR");
+
+httpConfiguration.setUriCompliance(customUriCompliance);</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="servleturi"><a class="anchor" href="#servleturi"></a>Servlet URI Compliance Modes</h3>
+<div class="paragraph">
+<p>Even if the server has been configured (as above) to allow ambiguous URIs to be received, individual Servlet contexts may not allow such ambiguous URIs to be returned via some specific methods.</p>
+</div>
+<div class="paragraph">
+<p>Specifically the <code>HttpServletRequest</code> methods: <a href="https://jakarta.ee/specifications/servlet/6.0/apidocs/jakarta.servlet/jakarta/servlet/http/httpservletrequest#getServletPath()">getServletPath()</a> and <a href="https://jakarta.ee/specifications/servlet/6.0/apidocs/jakarta.servlet/jakarta/servlet/http/httpservletrequest#getPathInfo()">getPathInfo()</a>, may throw <code>IllegalArgumentException</code> for such URIs.</p>
+</div>
+<div class="paragraph">
+<p>The intention is for safer methods, such as <a href="https://jakarta.ee/specifications/servlet/6.0/apidocs/jakarta.servlet/jakarta/servlet/http/httpservletrequest#getRequestURI()">getRequestURI</a> to be used instead.</p>
+</div>
+<div class="paragraph">
+<p>If necessary, the <code>ServletHandler</code> can be configured to allow ambiguous URIs from all methods with <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/ee10/servlet/ServletHandler.html#setDecodeAmbiguousURIs(boolean)">setDecodeAmbiguousURIs(boolean)</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cookie"><a class="anchor" href="#cookie"></a>Cookie Compliance Modes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The standards for Cookies have varied greatly over time from a non-specified but de-facto standard (implemented by the first browsers), through <a href="https://tools.ietf.org/html/rfc2965">RFC 2965</a> and currently to <a href="https://tools.ietf.org/html/rfc6265">RFC 6265</a>.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/CookieCompliance.Violation.html">CookieCompliance.Violation</a> enumeration defines the RFC requirements that may be optionally enforced by Jetty when parsing the <code>Cookie</code> HTTP header in requests and when generating the <code>Set-Cookie</code> HTTP header in responses.</p>
+</div>
+<div class="paragraph">
+<p>These violations are then grouped into modes by the <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/CookieCompliance.html"><code>CookieCompliance</code></a> class, which also defines several named modes that support common deployed sets of violations, with the default being <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/CookieCompliance.html#RFC6265"><code>CookieCompliance.RFC6265</code></a>.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpConfiguration httpConfiguration = new HttpConfiguration();
+httpConfiguration.setRequestCookieCompliance(CookieCompliance.RFC6265);
+httpConfiguration.setResponseCookieCompliance(CookieCompliance.RFC6265);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to customize the violations that you want to allow, you can create your own mode using the <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/CookieCompliance.html#from(java.lang.String)"><code>CookieCompliance.from(String)</code></a> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpConfiguration httpConfiguration = new HttpConfiguration();
+
+// RFC6265 compliance, but enforce Violation.RESERVED_NAMES_NOT_DOLLAR_PREFIXED.
+CookieCompliance customUriCompliance = CookieCompliance.from("RFC6265,-RESERVED_NAMES_NOT_DOLLAR_PREFIXED");
+httpConfiguration.setRequestCookieCompliance(customUriCompliance);
+
+httpConfiguration.setResponseCookieCompliance(CookieCompliance.RFC6265);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="http3.html">HTTP/3 Server Library</a></span>
+  <span class="next"><a href="session.html">HTTP Session Management</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>I/O Architecture :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="index.html">
+    <link rel="next" href="http.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Programming Guide</a></li>
+    <li><a href="index.html">Client Libraries</a></li>
+    <li><a href="io-arch.html">I/O Architecture</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/programming-guide/pages/client/io-arch.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">I/O Architecture</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jetty client libraries provide the basic components and APIs to implement a client application.</p>
+</div>
+<div class="paragraph">
+<p>They build on the common <a href="../arch/io.html" class="xref page">Jetty I/O Architecture</a> and provide client specific concepts (such as establishing a connection to a server).</p>
+</div>
+<div class="paragraph">
+<p>There are conceptually two layers that compose the Jetty client libraries:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="#transport">The transport layer</a>, that handles the low-level communication with the server, and deals with buffers, threads, etc.</p>
+</li>
+<li>
+<p><a href="#protocol">The protocol layer</a>, that handles the high-level protocol by parsing the bytes read from the transport layer and by generating the bytes to write to the transport layer.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="transport"><a class="anchor" href="#transport"></a>Transport Layer</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The transport layer is the low-level layer that communicates with the server.</p>
+</div>
+<div class="paragraph">
+<p>Protocols such as HTTP/1.1 and HTTP/2 are typically transported over TCP, while the newer HTTP/3 is transported over QUIC, which is itself transported over UDP.</p>
+</div>
+<div class="paragraph">
+<p>However, there are other means of communication supported by the Jetty client libraries, in particular over <a href="#unix-domain">Unix-Domain sockets</a> (for inter-process communication), and over <a href="#memory">memory</a> (for intra-process communication).</p>
+</div>
+<div class="paragraph">
+<p>The same high-level protocol can be carried by different low-level transports.
+For example, the high-level HTTP/1.1 protocol can be transported over either TCP (the default), or QUIC, or Unix-Domain sockets, or memory, because all these low-level transport provide reliable and ordered communication between client and server.</p>
+</div>
+<div class="paragraph">
+<p>Similarly, the high-level HTTP/3 protocol can be transported over either QUIC (the default) or memory.
+It would be possible to transport HTTP/3 also over Unix-Domain sockets, but the current version of Java only supports Unix-Domain sockets for <code>SocketChannel</code>s and not for <code>DatagramChannel</code>s.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty client libraries use the common I/O design described in <a href="../arch/io.html" class="xref page">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>The common I/O components and concepts are used for all low-level transports.
+The only partial exception is the <a href="#memory">memory transport</a>, which is not based on network components; as such it does not need a <code>SelectorManager</code>, but it exposes <code>EndPoint</code> so that high-level protocols have a common interface to interact with the low-level transport.</p>
+</div>
+<div class="paragraph">
+<p>The client-side abstraction for the low-level transport is <code>org.eclipse.jetty.io.Transport</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>Transport</code> represents how high-level protocols can be transported; there is <code>Transport.TCP_IP</code> that represents communication over TCP, but also <code>Transport.TCPUnix</code> for Unix-Domain sockets, <code>QuicTransport</code> for QUIC and <code>MemoryTransport</code> for memory.</p>
+</div>
+<div class="paragraph">
+<p>Applications can specify the <code>Transport</code> to use for each request as described in <a href="http.html#api-transport" class="xref page">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>When the <code>Transport</code> implementation uses the network, it delegates to <code>org.eclipse.jetty.io.ClientConnector</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>ClientConnector</code> primarily wraps <code>org.eclipse.jetty.io.SelectorManager</code> to provide network functionalities, and aggregates other four components:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a thread pool (in form of an <code>java.util.concurrent.Executor</code>)</p>
+</li>
+<li>
+<p>a scheduler (in form of <code>org.eclipse.jetty.util.thread.Scheduler</code>)</p>
+</li>
+<li>
+<p>a byte buffer pool (in form of <code>org.eclipse.jetty.io.ByteBufferPool</code>)</p>
+</li>
+<li>
+<p>a TLS factory (in form of <code>org.eclipse.jetty.util.ssl.SslContextFactory.Client</code>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>ClientConnector</code> is where you want to set those components after you have configured them.
+If you don&#8217;t explicitly set those components on the <code>ClientConnector</code>, then appropriate defaults will be chosen when the <code>ClientConnector</code> starts.</p>
+</div>
+<div class="paragraph">
+<p><code>ClientConnector</code> manages all network-related components, and therefore it is used for TCP, UDP, QUIC and <a href="#unix-domain">Unix-Domain sockets</a>.</p>
+</div>
+<div class="paragraph">
+<p>The simplest example that creates and starts a <code>ClientConnector</code> is the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ClientConnector clientConnector = new ClientConnector();
+clientConnector.start();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A more typical example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Create and configure the SslContextFactory.
+SslContextFactory.Client sslContextFactory = new SslContextFactory.Client();
+sslContextFactory.addExcludeProtocols("TLSv1", "TLSv1.1");
+
+// Create and configure the thread pool.
+QueuedThreadPool threadPool = new QueuedThreadPool();
+threadPool.setName("client");
+
+// Create and configure the ClientConnector.
+ClientConnector clientConnector = new ClientConnector();
+clientConnector.setSslContextFactory(sslContextFactory);
+clientConnector.setExecutor(threadPool);
+clientConnector.start();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A more advanced example that customizes the <code>ClientConnector</code> by overriding some of its methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">class CustomClientConnector extends ClientConnector
+{
+    @Override
+    protected SelectorManager newSelectorManager()
+    {
+        return new ClientSelectorManager(getExecutor(), getScheduler(), getSelectors())
+        {
+            @Override
+            protected void endPointOpened(EndPoint endpoint)
+            {
+                System.getLogger("endpoint").log(INFO, "opened %s", endpoint);
+            }
+
+            @Override
+            protected void endPointClosed(EndPoint endpoint)
+            {
+                System.getLogger("endpoint").log(INFO, "closed %s", endpoint);
+            }
+        };
+    }
+}
+
+// Create and configure the thread pool.
+QueuedThreadPool threadPool = new QueuedThreadPool();
+threadPool.setName("client");
+
+// Create and configure the scheduler.
+Scheduler scheduler = new ScheduledExecutorScheduler("scheduler-client", false);
+
+// Create and configure the custom ClientConnector.
+CustomClientConnector clientConnector = new CustomClientConnector();
+clientConnector.setExecutor(threadPool);
+clientConnector.setScheduler(scheduler);
+clientConnector.start();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Since <code>ClientConnector</code> is the component that handles the low-level network transport, it is also the component where you want to configure the low-level network configuration.</p>
+</div>
+<div class="paragraph">
+<p>The most common parameters are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ClientConnector.selectors</code>: the number of <code>java.nio.Selector</code>s components (defaults to <code>1</code>) that are present to handle the <code>SocketChannel</code>s and <code>DatagramChannel</code>s opened by the <code>ClientConnector</code>.
+You typically want to increase the number of selectors only for those use cases where each selector should handle more than few hundreds <em>concurrent</em> socket events.
+For example, one selector typically runs well for <code>250</code> <em>concurrent</em> socket events; as a rule of thumb, you can multiply that number by <code>10</code> to obtain the number of opened sockets a selector can handle (<code>2500</code>), based on the assumption that not all the <code>2500</code> sockets will be active <em>at the same time</em>.</p>
+</li>
+<li>
+<p><code>ClientConnector.idleTimeout</code>: the duration of time after which <code>ClientConnector</code> closes a socket due to inactivity (defaults to <code>30</code> seconds).
+This is an important parameter to configure, and you typically want the client idle timeout to be shorter than the server idle timeout, to avoid race conditions where the client attempts to use a socket just before the client-side idle timeout expires, but the server-side idle timeout has already expired and the is already closing the socket.</p>
+</li>
+<li>
+<p><code>ClientConnector.connectBlocking</code>: whether the operation of connecting a socket to the server (i.e. <code>SocketChannel.connect(SocketAddress)</code>) must be a blocking or a non-blocking operation (defaults to <code>false</code>).
+For <code>localhost</code> or same datacenter hosts you want to set this parameter to
+<code>true</code> because DNS resolution will be immediate (and likely never fail).
+For generic Internet hosts (e.g. when you are implementing a web spider) you want to set this parameter to <code>false</code>.</p>
+</li>
+<li>
+<p><code>ClientConnector.connectTimeout</code>: the duration of time after which <code>ClientConnector</code> aborts a connection attempt to the server (defaults to <code>5</code> seconds).
+This time includes the DNS lookup time <em>and</em> the TCP connect time.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Please refer to the <code>ClientConnector</code> <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/io/ClientConnector.html">javadocs</a> for the complete list of configurable parameters.</p>
+</div>
+<div class="sect2">
+<h3 id="unix-domain"><a class="anchor" href="#unix-domain"></a>Unix-Domain Support</h3>
+<div class="paragraph">
+<p><a href="https://openjdk.java.net/jeps/380">JEP 380</a> introduced Unix-Domain sockets support in Java 16, on all operative systems, but only for <code>SocketChannel</code>s (not for <code>DatagramChannel</code>s).</p>
+</div>
+<div class="paragraph">
+<p><code>ClientConnector</code> handles Unix-Domain sockets exactly like it handles regular TCP sockets, so there is no additional configuration necessary&#8201;&#8212;&#8201;Unix-Domain sockets are supported out-of-the-box.</p>
+</div>
+<div class="paragraph">
+<p>Applications can specify the <code>Transport</code> to use for each request as described in <a href="http.html#api-transport" class="xref page">this section</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="memory"><a class="anchor" href="#memory"></a>Memory Support</h3>
+<div class="paragraph">
+<p>In addition to support communication between client and server via network or Unix-Domain, the Jetty client libraries also support communication between client and server via memory for intra-process communication.
+This means that the client and server must be in the same JVM process.</p>
+</div>
+<div class="paragraph">
+<p>This functionality is provided by <code>org.eclipse.jetty.server.MemoryTransport</code>, which does not delegate to <code>ClientConnector</code>, but instead delegates to the server-side <code>MemoryConnector</code> and its related classes.</p>
+</div>
+<div class="paragraph">
+<p>Applications can specify the <code>Transport</code> to use for each request as described in <a href="http.html#api-transport" class="xref page">this section</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="protocol"><a class="anchor" href="#protocol"></a>Protocol Layer</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The protocol layer builds on top of the transport layer to generate the bytes to be written to the low-level transport and to parse the bytes read from the low-level transport.</p>
+</div>
+<div class="paragraph">
+<p>Recall from <a href="../arch/io.html#connection" class="xref page">this section</a> that Jetty uses the <code>Connection</code> abstraction to produce and interpret the low-level transport bytes.</p>
+</div>
+<div class="paragraph">
+<p>On the client side, a <code>ClientConnectionFactory</code> implementation is the component that creates <code>Connection</code> instances based on the protocol that the client wants to "speak" with the server.</p>
+</div>
+<div class="paragraph">
+<p>Applications may use <code>ClientConnector.connect(SocketAddress, Map&lt;String, Object&gt;)</code> to establish a TCP connection to the server, and must provide <code>ClientConnector</code> with the following information in the context map:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A <code>Transport</code> instance that specifies the low-level transport to use.</p>
+</li>
+<li>
+<p>A <code>ClientConnectionFactory</code> that creates <code>Connection</code> instances for the high-level protocol.</p>
+</li>
+<li>
+<p>A <code>Promise</code> that is notified when the connection creation succeeds or fails.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">class CustomConnection extends AbstractConnection
+{
+    public CustomConnection(EndPoint endPoint, Executor executor)
+    {
+        super(endPoint, executor);
+    }
+
+    @Override
+    public void onOpen()
+    {
+        super.onOpen();
+        System.getLogger("connection").log(INFO, "Opened connection {0}", this);
+    }
+
+    @Override
+    public void onFillable()
+    {
+    }
+}
+
+ClientConnector clientConnector = new ClientConnector();
+clientConnector.start();
+
+String host = "serverHost";
+int port = 8080;
+SocketAddress address = new InetSocketAddress(host, port);
+
+// The Transport instance.
+Transport transport = Transport.TCP_IP;
+
+// The ClientConnectionFactory that creates CustomConnection instances.
+ClientConnectionFactory connectionFactory = (endPoint, context) -&gt;
+{
+    System.getLogger("connection").log(INFO, "Creating connection for {0}", endPoint);
+    return new CustomConnection(endPoint, clientConnector.getExecutor());
+};
+
+// The Promise to notify of connection creation success or failure.
+CompletableFuture&lt;CustomConnection&gt; connectionPromise = new Promise.Completable&lt;&gt;();
+
+// Populate the context with the mandatory keys to create and obtain connections.
+Map&lt;String, Object&gt; context = new ConcurrentHashMap&lt;&gt;();
+context.put(Transport.class.getName(), transport);
+context.put(ClientConnector.CLIENT_CONNECTION_FACTORY_CONTEXT_KEY, connectionFactory);
+context.put(ClientConnector.CONNECTION_PROMISE_CONTEXT_KEY, connectionPromise);
+clientConnector.connect(address, context);
+
+// Use the Connection when it's available.
+
+// Use it in a non-blocking way via CompletableFuture APIs.
+connectionPromise.whenComplete((connection, failure) -&gt;
+{
+    System.getLogger("connection").log(INFO, "Created connection for {0}", connection);
+});
+
+// Alternatively, you can block waiting for the connection (or a failure).
+// CustomConnection connection = connectionPromise.get();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When a <code>Connection</code> is created successfully, its <code>onOpen()</code> method is invoked, and then the promise is completed successfully.</p>
+</div>
+<div class="paragraph">
+<p>It is now possible to write a super-simple <code>telnet</code> client that reads and writes string lines:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">class TelnetConnection extends AbstractConnection
+{
+    private final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    private Consumer&lt;String&gt; consumer;
+
+    public TelnetConnection(EndPoint endPoint, Executor executor)
+    {
+        super(endPoint, executor);
+    }
+
+    @Override
+    public void onOpen()
+    {
+        super.onOpen();
+
+        // Declare interest for fill events.
+        fillInterested();
+    }
+
+    @Override
+    public void onFillable()
+    {
+        try
+        {
+            ByteBuffer buffer = BufferUtil.allocate(1024);
+            while (true)
+            {
+                int filled = getEndPoint().fill(buffer);
+                if (filled &gt; 0)
+                {
+                    while (buffer.hasRemaining())
+                    {
+                        // Search for newline.
+                        byte read = buffer.get();
+                        if (read == '\n')
+                        {
+                            // Notify the consumer of the line.
+                            consumer.accept(bytes.toString(StandardCharsets.UTF_8));
+                            bytes.reset();
+                        }
+                        else
+                        {
+                            bytes.write(read);
+                        }
+                    }
+                }
+                else if (filled == 0)
+                {
+                    // No more bytes to fill, declare
+                    // again interest for fill events.
+                    fillInterested();
+                    return;
+                }
+                else
+                {
+                    // The other peer closed the
+                    // connection, close it back.
+                    getEndPoint().close();
+                    return;
+                }
+            }
+        }
+        catch (Exception x)
+        {
+            getEndPoint().close(x);
+        }
+    }
+
+    public void onLine(Consumer&lt;String&gt; consumer)
+    {
+        this.consumer = consumer;
+    }
+
+    public void writeLine(String line, Callback callback)
+    {
+        line = line + "\r\n";
+        getEndPoint().write(callback, ByteBuffer.wrap(line.getBytes(StandardCharsets.UTF_8)));
+    }
+}
+
+ClientConnector clientConnector = new ClientConnector();
+clientConnector.start();
+
+String host = "example.org";
+int port = 80;
+SocketAddress address = new InetSocketAddress(host, port);
+
+ClientConnectionFactory connectionFactory = (endPoint, context) -&gt;
+    new TelnetConnection(endPoint, clientConnector.getExecutor());
+
+CompletableFuture&lt;TelnetConnection&gt; connectionPromise = new Promise.Completable&lt;&gt;();
+
+Map&lt;String, Object&gt; context = new HashMap&lt;&gt;();
+context.put(Transport.class.getName(), Transport.TCP_IP);
+context.put(ClientConnector.CLIENT_CONNECTION_FACTORY_CONTEXT_KEY, connectionFactory);
+context.put(ClientConnector.CONNECTION_PROMISE_CONTEXT_KEY, connectionPromise);
+clientConnector.connect(address, context);
+
+connectionPromise.whenComplete((connection, failure) -&gt;
+{
+    if (failure == null)
+    {
+        // Register a listener that receives string lines.
+        connection.onLine(line -&gt; System.getLogger("app").log(INFO, "line: {0}", line));
+
+        // Write a line.
+        connection.writeLine("GET / HTTP/1.0\r\n", Callback.NOOP);
+    }
+    else
+    {
+        failure.printStackTrace();
+    }
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note how a very basic "telnet" API that applications could use is implemented in the form of the <code>onLine(Consumer&lt;String&gt;)</code> for the non-blocking receiving side and <code>writeLine(String, Callback)</code> for the non-blocking sending side.
+Note also how the <code>onFillable()</code> method implements some basic "parsing" by looking up the <code>\n</code> character in the buffer.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The "telnet" client above looks like a super-simple HTTP client because HTTP/1.0 can be seen as a line-based protocol.
+HTTP/1.0 was used just as an example, but we could have used any other line-based protocol such as <a href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">SMTP</a>, provided that the server was able to understand it.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This is very similar to what the Jetty client implementation does for real network protocols.
+Real network protocols are of course more complicated and so is the implementation code that handles them, but the general ideas are similar.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty client implementation provides a number of <code>ClientConnectionFactory</code> implementations that can be composed to produce and interpret the network bytes.</p>
+</div>
+<div class="paragraph">
+<p>For example, it is simple to modify the above example to use the TLS protocol so that you will be able to connect to the server on port <code>443</code>, typically reserved for the secure HTTP protocol.</p>
+</div>
+<div class="paragraph">
+<p>The differences between the clear-text version and the TLS encrypted version are minimal:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">class TelnetConnection extends AbstractConnection
+{
+    private final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    private Consumer&lt;String&gt; consumer;
+
+    public TelnetConnection(EndPoint endPoint, Executor executor)
+    {
+        super(endPoint, executor);
+    }
+
+    @Override
+    public void onOpen()
+    {
+        super.onOpen();
+
+        // Declare interest for fill events.
+        fillInterested();
+    }
+
+    @Override
+    public void onFillable()
+    {
+        try
+        {
+            ByteBuffer buffer = BufferUtil.allocate(1024);
+            while (true)
+            {
+                int filled = getEndPoint().fill(buffer);
+                if (filled &gt; 0)
+                {
+                    while (buffer.hasRemaining())
+                    {
+                        // Search for newline.
+                        byte read = buffer.get();
+                        if (read == '\n')
+                        {
+                            // Notify the consumer of the line.
+                            consumer.accept(bytes.toString(StandardCharsets.UTF_8));
+                            bytes.reset();
+                        }
+                        else
+                        {
+                            bytes.write(read);
+                        }
+                    }
+                }
+                else if (filled == 0)
+                {
+                    // No more bytes to fill, declare
+                    // again interest for fill events.
+                    fillInterested();
+                    return;
+                }
+                else
+                {
+                    // The other peer closed the
+                    // connection, close it back.
+                    getEndPoint().close();
+                    return;
+                }
+            }
+        }
+        catch (Exception x)
+        {
+            getEndPoint().close(x);
+        }
+    }
+
+    public void onLine(Consumer&lt;String&gt; consumer)
+    {
+        this.consumer = consumer;
+    }
+
+    public void writeLine(String line, Callback callback)
+    {
+        line = line + "\r\n";
+        getEndPoint().write(callback, ByteBuffer.wrap(line.getBytes(StandardCharsets.UTF_8)));
+    }
+}
+
+ClientConnector clientConnector = new ClientConnector();
+clientConnector.start();
+
+// Use port 443 to contact the server using encrypted HTTP.
+String host = "example.org";
+int port = 443;
+SocketAddress address = new InetSocketAddress(host, port);
+
+ClientConnectionFactory connectionFactory = (endPoint, context) -&gt;
+    new TelnetConnection(endPoint, clientConnector.getExecutor());
+
+// Wrap the "telnet" ClientConnectionFactory with the SslClientConnectionFactory.
+connectionFactory = new SslClientConnectionFactory(clientConnector.getSslContextFactory(),
+    clientConnector.getByteBufferPool(), clientConnector.getExecutor(), connectionFactory);
+
+// We will obtain a SslConnection now.
+CompletableFuture&lt;SslConnection&gt; connectionPromise = new Promise.Completable&lt;&gt;();
+
+Map&lt;String, Object&gt; context = new ConcurrentHashMap&lt;&gt;();
+context.put(Transport.class.getName(), Transport.TCP_IP);
+context.put(ClientConnector.CLIENT_CONNECTION_FACTORY_CONTEXT_KEY, connectionFactory);
+context.put(ClientConnector.CONNECTION_PROMISE_CONTEXT_KEY, connectionPromise);
+clientConnector.connect(address, context);
+
+connectionPromise.whenComplete((sslConnection, failure) -&gt;
+{
+    if (failure == null)
+    {
+        // Unwrap the SslConnection to access the "line" APIs in TelnetConnection.
+        TelnetConnection connection = (TelnetConnection)sslConnection.getSslEndPoint().getConnection();
+        // Register a listener that receives string lines.
+        connection.onLine(line -&gt; System.getLogger("app").log(INFO, "line: {0}", line));
+
+        // Write a line.
+        connection.writeLine("GET / HTTP/1.0\r\n", Callback.NOOP);
+    }
+    else
+    {
+        failure.printStackTrace();
+    }
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The differences with the clear-text version are only:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Change the port from <code>80</code> to <code>443</code>.</p>
+</li>
+<li>
+<p>Wrap the <code>ClientConnectionFactory</code> with <code>SslClientConnectionFactory</code>.</p>
+</li>
+<li>
+<p>Unwrap the <code>SslConnection</code> to access <code>TelnetConnection</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="index.html">Client Libraries</a></span>
+  <span class="next"><a href="http.html">HTTP Client</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

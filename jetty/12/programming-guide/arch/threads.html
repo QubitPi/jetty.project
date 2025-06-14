@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Jetty Threading Architecture :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="bean.html">
+    <link rel="next" href="io.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Programming Guide</a></li>
+    <li>Jetty Architecture</li>
+    <li><a href="threads.html">Jetty Threading Architecture</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/programming-guide/pages/arch/threads.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Jetty Threading Architecture</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Writing a performant client or server is difficult, because it should:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Scale well with the number of processors.</p>
+</li>
+<li>
+<p>Be efficient at using processor caches to avoid <a href="https://en.wikipedia.org/wiki/Parallel_slowdown">parallel slowdown</a>.</p>
+</li>
+<li>
+<p>Support multiple network protocols that may have very different requirements; for example, multiplexed protocols such as HTTP/2 introduce new challenges that are not present in non-multiplexed protocols such as HTTP/1.1.</p>
+</li>
+<li>
+<p>Support different application threading models; for example, if a Jetty server invokes server-side application code that is allowed to call blocking APIs, then the Jetty server should not be affected by how long the blocking API call takes, and should be able to process other connections or other requests in a timely fashion.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="execution-strategy"><a class="anchor" href="#execution-strategy"></a>Execution Strategies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jetty threading architecture can be modeled with a producer/consumer pattern, where produced tasks needs to be consumed efficiently.</p>
+</div>
+<div class="paragraph">
+<p>For example, Jetty produces (among others) these tasks:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A task that wraps a NIO selection event, see the <a href="io.html" class="xref page">Jetty I/O architecture</a>.</p>
+</li>
+<li>
+<p>A task that wraps the invocation of application code that may block (for example, the invocation of a Servlet to handle an HTTP request).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A task is typically a <code>Runnable</code> object that may implement <code>org.eclipse.jetty.util.thread.Invocable</code> to indicate the behavior of the task (in particular, whether the task may block or not).</p>
+</div>
+<div class="paragraph">
+<p>Once a task has been produced, it may be consumed using these modes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#execution-strategy-pc"><code>Produce-Consume</code></a></p>
+</li>
+<li>
+<p><a href="#execution-strategy-pec"><code>Produce-Execute-Consume</code></a></p>
+</li>
+<li>
+<p><a href="#execution-strategy-epc"><code>Execute-Produce-Consume</code></a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="execution-strategy-pc"><a class="anchor" href="#execution-strategy-pc"></a>Produce-Consume</h3>
+<div class="paragraph">
+<p>In the <code>Produce-Consume</code> mode, the producer thread loops to produce a task that is run directly by the <code>Producer Thread</code>.</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNpVzkEKgzAQheF9TjHoulCVlnZX6AWkeIExGWKoTmSSQKH07o1uJNv3f4sX3o5XFFxgRP224hObp5-9QBTkkBNxVEr7ZUUdQXvWLhBUvXiTNAkMkxCaCjBAP6jJGYLoFjrhxwWlHnk7gwswNFDPzk7RChGrZtuqV-IcKqiNN5ZknBOpy67bQl8P3Zb6tuuu0PdDd6Vu2i1980lD_PsD7ABSXQ==" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>If the task is a NIO selection event, then this mode is the thread-per-selector mode which is very CPU core cache efficient, but suffers from the <a href="http://en.wikipedia.org/wiki/Head-of-line_blocking">head-of-line blocking</a>: if one of the tasks blocks or runs slowly, then subsequent tasks cannot be produced (and therefore cannot be consumed either) and will pay in latency the cost of running previous, possibly unrelated, tasks.</p>
+</div>
+<div class="paragraph">
+<p>This mode should only be used if the produced task is known to never block, or if the system tolerates well (or does not care about) head-of-line blocking.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="execution-strategy-pec"><a class="anchor" href="#execution-strategy-pec"></a>Produce-Execute-Consume</h3>
+<div class="paragraph">
+<p>In the <code>Produce-Execute-Consume</code> mode, the <code>Producer Thread</code> loops to produce tasks that are submitted to a <code>java.util.concurrent.Executor</code> to be run by <code>Worker Thread</code>s different from the <code>Producer Thread</code>.</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNqFz8EKwjAMBuB7nyLMs-DaKR4FX0Bk4Lm2YSvb2pF2IIjvbu1ELTt4_fORP_GdsaMkOcBVqq4hN1l9dL0jCCStjyO0gTHlhlGqAMpZZTxCcSKnJ4UEdUsodQHSw6leuouj7qOgTO5Sl_8gf0P-D4o3FKw1GiGYAdfyZjxjh3jOBoyHuoRVb5o2NIRoWZkynmU8ZSLLRMqqLKte2T02abSPWPH6JO0rzpONRQWstNMN0rWfkG0Xms9Ns-a5rr6TKp_sF3vEfN2sRa53v_oJFh6awA==" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>Executor</code> implementation typically adds the task to a queue, and dequeues the task when there is a worker thread available to run it.</p>
+</div>
+<div class="paragraph">
+<p>This mode solves the head-of-line blocking discussed in the <a href="#execution-strategy-pc"><code>Produce-Consume</code> section</a>, but suffers from other issues:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>It is not CPU core cache efficient, as the data available to the producer thread will need to be accessed by another thread that likely is going to run on a CPU core that will not have that data in its caches.</p>
+</li>
+<li>
+<p>If the tasks take time to be run, the <code>Executor</code> queue may grow indefinitely.</p>
+</li>
+<li>
+<p>A small latency is added to every task: the time it waits in the <code>Executor</code> queue.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="execution-strategy-epc"><a class="anchor" href="#execution-strategy-epc"></a>Execute-Produce-Consume</h3>
+<div class="paragraph">
+<p>In the <code>Execute-Produce-Consume</code> mode, the producer thread <code>Thread 1</code> loops to produce a task, then submits one internal task to an <code>Executor</code> to take over production on thread <code>Thread 2</code>, and then runs the task in <code>Thread 1</code>, and so on.</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNp1zU0KwjAQhuF9TjHUtWB-Ki4FbyAB1zEZ2mCbSJKCIN7d1hbKIN3O9_JMfvjwNMn0cDf20aQ4BHeJXUxQkgl5nDAUxmzsn8YWsDFYnxEq3SY0DngFJsNN881CLIXYLORSyM1CLYVirXcIxfe4Ny-fGTtPrw_gM2gOu843bWkSYmB8ulXXIYxDBTsXXYPp3g3I6ml5j5DD8PkJYq61IIJYBUEF9atrUtdrXdOaH_4eyhnXkhByJSQljn-CmmutiKBWQVHhRIQvlPmeuw==" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>This mode may operate like <a href="#execution-strategy-pc"><code>Produce-Consume</code></a> when the take over production task run, for example, by thread <code>Thread 3</code> takes time to be executed (for example, in a busy server): then thread <code>Thread 2</code> will produce one task and run it, then produce another task and run it, etc.&#8201;&#8212;&#8201;<code>Thread 2</code> behaves exactly like the <code>Produce-Consume</code> mode.
+By the time thread <code>Thread 3</code> takes over task production from <code>Thread 2</code>, all the work might already be done.</p>
+</div>
+<div class="paragraph">
+<p>This mode may also operate similarly to <a href="#execution-strategy-pec"><code>Produce-Execute-Consume</code></a> when the take over production task always finds a free CPU core immediately (for example, in a mostly idle server): thread <code>Thread 1</code> will produce a task, yield production to <code>Thread 2</code> while <code>Thread 1</code> is running the task; <code>Thread 2</code> will produce a task, yield production to <code>Thread 3</code> while <code>Thread 2</code> is running the task, etc.</p>
+</div>
+<div class="paragraph">
+<p>Differently from <code>Produce-Execute-Consume</code>, here production happens on different threads, but the advantage is that the task is run by the same thread that produced it (which is CPU core cache efficient).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="execution-strategy-adaptive"><a class="anchor" href="#execution-strategy-adaptive"></a>Adaptive Execution Strategy</h3>
+<div class="paragraph">
+<p>The modes of task consumption discussed above are captured by the <code>org.eclipse.jetty.util.thread.ExecutionStrategy</code> interface, with an additional implementation that also takes into account the behavior of the task when the task implements <code>Invocable</code>.</p>
+</div>
+<div class="paragraph">
+<p>For example, a task that declares itself as non-blocking can be consumed using the <code>Produce-Consume</code> mode, since there is no risk to stop production because the task will not block.</p>
+</div>
+<div class="paragraph">
+<p>Conversely, a task that declares itself as blocking will stop production, and therefore must be consumed using either the <code>Produce-Execute-Consume</code> mode or the <code>Execute-Produce-Consume</code> mode.
+Deciding between these two modes depends on whether there is a free thread immediately available to take over production, and this is captured by the <code>org.eclipse.jetty.util.thread.TryExecutor</code> interface.</p>
+</div>
+<div class="paragraph">
+<p>An implementation of <code>TryExecutor</code> can be asked whether a thread can be immediately and exclusively allocated to run a task, as opposed to a normal <code>Executor</code> that can only queue the task in the expectation that there will be a thread available in the near future to run the task.</p>
+</div>
+<div class="paragraph">
+<p>The concept of task consumption modes, coupled with <code>Invocable</code> tasks that expose their own behavior, coupled with a <code>TryExecutor</code> that guarantees whether production can be immediately taken over are captured by the default Jetty execution strategy, named <code>org.eclipse.jetty.util.thread.AdaptiveExecutionStrategy</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>AdaptiveExecutionStrategy</code> was previously named <code>EatWhatYouKill</code>, named after a hunting proverb in the sense that one should produce (kill) only what it consumes (eats).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="thread-pool"><a class="anchor" href="#thread-pool"></a>Thread Pool</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jetty&#8217;s <a href="#">threading architecture</a> requires a more sophisticated thread pool than what offered by Java&#8217;s <code>java.util.concurrent.ExecutorService</code>.</p>
+</div>
+<div class="paragraph">
+<p>Jetty&#8217;s default thread pool implementation is <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/util/thread/QueuedThreadPool.html"><code>QueuedThreadPool</code></a>.</p>
+</div>
+<div class="paragraph">
+<p><code>QueuedThreadPool</code> integrates with the <a href="bean.html" class="xref page">Jetty component model</a>, implements <code>Executor</code>, provides a <code>TryExecutor</code> implementation (discussed in the <a href="#execution-strategy-adaptive">adaptive execution strategy section</a>), and supports <a href="#thread-pool-virtual-threads">virtual threads</a> (introduced as a preview feature in Java 19 and Java 20, and as an official feature since Java 21).</p>
+</div>
+<div class="sect2">
+<h3 id="thread-pool-queue"><a class="anchor" href="#thread-pool-queue"></a>Thread Pool Queue</h3>
+<div class="paragraph">
+<p><code>QueuedThreadPool</code> uses a <code>BlockingQueue</code> to store tasks that will be executed as soon as a thread is available.</p>
+</div>
+<div class="paragraph">
+<p>It is common, but too simplistic, to think that an upper bound to the thread pool queue is a good way to limit the number of concurrent HTTP requests.</p>
+</div>
+<div class="paragraph">
+<p>In case of asynchronous servers like Jetty, applications may have more than one thread handling a single request.
+Furthermore, the server implementation may produce a number of tasks that <em>must</em> be run by the thread pool, otherwise the server stops working properly.</p>
+</div>
+<div class="paragraph">
+<p>Therefore, the "one-thread-per-request" model is too simplistic, and the real model that predicts the number of threads that are necessary is too complicated to produce an accurate value.</p>
+</div>
+<div class="paragraph">
+<p>For example, a sudden large spike of requests arriving to the server may find the thread pool in an idle state where the number of threads is shrunk to the minimum.
+This will cause many tasks to be queued up, way before an HTTP request is even read from the network.
+Add to this that there could be I/O failures processing requests, which may be submitted as a new task to the thread pool.
+Furthermore, multiplexed protocols like HTTP/2 have a much more complex model (due to <a href="../server/http2.html#flow-control" class="xref page">data flow control</a>).
+For multiplexed protocols, the implementation must be able to write in order to progress reads (and must be able to read in order to progress writes), possibly causing more tasks to be submitted to the thread pool.</p>
+</div>
+<div class="paragraph">
+<p>If any of the submitted tasks is rejected because the queue is bounded the server may grind to a halt, because the task <em>must</em> be executed, sometimes <em>necessarily</em> in a different thread.</p>
+</div>
+<div class="paragraph">
+<p>For these reasons:</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The thread pool queue must be unbounded.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>There are better strategies to limit the number of concurrent requests, discussed in <a href="../server/http.html#handler-use-qos" class="xref page">this section</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="thread-pool-configuration"><a class="anchor" href="#thread-pool-configuration"></a><code>QueuedThreadPool</code> configuration</h3>
+<div class="paragraph">
+<p><code>QueuedThreadPool</code> can be configured with a <code>maxThreads</code> value.</p>
+</div>
+<div class="paragraph">
+<p>However, some of the Jetty components (such as the <a href="io.html#selector-manager" class="xref page">selectors</a>) steal threads for their internal use, or rather <code>QueuedThreadPool</code> leases some threads to these components.
+These threads are reported by <code>QueuedThreadPool.leasedThreads</code> and are not available to run application code.</p>
+</div>
+<div class="paragraph">
+<p><code>QueuedThreadPool</code> can be configured with a <code>reservedThreads</code> value.
+This value represents the maximum number of threads that can be reserved and used by the <code>TryExecutor</code> implementation.
+A negative value for <code>QueuedThreadPool.reservedThreads</code> means that the actual value will be heuristically derived from the number of CPU cores and <code>QueuedThreadPool.maxThreads</code>.
+A value of zero for <code>QueuedThreadPool.reservedThreads</code> means that reserved threads are disabled, and therefore the <a href="#execution-strategy-epc"><code>Execute-Produce-Consume</code> mode</a> is never used&#8201;&#8212;&#8201;the <a href="#execution-strategy-pec"><code>Produce-Execute-Consume</code> mode</a> is always used instead.</p>
+</div>
+<div class="paragraph">
+<p><code>QueuedThreadPool</code> leases threads to the following Jetty components:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <a href="../server/http.html#connector" class="xref page"><code>Connector</code></a>s; for each connector a thread is leased for each <a href="../server/http.html#connector-acceptors" class="xref page">acceptor</a> and each <a href="../server/http.html#connector-selectors" class="xref page">selector</a>.</p>
+</li>
+<li>
+<p>The <code>TryExecutor</code> implementation; for the default implementation <code>ReservedThreadExecutor</code>, <code>QueuedThreadPool.reservedThreads</code> are leased.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To carefully control the minimum number of threads in <code>QueuedThreadPool</code>, you must explicitly specify the number of selectors and the number of acceptors for each <code>Connector</code>, and the number of reserved threads.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">QueuedThreadPool threadPool = new QueuedThreadPool();
+// Configure the number of reserved threads.
+int reservedThreads = 2;
+threadPool.setReservedThreads(reservedThreads);
+
+Server server = new Server(threadPool);
+
+int acceptors = 1;
+int selectors = 3;
+ServerConnector connector = new ServerConnector(server, acceptors, selectors);
+server.addConnector(connector);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above, <code>6</code> threads will be leased: <code>2</code> reserved threads, <code>1</code> acceptor thread and <code>3</code> selector threads.</p>
+</div>
+<div class="paragraph">
+<p>To reduce the number of leased threads, you can configure the acceptors to <code>0</code>, the selectors to <code>1</code> and the reserved threads to <code>0</code>.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Setting the acceptors to <code>0</code> results in TCP connections being accepted in non-blocking mode, which may increase the load on the selector, and possibly in increased latency.</p>
+</div>
+<div class="paragraph">
+<p>Setting the reserved threads to <code>0</code> results in the <a href="#execution-strategy-pec"><code>Produce-Execute-Consume</code> mode</a> to be used instead of the <a href="#execution-strategy-epc"><code>Execute-Produce-Consume</code> mode</a>.</p>
+</div>
+<div class="paragraph">
+<p>You have to try and benchmark what is the best configuration for your use case.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>QueuedThreadPool</code> always maintains the number of threads between <code>QueuedThreadPool.minThreads</code> and <code>QueuedThreadPool.maxThreads</code>; during load spikes the number of thread grows to meet the load demand, and when the load on the system diminishes or the system goes idle, the number of threads shrinks.</p>
+</div>
+<div class="paragraph">
+<p>The number of leased threads must be taken into account to configure <code>QueuedThreadPool.maxThreads</code>.
+During <code>Server</code> startup, <code>QueuedThreadPool</code> leases threads to the Jetty components, and there must be enough threads for these components, and at least <code>1</code> more thread to handle requests.
+In the example above, <code>QueuedThreadPool.maxThreads</code> must be set to <code>7</code> or more.</p>
+</div>
+<div class="paragraph">
+<p>An alternative to explicitly setting the configuration of the Jetty components to which threads are leased, you can leave their configuration at default so that it is calculated by internal Jetty heuristics, and then adjust <code>QueuedThreadPool.maxThreads</code> afterwards:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Use the default thread pool configuration.
+QueuedThreadPool threadPool = new QueuedThreadPool();
+Server server = new Server(threadPool);
+// Use the default ServerConnector configuration.
+ServerConnector connector = new ServerConnector(server);
+server.addConnector(connector);
+// Start the server, so threads are leased to components
+// following the heuristics based on configuration and hardware.
+server.start();
+
+// Calculate a new maxThreads for the thread pool.
+
+// Retrieve the number of leased threads.
+int maxLeasedThreads = threadPool.getMaxLeasedThreads();
+// Choose the number of threads available to run application code.
+int availableThreads = 42;
+// The new value for maxThreads.
+int maxThreads = maxLeasedThreads + availableThreads;
+threadPool.setMaxThreads(maxThreads);</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Do not try to reduce the value of <code>QueuedThreadPool.maxThreads</code> to the minimum possible.</p>
+</div>
+<div class="paragraph">
+<p>Jetty may require threads to run internal tasks, and if no threads are available, because they are leased or busy handling requests, the server performance may degrade.</p>
+</div>
+<div class="paragraph">
+<p><code>QueuedThreadPool</code> can shrink the number of threads when they are not used, as explained below, so it is typically safe to leave <code>QueuedThreadPool.maxThreads</code> to its default, or to a value calculated using the max number of leased threads <code>L</code>, plus the number of concurrent threads to handle requests <code>H</code>, so that <code>QueuedThreadPool.maxThreads=L+H</code>.</p>
+</div>
+<div class="paragraph">
+<p>Consider to choose a generous value for <code>H</code>, for example one that takes into account load spikes, since <code>QueuedThreadPool</code> shrinking will eventually remove threads that are unused.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Shrinking <code>QueuedThreadPool</code> is important in particular in containerized environments, where typically you want to return the memory occupied by the threads to the operative system.
+The shrinking of the <code>QueuedThreadPool</code> is controlled by two parameters: <code>QueuedThreadPool.idleTimeout</code> and <code>QueuedThreadPool.maxEvictCount</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>QueuedThreadPool.idleTimeout</code> indicates how long a thread should stay around when it is idle, waiting for tasks to execute.
+The longer the threads stay around, the more ready they are in case of new load spikes on the system; however, they consume resources: a Java platform thread typically allocates 1 MiB of native memory.</p>
+</div>
+<div class="paragraph">
+<p><code>QueuedThreadPool.maxEvictCount</code> controls how many idle threads are evicted for one <code>QueuedThreadPool.idleTimeout</code> period.
+The larger this value is, the quicker the threads are evicted when the <code>QueuedThreadPool</code> is idle or has less load, and their resources returned to the operative system; however, large values may result in too much thread thrashing: the <code>QueuedThreadPool</code> shrinks too fast and must re-create a lot of threads in case of a new load spike on the system.</p>
+</div>
+<div class="paragraph">
+<p>A good balance between <code>QueuedThreadPool.idleTimeout</code> and <code>QueuedThreadPool.maxEvictCount</code> depends on the load profile of your system, and it is often tuned via trial and error.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="thread-pool-virtual-threads"><a class="anchor" href="#thread-pool-virtual-threads"></a>Virtual Threads</h3>
+<div class="paragraph">
+<p>Virtual threads have been introduced in Java 19 and Java 20 as a preview feature, and have become an official feature since Java 21.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In Java versions where virtual threads are a preview feature, remember to add <code>--enable-preview</code> to the JVM command line options to use virtual threads.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="thread-pool-virtual-threads-queued"><a class="anchor" href="#thread-pool-virtual-threads-queued"></a>Virtual Threads Support with <code>QueuedThreadPool</code></h4>
+<div class="paragraph">
+<p><code>QueuedThreadPool</code> can be configured to use virtual threads by specifying the virtual threads <code>Executor</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">QueuedThreadPool threadPool = new QueuedThreadPool();
+
+// Simple, unlimited, virtual thread Executor.
+threadPool.setVirtualThreadsExecutor(Executors.newVirtualThreadPerTaskExecutor());
+
+// Configurable, bounded, virtual thread executor (preferred).
+VirtualThreadPool virtualExecutor = new VirtualThreadPool();
+virtualExecutor.setMaxThreads(128);
+threadPool.setVirtualThreadsExecutor(virtualExecutor);
+
+// For server-side usage.
+Server server = new Server(threadPool);
+
+// Simple client-side usage.
+HttpClient client = new HttpClient();
+client.setExecutor(threadPool);
+
+// Client-side usage with explicit HttpClientTransport.
+ClientConnector clientConnector = new ClientConnector();
+clientConnector.setExecutor(threadPool);
+HttpClient httpClient = new HttpClient(new HttpClientTransportOverHTTP(clientConnector));</code></pre>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Jetty cannot enforce that the <code>Executor</code> passed to <code>setVirtualThreadsExecutor(Executor)</code> uses virtual threads, so make sure to specify a <em>virtual</em> threads <code>Executor</code> and not a normal <code>Executor</code> that uses platform threads.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>AdaptiveExecutionStrategy</code> makes use of this setting when it determines that a task should be run with the <a href="#execution-strategy-pec"><code>Produce-Execute-Consume</code> mode</a>: rather than submitting the task to <code>QueuedThreadPool</code> to be run in a platform thread, it submits the task to the virtual threads <code>Executor</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Enabling virtual threads in <code>QueuedThreadPool</code> will default the number of reserved threads to zero, unless the number of reserved threads is explicitly configured to a positive value.</p>
+</div>
+<div class="paragraph">
+<p>Defaulting the number of reserved threads to zero ensures that the <a href="#execution-strategy-pec">Produce-Execute-Consume mode</a> is always used, which means that virtual threads will always be used for blocking tasks.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="thread-pool-virtual-threads-virtual"><a class="anchor" href="#thread-pool-virtual-threads-virtual"></a>Virtual Threads Support with <code>VirtualThreadPool</code></h4>
+<div class="paragraph">
+<p><code>VirtualThreadPool</code>  is an alternative to <code>QueuedThreadPool</code> that creates only virtual threads (no platform threads).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">VirtualThreadPool threadPool = new VirtualThreadPool();
+// Limit the max number of current virtual threads.
+threadPool.setMaxThreads(200);
+// Track, with details, virtual threads usage.
+threadPool.setTracking(true);
+threadPool.setDetailedDump(true);
+
+// For server-side usage.
+Server server = new Server(threadPool);
+
+// Simple client-side usage.
+HttpClient client = new HttpClient();
+client.setExecutor(threadPool);
+
+// Client-side usage with explicit HttpClientTransport.
+ClientConnector clientConnector = new ClientConnector();
+clientConnector.setExecutor(threadPool);
+HttpClient httpClient = new HttpClient(new HttpClientTransportOverHTTP(clientConnector));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Despite the name, <code>VirtualThreadPool</code> does not pool virtual threads, but allows you to impose a limit on the maximum number of current virtual threads, using a <code>Semaphore</code>.</p>
+</div>
+<div class="paragraph">
+<p>Limiting the number of current virtual threads helps to limit resource usage in applications, especially in case of load spikes.
+When an unlimited number of virtual threads is allowed, the server might be brought down due to resource (typically memory) exhaustion.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, you can configure it to track virtual threads so that a <a href="../troubleshooting/component-dump.html" class="xref page">Jetty component dump</a> will show all virtual threads currently in use, including those that are unmounted.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="thread-pool-virtual-threads-pinning"><a class="anchor" href="#thread-pool-virtual-threads-pinning"></a>Virtual Threads Pinning</h4>
+<div class="paragraph">
+<p>Even when using virtual threads, Jetty uses non-blocking I/O, and dedicates a thread to each <code>java.nio.channels.Selector</code> to perform the <code>Selector.select()</code> operation.</p>
+</div>
+<div class="paragraph">
+<p>Up to Java 23, calling <code>Selector.select()</code> from a virtual thread <strong>pins</strong> the carrier thread.</p>
+</div>
+<div class="paragraph">
+<p>Since Java 24, calling <code>Selector.select()</code> from a virtual thread does <strong>not</strong> pin the carrier thread.</p>
+</div>
+<div class="sect4">
+<h5 id="thread-pool-virtual-threads-pinning-java23"><a class="anchor" href="#thread-pool-virtual-threads-pinning-java23"></a>Virtual Threads Pinning with Java 19 to 23</h5>
+<div class="paragraph">
+<p>If you configure a server-side <code>Connector</code>, or Jetty&#8217;s <code>HttpClient</code> with <code>N</code> selectors, then <code>N</code> carrier threads will be pinned by the virtual threads calling <code>Selector.select()</code>.</p>
+</div>
+<div class="paragraph">
+<p>If you have less than <code>N</code> CPU cores in your system, then by default all carriers will be pinned in the <code>Selector.select()</code> call, leaving no carrier to execute virtual threads, and therefore completely locking up your system, which will become completely unresponsive.</p>
+</div>
+<div class="paragraph">
+<p>If you have more than <code>N</code> CPU cores in your system, then by default your system may be less efficient, since the carrier threads may be pinned in the <code>Selector.select()</code> call, and therefore not available to run virtual threads.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The number of CPU cores of your system determines, by default, the number of carrier threads.
+The number of carrier threads may be explicitly configured by setting the system property <code>-Djdk.virtualThreadScheduler.parallelism=N</code>, where <code>N</code> is your desired number of carrier threads.</p>
+</div>
+<div class="paragraph">
+<p>Selector threads used by Jetty pin carrier threads.</p>
+</div>
+<div class="paragraph">
+<p>Choose the number of selectors wisely when using virtual threads: the number of selectors must always be less than the number of carrier threads, to leave some of the carrier threads free to run virtual threads.</p>
+</div>
+<div class="paragraph">
+<p>As an extreme example, if your system only has <code>1</code> CPU core, then <code>1</code> selector is enough to pin the only carrier thread, and your system will eventually lock up.
+In this case, you must explicitly configure the number of carrier threads by setting the system property <code>-Djdk.virtualThreadScheduler.parallelism=2</code> (or to a larger value).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="bean.html">Jetty Component Architecture</a></span>
+  <span class="next"><a href="io.html">Jetty I/O Architecture</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

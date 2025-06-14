@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Getting Started :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="../index.html">
+    <link rel="next" href="../features/index.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Operations Guide</a></li>
+    <li><a href="index.html">Getting Started</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/operations-guide/pages/begin/index.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Getting Started</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you are new to Eclipse Jetty, read on to download, install, start and deploy web applications to Jetty.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="quick-setup"><a class="anchor" href="#quick-setup"></a>Quick Setup</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jetty is distributed in an artifact that expands in a directory called <code>$JETTY_HOME</code>, which should not be modified.</p>
+</div>
+<div class="paragraph">
+<p>Configuration for Jetty is typically done in a directory called <code>$JETTY_BASE</code>.
+There may be more than one <code>$JETTY_BASE</code> directories with different configurations.</p>
+</div>
+<div class="paragraph">
+<p>Jetty supports the deployment of EE8, EE9 and EE10 standard web applications, as well as the deployment of Jetty-specific web applications.</p>
+</div>
+<div class="paragraph">
+<p>For example, the following commands can be used to set up a <code>$JETTY_BASE</code> directory that supports deployment of EE10 <code>*.war</code> files and a clear-text HTTP connector:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ export JETTY_HOME=/path/to/jetty-home
+$ mkdir /path/to/jetty-base
+$ cd /path/to/jetty-base
+$ java -jar $JETTY_HOME/start.jar --add-modules=server,http,ee10-deploy</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The last command creates a <code>$JETTY_BASE/start.d/</code> directory and other directories that contain the configuration of the server, including the <code>$JETTY_BASE/webapps/</code> directory, in which standard EE10 <code>*.war</code> files can be deployed.</p>
+</div>
+<div class="paragraph">
+<p>To deploy Jetty&#8217;s demo web applications, run this command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-module=demos</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you can start the Jetty server with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Point your browser at <code>http://localhost:8080</code> to see the demo web applications deployed in Jetty.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty server can be stopped with <code>ctrl+c</code> in the terminal window.</p>
+</div>
+<div class="paragraph">
+<p>The following sections will guide you in details about <a href="#download">downloading</a>, <a href="#install">installing</a> and <a href="#start">starting</a> Jetty, and <a href="#deploy">deploying</a> your web applications to Jetty.</p>
+</div>
+<div class="paragraph">
+<p>Read the <a href="../arch/index.html" class="xref page">Jetty architecture section</a> for more information about Jetty modules, <code>$JETTY_HOME</code>, <code>$JETTY_BASE</code> and how to customize and start Jetty.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="download"><a class="anchor" href="#download"></a>Downloading Jetty</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jetty distribution is a file of the form <code>jetty-home-&lt;version&gt;.&lt;ext&gt;</code>, available for download from <a href="https://jetty.org/download.html" class="bare">https://jetty.org/download.html</a></p>
+</div>
+<div class="paragraph">
+<p>The Jetty distribution is available in both <code>zip</code> and <code>gzip</code> formats; download the one most appropriate for your system, typically <code>zip</code> for Windows and <code>gzip</code> for other operating systems.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="install"><a class="anchor" href="#install"></a>Installing Jetty</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After the download, unpacking Jetty will extract the files into a directory called <code>jetty-home-&lt;version&gt;</code>, where <code>&lt;version&gt;</code> is the version of Jetty that you downloaded.
+For example, installing Jetty 12.0.23-SNAPSHOT will create a directory called <code>jetty-home-12.0.23-SNAPSHOT</code>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+It is important that <strong>only</strong> stable release versions are used in production environments.
+Versions that have been deprecated or are released as Milestones (M), Alpha, Beta or Release Candidates (RC) are <strong>not</strong> suitable for production as they may contain security flaws or incomplete/non-functioning feature sets.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Unpack Jetty file into a convenient location, such as <code>/opt</code>.
+The rest of the instructions in this documentation will refer to this location as <code>$JETTY_HOME</code>, or <code>${jetty.home}</code>.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+For Windows users, you should unpack Jetty to a path that does not contain spaces.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you are new to Jetty, you should read the <a href="../arch/index.html" class="xref page">Jetty architecture section</a> to become familiar with the terms used in this documentation.
+Otherwise, you can jump to the <a href="#start">section on starting Jetty</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="start"><a class="anchor" href="#start"></a>Starting Jetty</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jetty as a standalone server has no graphical user interface; configuring and running the server is done from the command line.</p>
+</div>
+<div class="paragraph">
+<p>First, create a <code>$JETTY_BASE</code> directory.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ JETTY_BASE=/path/to/jetty.base
+$ mkdir $JETTY_BASE
+$ cd $JETTY_BASE</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will typically start Jetty by executing <code>$JETTY_HOME/start.jar</code> from this directory.
+However, if you try to start Jetty from an empty <code>$JETTY_BASE</code>, it will complain that you haven&#8217;t enabled any modules:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Jetty uses a <a href="../modules/index.html" class="xref page">module system</a> to configure and assemble the server; these modules are enabled and configured in <a href="../arch/index.html#jetty-base" class="xref page"><code>$JETTY_BASE</code></a>.
+Since the <code>$JETTY_BASE</code> directory you just created is empty, Jetty has no configuration it can use to assemble the server.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+See the <a href="../arch/index.html" class="xref page">architecture section</a> of this document for more information on the design of Jetty&#8217;s module system.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can explore what modules are available with the <code>--list-modules</code> flag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --list-modules=*</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now try to enable the <a href="../protocols/index.html#http" class="xref page"><code>http</code></a> module.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you want to enable support for protocols like secure HTTP/1.1 or HTTP/2 or HTTP/3, or want to configure Jetty behind a load balancer, read <a href="../protocols/index.html" class="xref page">this section</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=http</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+args=--add-modules=http
+highlight=([a-z\-]+ *transitively enabled)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When Jetty enables the <code>http</code> module, it also automatically enables a number of transitive dependencies of the <code>http</code> module, such as the <code>server</code> module, the <code>logging-jetty</code> module, and so on.</p>
+</div>
+<div class="paragraph">
+<p>You can now start Jetty:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+args=--module=http
+highlight=(\{.*:8080})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Jetty is listening on port <code>8080</code> for clear-text HTTP/1.1 connections.
+But since it has no web applications deployed, it will just reply with <code>404 Not Found</code> to every request.</p>
+</div>
+<div class="paragraph">
+<p>Before you <a href="#deploy">deploy your first web application</a>, take a moment to see what happened to the <code>$JETTY_BASE</code> directory once you enabled the <code>http</code> module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">$JETTY_BASE
+├── resources
+│   └── jetty-logging.properties <i class="conum" data-value="1"></i><b>(1)</b>
+└── start.d <i class="conum" data-value="2"></i><b>(2)</b>
+    └── http.ini <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code>resources/jetty-logging.properties</code> file configures the server&#8217;s logging level; this file was auto-generated when the <code>jetty-logging</code> module was activated as a transitive dependency of the <code>http</code> module.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <code>start.d/</code> directory contains the <code>*.ini</code> configuration files for any modules you have explicitly activated.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The <code>start.d/http.ini</code> file is the <code>http</code> module configuration file, where you can specify values for the <a href="../modules/standard.html#http" class="xref page"><code>http</code> module properties</a>.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>By default, Jetty does <strong>not</strong> generate <code>*.ini</code> configuration files in <code>start.d/</code> for modules activated as transitive dependencies.
+To manually configure such modules, you should activate them directly via Jetty&#8217;s <code>--add-modules</code> flag.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In the <code>http.ini</code> file you can find the following (among other contents):</p>
+</div>
+<div class="listingblock">
+<div class="title">http.ini</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">--module=http <i class="conum" data-value="1"></i><b>(1)</b>
+# jetty.http.port=8080 <i class="conum" data-value="2"></i><b>(2)</b>
+...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This line enables the <code>http</code> module and should not be modified.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>This commented line specifies the default value for the <code>jetty.http.port</code> property, which is the network port that Jetty uses to listen for clear-text HTTP connections.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Try changing the default port.
+Open <code>http.ini</code>, uncomment the line containing <code>jetty.http.port=</code>, and change its value to <code>9999</code>:</p>
+</div>
+<div class="listingblock">
+<div class="title">http.ini</div>
+<div class="content">
+<pre>--module=http
+jetty.http.port=9999
+...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you restart Jetty, it will use this new value:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+args=--module=http jetty.http.port=9999
+highlight=(\{.*:9999})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also specify the value of a module property when you start up Jetty.
+A property value specified on the command-line in this way will <strong>override</strong> the value configured in a module&#8217;s <code>*.ini</code> file.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar jetty.http.port=8080</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+args=--module=http jetty.http.port=8080
+highlight=(\{.*:8080})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For more detailed information about the Jetty start mechanism, you can read the <a href="../arch/index.html#start" class="xref page">Jetty start mechanism</a> section.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploy"><a class="anchor" href="#deploy"></a>Deploying Web Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can deploy two types of web application resources with Jetty:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Standard Web Application Archives</strong>, in the form of <code>*.war</code> files or web application directories, defined by the <a href="https://jakarta.ee/specifications/servlet/">Servlet specification</a>.
+Their deployment is described in <a href="#deploy-war">this section</a>.</p>
+</li>
+<li>
+<p><strong>Jetty context XML files</strong>, that allow you to customize the deployment of standard web applications, and also allow you to use Jetty components&#8201;&#8212;&#8201;and possibly custom components written by you&#8201;&#8212;&#8201;to assemble and deploy your web applications.
+Their deployment is described in <a href="../deploy/index.html" class="xref page">this section</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Jetty supports the deployment of both standard web applications and Jetty context XML files in a specific EE <em>environment</em>, such as the old Java EE 8, or Jakarta EE 9, or Jakarta EE 10.</p>
+</div>
+<div class="paragraph">
+<p>Jetty supports <em>simultaneous</em> deployment of web applications each to a possibly different environment, for example an old Java EE 8 web application alongside a new Jakarta EE 10 web application.</p>
+</div>
+<div class="paragraph">
+<p>Refer to the section about <a href="../deploy/index.html" class="xref page">deployment</a> for further information about how to deploy to different environments.</p>
+</div>
+<div class="paragraph">
+<p>In the following sections you can find simple examples of deployments of Jakarta EE 10 web applications.</p>
+</div>
+<div class="sect2">
+<h3 id="deploy-war"><a class="anchor" href="#deploy-war"></a>Deploying *.war Files</h3>
+<div class="paragraph">
+<p>A standard Servlet web application is packaged in either a <code>*.war</code> file or in a directory with the structure of a <code>*.war</code> file.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Recall that the structure of a <code>*.war</code> file is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">mywebapp.war
+├── index.html <i class="conum" data-value="1"></i><b>(1)</b>
+└── WEB-INF <i class="conum" data-value="2"></i><b>(2)</b>
+    ├── classes/ <i class="conum" data-value="3"></i><b>(3)</b>
+    ├── lib/ <i class="conum" data-value="4"></i><b>(4)</b>
+    └── web.xml <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Publicly accessible resources such as <code>*.html</code>, <code>*.jsp</code>, <code>*.css</code>, <code>*.js</code> files, etc. are placed in <code>*.war</code> or in sub-directories of the <code>*.war</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>WEB-INF</code> is a special directory used to store anything related to the web application that must not be publicly accessible, but may be accessed by other resources.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><code>WEB-INF/classes</code> stores the web application&#8217;s compiled <code>*.class</code> files</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><code>WEB-INF/lib</code> stores the web application&#8217;s <code>*.jar</code> files</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><code>WEB-INF/web.xml</code> is the web application deployment descriptor, which defines the components and the configuration of your web application.</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To deploy a standard web application, you need to enable the <a href="../modules/standard.html#eeN-deploy" class="xref page"><code>ee10-deploy</code> module</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The following examples assume you&#8217;re deploying a Jakarta EE 10 application; for other versions of Jakarta EE, make sure to activate the corresponding <code>ee{8,9,10}-deploy</code> module.</p>
+</div>
+<div class="paragraph">
+<p>Refer to the section about <a href="../deploy/index.html" class="xref page">deployment</a> for further information about how to deploy to different environments.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">$ java -jar $JETTY_HOME/start.jar --add-modules=ee10-deploy</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+setupArgs=--add-modules=http
+args=--add-modules={ee-current}-deploy</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>ee10-deploy</code> module creates <code>$JETTY_BASE/webapps</code>, which is the directory where Jetty looks for any <code>*.war</code> files or web application directories to deploy.</p>
+</div>
+<div class="paragraph">
+<p>Activating one of Jetty&#8217;s <code>ee{8,9,10}-deploy</code> modules enables web application deployment.
+Whether these web applications are served via clear-text HTTP/1.1, or secure HTTP/1.1, or secure HTTP/2, or HTTP/3 (or even all of these protocols) depends on whether the correspondent Jetty protocol modules have been enabled.
+Refer to the <a href="../protocols/index.html" class="xref page">section about protocols</a> for further information.</p>
+</div>
+<div class="paragraph">
+<p>Now you&#8217;re ready to copy a web application to the <code>$JETTY_BASE/webapps</code> directory.
+You can use one of the demos shipped with Jetty:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">$ java -jar $JETTY_HOME/start.jar --add-modules=ee10-demo-simple</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>$JETTY_BASE</code> directory is now:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">$JETTY_BASE
+├── resources
+│   └── jetty-logging.properties
+├── start.d
+│   ├── deploy.ini
+│   ├── ee10-demo-simple.ini
+│   └── http.ini
+└── webapps
+    └── ee10-demo-simple.war</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now start Jetty:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+setupArgs=--add-modules=http,deploy,{ee-current}-demo-simple
+highlight=WebAppContext</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the highlighted line that logs the deployment of <code>ee10-demo-simple.war</code>.</p>
+</div>
+<div class="paragraph">
+<p>Now you can access the web application by pointing your browser to <code>http://localhost:8080/ee10-demo-simple</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deploy-war-advanced"><a class="anchor" href="#deploy-war-advanced"></a>Advanced Deployment</h3>
+<div class="paragraph">
+<p>If you want to customize the deployment of your web application&#8201;&#8212;&#8201;for example, by specifying a <code>contextPath</code> different from the file/directory name, or by specifying JNDI entries, or by specifying virtual hosts&#8201;&#8212;&#8201;read <a href="../deploy/index.html" class="xref page">this section</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../index.html">Operations Guide</a></span>
+  <span class="next"><a href="../features/index.html">Eclipse Jetty Features</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

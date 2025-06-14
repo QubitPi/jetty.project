@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>JMX Monitoring &amp; Management :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="../security/openid-support.html">
+    <link rel="next" href="../tools/index.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Operations Guide</a></li>
+    <li><a href="index.html">JMX Monitoring &amp; Management</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/operations-guide/pages/jmx/index.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">JMX Monitoring &amp; Management</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Monitoring and management of a Jetty server is important because it allows you to monitor the status of the server (<em>"Is the server processing requests?"</em>) and to manage&#8201;&#8212;&#8201;i.e. read and possibly change&#8201;&#8212;&#8201;its configuration.</p>
+</div>
+<div class="paragraph">
+<p>The ability to read and change the Jetty configuration is very important for troubleshooting Jetty&#8201;&#8212;&#8201;please refer to the <a href="../troubleshooting/index.html" class="xref page">troubleshooting section</a> for more information.</p>
+</div>
+<div class="paragraph">
+<p>Jetty relies on the Java Management Extensions (JMX) APIs included in OpenJDK to provide monitoring and management.</p>
+</div>
+<div class="paragraph">
+<p>The JMX APIs support a JVM-local <code>MBeanServer</code>, accessible only from within the JVM itself (or by tools that can <em>attach</em> to a running JVM), and a way to expose the <code>MBeanServer</code> to remote clients via Java&#8217;s RMI (Remote Method Invocation).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="local"><a class="anchor" href="#local"></a>Enabling Local JMX Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As with many other Jetty features, local JMX support is enabled with the <a href="../modules/standard.html#jmx" class="xref page"><code>jmx</code> Jetty module</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=jmx</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With the <code>jmx</code> Jetty module enabled, Jetty components will be exported as JMX <em>MBeans</em> to the JVM platform <code>MBeanServer</code>, so that they can be accessed by JMX compliant tools.</p>
+</div>
+<div class="paragraph">
+<p>Each Jetty component will export to its correspondent MBean relevant configuration parameters, so that a JMX tool can read and possibly change the component configuration through the MBean.</p>
+</div>
+<div class="paragraph">
+<p>Note that the Jetty MBeans are registered into the platform <code>MBeanServer</code>, but are not available to remote clients: they are <em>local</em> to the JVM.</p>
+</div>
+<div class="paragraph">
+<p>This configuration is useful when you develop and test your Jetty server locally.</p>
+</div>
+<div class="paragraph">
+<p>JMX compliant tools such as <a href="https://adoptium.net/jmc.html">Java Mission Control (JMC)</a> can be started locally on your machine and can attach to other JVMs running on your machine, showing you the registered MBeans among which you will find the Jetty MBeans.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Enabling only the local JMX support is the most secure option for monitoring and management, but only users that have local access to the JVM will be able to browse the MBeans.
+If you need to access the MBeans from a remote machine, read <a href="#remote">this section</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="remote"><a class="anchor" href="#remote"></a>Enabling Remote JMX Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are two ways to configure a Jetty server so that it is possible to access the JVM platform MBeans from remote clients:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use the <code>com.sun.management.jmxremote</code> and related system properties when starting Jetty.
+Unfortunately, this solution does not work well with firewalls, and will not be discussed further.</p>
+</li>
+<li>
+<p>Use the <code>jmx-remote</code> Jetty module.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Both ways use Java&#8217;s Remote Method Invocation (RMI) to communicate between the client and the server.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="title">Refresher: How RMI Works</div>
+<div class="paragraph">
+<p>A server application that wants to make an object available to remote clients must <em>export</em> the object.</p>
+</div>
+<div class="paragraph">
+<p>Exporting an object creates an RMI <em>stub</em> that contains the host/port of the RMI <em>server</em> that accepts incoming invocations from clients and forwards them to the object.
+During the creation of the RMI stub, the host stored in the RMI stub is retrieved from the local name resolution system (for example, in Linux, from <code>/etc/hosts</code>).</p>
+</div>
+<div class="paragraph">
+<p>The RMI stub is then sent, along with a name that uniquely identifies the object, to the RMI <em>registry</em>.
+The RMI registry is a service that maps names to RMI stubs; it may be external to both clients and server, although often it is part of the server JVM.</p>
+</div>
+<div class="paragraph">
+<p>When a client application wants to connect to the server object using RMI, it first connects to the RMI registry to download the RMI stub for the RMI server; recall that the RMI stub contains the host/port to connect to the RMI server.
+Then, the client uses the RMI stub to connect to the RMI server, typically to a host/port that may be different from the RMI registry host/port (in particular, by default the RMI server port will be different from the RMI registry port).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Remote access to the platform MBeans, and therefore the Jetty MBeans, is enabled by the <code>jmx-remote</code> Jetty module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=jmx-remote</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command creates the <code>jmx-remote.ini</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">JETTY_BASE
+└── start.d
+    └── <mark>jmx-remote.ini</mark></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Enabling the <code>jmx-remote</code> module transitively enables the <a href="#local"><code>jmx</code> module</a> as well.</p>
+</div>
+<div class="paragraph">
+<p>The configuration for the RMI registry and the RMI server is specified by a <code>JMXServiceURL</code>.
+The string format of an RMI <code>JMXServiceURL</code> is the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>service:jmx:rmi://&lt;rmi_server_host&gt;:&lt;rmi_server_port&gt;/jndi/rmi://&lt;rmi_registry_host&gt;:&lt;rmi_registry_port&gt;/jmxrmi</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Below you can find examples of <code>JMXServiceURL</code>s:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs"><strong>service:jmx:rmi:///jndi/rmi:///jmxrmi</strong>
+where:
+  rmi_server_host = local host address
+  rmi_server_port = randomly chosen
+  rmi_registry_host = local host address
+  rmi_registry_port = 1099
+
+<strong>service:jmx:rmi://0.0.0.0:1099/jndi/rmi://0.0.0.0:1099/jmxrmi</strong>
+where:
+  rmi_server_host = any address
+  rmi_server_port = 1099
+  rmi_registry_host = any address
+  rmi_registry_port = 1099
+
+<strong>service:jmx:rmi://localhost:1100/jndi/rmi://localhost:1099/jmxrmi</strong>
+where:
+  rmi_server_host = loopback address
+  rmi_server_port = 1100
+  rmi_registry_host = loopback address
+  rmi_registry_port = 1099</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The default <code>JMXServiceURL</code> configured by the <code>jmx-remote</code> module is the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>service:jmx:rmi://localhost:1099/jndi/rmi://localhost:1099/jmxrmi</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With the default configuration, only clients that are local to the server machine can connect to the RMI registry and RMI server - this is done for security reasons.
+However, even with this local-only configuration, it would still be possible to access the MBeans from remote using an SSH tunnel, as explained in <a href="#remote-ssh-tunnel">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>By specifying an appropriate <code>JMXServiceURL</code>, you can fine tune the network address the RMI registry and the RMI server bind to, and the ports that the RMI registry and the RMI server listen to.
+The RMI server and RMI registry hosts and ports can be the same (as in the default configuration) because RMI is able to multiplex traffic arriving to one port to multiple RMI objects.</p>
+</div>
+<div class="paragraph">
+<p>If you need to allow JMX remote access through a firewall, you must open both the RMI registry and the RMI server ports.
+The default configuration simplifies the firewall configuration because you only need to open port <code>1099</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When Jetty is started with the <code>jmx-remote</code> module enabled, the RMI stub of the Jetty component that provides access to the MBeans is exported to the RMI registry.</p>
+</div>
+<div class="paragraph">
+<p>The RMI stub contains the host/port to connect to the RMI server, but the host is typically the machine host name, not the host specified in the <code>JMXServiceURL</code> (the latter is only used to specify the network address the RMI server binds to).</p>
+</div>
+<div class="paragraph">
+<p>To control the host stored in the RMI stub you need to set the system property <code>java.rmi.server.hostname</code> with the desired value in the module configuration file, <code>jmx-remote.ini</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If your client cannot connect to the server, the most common cause is a mismatch between the RMI server host of the <code>JMXServiceURL</code> and the RMI server host of the RMI stub.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can customize the RMI server host/port, the RMI registry host/port and the system property <code>java.rmi.server.hostname</code> by editing the <code>jmx-remote.ini</code> configuration file.
+Further information about the <code>jmx-remote</code> module configuration can be found <a href="../modules/standard.html#jmx-remote" class="xref page">here</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="remote-ssh-tunnel"><a class="anchor" href="#remote-ssh-tunnel"></a>Remote JMX Access with Port Forwarding via SSH Tunnel</h3>
+<div class="paragraph">
+<p>You can access JMX MBeans on a remote machine when the RMI ports are not open, for example because of firewall policies, but you have SSH access to the machine, using local port forwarding via an SSH tunnel.</p>
+</div>
+<div class="paragraph">
+<p>In this case you want to configure the <code>JMXServiceURL</code> that binds the RMI server and the RMI registry to the loopback interface only and to the same port:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>service:jmx:rmi://localhost:1099/jndi/rmi://localhost:1099/jmxrmi</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You must set the system property <code>-Djava.rmi.server.hostname=localhost</code> so that the RMI stub contains <code>localhost</code> as the host name to connect to.
+This is, incidentally, the default configuration of the <code>jmx-remote</code> module.</p>
+</div>
+<div class="paragraph">
+<p>Then you set up the local port forwarding with the SSH tunnel:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ ssh -L 1099:localhost:1099 &lt;user&gt;@&lt;machine_host&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Thanks to the local port forwarding of the SSH tunnel, when the client connects to <code>localhost:1099</code> on your local computer, the traffic will be forwarded to <code>machine_host</code> and when there, the SSH daemon will forward the traffic to <code>localhost:1099</code> on <code>machine_host</code>, which is exactly where the RMI server and the RMI registry listens to.</p>
+</div>
+<div class="paragraph">
+<p>The client first contacts the RMI registry, so it connects to <code>localhost:1099</code> on your local computer; the traffic is forwarded to <code>machine_host</code> through the SSH tunnel, connects to the RMI registry and the RMI stub is downloaded to the client.</p>
+</div>
+<div class="paragraph">
+<p>Then the client uses the RMI stub to connect to the RMI server. The RMI stub contains <code>localhost</code> as the RMI server host because that is what you have configured with the system property <code>java.rmi.server.hostname</code>.</p>
+</div>
+<div class="paragraph">
+<p>The client will connect again to <code>localhost:1099</code> on your local computer, this time to contact the RMI server; the traffic is forwarded to <code>machine_host</code> through the SSH tunnel, arrives to <code>machine_host</code> and connects to the RMI server.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="remote-auth"><a class="anchor" href="#remote-auth"></a>Remote JMX Access Authentication &amp; Authorization</h3>
+<div class="paragraph">
+<p>The standard <code>javax.management.remote.JMXConnectorServer</code> class, used by the <code>jmx-remote</code> module to provide remote JMX access to Jetty MBeans, provides several options to authenticate and authorize users.
+For a complete guide to controlling authentication and authorization in JMX, see <a href="https://docs.oracle.com/en/java/javase/11/management/monitoring-and-management-using-jmx-technology.html">the official JMX documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>The simplest way to control JMX authentication and authorization is to specify two files: one contains username and password pairs, and the other contains username and permission pairs.</p>
+</div>
+<div class="paragraph">
+<p>This is achieved by enabling the <code>jmx-remote-auth</code> Jetty module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=jmx-remote-auth</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Enabling the <code>jmx-remote-auth</code> Jetty module creates the following files:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$JETTY_BASE
+├── etc
+│   ├── jmxremote.access
+│   ├── jmxremote.password
+│   └── jmx-remote-auth.xml
+└── start.d
+    ├── jmx-remote-auth.ini
+    └── jmx-remote.ini</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then you edit the <code>$JETTY_BASE/etc/jmxremote.password</code> file, adding the username/password pairs that you need:</p>
+</div>
+<div class="listingblock">
+<div class="title">$JETTY_BASE/etc/jmxremote.password</div>
+<div class="content">
+<pre># The file format is: &lt;username&gt; &lt;password&gt;
+alice wonderland
+bob marley</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You must also edit the <code>$JETTY_BASE/etc/jmxremote.access</code> file to give permissions to your users:</p>
+</div>
+<div class="listingblock">
+<div class="title">$JETTY_BASE/etc/jmxremote.access</div>
+<div class="content">
+<pre># The file format is: &lt;username&gt; &lt;readonly|readwrite&gt;
+alice readwrite
+bob readonly</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The above files define user <code>alice</code> with password <code>wonderland</code> to have <code>readwrite</code> access, and user <code>bob</code> with password <code>marley</code> to have <code>readonly</code> access.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="remote-secure"><a class="anchor" href="#remote-secure"></a>Securing Remote JMX Access with TLS</h3>
+<div class="paragraph">
+<p>The JMX communication via RMI happens by default in clear-text, but it is possible to secure the JMX communication via RMI with TLS.</p>
+</div>
+<div class="paragraph">
+<p>If you want to reuse the configuration that you are using for the <a href="../protocols/index.html#https" class="xref page"><code>https</code> module</a>, you can just enable the <code>jmx-remote-ssl.xml</code> Jetty module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=jmx-remote-ssl</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>jmx-remote-ssl</code> Jetty module depends on the <code>ssl</code> Jetty module that in turn requires a KeyStore (read <a href="../protocols/index.html#ssl" class="xref page">this section</a> for more information).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The KeyStore must contain a valid certificate signed by a Certification Authority.
+Having certificates signed by a Certification Authority simplifies by a lot the configuration needed to get the RMI communication over TLS working properly.</p>
+</div>
+<div class="paragraph">
+<p>The RMI mechanic is the usual one: the RMI client (typically a monitoring console) will connect first to the RMI registry (using TLS), download the RMI stub that contains the address and port of the RMI server to connect to, then connect to the RMI server (using TLS).</p>
+</div>
+<div class="paragraph">
+<p>This also mean that if the RMI registry and the RMI server are on different hosts, the RMI client must have available the cryptographic material to validate the certificates from both hosts.
+This is where having certificates signed by a Certification Authority simplifies the configuration: if they are signed by a well known Certification Authority, the client does not need any extra configuration&#8201;&#8212;&#8201;everything will be handled by the Java runtime.</p>
+</div>
+<div class="paragraph">
+<p>If the certificates are not signed by a Certification Authority (for example the certificate is self-signed), then you need to specify the TLS system properties that allow RMI (especially when acting as an RMI client) to retrieve the cryptographic material necessary to establish the TLS connection.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When the RMI server exports the <code>JMXConnectorServer</code> it acts as an RMI <em>client</em> towards the RMI registry, and as such you must specify the TLS system properties as detailed below.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You must edit the <code>$JETTY_BASE/start.d/jmx-remote-ssl.ini</code> file and add the TrustStore path and password:</p>
+</div>
+<div class="listingblock">
+<div class="title">$JETTY_BASE/start.d/jmx-remote-ssl.ini</div>
+<div class="content">
+<pre>--module=jmx-remote-ssl
+
+# System properties necessary for non-trusted certificates.
+-Djavax.net.ssl.trustStore=/path/to/trustStore.p12
+-Djavax.net.ssl.trustStorePassword=password</pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The TrustStore must contain the certificate you want to trust.</p>
+</div>
+<div class="paragraph">
+<p>If you are using self-signed certificates, the KeyStore already contains the self-signed certificate and therefore the KeyStore can be used as a TrustStore, and the system properties above can refer to the KeyStore path and password.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>JMX compliant tools that offer a graphical user interface also must be started specifying the TrustStore path and password.</p>
+</div>
+<div class="paragraph">
+<p>For example, to launch <a href="https://adoptium.net/jmc.html">Java Mission Control (JMC)</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ jmc -vmargs -Djavax.net.ssl.trustStore=/path/to/trustStore.p12 -Djavax.net.ssl.trustStorePassword=password</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../security/openid-support.html">OpenID Support</a></span>
+  <span class="next"><a href="../tools/index.html">Jetty Tools</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

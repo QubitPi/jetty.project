@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Jetty Modules :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="../start/start-jpms.html">
+    <link rel="next" href="custom.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Operations Guide</a></li>
+    <li><a href="index.html">Jetty Modules</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/operations-guide/pages/modules/index.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Jetty Modules</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Jetty <em>module</em> provides one or more Java components that work together to implement one or more features.
+Such features could be listening for clear-text HTTP/1.1 requests, exposing Jetty components to JMX, provide hot-deployment of web applications, etc.</p>
+</div>
+<div class="paragraph">
+<p>Every Jetty feature is provided by a Jetty module.</p>
+</div>
+<div class="paragraph">
+<p>A Jetty module is defined in a <code>&lt;name&gt;.mod</code> file, where <code>&lt;name&gt;</code> is the module name (see also the <a href="#names">section about module names</a>).</p>
+</div>
+<div class="paragraph">
+<p>Jetty module files are read from the typical <a href="../start/index.html#configure" class="xref page">configuration source directories</a>, under the <code>modules/</code> subdirectory; from higher priority to lower priority:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>$JETTY_BASE/modules/</code> directory.</p>
+</li>
+<li>
+<p>If a directory is specified with the <code>--add-config-dir</code> option, its <code>modules/</code> subdirectory.</p>
+</li>
+<li>
+<p>The <code>$JETTY_HOME/modules/</code> directory.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The standard Jetty modules that Jetty provides out-of-the-box are under <code>$JETTY_HOME/modules/</code>.</p>
+</div>
+<div class="paragraph">
+<p><a href="custom.html" class="xref page">Custom Jetty modules</a> should be put under <code>$JETTY_BASE/modules/</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="names"><a class="anchor" href="#names"></a>Module Names</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Jetty module has a unique name.
+The module name is by default derived from the file name, so module file <code>acme.mod</code> identifies a module named <code>acme</code>.</p>
+</div>
+<div class="paragraph">
+<p>However, a module file may specify a &lt;&lt;directive-provides,[provides&gt;&gt;] directive for a <em>virtual</em> module, so that many modules may provide a different implementation for the same feature.</p>
+</div>
+<div class="paragraph">
+<p>For example, among the standard modules provided by Jetty, the <code>server</code> module depends on the <code>logging</code> module, but there is no correspondent <code>logging.mod</code> file.</p>
+</div>
+<div class="paragraph">
+<p>However, the <code>logging-jetty.mod</code> file has, among others, this section:</p>
+</div>
+<div class="listingblock">
+<div class="title">logging-jetty.mod</div>
+<div class="content">
+<pre>[provides]
+logging|default</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This section means that the <code>logging-jetty.mod</code> file provides the virtual module <code>logging</code>, and it is the default provider.</p>
+</div>
+<div class="paragraph">
+<p>The <code>logging-log4j2.mod</code> file has a similar section:</p>
+</div>
+<div class="listingblock">
+<div class="title">logging-log4j2.mod</div>
+<div class="content">
+<pre>[provides]
+logging</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If there are no enabled modules that provide the <code>logging</code> virtual module, either explicitly or transitively, then the default provider is used, in this case <code>logging-jetty.mod</code>.</p>
+</div>
+<div class="paragraph">
+<p>Otherwise, a module that provides the <code>logging</code> virtual module is explicitly or transitively enabled, and the default provider is not used.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="components"><a class="anchor" href="#components"></a>Module Components</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Jetty module may provide one or more Java components that implement a feature.
+These Java components are nothing more than regular Java classes that are instantiated and configured via <a href="../xml/index.html" class="xref page">Jetty XML</a> files.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty XML file of a Jetty module may instantiate and assemble together its own components, or reference existing components from other Jetty modules to enhance or reconfigure them.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty module&#8217;s XML files are read from the typical <a href="../start/index.html#configure" class="xref page">configuration source directories</a>, under the <code>etc/</code> subdirectory; from higher priority to lower priority:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>$JETTY_BASE/etc/</code> directory.</p>
+</li>
+<li>
+<p>If a directory is specified with the <code>--add-config-dir</code> option, its <code>etc/</code> subdirectory.</p>
+</li>
+<li>
+<p>The <code>$JETTY_HOME/etc/</code> directory.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The standard Jetty modules XML files that Jetty provides out-of-the-box are under <code>$JETTY_HOME/etc/</code>.</p>
+</div>
+<div class="paragraph">
+<p>For example, a Jetty XML file that allocates Jetty&#8217;s <code>QueuedThreadPool</code> could be as simple as:</p>
+</div>
+<div class="listingblock">
+<div class="title">jetty-threadpool.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+&lt;Configure&gt;
+  &lt;New id="threadPool" class="org.eclipse.jetty.util.thread.QueuedThreadPool"&gt;
+    &lt;Set name="maxThreads" type="int"&gt;
+      &lt;Property name="jetty.threadPool.maxThreads" default="256"/&gt;
+    &lt;/Set&gt;
+  &lt;/New&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note how the Jetty XML file above is allocating (with the <code>&lt;New&gt;</code> element) a <code>QueuedThreadPool</code> instance, giving it the unique <code>id</code> of <code>threadPool</code> (so that other modules can reference it, if they need to).
+It is then calling the setter method <code>QueuedThreadPool.setMaxThreads(int)</code> with the value defined by the <a href="#properties">module property</a> <code>jetty.threadPool.maxThreads</code>; if the property value is not defined, it will have the default value of <code>256</code>.</p>
+</div>
+<div class="paragraph">
+<p>This is nothing more than Java code in XML format with configurable properties support that can be leveraged by the <a href="../start/index.html" class="xref page">Jetty start mechanism</a>.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty module&#8217;s XML files make easy to instantiate and assemble Java components (just write the equivalent Java code in XML format), and make easy to configure them by declaring module properties that can be easily customized elsewhere (for example, in <code>*.ini</code> files as described in <a href="../start/index.html#configure-enable" class="xref page">this section</a>, or on the command line as described in <a href="../start/index.html#start" class="xref page">this section</a>).</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Remember that the standard Jetty XML files in <code>$JETTY_HOME/etc/</code> should not be modified.</p>
+</div>
+<div class="paragraph">
+<p>Even if you need to modify a standard Jetty component, write a new Jetty XML file, save it under <code>$JETTY_BASE/etc/</code>, and create a <a href="custom.html" class="xref page">custom Jetty module</a> so that it gets processed when Jetty starts.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="properties"><a class="anchor" href="#properties"></a>Module Properties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Jetty module property is declared in the <a href="#components">module XML file(s)</a> via the <code>&lt;Property&gt;</code> element.
+Modules properties are used to parametrize Jetty components so that you can customize their values when Jetty starts, rather than hard-coding it in the XML files.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can declare your own properties, but the <code>jetty.*</code> namespace is reserved.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A module property can be given a value in a Jetty module <code>[ini]</code> section (see <a href="#directive-ini">here</a>), in a <code>*.ini</code> file as described in <a href="../start/index.html#configure-enable" class="xref page">this section</a>, or on the command line as described in <a href="../start/index.html#start" class="xref page">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>The syntax to specify a property value is the following:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">&lt;name&gt;=&lt;value&gt;</dt>
+<dd>
+<p>Sets the property value unconditionally.</p>
+</dd>
+<dt class="hdlist1">&lt;name&gt;+=&lt;value&gt;</dt>
+<dd>
+<p>Appends the value to the existing value.
+This is useful to append a value to properties that accept a comma separated list of values, for example:</p>
+<div class="listingblock">
+<div class="content">
+<pre>jetty.webapp.addProtectedClasses+=,com.acme</pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">&lt;name&gt;?=&lt;value&gt;</dt>
+<dd>
+<p>Sets the property value only if it is not already set.
+This is useful to define default values, for example for "version" properties, where the "version" property can be explicitly configured to a newer version, but if it is not explicitly configured it will have a default version (see also <a href="../start/index.html#configure-custom-module" class="xref page">here</a>).
+For example:</p>
+<div class="listingblock">
+<div class="content">
+<pre>conscrypt.version?=2.5.1
+jetty.sslContext.provider?=Conscrypt</pre>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="directives"><a class="anchor" href="#directives"></a>Module Directives</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Lines that start with <code>#</code> are comments.</p>
+</div>
+<div class="sect2">
+<h3 id="directive-description"><a class="anchor" href="#directive-description"></a>[description]</h3>
+<div class="paragraph">
+<p>A text that describes the module.</p>
+</div>
+<div class="paragraph">
+<p>This text will be shown by the <a href="../start/index.html#configure" class="xref page">Jetty start mechanism</a> when using the <code>--list-modules</code> command.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directive-tags"><a class="anchor" href="#directive-tags"></a>[tags]</h3>
+<div class="paragraph">
+<p>A list of words that characterize the module.</p>
+</div>
+<div class="paragraph">
+<p>Modules that have the same tags will be shown by the Jetty start mechanism when using the <code>--list-modules=&lt;tag&gt;</code> command.</p>
+</div>
+<div class="listingblock">
+<div class="title">example.mod</div>
+<div class="content">
+<pre>[tags]
+demo
+webapp
+jsp</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directive-provides"><a class="anchor" href="#directive-provides"></a>[provides]</h3>
+<div class="paragraph">
+<p>A module name with an optional <code>default</code> specifier.</p>
+</div>
+<div class="paragraph">
+<p>As explained in the <a href="#names">module name section</a>, there can be many module files each providing a different implementation for the same feature.</p>
+</div>
+<div class="paragraph">
+<p>The format is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[provides]
+&lt;module_name&gt;[|default]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where the <code>|default</code> part is optional and specifies that the module is the default provider.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directive-depends"><a class="anchor" href="#directive-depends"></a>[depends]</h3>
+<div class="paragraph">
+<p>A list of module names that this module depends on.</p>
+</div>
+<div class="paragraph">
+<p>For example, the standard module <code>http</code> depends on module <code>server</code>.
+Enabling the <code>http</code> module also enables, transitively, the <code>server</code> module, since the <code>http</code> module cannot work without the <code>server</code> module; when the <code>server</code> module is transitively enabled, the modules it depends on will be transitively enabled, and so on recursively.</p>
+</div>
+<div class="paragraph">
+<p>The <code>[depends]</code> directive establishes a <a href="https://en.wikipedia.org/wiki/Partially_ordered_set"><em>partial order</em></a> relationship among modules so that enabled modules can be sorted and organized in a graph.
+Circular dependencies are not allowed.</p>
+</div>
+<div class="paragraph">
+<p>The order of the enabled modules is used to determine the processing of the configuration, for example the order of processing of the &lt;&lt;directive-files,[files&gt;&gt;] section, the order of processing of XML files defined in the &lt;&lt;directive-xml,[xml&gt;&gt;] section, etc.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directive-after"><a class="anchor" href="#directive-after"></a>[after]</h3>
+<div class="paragraph">
+<p>This directive indicates that this module is ordered after the listed module names, if they are enabled.</p>
+</div>
+<div class="paragraph">
+<p>For example, module <code>https</code> is <code>[after]</code> module <code>http2</code>.
+Enabling the <code>https</code> module <em>does not</em> enable the <code>http2</code> module.</p>
+</div>
+<div class="paragraph">
+<p>However, if the <code>http2</code> module is enabled (explicitly or transitively), then the <code>https</code> module is <a href="#directive-depends">sorted</a> <em>after</em> the <code>http2</code> module.
+In this way, you are guaranteed that the <code>https</code> module is processed after the <code>http2</code> module.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directive-before"><a class="anchor" href="#directive-before"></a>[before]</h3>
+<div class="paragraph">
+<p>This directive indicates that this module is ordered before the listed module names, if they are enabled.</p>
+</div>
+<div class="paragraph">
+<p>For example, module <code>test-keystore</code> is <code>[before]</code> module <code>ssl</code>.
+Enabling the <code>test-keystore</code> module <em>does not</em> enable the <code>ssl</code> module.</p>
+</div>
+<div class="paragraph">
+<p>This directive is used to create a prerequisite module without the need to modify the <code>depends</code> directive of an existing module.</p>
+</div>
+<div class="paragraph">
+<p>For example, you want to create a custom <code>org.eclipse.jetty.server.Server</code> subclass instance to be used by the standard <code>server</code> module, but without modifying the existing <code>server.mod</code> file nor the <code>jetty.xml</code> file that <code>server.mod</code> uses.</p>
+</div>
+<div class="paragraph">
+<p>This can be achieved by creating the following <code>custom-server</code> <a href="custom.html" class="xref page">Jetty custom module</a>:</p>
+</div>
+<div class="listingblock">
+<div class="title">custom-server.mod</div>
+<div class="content">
+<pre>[description]
+This module creates a custom Server subclass instance.
+
+[before]
+server
+
+[xml]
+etc/custom-server.xml</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>custom-server.xml</code> file is the following:</p>
+</div>
+<div class="listingblock">
+<div class="title">custom-server.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+&lt;Configure id="Server" class="com.acme.server.CustomJettyServer"&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The presence of the <code>[before]</code> directive in <code>custom-server.mod</code> causes the processing of the <code>custom-server.xml</code> file to happen before the processing of the standard <code>jetty.xml</code> file referenced by the standard <code>server.mod</code> Jetty module.</p>
+</div>
+<div class="paragraph">
+<p>Thus, the instance assigned to the <code>Server</code> identifier is your custom <code>com.acme.server.CustomJettyServer</code> instance from the  <code>custom-server.xml</code> file; this instance is then used while processing the <code>jetty.xml</code> file.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directive-files"><a class="anchor" href="#directive-files"></a>[files]</h3>
+<div class="paragraph">
+<p>A list of paths (directories and/or files) that are necessary for the module, created or resolved when the module is enabled.</p>
+</div>
+<div class="paragraph">
+<p>Each path may be of the following types:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Path Name</dt>
+<dd>
+<p>A path name representing a file, or a directory if the path name ends with <code>/</code>, such as <code>webapps/</code>.
+The file or directory will be created relative to <code>$JETTY_BASE</code>, if not already present.</p>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[files]
+logs/</pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">Maven Artifact</dt>
+<dd>
+<p>An URI representing a Maven artifact to be downloaded from Maven Central, if not already present.
+Property expansion is supported.</p>
+<div class="paragraph">
+<p>The format is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[files]
+maven://&lt;groupId&gt;/&lt;artifactId&gt;/&lt;version&gt;[/&lt;type&gt;]|&lt;pathName&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>&lt;type&gt;</code> is optional, and <code>&lt;pathName&gt;</code> after the <code>|</code> is the path under <code>$JETTY_BASE</code> where the downloaded file should be saved.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">[files]
+maven://org.postgresql/postgresql/${postgresql-version}|lib/postgresql-${postgresql-version}.jar</pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">BaseHome</dt>
+<dd>
+<p>An URI representing a <code>$JETTY_HOME</code> resource to be copied in <code>$JETTY_BASE</code>, if not already present.
+URIs of this type are typically only used by standard Jetty modules; custom modules should not need to use it.</p>
+<div class="paragraph">
+<p>The format is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[files]
+basehome:&lt;jettyHomePathName&gt;|&lt;pathName&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[files]
+basehome:modules/demo.d/demo-moved-context.xml|webapps/demo-moved-context.xml</pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">HTTP URL</dt>
+<dd>
+<p>An <code>http://</code> or <code>https://</code> URL to be downloaded, if not already present.</p>
+<div class="paragraph">
+<p>The format is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[files]
+&lt;httpURL&gt;|&lt;pathName&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[files]
+https://acme.com/favicon.ico|webapps/acme/favicon.ico</pre>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directive-libs"><a class="anchor" href="#directive-libs"></a>[libs]</h3>
+<div class="paragraph">
+<p>A list of paths, relative to the <a href="../start/index.html#configure" class="xref page">configuration source directories</a>, of <code>*.jar</code> library files and/or directories that are added to the server class-path (or module-path when <a href="../start/start-jpms.html" class="xref page">running in JPMS mode</a>).</p>
+</div>
+<div class="paragraph">
+<p>The <code>[libs]</code> section if often used in conjunction with the <code>[files]</code> section.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[files]
+maven://org.postgresql/postgresql/${postgresql-version}|lib/postgresql-${postgresql-version}.jar
+
+[libs]
+lib/postgresql-${postgresql-version}.jar</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>postgresql-&lt;version&gt;.jar</code> artifact is downloaded from Maven Central, if not already present, into the <code>$JETTY_BASE/lib/</code> directory when the module is enabled.</p>
+</div>
+<div class="paragraph">
+<p>When Jetty starts, the <code>$JETTY_BASE/lib/postgresql-&lt;version&gt;.jar</code> will be in the server class-path (or module-path).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directive-xml"><a class="anchor" href="#directive-xml"></a>[xml]</h3>
+<div class="paragraph">
+<p>A list of paths, relative to the <a href="../start/index.html#configure" class="xref page">configuration source directories</a>, of Jetty <code>*.xml</code> files that are passed as program arguments to be processed when Jetty starts (see the <a href="../start/index.html#start-xml" class="xref page">section about assembling Jetty components</a>).</p>
+</div>
+<div class="paragraph">
+<p>Jetty XML files are read from the typical <a href="../start/index.html#configure" class="xref page">configuration source directories</a>, under the <code>etc/</code> subdirectory.
+Standard Jetty XML files are under <code>$JETTY_HOME/etc/</code>, while custom Jetty XML files are typically under <code>$JETTY_BASE/etc/</code>.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[xml]
+etc/custom/components.xml</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directive-ini"><a class="anchor" href="#directive-ini"></a>[ini]</h3>
+<div class="paragraph">
+<p>A list of program arguments to pass to the command line when Jetty is started.</p>
+</div>
+<div class="paragraph">
+<p>The program arguments may include any command line option (see <a href="../start/index.html#reference" class="xref page">here</a> for the list of command line options), <a href="#properties">module properties</a> and/or <a href="#components">module XML files</a>.</p>
+</div>
+<div class="paragraph">
+<p>A property defined in the <code>[ini]</code> section is available in the <code>*.mod</code> module file for property expansion, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[ini]
+postgresql-version?=42.6.0
+
+[lib]
+lib/postgresql-${postgresql-version}.jar</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above, the <code>[lib]</code> section contains <code>${postgresql-version}</code>, a reference to property <code>postgresql-version</code> whose value is defined in the <code>[ini]</code> section.
+The expression <code>${&lt;property&gt;}</code> <em>expands</em> the property replacing the expression with the property value.</p>
+</div>
+<div class="paragraph">
+<p>See also the <a href="../start/start-jpms.html" class="xref page">JPMS section</a> for additional examples about the <code>[ini]</code> section.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directive-ini-template"><a class="anchor" href="#directive-ini-template"></a>[ini-template]</h3>
+<div class="paragraph">
+<p>A list of properties to be copied in the <code>*.ini</code> file generated when <a href="../start/index.html#configure-enable" class="xref page">the module is enabled</a>.</p>
+</div>
+<div class="paragraph">
+<p>The list of properties is derived from the <a href="#components">module XML file(s)</a> that declare them.</p>
+</div>
+<div class="paragraph">
+<p>The properties are typically assigned their default value and commented out, so that it is evident which properties have been uncommented and customized with a non-default value.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directive-exec"><a class="anchor" href="#directive-exec"></a>[exec]</h3>
+<div class="paragraph">
+<p>A list of JVM command line options and/or system properties passed to a forked JVM.</p>
+</div>
+<div class="paragraph">
+<p>When the <code>[exec]</code> section is present, the JVM running the Jetty start mechanism will fork another JVM, passing the JVM command line options and system properties listed in the <code>[exec]</code> sections of the enabled modules.</p>
+</div>
+<div class="paragraph">
+<p>This is necessary because JVM options such as <code>-Xmx</code> (that specifies the max JVM heap size) cannot be changed in a running JVM.
+For an example, see <a href="../start/index.html#configure-custom-module-exec" class="xref page">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>You can avoid that the Jetty start mechanism forks the second JVM, as explained in <a href="../start/index.html#configure-dry-run" class="xref page">this section</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directive-jpms"><a class="anchor" href="#directive-jpms"></a>[jpms]</h3>
+<div class="paragraph">
+<p>A list of JVM command line options related to the Java Module System.</p>
+</div>
+<div class="paragraph">
+<p>This section is processed only when Jetty is <a href="../start/start-jpms.html" class="xref page">started in JPMS mode</a>.</p>
+</div>
+<div class="paragraph">
+<p>The directives are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">add-modules</dt>
+<dd>
+<p>Equivalent to the JVM option <code>--add-modules</code>.
+The format is:</p>
+<div class="listingblock">
+<div class="content">
+<pre>[jpms]
+add-modules: &lt;module&gt;(,&lt;module&gt;)*</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>module</code> is a JPMS module name.</p>
+</div>
+</dd>
+<dt class="hdlist1">patch-module</dt>
+<dd>
+<p>Equivalent to the JVM option <code>--patch-module</code>.
+The format is:</p>
+<div class="listingblock">
+<div class="content">
+<pre>[jpms]
+patch-module: &lt;module&gt;=&lt;file&gt;(:&lt;file&gt;)*</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>module</code> is a JPMS module name.</p>
+</div>
+</dd>
+<dt class="hdlist1">add-opens</dt>
+<dd>
+<p>Equivalent to the JVM option <code>--add-opens</code>.
+The format is:</p>
+<div class="listingblock">
+<div class="content">
+<pre>[jpms]
+add-opens: &lt;module&gt;/&lt;package&gt;=&lt;target-module&gt;(,&lt;target-module&gt;)*</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>module</code> and <code>target-module</code> are a JPMS module names.</p>
+</div>
+</dd>
+<dt class="hdlist1">add-exports</dt>
+<dd>
+<p>Equivalent to the JVM option <code>--add-exports</code>.
+The format is:</p>
+<div class="listingblock">
+<div class="content">
+<pre>[jpms]
+add-exports: &lt;module&gt;/&lt;package&gt;=&lt;target-module&gt;(,&lt;target-module&gt;)*</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>module</code> and <code>target-module</code> are a JPMS module names.</p>
+</div>
+</dd>
+<dt class="hdlist1">add-reads</dt>
+<dd>
+<p>Equivalent to the JVM option <code>--add-exports</code>.
+The format is:</p>
+<div class="listingblock">
+<div class="content">
+<pre>[jpms]
+add-reads: &lt;module&gt;=&lt;target-module&gt;(,&lt;target-module&gt;)*</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>module</code> and <code>target-module</code> are a JPMS module names.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directive-license"><a class="anchor" href="#directive-license"></a>[license]</h3>
+<div class="paragraph">
+<p>The license under which the module is released.</p>
+</div>
+<div class="paragraph">
+<p>A Jetty module may be released under a license that is different from Jetty&#8217;s, or use libraries that require end-users to accept their licenses in order to be used.</p>
+</div>
+<div class="paragraph">
+<p>You can put the license text in the <code>[license]</code> section, and when the Jetty module is enabled the license text will be printed on the terminal, and the user prompted to accept the license.
+If the user does not accept the license, the module will not be enabled.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[license]
+Acme Project is an open source project hosted on GitHub
+and released under the Apache 2.0 license.
+https://www.apache.org/licenses/LICENSE-2.0.txt</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directive-version"><a class="anchor" href="#directive-version"></a>[version]</h3>
+<div class="paragraph">
+<p>The minimum Jetty version for which this module is valid.</p>
+</div>
+<div class="paragraph">
+<p>For example, a module may only be valid for Jetty 10 and later, but not for earlier Jetty versions (because it references components that have been introduced in Jetty 10).</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[version]
+10.0</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A Jetty module with such a section will only work for Jetty 10.0.x or later.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../start/start-jpms.html">Starting Jetty using JPMS</a></span>
+  <span class="next"><a href="custom.html">Custom Jetty Modules</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

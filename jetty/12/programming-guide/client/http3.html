@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>HTTP/3 Client Library :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="http2.html">
+    <link rel="next" href="websocket.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Programming Guide</a></li>
+    <li><a href="index.html">Client Libraries</a></li>
+    <li><a href="http3.html">HTTP/3 Client Library</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/programming-guide/pages/client/http3.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">HTTP/3 Client Library</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the vast majority of cases, client applications should use the generic, high-level, <a href="http.html" class="xref page">HTTP client library</a> that also provides HTTP/3 support via the pluggable <a href="http.html#transport-http3" class="xref page">HTTP/3 transport</a> or the <a href="http.html#transport-dynamic" class="xref page">dynamic transport</a>.</p>
+</div>
+<div class="paragraph">
+<p>The high-level HTTP library supports cookies, authentication, redirection, connection pooling and a number of other features that are absent in the low-level HTTP/3 library.</p>
+</div>
+<div class="paragraph">
+<p>The HTTP/3 client library has been designed for those applications that need low-level access to HTTP/3 features such as <em>sessions</em>, <em>streams</em> and <em>frames</em>, and this is quite a rare use case.</p>
+</div>
+<div class="paragraph">
+<p>See also the correspondent <a href="../server/http3.html" class="xref page">HTTP/3 server library</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="intro"><a class="anchor" href="#intro"></a>Introducing HTTP3Client</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Maven artifact coordinates for the HTTP/3 client library are the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.eclipse.jetty.http3&lt;/groupId&gt;
+  &lt;artifactId&gt;jetty-http3-client&lt;/artifactId&gt;
+  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The main class is named <code>org.eclipse.jetty.http3.client.HTTP3Client</code>, and must be created, configured and started before use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Instantiate HTTP3Client.
+SslContextFactory.Client sslContextFactory = new SslContextFactory.Client();
+HTTP3Client http3Client = new HTTP3Client(new ClientQuicConfiguration(sslContextFactory, null));
+
+// Configure HTTP3Client, for example:
+http3Client.getHTTP3Configuration().setStreamIdleTimeout(15000);
+
+// Start HTTP3Client.
+http3Client.start();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When your application stops, or otherwise does not need <code>HTTP3Client</code> anymore, it should stop the <code>HTTP3Client</code> instance (or instances) that were started:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Stop HTTP3Client.
+http3Client.stop();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>HTTP3Client</code> allows client applications to connect to an HTTP/3 server.
+A <em>session</em> represents a single connection to an HTTP/3 server and is defined by class <code>org.eclipse.jetty.http3.api.Session</code>.
+A <em>session</em> typically has a long life&#8201;&#8212;&#8201;once the connection is established, it remains active until it is not used anymore (and therefore it is closed by the idle timeout mechanism), until a fatal error occurs (for example, a network failure), or if one of the peers decides unilaterally to close the connection.</p>
+</div>
+<div class="paragraph">
+<p>HTTP/3 is a multiplexed protocol because it relies on the multiplexing capabilities of QUIC, the protocol based on UDP that transports HTTP/3 frames.
+Thanks to multiplexing, multiple HTTP/3 requests are sent on the same QUIC connection, or <em>session</em>.
+Each request/response cycle is represented by a <em>stream</em>.
+Therefore, a single <em>session</em> manages multiple concurrent <em>streams</em>.
+A <em>stream</em> has typically a very short life compared to the <em>session</em>: a <em>stream</em> only exists for the duration of the request/response cycle and then disappears.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="connect"><a class="anchor" href="#connect"></a>Connecting to the Server</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The first thing an application should do is to connect to the server and obtain a <code>Session</code>.
+The following example connects to the server:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Address of the server's port.
+SocketAddress serverAddress = new InetSocketAddress("localhost", 8444);
+
+// Connect to the server, the CompletableFuture will be
+// notified when the connection is succeeded (or failed).
+CompletableFuture&lt;Session.Client&gt; sessionCF = http3Client.connect(serverAddress, new Session.Client.Listener() {});
+
+// Block to obtain the Session.
+// Alternatively you can use the CompletableFuture APIs to avoid blocking.
+Session session = sessionCF.get();</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configure"><a class="anchor" href="#configure"></a>Configuring the Session</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>connect(...)</code> method takes a <code>Session.Client.Listener</code> parameter.
+This listener&#8217;s <code>onPreface(...)</code> method is invoked just before establishing the connection to the server to gather the client configuration to send to the server.
+Client applications can override this method to change the default configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">SocketAddress serverAddress = new InetSocketAddress("localhost", 8444);
+http3Client.connect(serverAddress, new Session.Client.Listener()
+{
+    @Override
+    public Map&lt;Long, Long&gt; onPreface(Session session)
+    {
+        Map&lt;Long, Long&gt; configuration = new HashMap&lt;&gt;();
+
+        // Add here configuration settings.
+
+        return configuration;
+    }
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>Session.Client.Listener</code> is notified of session events originated by the server such as receiving a <code>SETTINGS</code> frame from the server, or the server closing the connection, or the client timing out the connection due to idleness.
+Please refer to the <code>Session.Client.Listener</code> <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http3/api/Session.Client.Listener.html">javadocs</a> for the complete list of events.</p>
+</div>
+<div class="paragraph">
+<p>Once a <code>Session</code> has been established, the communication with the server happens by exchanging <em>frames</em>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="request"><a class="anchor" href="#request"></a>Sending a Request</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sending an HTTP request to the server, and receiving a response, creates a <em>stream</em> that encapsulates the exchange of HTTP/3 frames that compose the request and the response.</p>
+</div>
+<div class="paragraph">
+<p>In order to send an HTTP request to the server, the client must send a <code>HEADERS</code> frame.
+<code>HEADERS</code> frames carry the request method, the request URI and the request headers.
+Sending the <code>HEADERS</code> frame opens the <code>Stream</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">SocketAddress serverAddress = new InetSocketAddress("localhost", 8444);
+CompletableFuture&lt;Session.Client&gt; sessionCF = http3Client.connect(serverAddress, new Session.Client.Listener() {});
+Session.Client session = sessionCF.get();
+
+// Configure the request headers.
+HttpFields requestHeaders = HttpFields.build()
+    .put(HttpHeader.USER_AGENT, "Jetty HTTP3Client 12.0.23-SNAPSHOT");
+
+// The request metadata with method, URI and headers.
+MetaData.Request request = new MetaData.Request("GET", HttpURI.from("http://localhost:8444/path"), HttpVersion.HTTP_3, requestHeaders);
+
+// The HTTP/3 HEADERS frame, with endStream=true
+// to signal that this request has no content.
+HeadersFrame headersFrame = new HeadersFrame(request, true);
+
+// Open a Stream by sending the HEADERS frame.
+session.newRequest(headersFrame, new Stream.Client.Listener() {});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note how <code>Session.newRequest(...)</code> takes a <code>Stream.Client.Listener</code> parameter.
+This listener is notified of stream events originated by the server such as receiving <code>HEADERS</code> or <code>DATA</code> frames that are part of the response, discussed in more details in the <a href="#response">section below</a>.
+Please refer to the <code>Stream.Client.Listener</code> <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http3/api/Stream.Client.Listener.html">javadocs</a> for the complete list of events.</p>
+</div>
+<div class="paragraph">
+<p>HTTP requests may have content, which is sent using the <code>Stream</code> APIs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">SocketAddress serverAddress = new InetSocketAddress("localhost", 8444);
+CompletableFuture&lt;Session.Client&gt; sessionCF = http3Client.connect(serverAddress, new Session.Client.Listener() {});
+Session.Client session = sessionCF.get();
+
+// Configure the request headers.
+HttpFields requestHeaders = HttpFields.build()
+    .put(HttpHeader.CONTENT_TYPE, "application/json");
+
+// The request metadata with method, URI and headers.
+MetaData.Request request = new MetaData.Request("POST", HttpURI.from("http://localhost:8444/path"), HttpVersion.HTTP_3, requestHeaders);
+
+// The HTTP/3 HEADERS frame, with endStream=false to
+// signal that there will be more frames in this stream.
+HeadersFrame headersFrame = new HeadersFrame(request, false);
+
+// Open a Stream by sending the HEADERS frame.
+CompletableFuture&lt;Stream&gt; streamCF = session.newRequest(headersFrame, new Stream.Client.Listener() {});
+
+// Block to obtain the Stream.
+// Alternatively you can use the CompletableFuture APIs to avoid blocking.
+Stream stream = streamCF.get();
+
+// The request content, in two chunks.
+String content1 = "{\"greet\": \"hello world\"}";
+ByteBuffer buffer1 = StandardCharsets.UTF_8.encode(content1);
+String content2 = "{\"user\": \"jetty\"}";
+ByteBuffer buffer2 = StandardCharsets.UTF_8.encode(content2);
+
+// Send the first DATA frame on the stream, with endStream=false
+// to signal that there are more frames in this stream.
+CompletableFuture&lt;Stream&gt; dataCF1 = stream.data(new DataFrame(buffer1, false));
+
+// Only when the first chunk has been sent we can send the second,
+// with endStream=true to signal that there are no more frames.
+dataCF1.thenCompose(s -&gt; s.data(new DataFrame(buffer2, true)));</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+When sending two <code>DATA</code> frames consecutively, the second call to <code>Stream.data(...)</code> must be done only when the first is completed, or a <code>WritePendingException</code> will be thrown.
+Use the <code>CompletableFuture</code> APIs to ensure that the second <code>Stream.data(...)</code> call is performed when the first completed successfully.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="response"><a class="anchor" href="#response"></a>Receiving a Response</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Response events are delivered to the <code>Stream.Client.Listener</code> passed to <code>Session.newRequest(...)</code>.</p>
+</div>
+<div class="paragraph">
+<p>An HTTP response is typically composed of a <code>HEADERS</code> frame containing the HTTP status code and the response headers, and optionally one or more <code>DATA</code> frames containing the response content bytes.</p>
+</div>
+<div class="paragraph">
+<p>The HTTP/3 protocol also supports response trailers (that is, headers that are sent after the response content) that also are sent using a <code>HEADERS</code> frame.</p>
+</div>
+<div class="paragraph">
+<p>A client application can therefore receive the HTTP/3 frames sent by the server by implementing the relevant methods in <code>Stream.Client.Listener</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Open a Stream by sending the HEADERS frame.
+session.newRequest(headersFrame, new Stream.Client.Listener()
+{
+    @Override
+    public void onResponse(Stream.Client stream, HeadersFrame frame)
+    {
+        MetaData metaData = frame.getMetaData();
+        MetaData.Response response = (MetaData.Response)metaData;
+        System.getLogger("http3").log(INFO, "Received response {0}", response);
+    }
+
+    @Override
+    public void onDataAvailable(Stream.Client stream)
+    {
+        // Read a chunk of the content.
+        Stream.Data data = stream.readData();
+        if (data == null)
+        {
+            // No data available now, demand to be called back.
+            stream.demand();
+        }
+        else
+        {
+            // Process the content.
+            process(data.getByteBuffer());
+
+            // Notify the implementation that the content has been consumed.
+            data.release();
+
+            if (!data.isLast())
+            {
+                // Demand to be called back.
+                stream.demand();
+            }
+        }
+    }
+});</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="reset"><a class="anchor" href="#reset"></a>Resetting a Request or Response</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In HTTP/3, clients and servers have the ability to tell to the other peer that they are not interested anymore in either the request or the response, by resetting the stream.</p>
+</div>
+<div class="paragraph">
+<p>The <code>HTTP3Client</code> APIs allow client applications to send and receive this "reset" event:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Open a Stream by sending the HEADERS frame.
+CompletableFuture&lt;Stream&gt; streamCF = session.newRequest(headersFrame, new Stream.Client.Listener()
+{
+    @Override
+    public void onFailure(Stream.Client stream, long error, Throwable failure)
+    {
+        // The server reset this stream.
+    }
+});
+Stream stream = streamCF.get();
+
+// Reset this stream (for example, the user closed the application).
+stream.reset(HTTP3ErrorCode.REQUEST_CANCELLED_ERROR.code(), new ClosedChannelException());</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="goaway"><a class="anchor" href="#goaway"></a>Session Closing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once a <code>Session</code> has been established (see <a href="#connect">here</a>), it may be closed in the following way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">session.goAway(false);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Closing a <code>Session</code> will send a <code>GOAWAY</code> frame to the server.</p>
+</div>
+<div class="paragraph">
+<p>When the server closes the <code>Session</code>, the <code>GOAWAY</code> frame received by the client carries the identifier of the last stream that was processed by the server.
+Streams that have an identifier higher than the one specified in the <code>GOAWAY</code> frame are not processed by the server.</p>
+</div>
+<div class="paragraph">
+<p>A client application may be sending requests while the server is closing the <code>Session</code>, so it is possible that the client opens a stream that will not be processed by the server, because it has an identifier that is greater than the one specified in the <code>GOAWAY</code> frame sent by the server.</p>
+</div>
+<div class="paragraph">
+<p>In this case the stream is failed on the client with a <code>RetryableStreamException</code>, and client applications may decide whether to retry the request (if the request can be retried):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">CompletableFuture&lt;Stream&gt; streamCF = session.newRequest(headersFrame, new Stream.Client.Listener()
+{
+    @Override
+    public void onFailure(Stream.Client stream, long error, Throwable failure)
+    {
+        if (failure instanceof RetryableStreamException)
+        {
+            // The request may be retried.
+        }
+        else
+        {
+            // The request failed.
+        }
+    }
+});</code></pre>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="http2.html">HTTP/2 Client Library</a></span>
+  <span class="next"><a href="websocket.html">WebSocket Client</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

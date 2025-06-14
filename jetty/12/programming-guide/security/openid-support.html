@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>OpenID Support :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="configuring-form-size.html">
+    <link rel="next" href="../migration/94-to-10.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Programming Guide</a></li>
+    <li>Jetty Security</li>
+    <li><a href="openid-support.html">OpenID Support</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/programming-guide/pages/security/openid-support.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">OpenID Support</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jetty supports authentication using the OpenID Connect protocol (see <a href="https://openid.net/specs/openid-connect-core-1_0-final.html">OpenID Connect Core 1.0</a>).</p>
+</div>
+<div class="paragraph">
+<p>This allows users to authenticate with third party OpenID Providers, making possible to integrate features like "Sign in with Google" or "Sign in with Microsoft", among others.</p>
+</div>
+<div class="paragraph">
+<p>With OpenID Connect, Jetty applications can offload the responsibility of managing user credentials while enabling features like single sign-on (SSO).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="external-configuration"><a class="anchor" href="#external-configuration"></a>External Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To use OpenID Connect authentication with Jetty you are required to set up an external OpenID Provider for your web application; some examples of OpenID Providers are <a href="https://developers.google.com/identity/protocols/OpenIDConnect">Google</a> and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html">Amazon</a>.</p>
+</div>
+<div class="paragraph">
+<p>Once you have set up your OpenID Provider you will have access to a Client ID and Client Secret which you can use to configure Jetty.</p>
+</div>
+<div class="paragraph">
+<p>You must also configure your OpenID Provider to recognize the redirect URIs that your web application will use to handle authentication responses.
+By default, the redirect path is <code>/j_security_check</code>, but this can be customized through the <code>OpenIdAuthenticator</code> configuration if needed.</p>
+</div>
+<div class="paragraph">
+<p>For example, you may wish to register the following URIs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For a deployed application, <code>https://example.com/j_security_check</code>.</p>
+</li>
+<li>
+<p>For local development, <code>http://localhost:8080/j_security_check</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Ensure that all relevant environments where your web application is deployed have their corresponding URIs registered with the OpenID Provider to avoid authentication errors.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jetty-configuration"><a class="anchor" href="#jetty-configuration"></a>Jetty Configuration</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="code-example"><a class="anchor" href="#code-example"></a>Code Example</h3>
+<div class="paragraph">
+<p>This is an example of how you can configure OpenID Connect authentication with an embedded Jetty environment with the Jetty Core API.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// To create an OpenIdConfiguration you can rely on discovery of the OIDC metadata.
+OpenIdConfiguration openIdConfig = new OpenIdConfiguration(
+    "https://example.com/issuer",           // ISSUER
+    "my-client-id",                         // CLIENT_ID
+    "my-client-secret"                     // CLIENT_SECRET
+);
+
+// Or you can specify the full OpenID configuration manually.
+openIdConfig = new OpenIdConfiguration(
+    "https://example.com/issuer",           // ISSUER
+    "https://example.com/token",            // TOKEN_ENDPOINT
+    "https://example.com/auth",             // AUTH_ENDPOINT
+    "https://example.com/logout",           // END_SESSION_ENDPOINT
+    "my-client-id",                         // CLIENT_ID
+    "my-client-secret",                     // CLIENT_SECRET
+    "client_secret_post",                   // AUTH_METHOD (e.g., client_secret_post, client_secret_basic)
+    new HttpClient()                        // HttpClient instance
+);
+
+// The specific security handler implementation will change depending on whether you are using EE8/EE9/EE10/EE11 or Jetty Core API.
+SecurityHandler.PathMapped securityHandler = new SecurityHandler.PathMapped();
+server.insertHandler(securityHandler);
+securityHandler.put("/auth/*", Constraint.ANY_USER);
+
+// A nested LoginService is optional and used to specify known users with defined roles.
+// This can be any instance of LoginService and is not restricted to be a HashLoginService.
+HashLoginService nestedLoginService = new HashLoginService();
+UserStore userStore = new UserStore();
+userStore.addUser("&lt;admin-user-subject-identifier&gt;", null, new String[]{"admin"});
+nestedLoginService.setUserStore(userStore);
+
+// Optional configuration to allow new users not listed in the nested LoginService to be authenticated.
+openIdConfig.setAuthenticateNewUsers(true);
+
+// An OpenIdLoginService should be used which can optionally wrap the nestedLoginService to support roles.
+LoginService loginService = new OpenIdLoginService(openIdConfig, nestedLoginService);
+securityHandler.setLoginService(loginService);
+
+// Configure an OpenIdAuthenticator.
+securityHandler.setAuthenticator(new OpenIdAuthenticator(openIdConfig,
+    "/j_security_check", // The path where the OIDC provider redirects back to Jetty.
+    "/error", // Optional page where authentication errors are redirected.
+    "/logoutRedirect" // Optional page where the user is redirected to this page after logout.
+));
+
+// Session handler is required for OpenID authentication.
+server.insertHandler(new SessionHandler());</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="application-usage"><a class="anchor" href="#application-usage"></a>Application Usage</h3>
+<div class="paragraph">
+<p>Here is an example of a Jetty Core <code>Handler</code> which handles authenticated requests by accessing the OpenID claims, and also handles authentication errors at <code>/error</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">class OpenIdExampleHandler extends Handler.Abstract
+{
+    @Override
+    public boolean handle(Request request, Response response, Callback callback) throws Exception
+    {
+        PrintStream writer = new PrintStream(Content.Sink.asOutputStream(response));
+
+        String pathInContext = Request.getPathInContext(request);
+        if (pathInContext.startsWith("/error"))
+        {
+            // Handle requests to the error page which may have an error description parameter.
+            Fields parameters = Request.getParameters(request);
+            writer.println("error_description: " + parameters.get("error_description_jetty") + "&lt;br&gt;");
+        }
+        else
+        {
+            Principal userPrincipal = AuthenticationState.getUserPrincipal(request);
+            writer.println("userPrincipal: " + userPrincipal);
+            if (userPrincipal != null)
+            {
+                // You can access the full openid claims for an authenticated session.
+                Session session = request.getSession(false);
+                @SuppressWarnings("unchecked")
+                Map&lt;String, String&gt; claims = (Map&lt;String, String&gt;)session.getAttribute("org.eclipse.jetty.security.openid.claims");
+                writer.println("claims: " + claims);
+                writer.println("name: " + claims.get("name"));
+                writer.println("sub: " + claims.get("sub"));
+            }
+        }
+
+        writer.close();
+        callback.succeeded();
+        return true;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="claims-and-access-token"><a class="anchor" href="#claims-and-access-token"></a>Claims and Access Token</h4>
+<div class="paragraph">
+<p>Claims about the user can be found using attributes in the HTTP session attribute <code>org.eclipse.jetty.security.openid.claims</code>, and the full response containing the OAuth 2.0 Access Token can be found in the HTTP session attribute <code>org.eclipse.jetty.security.openid.response</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="authorization-with-security-roles"><a class="anchor" href="#authorization-with-security-roles"></a>Authorization with Security Roles</h3>
+<div class="paragraph">
+<p>If security roles are required, they can be configured through a wrapped <code>LoginService</code> which is deferred to for role information by the <code>OpenIdLoginService</code>.</p>
+</div>
+<div class="paragraph">
+<p>The wrapped <code>LoginService</code> be configured through the constructor arguments of <code>OpenIdLoginService</code>, or left <code>null</code> if no user roles are required.</p>
+</div>
+<div class="paragraph">
+<p>When using authorization roles, the property <code>authenticateNewUsers</code>, which can be configured through the <code>OpenIdConfiguration</code> or directly on the <code>OpenIdLoginService</code>, becomes significant.</p>
+</div>
+<div class="paragraph">
+<p>When <code>authenticateNewUsers</code> is set to <code>true</code>, users not found by the wrapped <code>LoginService</code> will still be authenticated but will have no roles.</p>
+</div>
+<div class="paragraph">
+<p>When <code>authenticateNewUsers</code> is set to <code>false</code>, users not found by the wrapped <code>LoginService</code> will be not be allowed to authenticate and are redirected to the error page.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="configuring-form-size.html">Limiting Form Content</a></span>
+  <span class="next"><a href="../migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>HTTP/2 Server Library :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="http.html">
+    <link rel="next" href="http3.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Programming Guide</a></li>
+    <li><a href="index.html">Server Libraries</a></li>
+    <li><a href="http2.html">HTTP/2 Server Library</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/programming-guide/pages/server/http2.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">HTTP/2 Server Library</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the vast majority of cases, server applications should use the generic, high-level, <a href="http.html" class="xref page">HTTP server library</a> that also provides HTTP/2 support via the HTTP/2 <code>ConnectionFactory</code>s as described in details <a href="http.html#connector-protocol-http2" class="xref page">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>The low-level HTTP/2 server library has been designed for those applications that need low-level access to HTTP/2 features such as <em>sessions</em>, <em>streams</em> and <em>frames</em>, and this is quite a rare use case.</p>
+</div>
+<div class="paragraph">
+<p>See also the correspondent <a href="../client/http2.html" class="xref page">HTTP/2 client library</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="intro"><a class="anchor" href="#intro"></a>Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Maven artifact coordinates for the HTTP/2 client library are the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.eclipse.jetty.http2&lt;/groupId&gt;
+  &lt;artifactId&gt;jetty-http2-server&lt;/artifactId&gt;
+  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>HTTP/2 is a multiplexed protocol: it allows multiple HTTP/2 requests to be sent on the same TCP connection, or <em>session</em>.
+Each request/response cycle is represented by a <em>stream</em>.
+Therefore, a single <em>session</em> manages multiple concurrent <em>streams</em>.
+A <em>stream</em> has typically a very short life compared to the <em>session</em>: a <em>stream</em> only exists for the duration of the request/response cycle and then disappears.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="flow-control"><a class="anchor" href="#flow-control"></a>HTTP/2 Flow Control</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The HTTP/2 protocol is <em>flow controlled</em> (see <a href="https://tools.ietf.org/html/rfc7540#section-5.2">the specification</a>).
+This means that a sender and a receiver maintain a <em>flow control window</em> that tracks the number of data bytes sent and received, respectively.
+When a sender sends data bytes, it reduces its flow control window.
+When a receiver receives data bytes, it also reduces its flow control window, and then passes the received data bytes to the application.
+The application consumes the data bytes and tells back the receiver that it has consumed the data bytes.
+The receiver then enlarges the flow control window, and the implementation arranges to send a message to the sender with the number of bytes consumed, so that the sender can enlarge its flow control window.</p>
+</div>
+<div class="paragraph">
+<p>A sender can send data bytes up to its whole flow control window, then it must stop sending.
+The sender may resume sending data bytes when it receives a message from the receiver that the data bytes sent previously have been consumed.
+This message enlarges the sender flow control window, which allows the sender to send more data bytes.</p>
+</div>
+<div class="paragraph">
+<p>HTTP/2 defines <em>two</em> flow control windows: one for each <em>session</em>, and one for each <em>stream</em>.
+Let&#8217;s see with an example how they interact, assuming that in this example the session flow control window is 120 bytes and the stream flow control window is 100 bytes.</p>
+</div>
+<div class="paragraph">
+<p>The sender opens a session, and then opens <code>stream_1</code> on that session, and sends <code>80</code> data bytes.
+At this point the session flow control window is <code>40</code> bytes (<code>120 - 80</code>), and <code>stream_1</code>'s flow control window is <code>20</code> bytes (<code>100 - 80</code>).
+The sender now opens <code>stream_2</code> on the same session and sends <code>40</code> data bytes.
+At this point, the session flow control window is <code>0</code> bytes (<code>40 - 40</code>), while <code>stream_2</code>'s flow control window is <code>60</code> (<code>100 - 40</code>).
+Since now the session flow control window is <code>0</code>, the sender cannot send more data bytes, neither on <code>stream_1</code> nor on <code>stream_2</code>, nor on other streams, despite all the streams having their stream flow control windows greater than <code>0</code>.</p>
+</div>
+<div class="paragraph">
+<p>The receiver consumes <code>stream_2</code>'s <code>40</code> data bytes and sends a message to the sender with this information.
+At this point, the session flow control window is <code>40</code> (<code>0 + 40</code>), <code>stream_1</code>'s flow control window is still <code>20</code> and <code>stream_2</code>'s flow control window is <code>100</code> (<code>60 + 40</code>).
+If the sender opens <code>stream_3</code> and would like to send <code>50</code> data bytes, it would only be able to send <code>40</code> because that is the maximum allowed by the session flow control window at this point.</p>
+</div>
+<div class="paragraph">
+<p>It is therefore very important that applications notify the fact that they have consumed data bytes as soon as possible, so that the implementation (the receiver) can send a message to the sender (in the form of a <code>WINDOW_UPDATE</code> frame) with the information to enlarge the flow control window, therefore reducing the possibility that sender stalls due to the flow control windows being reduced to <code>0</code>.</p>
+</div>
+<div class="paragraph">
+<p>How a server application should handle HTTP/2 flow control is discussed in details in <a href="#request">this section</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="setup"><a class="anchor" href="#setup"></a>Server Setup</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The low-level HTTP/2 support is provided by <code>org.eclipse.jetty.http2.server.RawHTTP2ServerConnectionFactory</code> and <code>org.eclipse.jetty.http2.api.server.ServerSessionListener</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Create a Server instance.
+Server server = new Server();
+
+ServerSessionListener sessionListener = new ServerSessionListener() {};
+
+// Create a ServerConnector with RawHTTP2ServerConnectionFactory.
+RawHTTP2ServerConnectionFactory http2 = new RawHTTP2ServerConnectionFactory(sessionListener);
+
+// Configure RawHTTP2ServerConnectionFactory, for example:
+
+// Configure the max number of concurrent requests.
+http2.setMaxConcurrentStreams(128);
+// Enable support for CONNECT.
+http2.setConnectProtocolEnabled(true);
+
+// Create the ServerConnector.
+ServerConnector connector = new ServerConnector(server, http2);
+
+// Add the Connector to the Server
+server.addConnector(connector);
+
+// Start the Server so it starts accepting connections from clients.
+server.start();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where server applications using the <a href="http.html" class="xref page">high-level server library</a> deal with HTTP requests and responses in <code>Handler</code>s, server applications using the low-level HTTP/2 server library deal directly with HTTP/2 <em>session</em>s, <em>stream</em>s and <em>frame</em>s in a <code>ServerSessionListener</code> implementation.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ServerSessionListener</code> interface defines a number of methods that are invoked by the implementation upon the occurrence of HTTP/2 events, and that server applications can override to react to those events.</p>
+</div>
+<div class="paragraph">
+<p>Please refer to the <code>ServerSessionListener</code> <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http2/api/server/ServerSessionListener.html">javadocs</a> for the complete list of events.</p>
+</div>
+<div class="paragraph">
+<p>The first event is the <em>accept</em> event and happens when a client opens a new TCP connection to the server and the server accepts the connection.
+This is the first occasion where server applications have access to the HTTP/2 <code>Session</code> object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ServerSessionListener sessionListener = new ServerSessionListener()
+{
+    @Override
+    public void onAccept(Session session)
+    {
+        SocketAddress remoteAddress = session.getRemoteSocketAddress();
+        System.getLogger("http2").log(INFO, "Connection from {0}", remoteAddress);
+    }
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After connecting to the server, a compliant HTTP/2 client must send the <a href="https://tools.ietf.org/html/rfc7540#section-3.5">HTTP/2 client preface</a>, and when the server receives it, it generates the <em>preface</em> event on the server.
+This is where server applications can customize the connection settings by returning a map of settings that the implementation will send to the client:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ServerSessionListener sessionListener = new ServerSessionListener()
+{
+    @Override
+    public Map&lt;Integer, Integer&gt; onPreface(Session session)
+    {
+        // Customize the settings, for example:
+        Map&lt;Integer, Integer&gt; settings = new HashMap&lt;&gt;();
+
+        // Tell the client that HTTP/2 push is disabled.
+        settings.put(SettingsFrame.ENABLE_PUSH, 0);
+
+        return settings;
+    }
+};</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="request"><a class="anchor" href="#request"></a>Receiving a Request</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Receiving an HTTP request from the client, and sending a response, creates a <em>stream</em> that encapsulates the exchange of HTTP/2 frames that compose the request and the response.</p>
+</div>
+<div class="paragraph">
+<p>An HTTP request is made of a <code>HEADERS</code> frame, that carries the request method, the request URI and the request headers, and optional <code>DATA</code> frames that carry the request content.</p>
+</div>
+<div class="paragraph">
+<p>Receiving the <code>HEADERS</code> frame opens the <code>Stream</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ServerSessionListener sessionListener = new ServerSessionListener()
+{
+    @Override
+    public Stream.Listener onNewStream(Stream stream, HeadersFrame frame)
+    {
+        // This is the "new stream" event, so it's guaranteed to be a request.
+        MetaData.Request request = (MetaData.Request)frame.getMetaData();
+
+        // Return a Stream.Listener to handle the request events,
+        // for example request content events or a request reset.
+        return new Stream.Listener()
+        {
+            // Override callback methods for events you are interested in.
+        };
+    }
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Server applications should return a <code>Stream.Listener</code> implementation from <code>onNewStream(...)</code> to be notified of events generated by the client, such as <code>DATA</code> frames carrying request content, or a <code>RST_STREAM</code> frame indicating that the client wants to <em>reset</em> the request, or an idle timeout event indicating that the client was supposed to send more frames but it did not.</p>
+</div>
+<div class="paragraph">
+<p>The example below shows how to receive request content:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ServerSessionListener sessionListener = new ServerSessionListener()
+{
+    @Override
+    public Stream.Listener onNewStream(Stream stream, HeadersFrame frame)
+    {
+        MetaData.Request request = (MetaData.Request)frame.getMetaData();
+
+        // Demand for request data content.
+        stream.demand();
+
+        // Return a Stream.Listener to handle the request events.
+        return new Stream.Listener()
+        {
+            @Override
+            public void onDataAvailable(Stream stream)
+            {
+                Stream.Data data = stream.readData();
+
+                if (data == null)
+                {
+                    stream.demand();
+                    return;
+                }
+
+                // Get the content buffer.
+                ByteBuffer buffer = data.frame().getByteBuffer();
+
+                // Consume the buffer, here - as an example - just log it.
+                System.getLogger("http2").log(INFO, "Consuming buffer {0}", buffer);
+
+                // Tell the implementation that the buffer has been consumed.
+                data.release();
+
+                if (!data.frame().isEndStream())
+                {
+                    // Demand more DATA frames when they are available.
+                    stream.demand();
+                }
+            }
+        };
+    }
+};</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When <code>onDataAvailable(Stream stream)</code> is invoked, the demand is implicitly cancelled.</p>
+</div>
+<div class="paragraph">
+<p>Just returning from the <code>onDataAvailable(Stream stream)</code> method does <em>not</em> implicitly demand for more <code>DATA</code> frames.</p>
+</div>
+<div class="paragraph">
+<p>Applications must call <code>Stream.demand()</code> to explicitly require that <code>onDataAvailable(Stream stream)</code> is invoked again when more <code>DATA</code> frames are available.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Applications that consume the content buffer within <code>onDataAvailable(Stream stream)</code> (for example, writing it to a file, or copying the bytes to another storage) should call <code>Data.release()</code> as soon as they have consumed the content buffer.
+This allows the implementation to reuse the buffer, reducing the memory requirements needed to handle the content buffers.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, an application may store away the <code>Data</code> object to consume the buffer bytes later, or pass the <code>Data</code> object to another asynchronous API (this is typical in proxy applications).</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The call to <code>Stream.readData()</code> tells the implementation to enlarge the stream and session flow control windows so that the sender will be able to send more <code>DATA</code> frames without stalling.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Applications can unwrap the <code>Data</code> object into some other object that may be used later, provided that the <em>release</em> semantic is maintained:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">record Chunk(ByteBuffer byteBuffer, Callback callback)
+{
+}
+
+// A queue that consumers poll to consume content asynchronously.
+Queue&lt;Chunk&gt; dataQueue = new ConcurrentLinkedQueue&lt;&gt;();
+
+// Implementation of Stream.Listener.onDataAvailable(Stream stream)
+// in case of unwrapping of the Data object for asynchronous content
+// consumption and demand.
+Stream.Listener listener = new Stream.Listener()
+{
+    @Override
+    public void onDataAvailable(Stream stream)
+    {
+        Stream.Data data = stream.readData();
+
+        if (data == null)
+        {
+            stream.demand();
+            return;
+        }
+
+        // Get the content buffer.
+        ByteBuffer byteBuffer = data.frame().getByteBuffer();
+
+        // Unwrap the Data object, converting it to a Chunk.
+        // The Data.release() semantic is maintained in the completion of the Callback.
+        dataQueue.offer(new Chunk(byteBuffer, Callback.from(() -&gt;
+        {
+            // When the buffer has been consumed, then:
+            // A) release the Data object.
+            data.release();
+            // B) possibly demand more DATA frames.
+            if (!data.frame().isEndStream())
+                stream.demand();
+        })));
+
+        // Do not demand more data here, to avoid to overflow the queue.
+    }
+};</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Applications that implement <code>onDataAvailable(Stream stream)</code> must remember to call <code>Stream.demand()</code> eventually.</p>
+</div>
+<div class="paragraph">
+<p>If they do not call <code>Stream.demand()</code>, the implementation will not invoke <code>onDataAvailable(Stream stream)</code> to deliver more <code>DATA</code> frames and the application will stall threadlessly until an idle timeout fires to close the stream or the session.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="response"><a class="anchor" href="#response"></a>Sending a Response</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After receiving an HTTP request, a server application must send an HTTP response.</p>
+</div>
+<div class="paragraph">
+<p>An HTTP response is typically composed of a <code>HEADERS</code> frame containing the HTTP status code and the response headers, and optionally one or more <code>DATA</code> frames containing the response content bytes.</p>
+</div>
+<div class="paragraph">
+<p>The HTTP/2 protocol also supports response trailers (that is, headers that are sent after the response content) that also are sent using a <code>HEADERS</code> frame.</p>
+</div>
+<div class="paragraph">
+<p>A server application can send a response in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ServerSessionListener sessionListener = new ServerSessionListener()
+{
+    @Override
+    public Stream.Listener onNewStream(Stream stream, HeadersFrame frame)
+    {
+        // Send a response after reading the request.
+        MetaData.Request request = (MetaData.Request)frame.getMetaData();
+        if (frame.isEndStream())
+        {
+            respond(stream, request);
+            return null;
+        }
+        else
+        {
+            // Demand for request data.
+            stream.demand();
+
+            // Return a listener to handle the request events.
+            return new Stream.Listener()
+            {
+                @Override
+                public void onDataAvailable(Stream stream)
+                {
+                    Stream.Data data = stream.readData();
+
+                    if (data == null)
+                    {
+                        stream.demand();
+                        return;
+                    }
+
+                    // Consume the request content.
+                    data.release();
+
+                    if (data.frame().isEndStream())
+                        respond(stream, request);
+                    else
+                        stream.demand();
+                }
+            };
+        }
+    }
+
+    private void respond(Stream stream, MetaData.Request request)
+    {
+        // Prepare the response HEADERS frame.
+
+        // The response HTTP status and HTTP headers.
+        MetaData.Response response = new MetaData.Response(HttpStatus.OK_200, null, HttpVersion.HTTP_2, HttpFields.EMPTY);
+
+        if (HttpMethod.GET.is(request.getMethod()))
+        {
+            // The response content.
+            ByteBuffer resourceBytes = getResourceBytes(request);
+
+            // Send the HEADERS frame with the response status and headers,
+            // and a DATA frame with the response content bytes.
+            stream.headers(new HeadersFrame(stream.getId(), response, null, false))
+                .thenCompose(s -&gt; s.data(new DataFrame(s.getId(), resourceBytes, true)));
+        }
+        else
+        {
+            // Send just the HEADERS frame with the response status and headers.
+            stream.headers(new HeadersFrame(stream.getId(), response, null, true));
+        }
+    }
+};</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="reset"><a class="anchor" href="#reset"></a>Resetting a Request</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A server application may decide that it does not want to accept the request.
+For example, it may throttle the client because it sent too many requests in a time window, or the request is invalid (and does not deserve a proper HTTP response), etc.</p>
+</div>
+<div class="paragraph">
+<p>A request can be reset in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ServerSessionListener sessionListener = new ServerSessionListener()
+{
+    @Override
+    public Stream.Listener onNewStream(Stream stream, HeadersFrame frame)
+    {
+        float requestRate = calculateRequestRate();
+
+        if (requestRate &gt; maxRequestRate)
+        {
+            stream.reset(new ResetFrame(stream.getId(), ErrorCode.REFUSED_STREAM_ERROR.code), Callback.NOOP);
+            return null;
+        }
+        else
+        {
+            // The request is accepted.
+            MetaData.Request request = (MetaData.Request)frame.getMetaData();
+            // Return a Stream.Listener to handle the request events.
+            return new Stream.Listener()
+            {
+                // Override callback methods for events you are interested in.
+            };
+        }
+    }
+};</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="push"><a class="anchor" href="#push"></a>HTTP/2 Push of Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A server application may <em>push</em> secondary resources related to a primary resource.</p>
+</div>
+<div class="paragraph">
+<p>A client may inform the server that it does not accept pushed resources(see <a href="https://tools.ietf.org/html/rfc7540#section-8.2">this section</a> of the specification) via a <code>SETTINGS</code> frame.
+Server applications must track <code>SETTINGS</code> frames and verify whether the client supports HTTP/2 push, and only push if the client supports it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// The favicon bytes.
+ByteBuffer faviconBuffer = BufferUtil.toBuffer(ResourceFactory.root().newResource("/path/to/favicon.ico"), true);
+
+ServerSessionListener sessionListener = new ServerSessionListener()
+{
+    // By default, push is enabled.
+    private boolean pushEnabled = true;
+
+    @Override
+    public void onSettings(Session session, SettingsFrame frame)
+    {
+        // Check whether the client sent an ENABLE_PUSH setting.
+        Map&lt;Integer, Integer&gt; settings = frame.getSettings();
+        Integer enablePush = settings.get(SettingsFrame.ENABLE_PUSH);
+        if (enablePush != null)
+            pushEnabled = enablePush == 1;
+    }
+
+    @Override
+    public Stream.Listener onNewStream(Stream stream, HeadersFrame frame)
+    {
+        MetaData.Request request = (MetaData.Request)frame.getMetaData();
+        if (pushEnabled &amp;&amp; request.getHttpURI().toString().endsWith("/index.html"))
+        {
+            // Push the favicon.
+            HttpURI pushedURI = HttpURI.build(request.getHttpURI()).path("/favicon.ico");
+            MetaData.Request pushedRequest = new MetaData.Request("GET", pushedURI, HttpVersion.HTTP_2, HttpFields.EMPTY);
+            PushPromiseFrame promiseFrame = new PushPromiseFrame(stream.getId(), 0, pushedRequest);
+            stream.push(promiseFrame, null)
+                .thenCompose(pushedStream -&gt;
+                {
+                    // Send the favicon "response".
+                    MetaData.Response pushedResponse = new MetaData.Response(HttpStatus.OK_200, null, HttpVersion.HTTP_2, HttpFields.EMPTY);
+                    return pushedStream.headers(new HeadersFrame(pushedStream.getId(), pushedResponse, null, false))
+                        .thenCompose(pushed -&gt; pushed.data(new DataFrame(pushed.getId(), faviconBuffer.slice(), true)));
+                });
+        }
+        // Return a Stream.Listener to handle the request events.
+        return new Stream.Listener()
+        {
+            // Override callback methods for events you are interested in.
+        };
+    }
+};</code></pre>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="http.html">HTTP Server Libraries</a></span>
+  <span class="next"><a href="http3.html">HTTP/3 Server Library</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Web Application Deployment :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="../modules/standard.html">
+    <link rel="next" href="../server/index.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Operations Guide</a></li>
+    <li><a href="index.html">Web Application Deployment</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/operations-guide/pages/deploy/index.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Web Application Deployment</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Most of the time you want to be able to customize the deployment of your web applications, for example by changing the <code>contextPath</code>, or by adding JNDI entries, or by configuring virtual hosts, etc.</p>
+</div>
+<div class="paragraph">
+<p>Jetty supports the deployment of each web application to a specific <em>environment</em>.
+The available environments are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Java EE 8&#8201;&#8212;&#8201;Supports Servlet 4.0 (and associated specifications) in the <code>javax.*</code> packages.</p>
+</li>
+<li>
+<p>Jakarta EE 9&#8201;&#8212;&#8201;Supports Servlet 5.0 (and associated specifications) in the <code>jakarta.*</code> packages.</p>
+</li>
+<li>
+<p>Jakarta EE 10&#8201;&#8212;&#8201;Supports Servlet 6.0 (and associated specifications) in the <code>jakarta.*</code> packages.</p>
+</li>
+<li>
+<p>Jetty Core&#8201;&#8212;&#8201;Supports web applications written against the Jetty <code>Handler</code> APIs, without any Servlet dependencies.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This means that you can simultaneously deploy an old Java EE 8 web application, say <code>old-ee8.war</code>, alongside a new Jakarta EE 10 web application, say <code>new-ee10.war</code>, alongside a web application that only uses the Jetty <code>Handler</code> APIs, say <code>app-jetty.xml</code>.</p>
+</div>
+<div class="paragraph">
+<p>The customization of the deployment (for example, web application context path, etc.) is performed by processing <a href="#jetty">Jetty context XML files</a>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>deploy</code> module contains the <code>DeploymentManager</code> component that scans the <code>$JETTY_BASE/webapps</code> directory for changes, following the deployment rules described in <a href="#rules">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>For each specific environment there is a specific deploy module that you must enable:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For Java EE 8, <a href="../modules/standard.html#eeN-deploy" class="xref page"><code>ee8-deploy</code></a></p>
+</li>
+<li>
+<p>For Java EE 9, <a href="../modules/standard.html#eeN-deploy" class="xref page"><code>ee9-deploy</code></a></p>
+</li>
+<li>
+<p>For Java EE 10, <a href="../modules/standard.html#eeN-deploy" class="xref page"><code>ee10-deploy</code></a></p>
+</li>
+<li>
+<p>For Jetty Core, <a href="../modules/standard.html#core-deploy" class="xref page"><code>core-deploy</code></a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each of these modules provide the environment specific features, and depend on the <code>deploy</code> module that provides the scanning features.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="hot-static"><a class="anchor" href="#hot-static"></a>Hot vs Static Deployment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>DeploymentManager</code> scans the <code>$JETTY_BASE/webapps</code> directory for changes every <code>N</code> seconds, where <code>N</code> is configured via the <code>jetty.deploy.scanInterval</code> property.</p>
+</div>
+<div class="paragraph">
+<p>By default, the scan interval is <code>0</code> seconds, which means <em>static</em> deployment, and the <code>DeploymentManager</code> will not scan the <code>$JETTY_BASE/webapps</code> directory for changes.
+This means that to deploy/redeploy/undeploy a web application you will need to stop and restart Jetty.</p>
+</div>
+<div class="paragraph">
+<p>Setting the scan interval to a value of <code>1</code> second (or greater) means that <em>hot</em> deployment is enabled: if a file is added/changed/removed from the <code>$JETTY_BASE/webapps</code> directory, the <code>DeploymentManager</code> will notice the change and respectively deploy/redeploy/undeploy the web application.</p>
+</div>
+<div class="paragraph">
+<p>The following command line enables <em>hot</em> deployment by specifying the <code>jetty.deploy.scanInterval</code> property on the command line, and therefore only for this particular run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar jetty.deploy.scanInterval=1</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To make <em>hot</em> deployment persistent, you need to edit the appropriate <code>&lt;env&gt;-deploy</code> module configuration file, <code>$JETTY_BASE/start.d/&lt;env&gt;-deploy.ini</code> (eg: <code>ee10-deploy.ini</code>), uncomment the module property <code>jetty.deploy.scanInterval</code> and change the value to <code>1</code> second (or greater):</p>
+</div>
+<div class="listingblock">
+<div class="title">&lt;env&gt;-deploy.ini</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">--module=deploy
+<mark>jetty.deploy.scanInterval=1</mark>
+...</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rules"><a class="anchor" href="#rules"></a>Deployment Rules</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Adding</em> a <code>*.war</code> file, a <code>*.war</code> directory, a Jetty context XML file or a normal directory to <code>$JETTY_BASE/webapps</code> causes the <code>DeploymentManager</code> to deploy the new web application.</p>
+</div>
+<div class="paragraph">
+<p><em>Updating</em> a <code>*.war</code> file or a Jetty context XML file causes the <code>DeploymentManager</code> to redeploy the web application, which means that the Jetty context component representing the web application is stopped, then reconfigured, and then restarted.</p>
+</div>
+<div class="paragraph">
+<p><em>Removing</em> a <code>*.war</code> file, a <code>*.war</code> directory, a Jetty context XML file or a normal directory from <code>$JETTY_BASE/webapps</code> causes the <code>DeploymentManager</code> to undeploy the web application, which means that the Jetty context component representing the web application is stopped and removed from the Jetty server.</p>
+</div>
+<div class="sect2">
+<h3 id="rules-context-path"><a class="anchor" href="#rules-context-path"></a>Context Path Resolution</h3>
+<div class="paragraph">
+<p>When a file or directory is added to <code>$JETTY_BASE/webapps</code>, the <code>DeploymentManager</code> derives the web application <code>contextPath</code> from the file or directory name, with the following rules:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If the directory name is, for example, <code>mywebapp/</code>, it is deployed as a standard web application if it contains a <code>WEB-INF/</code> subdirectory, otherwise it is deployed as a web application of static content.
+The <code>contextPath</code> would be <code>/mywebapp</code> (that is, the web application is reachable at <code>http://localhost:8080/mywebapp/</code>).</p>
+</li>
+<li>
+<p>If the directory name is <code>ROOT</code>, case-insensitive, the <code>contextPath</code> is <code>/</code> (that is, the web application is reachable at <code>http://localhost:8080/</code>).</p>
+</li>
+<li>
+<p>If the directory name ends with <code>.d</code>, for example <code>config.d/</code>, it is ignored, although it may be referenced to configure other web applications (for example to store common files).</p>
+</li>
+<li>
+<p>If the <code>*.war</code> file name is, for example, <code>mywebapp.war</code>, it is deployed as a standard web application with the context path <code>/mywebapp</code> (that is, the web application is reachable at <code>http://localhost:8080/mywebapp/</code>).</p>
+</li>
+<li>
+<p>If the file name is <code>ROOT.war</code>, case-insensitive, the <code>contextPath</code> is <code>/</code> (that is, the web application is reachable at <code>http://localhost:8080/</code>).</p>
+</li>
+<li>
+<p>If both the <code>mywebapp.war</code> file and the <code>mywebapp/</code> directory exist, only the file is deployed.
+This allows the directory with the same name to be the <code>*.war</code> file unpack location and avoid that the web application is deployed twice.</p>
+</li>
+<li>
+<p>A <a href="#jetty">Jetty context XML file</a> named <code>mywebapp.xml</code> is deployed as a web application by processing the directives contained in the XML file itself, which must set the <code>contextPath</code>, which could be different from the name of the XML file.</p>
+</li>
+<li>
+<p>If both <code>mywebapp.xml</code> and <code>mywebapp.war</code> exist, only the XML file is deployed.
+This allows the XML file to reference the <code>*.war</code> file and avoid that the web application is deployed twice.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rules-environment"><a class="anchor" href="#rules-environment"></a>Environment Resolution</h3>
+<div class="paragraph">
+<p>A web application is always deployed to a specific environment, which is either configured for the deployed application or set to the default environment.</p>
+</div>
+<div class="paragraph">
+<p>If only a single specific deployer module is enabled, for example <code>ee10-deploy</code>, then it is the default environment and applications will be deployed to it without any additional configuration.</p>
+</div>
+<div class="paragraph">
+<p>If multiple deployer modules are enabled, then the default environment is:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The most recent Jakarta EE environment of the <code>ee{8,9,10}-deploy</code> modules that are enabled.</p>
+</li>
+<li>
+<p>Otherwise, the <code>core</code> environment, if the <code>core-deploy</code> module is enabled.</p>
+</li>
+<li>
+<p>Otherwise, no deployer environment has been enabled, and therefore no application can be deployed.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, if <code>core-deploy</code>, <code>ee9-deploy</code> and the <code>ee10-deploy</code> modules are enabled, then <code>ee10</code> is the default environment, to which applications will be deployed unless otherwise configured (see below).</p>
+</div>
+<div class="paragraph">
+<p>To configure a specific environment for an application, you add a <code>*.properties</code> file with the same name of the web application.
+For example, an application deployed to <code>$JETTY_BASE/webapps/my-ee9-app.war</code> is configured with the file <code>$JETTY_BASE/webapps/my-ee9-app.properties</code>, with the following content:</p>
+</div>
+<div class="listingblock">
+<div class="title">my-ee9-app.properties</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">environment=ee9</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In case of simultaneous multiple deployer environments, it is good practice to always specify the <code>*.properties</code> file for your web applications.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you do <strong>not</strong> specify the <code>*.properties</code> file for your web applications, then the deployer for the default environment will be used.</p>
+</div>
+<div class="paragraph">
+<p>For example, if you have enabled the deployer Jetty module for all Jakarta EE versions, and you deploy an EE 9 web application <em>without</em> the <code>*.properties</code> file, then it will be deployed by the EE 10 deployer, with unspecified results.</p>
+</div>
+<div class="paragraph">
+<p>This unspecified deployment may not work as the EE 9 web application may use APIs that have been removed in EE 10, causing an error at runtime.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="context-xml"><a class="anchor" href="#context-xml"></a>Deploying Jetty Context XML Files</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Jetty context XML file is a <a href="../xml/index.html" class="xref page">Jetty XML file</a> that allows you to customize the deployment of web applications.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Recall that the <code>DeploymentManager</code> component of the Jetty <code>deploy</code> module <a href="#rules">gives priority</a> to Jetty context XML files over <code>*.war</code> files or directories.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To deploy a web application using a Jetty context XML file, simply place the file in the <code>$JETTY_BASE/webapps</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>A simple Jetty context XML file, for example named <code>wiki.xml</code> is the following:</p>
+</div>
+<div class="listingblock">
+<div class="title">wiki.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+  &lt;Set name="contextPath"&gt;/wiki&lt;/Set&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+  &lt;Set name="war"&gt;/opt/myapps/myapp.war&lt;/Set&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Configures a <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/ee10/webapp/WebAppContext.html"><code>WebAppContext</code></a>, which is the Jetty component that represents a standard Servlet web application.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Specifies the web application <code>contextPath</code>, which may be different from the <code>*.war</code> file name.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Specifies the file system path of the <code>*.war</code> file.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The Jetty content XML file may be accompanied by a <code>*.properties</code> file that specifies the <a href="#">environment</a> to use for the deployment:</p>
+</div>
+<div class="listingblock">
+<div class="title">wiki.properties</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">environment=ee10</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Refer to <a href="#rules-environment">this section</a> for more information about specifying the environment.</p>
+</div>
+<div class="paragraph">
+<p>The <code>$JETTY_BASE</code> directory would look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$JETTY_BASE
+├── resources
+│   └── jetty-logging.properties
+├── start.d
+│   ├── deploy.ini
+│   └── http.ini
+└── webapps
+    ├── wiki.properties
+    └── wiki.xml</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <code>*.war</code> file may be placed anywhere in the file system and does not need to be placed in the <code>$JETTY_BASE/webapps</code> directory.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If you place both the Jetty context XML file <em>and</em> the <code>*.war</code> file in the <code>$JETTY_BASE/webapps</code> directory, remember that they must have the same file name, for example <code>wiki.xml</code> and <code>wiki.war</code>, so that the <code>DeploymentManager</code> deploys the web application only once using the Jetty context XML file (and not the <code>*.war</code> file).
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can use the features of <a href="../xml/index.html" class="xref page">Jetty XML files</a> to avoid to hard-code file system paths or other configurations in your Jetty context XML files, for example by using system properties:</p>
+</div>
+<div class="listingblock">
+<div class="title">wiki.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt;
+  &lt;Set name="contextPath"&gt;/wiki&lt;/Set&gt;
+  &lt;Set name="war"&gt;&lt;SystemProperty name="myapps.dir"/&gt;/myapp.war&lt;/Set&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note how the <code>*.war</code> file path is now obtained by resolving the system property <code>myapps.dir</code> that you can specify on the command line when you start Jetty:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar -Dmyapps.dir=/opt/myapps</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="env-context-xml"><a class="anchor" href="#env-context-xml"></a>Deploying Environment Specific Context XML Files</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="../xml/index.html" class="xref page">Jetty context XML file</a> files can be applied to <em>all</em> webapps deployed to a particular <code>environment</code>.</p>
+</div>
+<div class="paragraph">
+<p>Add a properties file to the deployment directory that contains a property naming the location of the xml file to apply.
+The properties file name must be prefixed by the name of the <code>environment</code>.
+For example <code>ee8.properties, ee8-more.properties ee8-other.properties</code> would all apply to all contexts deployed in the <code>ee8</code> environment.</p>
+</div>
+<div class="paragraph">
+<p>If the property file(s) contain one or more properties whose names are prefixed with <code>org.eclipse.jetty.deploy.environmentXml</code>, then their values are used as additional context XML files to apply to all contexts deployed in the corresponding environment.
+So for example <code>org.eclipse.jetty.deploy.environmentXml, org.eclipse.jetty.deploy.environmentXml.more, org.eclipse.jetty.deploy.environmentXml.other</code> are all acceptable as names.
+Each property configures the location of a context XML file to apply to a context when it is being created and deployed.
+The location may be either absolute or relative to <em>the parent of the deployment directory</em>.
+So if your webapp deployment directory is <code>$JETTY_BASE/webapps</code>, then <code>$JETTY_BASE</code> will be used to resolve any relative filenames.</p>
+</div>
+<div class="paragraph">
+<p>All environment-specific Jetty context XML files will be applied to the webapp <em>before</em> any context XML file associated with the webapp.
+The order in which they are applied is determined by <em>the name of the properties that define them</em>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The contents of the environment specific context XML file may only contain references to classes appropriate for that environment.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For example, given the previous example of a <code>$JETTY_BASE/webapps/wiki.xml</code> and its accompanying <code>$JETTY_BASE/webapps/wiki.properties</code> file that declares the <code>wiki</code> webapp should be deployed to environment <code>ee10</code>, files called <code>$JETTY_BASE/webapps/ee10.properties</code> and <code>$JETTY_BASE/webapps/ee10-feature.properties</code> can be defined to further configure the webapp.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ee10.properties</code> file contains:</p>
+</div>
+<div class="listingblock">
+<div class="title">ee10.properties</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">jetty.deploy.environmentXml=etc/ee10-context.xml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>ee10-feature.properties</code> file contains:</p>
+</div>
+<div class="listingblock">
+<div class="title">ee10-feature.properties</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">jetty.deploy.environmentXml.feature=etc/ee10-feature.xml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>ee10-context.xml</code> file contains:</p>
+</div>
+<div class="listingblock">
+<div class="title">ee10-context.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure id="wac" class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt;
+  &lt;Call name="setAttribute"&gt;
+    &lt;Arg&gt;common&lt;/Arg&gt;
+    &lt;Arg&gt;value&lt;/Arg&gt;
+  &lt;/Call&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>ee10-feature.xml</code> file contains:</p>
+</div>
+<div class="listingblock">
+<div class="title">ee10-feature.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure id="wac" class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt;
+  &lt;Call name="addEventListener"&gt;
+    &lt;Arg&gt;
+      &lt;New class="com.example.MyListenerFeature"/&gt;
+    &lt;/Arg&gt;
+  &lt;/Call&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The directory structure would look like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">directory structure</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">$JETTY_BASE
+|- etc
+│  |-ee10-context.xml
+|  |-ee10-feature.xml
+|- webapps
+    |-ee10.properties
+    |-ee10-feature.properties
+    |-wiki.properties
+    |- wiki.xml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The contents of the <code>$JETTY_BASE/etc/ee10-context.xml</code> then <code>$JETTY_BASE/etc/ee10-feature.xml</code> files will be applied to the <code>wiki</code> webapp instance <em>before</em> <code>wiki.xml</code>, allowing the contents of the latter to override the contents of the former.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="web-infjetty-ee8910-web-xml"><a class="anchor" href="#web-infjetty-ee8910-web-xml"></a>WEB-INF/jetty-ee{8,9,10}-web.xml</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As discussed above, a Jetty context XML file can be used to configure a webapp during deployment.
+The webapp can also be configured during its startup phase by a <code>WEB-INF/jetty-ee{8,9,10}-web.xml</code> file.
+The contents of this file is the same as a Jetty context XML file.
+This file can be useful:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>to place all configuration inside your webapp archive</p>
+</li>
+<li>
+<p>to perform configuration that can only occur <em>after</em> the webapp&#8217;s classpath has been created</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+it is good practice to name the file according to the <code>environment</code> into which the webapp will be deployed. If your webapp can be deployed to multiple <code>environments</code> then you should include a <code>WEB-INF</code> file for each one. If you only deploy to a single <code>environment</code> then you can omit it from the filename, however be aware that you cannot change environments without updating the contents of the file.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jndi"><a class="anchor" href="#jndi"></a>Configuring JNDI Entries</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A web application may <em>reference</em> a JNDI entry, such as a JDBC <code>DataSource</code> from the web application <code>web.xml</code> file.
+The JNDI entry must be <em>defined</em> in a <a href="../jndi/index.html#xml" class="xref page">Jetty XML file</a>, for example a context XML like so:</p>
+</div>
+<div class="listingblock">
+<div class="title">mywebapp.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure id="wac" class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt;
+  &lt;Set name="contextPath"&gt;/mywebapp&lt;/Set&gt;
+  &lt;Set name="war"&gt;/opt/webapps/mywebapp.war&lt;/Set&gt;
+    &lt;New class="org.eclipse.jetty.plus.jndi.Resource"&gt;
+    &lt;Arg&gt;&lt;Ref refid="wac"/&gt;&lt;/Arg&gt;
+    &lt;Arg&gt;jdbc/myds&lt;/Arg&gt;
+     &lt;Arg&gt;
+        &lt;New class="com.mysql.cj.jdbc.MysqlConnectionPoolDataSource"&gt;
+           &lt;Set name="url"&gt;jdbc:mysql://localhost:3306/databasename&lt;/Set&gt;
+           &lt;Set name="user"&gt;user&lt;/Set&gt;
+           &lt;Set name="password"&gt;password&lt;/Set&gt;
+        &lt;/New&gt;
+     &lt;/Arg&gt;
+  &lt;/New&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For more information and examples on how to use JNDI in Jetty, refer to the <a href="../jndi/index.html" class="xref page">JNDI</a> feature section.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Class <code>com.mysql.cj.jdbc.MysqlConnectionPoolDataSource</code> is present in the MySQL JDBC driver file, <code>mysql-connector-java-&lt;version&gt;.jar</code>, which must be available on the server&#8217;s classpath .</p>
+</div>
+<div class="paragraph">
+<p>If the class is instead present <em>within</em> the web application, then the JNDI entry must be declared in a <code>WEB-INF/jetty-ee{8,9,10}-env.xml</code> file - which is applied after the webapp&#8217;s classpath has been set up - see the <a href="../jndi/index.html" class="xref page">JNDI</a> feature section for more information and examples.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="virtual-hosts"><a class="anchor" href="#virtual-hosts"></a>Configuring Virtual Hosts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <em>virtual host</em> is an internet domain name, registered in the Domain Name Server (DNS), for an IP address such that multiple virtual hosts will resolve to the same IP address of a single server instance.</p>
+</div>
+<div class="paragraph">
+<p>If you have multiple web applications deployed on the same Jetty server, by using virtual hosts you will be able to target a specific web application.</p>
+</div>
+<div class="paragraph">
+<p>For example, you may have a web application for your business and a web application for your hobbies , both deployed in the same Jetty server.
+By using virtual hosts, you will be able to have the first web application available at <code>http://domain.biz/</code>, and the second web application available at <code>http://hobby.net/</code>.</p>
+</div>
+<div class="paragraph">
+<p>Another typical case is when you want to use different subdomains for different web application, for example a project website is at <code>http://project.org/</code> and the project documentation is at <code>http://docs.project.org</code>.</p>
+</div>
+<div class="paragraph">
+<p>Virtual hosts can be used with any context that is a subclass of <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/server/handler/ContextHandler.html">ContextHandler</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="virtual-hosts-names"><a class="anchor" href="#virtual-hosts-names"></a>Virtual Host Names</h3>
+<div class="paragraph">
+<p>Jetty supports the following variants to be specified as virtual host names:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>www.hostname.com</code></dt>
+<dd>
+<p>A fully qualified domain name. It is important to list all variants as a site may receive traffic for both <code>www.hostname.com</code> and <code>hostname.com</code>.</p>
+</dd>
+<dt class="hdlist1"><code>*.hostname.com</code></dt>
+<dd>
+<p>A wildcard domain name which will match only one level of arbitrary subdomains.
+*.foo.com will match www.foo.com and m.foo.com, but not www.other.foo.com.</p>
+</dd>
+<dt class="hdlist1"><code>10.0.0.2</code></dt>
+<dd>
+<p>An IP address may be set as a virtual host to indicate that a web application should handle requests received on the network interface with that IP address for protocols that do not indicate a host name such as HTTP/0.9 or HTTP/1.0.</p>
+</dd>
+<dt class="hdlist1"><code>@ConnectorName</code></dt>
+<dd>
+<p>A Jetty server <code>Connector</code> name to indicate that a web application should handle requests received on the server <code>Connector</code> with that name, and therefore received on a specific socket address (either an IP port for <code>ServerConnector</code>, or a Unix-Domain path for <code>UnixDomainServerConnector</code>).
+A server <code>Connector</code> name can be set via <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/server/AbstractConnector.html#setName(java.lang.String)" class="bare">https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/server/AbstractConnector.html#setName(java.lang.String)</a>.</p>
+</dd>
+<dt class="hdlist1"><code>www.√integral.com</code></dt>
+<dd>
+<p>Non-ASCII and <a href="https://en.wikipedia.org/wiki/Internationalized_domain_name">IDN</a> domain names can be set as virtual hosts using <a href="https://en.wikipedia.org/wiki/Punycode">Puny Code</a> equivalents that may be obtained from a <a href="https://www.punycoder.com/">Punycode/IDN converters</a>.
+For example if the non-ASCII domain name <code>www.√integral.com</code> is given to a browser, then the browser will make a request that uses the domain name <code>www.xn&#8212;&#8203;integral-7g7d.com</code>, which is the name that should be added as the virtual host name.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="virtual-hosts-config"><a class="anchor" href="#virtual-hosts-config"></a>Virtual Hosts Configuration</h3>
+<div class="paragraph">
+<p>If you have a web application <code>mywebapp.war</code> you can configure its virtual hosts in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt;
+  &lt;Set name="contextPath"&gt;/mywebapp&lt;/Set&gt;
+  &lt;Set name="war"&gt;/opt/webapps/mywebapp.war&lt;/Set&gt;
+  &lt;Set name="virtualHosts"&gt;
+    &lt;Array type="java.lang.String"&gt;
+      &lt;Item&gt;mywebapp.com&lt;/Item&gt;
+      &lt;Item&gt;www.mywebapp.com&lt;/Item&gt;
+      &lt;Item&gt;mywebapp.net&lt;/Item&gt;
+      &lt;Item&gt;www.mywebapp.net&lt;/Item&gt;
+    &lt;/Array&gt;
+  &lt;/Set&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Your web application will be available at:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>http://mywebapp.com/mywebapp</code></p>
+</li>
+<li>
+<p><code>http://www.mywebapp.com/mywebapp</code></p>
+</li>
+<li>
+<p><code>http://mywebapp.net/mywebapp</code></p>
+</li>
+<li>
+<p><code>http://www.mywebapp.net/mywebapp</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You configured the <code>contextPath</code> of your web application to <code>/mywebapp</code>.</p>
+</div>
+<div class="paragraph">
+<p>As such, a request to <code>http://mywebapp.com/other</code> will not match your web application because the <code>contextPath</code> does not match.</p>
+</div>
+<div class="paragraph">
+<p>Likewise, a request to <code>http://other.com/mywebapp</code> will not match your web application because the virtual host does not match.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="virtual-hosts-same-context"><a class="anchor" href="#virtual-hosts-same-context"></a>Same Context Path, Different Virtual Hosts</h3>
+<div class="paragraph">
+<p>If you want to deploy different web applications to the same context path, typically the root context path <code>/</code>, you must use virtual hosts to differentiate among web applications.</p>
+</div>
+<div class="paragraph">
+<p>You have <code>domain.war</code> that you want to deploy at <code>http://domain.biz/</code> and <code>hobby.war</code> that you want to deploy at <code>http://hobby.net</code>.</p>
+</div>
+<div class="paragraph">
+<p>To achieve this, you simply use the same context path of <code>/</code> for each of your webapps, while specifying different virtual hosts for each of your webapps:</p>
+</div>
+<div class="listingblock">
+<div class="title">domain.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt;
+  &lt;Set name="contextPath"&gt;/&lt;/Set&gt;
+  &lt;Set name="war"&gt;/opt/webapps/domain.war&lt;/Set&gt;
+  &lt;Set name="virtualHosts"&gt;
+    &lt;Array type="java.lang.String"&gt;
+      &lt;Item&gt;domain.biz&lt;/Item&gt;
+    &lt;/Array&gt;
+  &lt;/Set&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">hobby.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt;
+  &lt;Set name="contextPath"&gt;/&lt;/Set&gt;
+  &lt;Set name="war"&gt;/opt/webapps/hobby.war&lt;/Set&gt;
+  &lt;Set name="virtualHosts"&gt;
+    &lt;Array type="java.lang.String"&gt;
+      &lt;Item&gt;hobby.net&lt;/Item&gt;
+    &lt;/Array&gt;
+  &lt;/Set&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="virtual-hosts-port"><a class="anchor" href="#virtual-hosts-port"></a>Different Port, Different Web Application</h3>
+<div class="paragraph">
+<p>Sometimes it is required to serve different web applications from different socket addresses (either different IP ports, or different Unix-Domain paths), and therefore from different server <code>Connector</code>s.</p>
+</div>
+<div class="paragraph">
+<p>For example, you want requests to <code>http://localhost:8080/</code> to be served by one web application, but requests to <code>http://localhost:9090/</code> to be served by another web application.</p>
+</div>
+<div class="paragraph">
+<p>This configuration may be useful when Jetty sits behind a load balancer.</p>
+</div>
+<div class="paragraph">
+<p>In this case, you want to <a href="../protocols/index.html" class="xref page">configure multiple connectors</a>, each with a different name, and then reference the connector name in the web application virtual host configuration:</p>
+</div>
+<div class="listingblock">
+<div class="title">domain.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt;
+  &lt;Set name="contextPath"&gt;/&lt;/Set&gt;
+  &lt;Set name="war"&gt;/opt/webapps/domain.war&lt;/Set&gt;
+  &lt;Set name="virtualHosts"&gt;
+    &lt;Array type="java.lang.String"&gt;
+      <mark>&lt;Item&gt;@port8080&lt;/Item&gt;</mark>
+    &lt;/Array&gt;
+  &lt;/Set&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">hobby.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt;
+  &lt;Set name="contextPath"&gt;/&lt;/Set&gt;
+  &lt;Set name="war"&gt;/opt/webapps/hobby.war&lt;/Set&gt;
+  &lt;Set name="virtualHosts"&gt;
+    &lt;Array type="java.lang.String"&gt;
+      <mark>&lt;Item&gt;@port9090&lt;/Item&gt;</mark>
+    &lt;/Array&gt;
+  &lt;/Set&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Web application <code>domain.war</code> has a virtual host of <code>@port8080</code>, where <code>port8080</code> is the name of a Jetty connector.</p>
+</div>
+<div class="paragraph">
+<p>Likewise, web application <code>hobby.war</code> has a virtual host of <code>@port9090</code>, where <code>port9090</code> is the name of another Jetty connector.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="../protocols/index.html" class="xref page">this section</a> for further information about how to configure connectors.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="extract-war"><a class="anchor" href="#extract-war"></a>Configuring <code>*.war</code> File Extraction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, <code>*.war</code> files are uncompressed and its content extracted in a temporary directory.
+The web application resources are served by Jetty from the files extracted in the temporary directory, not from the files within the <code>*.war</code> file, for performance reasons.</p>
+</div>
+<div class="paragraph">
+<p>If you do not want Jetty to extract the <code>*.war</code> files, you can disable this feature, for example:</p>
+</div>
+<div class="listingblock">
+<div class="title">mywebapp.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt;
+  &lt;Set name="contextPath"&gt;/mywebapp&lt;/Set&gt;
+  &lt;Set name="war"&gt;/opt/webapps/mywebapp.war&lt;/Set&gt;
+  <mark>&lt;Set name="extractWAR"&gt;false&lt;/Set&gt;</mark>
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jetty-override-web-xml"><a class="anchor" href="#jetty-override-web-xml"></a>Overriding <code>web.xml</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can configure an additional <code>web.xml</code> that complements the <code>web.xml</code> file that is present in the web application <code>*.war</code> file.
+This additional <code>web.xml</code> is processed <em>after</em> the <code>*.war</code> file <code>web.xml</code>.
+This allows you to add host specific configuration or server specific configuration without having to extract the web application <code>web.xml</code>, modify it, and repackage it in the <code>*.war</code> file.</p>
+</div>
+<div class="listingblock">
+<div class="title">mywebapp.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt;
+  &lt;Set name="contextPath"&gt;/mywebapp&lt;/Set&gt;
+  &lt;Set name="war"&gt;/opt/webapps/mywebapp.war&lt;/Set&gt;
+  <mark>&lt;Set name="overrideDescriptor"&gt;/opt/webapps/mywebapp-web.xml&lt;/Set&gt;</mark>
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The format of the additional <code>web.xml</code> is exactly the same as a standard <code>web.xml</code> file, for example:</p>
+</div>
+<div class="listingblock">
+<div class="title">mywebapp-web.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0"&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;my-servlet&lt;/servlet-name&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;host&lt;/param-name&gt;
+      &lt;param-value&gt;192.168.0.13&lt;/param-value&gt;
+    &lt;/init-param&gt;
+  &lt;/servlet&gt;
+&lt;/web-app&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above, you configured the <code>my-servlet</code> Servlet (defined in the web application <code>web.xml</code>), adding a host specific <code>init-param</code> with the IP address of the host.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="init-params"><a class="anchor" href="#init-params"></a>Configuring <code>init-param</code>s</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../modules/standard.html">Standard Modules</a></span>
+  <span class="next"><a href="../server/index.html">Jetty Server</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Jetty Connectors and Protocols :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="../server/index.html">
+    <link rel="next" href="../keystore/index.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Operations Guide</a></li>
+    <li><a href="index.html">Jetty Connectors and Protocols</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/operations-guide/pages/protocols/index.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Jetty Connectors and Protocols</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Connectors are the network components through which Jetty accepts incoming network connections.</p>
+</div>
+<div class="paragraph">
+<p>Each connector listens on a network port and can be configured with <code>ConnectionFactory</code> components that <em>understand</em> one or more network protocols.</p>
+</div>
+<div class="paragraph">
+<p>Understanding a protocol means that the connector is able to interpret incoming network bytes (for example, the bytes that represent an HTTP/1.1 request) and convert them into more abstract objects (for example an <code>HttpServletRequest</code> object) that are then processed by applications.
+Conversely, an abstract object (for example an <code>HttpServletResponse</code>) is converted into the correspondent outgoing network bytes (the bytes that represent an HTTP/1.1 response).</p>
+</div>
+<div class="paragraph">
+<p>Like other Jetty components, connectors are enabled and configured by enabling and configuring the correspondent Jetty module.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Recall that you must always issue the commands to enable Jetty modules from within the <code>$JETTY_BASE</code> directory, and that the Jetty module configuration files are in the <code>$JETTY_BASE/start.d/</code> directory.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can obtain the list of connector-related modules in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --list-modules=connector</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="http"><a class="anchor" href="#http"></a>Clear-Text HTTP/1.1</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Clear text HTTP/1.1 is enabled with the <code>http</code> Jetty module with the following command (issued from within the <code>$JETTY_BASE</code> directory):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=http</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+setupArgs=--add-modules=http</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After having enabled the <code>http</code> module, the <code>$JETTY_BASE</code> directory looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">JETTY_BASE
+├── resources
+│   └── jetty-logging.properties
+└── start.d
+    └── <mark>http.ini</mark></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>http.ini</code> file is the file that you want to edit to configure network and protocol parameters&#8201;&#8212;&#8201;for more details see <a href="../modules/standard.html#http" class="xref page">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>Note that the <code>http</code> Jetty module depends on the <code>server</code> Jetty module.</p>
+</div>
+<div class="paragraph">
+<p>Some parameters that you may want to configure are in fact common HTTP parameters that are applied not only for clear-text HTTP/1.1, but also for secure HTTP/1.1 or for clear-text HTTP/2 or for encrypted HTTP/2, or for HTTP/3, and these configuration parameters may be present in the <code>server</code> module configuration file.</p>
+</div>
+<div class="paragraph">
+<p>You can force the creation of the <code>server.ini</code> file via:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=server</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now the <code>$JETTY_BASE</code> directory looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">JETTY_BASE
+├── resources
+│   └── jetty-logging.properties
+└── start.d
+    ├── http.ini
+    └── server.ini</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you can edit the <code>server.ini</code> file&#8201;&#8212;&#8201;for more details see <a href="../modules/standard.html#server" class="xref page">this section</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="https"><a class="anchor" href="#https"></a>Secure HTTP/1.1</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Secure HTTP/1.1 is enabled with both the <code>ssl</code> and <code>https</code> Jetty modules with the following command (issued from within the <code>$JETTY_BASE</code> directory):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=ssl,https</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+args=--add-modules=ssl,https</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The command above enables the <code>ssl</code> module, that provides the secure network connector, the KeyStore configuration and TLS configuration&#8201;&#8212;&#8201;for more details see <a href="#ssl">this section</a>.
+Then, the <a href="../modules/standard.html#https" class="xref page"><code>https</code> module</a> adds HTTP/1.1 as the protocol secured by TLS.</p>
+</div>
+<div class="paragraph">
+<p>The <code>$JETTY_BASE</code> directory looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">$JETTY_BASE
+├── resources
+│   └── jetty-logging.properties
+└── start.d
+    ├── https.ini
+    └── ssl.ini</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that the KeyStore file is missing, because you have to provide one with the cryptographic material you want (read <a href="../keystore/index.html" class="xref page">this section</a> to create your own KeyStore).
+You need to configure these two properties by editing <code>ssl.ini</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>jetty.sslContext.keyStorePath</code></p>
+</li>
+<li>
+<p><code>jetty.sslContext.keyStorePassword</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>As a quick example, you can enable the <a href="../modules/standard.html#test-keystore" class="xref page"><code>test-keystore</code> module</a>, that creates on-the-fly a KeyStore containing a self-signed certificate:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=test-keystore</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+setupArgs=--add-modules=ssl,https
+args=--add-modules=test-keystore</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>$JETTY_BASE</code> directory is now:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">├── etc
+│   └── <mark>test-keystore.p12</mark>
+├── resources
+│   └── jetty-logging.properties
+└── start.d
+    ├── https.ini
+    ├── ssl.ini
+    └── test-keystore.ini</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Starting Jetty yields:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+setupArgs=--add-modules=ssl,https,test-keystore
+highlight=(\{.*:8443})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note how Jetty is listening on port <code>8443</code> for the secure HTTP/1.1 protocol.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you point your browser at <code>https://localhost:8443/</code> you will get a warning from the browser about a "potential security risk ahead", or that "your connection is not private", or similar message depending on the browser.</p>
+</div>
+<div class="paragraph">
+<p>This is normal because the certificate contained in <code>test-keystore.p12</code> is self-signed&#8201;&#8212;&#8201;and as such not signed by a recognized certificate authority&#8201;&#8212;&#8201;and therefore browsers do not trust it.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="http2"><a class="anchor" href="#http2"></a>Configuring HTTP/2</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://tools.ietf.org/html/rfc7540">HTTP/2</a> is the successor of the HTTP/1.1 protocol, but it is quite different from HTTP/1.1: where HTTP/1.1 is a duplex, text-based protocol, HTTP/2 is a multiplex, binary protocol.</p>
+</div>
+<div class="paragraph">
+<p>Because of these fundamental differences, a client and a server need to <em>negotiate</em> what version of the HTTP protocol they speak, based on what versions each side supports.</p>
+</div>
+<div class="paragraph">
+<p>To ensure maximum compatibility, and reduce the possibility that an intermediary that only understands HTTP/1.1 will close the connection when receiving unrecognized HTTP/2 bytes, HTTP/2 is typically deployed over secure connections, using the TLS protocol to wrap HTTP/2.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Browsers only support secure HTTP/2.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The protocol negotiation is performed by the <a href="https://tools.ietf.org/html/rfc7301">ALPN TLS extension</a>: the client advertises the list of protocols it can speak, and the server communicates to the client the protocol chosen by the server.</p>
+</div>
+<div class="paragraph">
+<p>For example, you can have a client that only supports HTTP/1.1 and a server that supports both HTTP/1.1 and HTTP/2:</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNptjjFvwjAQhXf_ihNDVYamwIjULqgqAwMS2UqHa2KIFefO8jnt369xEmSkbKf3vvfuSWvIoccOfrBqr557qnds2UPwSBItTUHJneqYuGo8dzoCvc4cabDmP0NXuKAVrVSUg6mMQwqwqKyJRWeS3jn2Qc7UhOBe18V6ASgw2I8R0f5X-7kIPEE6Nyk7cErdxjsoDydokOo4p9Vq6IWX95GCLeyStNfWMjyjdfT2NfV-L9WI5QFnqlZgYjJiLN_CKUl55UQvVVEUXksAvjxOi7rSVGer92V5TB9mRk8efH6Ucwvu_ma1utX-A-50n7Q=" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>Nowadays, it&#8217;s common that both clients and servers support HTTP/2, so servers prefer HTTP/2 as the protocol to speak:</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNqFjz1PwzAQhnf_ilMHRCUIbcZKsFSIDgxIzUYZjuRaW3HOls-Bv4-bGORKldis9-O519Ib9hhwgE9s-1NwI3dbZ12AGJAlWcRRyV9qcOxaHdxAKTBS4YjGzn0bPsERrZBSSY6mNR45wqK1JoEOLKP3LkQ5sI7RP6yrNdzA9KwXgAJz7rIrFL4o_N-dc0qdf-Ghed2DRu7Srp7UzIX7p5yCDWwnaUfWOrhF6_nx_Zd7p-uPpcrJsuNN20u-WfiZvoH9JJVMXS9VVVWBJII7Xq5KuiLuisG7pnlL5CtrZwdenptrd7Nbr1Zn4A87TJ-k" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>When you configure a connector with the HTTP/2 protocol, you typically want to also configure the HTTP/1.1 protocol.
+The reason to configure both protocols is that you typically do not control the clients: for example an old browser that does not support HTTP/2, or a monitoring console that performs requests using HTTP/1.1, or a heartbeat service that performs a single HTTP/1.0 request to verify that the server is alive.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="secure-vs-clear-text-http2"><a class="anchor" href="#secure-vs-clear-text-http2"></a>Secure vs Clear-Text HTTP/2</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Deciding whether you want to configure Jetty with <a href="#http2s">secure HTTP/2</a> or <a href="#http2c">clear-text HTTP/2</a> depends on your use case.</p>
+</div>
+<div class="paragraph">
+<p>You want to configure secure HTTP/2 when Jetty is exposed directly to browsers, because browsers only support secure HTTP/2.</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNpVzL0Kg1AMhuE9V5G9SH_GUrp06dChUG8gHlO1HhPJiUjvviIidgrkffhS20hPRh0WFNrKdJDyplEN3UjSlFgc0qo6FQ21accTGHhTUk2ljo1U-KaYtmUZNWHD4wHAODhJFRkL0zGxQYg6lNiI84R8Az7s_gWYD16y7LoiPGP-eO3uef7cn2D9zmaZ_SM_BsxTJA==" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>You may configure clear-text HTTP/2 (mostly for performance reasons) if you offload TLS at a load balancer (for example, <a href="https://haproxy.org/">HAProxy</a>) or at a reverse proxy (for example, <a href="https://nginx.org/">nginx</a>).</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNpVzr1ug1AMBeDdT-GxVYTaZoyiLlkydKhUXsC5mJ9ysSNfI8jbB5GAyOhzPh05tY1cyajDC4W2Mu2lOGlUQzeSNFUsDmlVnYqG2rTjCfS8aVJNhQ6NVFhSTNvmOWrChl-fAMbBSarIeDEdEhuEqH2BjThPyDegpqvpeNsk_-x-AxB1Rmuq2lHLhR0w__mb7jIqFQAzxWOWfS8AD3jO89-PPb6FyGSZ8-jvsLQzXb7AeW338LCms3n-_ULuBIZ0Nw==" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>You may configure clear-text HTTP/2 (mostly for performance reasons) to call microservices deployed to different Jetty servers (although you may want to use secure HTTP/2 for confidentiality reasons).</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNqNz8FOwzAMBuB7nsJHEKqg3a1CXLhw4IBEXyBL3TYsjSfHZePtiZZlSiUGHG1_v-OEnfV7zXqGrTa7kWnx_TM5YhDWPsQRelHhombyZCamGSNYsJiESfd0sH6EQbtQTs5L2SND_aAUoxHtR4ewZToEZGUcLT1YLxiRFGDSe6bjV9H5QJGynq1hijs-rcH6Sr-50t8o5UkQ2I6TAA35uRa61_dYD450r1S-Cx6r6infDCd099J1b_eNOgeTuPgWSnO6PInMW0gzuDEONVeCR7lVqy-lQMpmvhLNn2Lz3x3r0I-y_k1-A8biywQ=" alt="Diagram">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="http2s"><a class="anchor" href="#http2s"></a>Secure HTTP/2</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you enable secure HTTP/2 you typically want to enable also secure HTTP/1.1, for backwards compatibility reasons: in this way, old browsers or other clients that do not support HTTP/2 will be able to connect to your server.</p>
+</div>
+<div class="paragraph">
+<p>You need to enable:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <code>ssl</code> Jetty module, which provides the secure connector and the KeyStore and TLS configuration</p>
+</li>
+<li>
+<p>the <code>http2</code> Jetty module, which adds ALPN handling and adds the HTTP/2 protocol to the secured connector</p>
+</li>
+<li>
+<p>optionally, the <code>https</code> Jetty module, which adds the HTTP/1.1 protocol to the secured connector</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Use the following command (issued from within the <code>$JETTY_BASE</code> directory):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=ssl,http2,https</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As when enabling the <code>https</code> Jetty module, you need a valid KeyStore (read <a href="../keystore/index.html" class="xref page">this section</a> to create your own KeyStore).</p>
+</div>
+<div class="paragraph">
+<p>As a quick example, you can enable the <a href="../modules/standard.html#test-keystore" class="xref page"><code>test-keystore</code> module</a>, that creates on-the-fly a KeyStore containing a self-signed certificate:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=test-keystore</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Starting Jetty yields:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+setupArgs=--add-modules=ssl,http2,https,test-keystore
+highlight=(\{.*:8443})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note how Jetty is listening on port <code>8443</code> and the protocols supported are the sequence <code>(ssl, alpn, h2, http/1.1)</code>.</p>
+</div>
+<div class="paragraph">
+<p>The (ordered) list of protocols after <code>alpn</code> are the <em>application protocols</em>, in the example above <code>(h2, http/1.1)</code>.</p>
+</div>
+<div class="paragraph">
+<p>When a new connection is accepted by the connector, Jetty first interprets the TLS bytes, then it handles the ALPN negotiation knowing that the application protocols are (in order) <code>h2</code> and then <code>http/1.1</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can customize the list of application protocols and the default protocol to use in case the ALPN negotiation fails by editing the <a href="../modules/standard.html#alpn" class="xref page"><code>alpn</code> module</a> properties.</p>
+</div>
+<div class="paragraph">
+<p>The HTTP/2 protocol parameters can be configured by editing the <a href="../modules/standard.html#http2" class="xref page"><code>http2</code> module</a> properties.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="http2c"><a class="anchor" href="#http2c"></a>Clear-Text HTTP/2</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you enable clear-text HTTP/2 you typically want to enable also clear-text HTTP/1.1, for backwards compatibility reasons and to allow clients to <a href="https://tools.ietf.org/html/rfc7540#section-3.2">upgrade</a> from HTTP/1.1 to HTTP/2.</p>
+</div>
+<div class="paragraph">
+<p>You need to enable:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <code>http</code> Jetty module, which provides the clear-text connector and adds the HTTP/1.1 protocol to the clear-text connector</p>
+</li>
+<li>
+<p>the <code>http2c</code> Jetty module, which adds the HTTP/2 protocol to the clear-text connector</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=http,http2c</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Starting Jetty yields:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+setupArgs=--add-modules=http,http2c
+highlight=(\{.+:8080})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note how Jetty is listening on port <code>8080</code> and the protocols supported are HTTP/1.1 and <code>h2c</code> (i.e. clear-text HTTP/2).</p>
+</div>
+<div class="paragraph">
+<p>With this configuration, browsers and client applications will be able to connect to port <code>8080</code> using:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>HTTP/1.1 directly (e.g. <code>curl --http1.1 http://localhost:8080</code>):</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>GET / HTTP/1.1
+Host: localhost:8080</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>HTTP/1.1 with upgrade to HTTP/2 (e.g. <code>curl --http2 http://localhost:8080</code>):</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>GET / HTTP/1.1
+Host: localhost:8080
+Connection: Upgrade, HTTP2-Settings
+Upgrade: h2c
+HTTP2-Settings:</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>HTTP/2 directly (e.g. <code>curl --http2-prior-knowledge http://localhost:8080</code>):</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>50 52 49 20 2a 20 48 54 54 50 2f 32 2e 30 0d 0a
+0d 0a 53 4d 0d 0a 0d 0a 00 00 12 04 00 00 00 00
+00 00 03 00 00 00 64 00 04 40 00 00 00 00 02 00
+00 00 00 00 00 1e 01 05 00 00 00 01 82 84 86 41
+8a a0 e4 1d 13 9d 09 b8 f0 1e 07 7a 88 25 b6 50
+c3 ab b8 f2 e0 53 03 2a 2f 2a</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The HTTP/2 protocol parameters can be configured by editing the <a href="../modules/standard.html#http2c" class="xref page"><code>http2c</code> module</a> properties.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="http3"><a class="anchor" href="#http3"></a>HTTP/3</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you enable support for the HTTP/3 protocol, by default the secure HTTP/2 protocol is also enabled, so that browsers or clients that do not support HTTP/3 will be able to connect to your server.</p>
+</div>
+<div class="paragraph">
+<p>You need to enable:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <code>ssl</code> Jetty module, which provides the KeyStore and TLS configuration</p>
+</li>
+<li>
+<p>the <code>http3</code> Jetty module, which adds the HTTP/3 protocol on the HTTP/3 connector</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Use the following command (issued from within the <code>$JETTY_BASE</code> directory):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=ssl,http3</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Enabling any module Jetty module that supports secure network communication requires a valid KeyStore (read <a href="../keystore/index.html" class="xref page">this section</a> to create your own KeyStore), that, as a quick example, you can enable with the <a href="../modules/standard.html#test-keystore" class="xref page"><code>test-keystore</code> module</a>, that creates on-the-fly a KeyStore containing a self-signed certificate:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=test-keystore</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Starting Jetty yields:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+setupArgs=--approve-all-licenses --add-modules=ssl,http3,test-keystore
+highlight=(\{.*:8444})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note how Jetty is listening on port <code>8443</code> for HTTP/2 and on port <code>8444</code> for HTTP/3.</p>
+</div>
+<div class="paragraph">
+<p>The HTTP/3 protocol parameters can be configured by editing the <a href="../modules/standard.html#http3" class="xref page"><code>http3</code> module</a> properties.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="websocket"><a class="anchor" href="#websocket"></a>WebSocket</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>WebSocket is a network protocol for bidirectional data communication initiated via the <a href="https://tools.ietf.org/html/rfc7230#section-6.7">HTTP/1.1 upgrade mechanism</a>.
+WebSocket provides a simple, low-level, framing protocol layered over TCP.
+One or more WebSocket frames compose a WebSocket <em>message</em> that is either a UTF-8 <em>text</em> message or <em>binary</em> message.</p>
+</div>
+<div class="paragraph">
+<p>Jetty provides an implementation of the following standards and specifications.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="http://tools.ietf.org/html/rfc6455">RFC-6455</a> - The WebSocket Protocol</dt>
+<dd>
+<p>Jetty supports version 13 of the released and final specification.</p>
+</dd>
+<dt class="hdlist1"><a href="http://www.jcp.org/en/jsr/detail?id=356">JSR-356</a> - The Java WebSocket API (<code>javax.websocket</code>)</dt>
+<dd>
+<p>This is the official Java API for working with WebSockets.</p>
+</dd>
+<dt class="hdlist1"><a href="https://tools.ietf.org/html/rfc7692">RFC-7692</a> - WebSocket Per-Message Deflate Extension</dt>
+<dd>
+<p>This is the replacement for perframe-compression, switching the compression to being based on the entire message, not the individual frames.</p>
+</dd>
+<dt class="hdlist1"><a href="https://tools.ietf.org/html/rfc8441">RFC-8441</a> - Bootstrapping WebSockets with HTTP/2</dt>
+<dd>
+<p>Allows a single stream of an HTTP/2 connection to be upgraded to WebSocket.
+This allows one TCP connection to be shared by both protocols and extends HTTP/2&#8217;s more efficient use of the network to WebSockets.</p>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="websocket-configure"><a class="anchor" href="#websocket-configure"></a>Configuring WebSocket</h3>
+<div class="paragraph">
+<p>Jetty provides two WebSocket implementations: one based on the Java WebSocket APIs defined by JSR 356, provided by module <code>websocket-javax</code>, and one based on Jetty specific WebSocket APIs, provided by module <code>websocket-jetty</code>.
+The Jetty <code>websocket</code> module enables both implementations, but each implementation can be enabled independently.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Remember that a WebSocket connection is always initiated from the HTTP protocol (either an HTTP/1.1 upgrade or an HTTP/2 connect), therefore to enable WebSocket you need to enable HTTP.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To enable WebSocket support, you also need to decide what version of the HTTP protocol you want WebSocket to be initiated from, and whether you want secure HTTP.</p>
+</div>
+<div class="paragraph">
+<p>For example, to enable clear-text WebSocket from HTTP/1.1, use the following command (issued from within the <code>$JETTY_BASE</code> directory):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=http,websocket</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To enable secure WebSocket from HTTP/2, use the following command (issued from within the <code>$JETTY_BASE</code> directory):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=http2,websocket</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When enabling secure protocols you need a valid KeyStore (read <a href="../keystore/index.html" class="xref page">this section</a> to create your own KeyStore).
+As a quick example, you can enable the <a href="../modules/standard.html#test-keystore" class="xref page"><code>test-keystore</code> module</a>, that creates on-the-fly a KeyStore containing a self-signed certificate:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=test-keystore</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To enable WebSocket on both HTTP/1.1 and HTTP/2, both clear-text and secure, use the following command (issued from within the <code>$JETTY_BASE</code> directory):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=http,https,http2c,http2,websocket</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="websocket-disable"><a class="anchor" href="#websocket-disable"></a>Selectively Disabling WebSocket</h3>
+<div class="paragraph">
+<p>Enabling the WebSocket Jetty modules comes with a startup cost because Jetty must perform two steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Scan web applications <code>*.war</code> files (and all the jars and classes inside it) looking for WebSocket EndPoints classes (either annotated with WebSocket API annotations or extending/implementing WebSocket API classes/interfaces).
+This can be a significant cost if your web application contains a lot of classes and/or jar files.</p>
+</li>
+<li>
+<p>Configure and wire WebSocket EndPoints so that WebSocket messages are delivered to the correspondent WebSocket EndPoint.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>WebSocket support is by default enabled for all web applications.</p>
+</div>
+<div class="paragraph">
+<p>For a specific web application, you can disable step 2 for Java WebSocket support (i.e. when the <code>websocket-javax</code> module is enabled) by setting the context attribute <code>org.eclipse.jetty.websocket.javax</code> to <code>false</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0"&gt;
+
+  &lt;!-- Disable Javax WebSocket --&gt;
+  &lt;context-param&gt;
+    &lt;param-name&gt;org.eclipse.jetty.websocket.javax&lt;/param-name&gt;
+    &lt;param-value&gt;false&lt;/param-value&gt;
+  &lt;/context-param&gt;
+
+  ...
+
+&lt;/web-app&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Furthermore, for a specific web application, you can disable step 1 (and therefore also step 2) as described in the <a href="../annotations/index.html" class="xref page">annotations processing section</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="websocket-webapp-client"><a class="anchor" href="#websocket-webapp-client"></a>Using WebSocket Client in WebApps</h3>
+<div class="paragraph">
+<p>Web applications may need to use a WebSocket client to communicate with third party WebSocket services.</p>
+</div>
+<div class="paragraph">
+<p>If the web application uses the Java WebSocket APIs, the WebSocket client APIs are provided by the Servlet Container and are available to the web application by enabling the WebSocket server APIs, and therefore you must enable the <code>websocket-javax</code> Jetty module.</p>
+</div>
+<div class="paragraph">
+<p>However, the Java WebSocket Client APIs are quite limited (for example, they do not support secure WebSocket).
+For this reason, web applications may want to use the Jetty WebSocket Client APIs.</p>
+</div>
+<div class="paragraph">
+<p>When using the Jetty WebSocket Client APIs, web applications should include the required jars and their dependencies in the <code>WEB-INF/lib</code> directory of the <code>*.war</code> file.
+Alternatively, when deploying your web applications in Jetty, you can enable the <code>websocket-jetty-client</code> Jetty module to allow web applications to use the Jetty WebSocket Client APIs provided by Jetty, without the need to include jars and their dependencies in the <code>*.war</code> file.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fcgi"><a class="anchor" href="#fcgi"></a>FastCGI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>FastCGI is a network protocol primarily used by a <em>web server</em> to communicate to a <em>FastCGI server</em>.</p>
+</div>
+<div class="paragraph">
+<p>FastCGI servers are typically used to serve web content generated by dynamic web languages, primarily <a href="http://www.php.net/">PHP</a>, but also Python, Ruby, Perl and others.</p>
+</div>
+<div class="paragraph">
+<p>Web servers that supports FastCGI are, among others, <a href="http://httpd.apache.org/">Apache</a>, <a href="http://nginx.org/">Nginx</a>, and Jetty.
+Web servers typically act as reverse proxies, converting HTTP requests that they receive from clients (browsers) to FastCGI requests that are forwarded to the FastCGI server.
+The FastCGI server spawns the dynamic web language interpreter, passing it the information contained in the FastCGI request and a dynamic web language script is executed, producing web content, typically HTML.
+The web content is then formatted into a FastCGI response that is returned to the web server, which converts it to an HTTP response that is then returned to the client.</p>
+</div>
+<div class="paragraph">
+<p>The most well known FastCGI server is the <a href="http://php-fpm.org/">PHP FastCGI Process Manager</a>, or <code>php-fpm</code>.
+In the following we will assume that <code>php-fpm</code> is used as FastCGI server.</p>
+</div>
+<div class="paragraph">
+<p>This is a diagram of what described above:</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNplj01ug0AMhfdzCiurRFV-1GUXXSRqIW2jsuACE3BgBHhGHiOS23cggpJ2Y9l6n-33fGXIadYNnHVWFWxbyg-2tgzCmnyQkET5iWos2axk22AAWpwpvtS57QwVcNG1R6X2bDuPDOtX-ECRG7xA9JbC1mkpYRmnabJSdyEQC1e69cU1i0fqXXs5RMeV-tUDnMRJwIK5jobekCA7xlBVP_f3DOV43YSt_iJeMWsFB9hnbJyoOfDnf5yevh4fjv6fdzv4_oSnAZm5m2KMmf-h97g_R5xzBw==" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>Jetty can be configured to act as a web server that supports FastCGI, replacing the functionality that is normally provided by Apache or Nginx.
+This allows users to leverage Jetty features such as the support for HTTP/1.1, HTTP/2 and HTTP/3, Jetty&#8217;s scalability, and of course Jetty&#8217;s native support for Java Web Standards such as Servlets, JSPs, etc.</p>
+</div>
+<div class="paragraph">
+<p>With such configuration, users can not only deploy their Java Web Applications in Jetty, but also serve their <a href="http://wordpress.com/">WordPress</a> site or blog or their <a href="https://drupal.org/">Drupal</a> site without having to install and manage multiple web servers.</p>
+</div>
+<div class="sect2">
+<h3 id="fcgi-configure"><a class="anchor" href="#fcgi-configure"></a>Configuring WordPress</h3>
+<div class="paragraph">
+<p>This section explains how to configure Jetty to serve your <a href="https://wordpress.com/">WordPress</a> site.</p>
+</div>
+<div class="paragraph">
+<p>The prerequisites are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Have <code>php-fpm</code> installed on your server host, and configured to listen either on a Unix-Domain socket (such as <code>/run/php/php-fpm.sock</code>), or on a TCP socket (such as <code>localhost:9000</code>).</p>
+</li>
+<li>
+<p>Have WordPress installed on your server host, for example under <code>/var/www/wordpress</code>.
+For more information about how to install WordPress and the necessary PHP modules, please refer to the <a href="https://wordpress.org/support/article/how-to-install-wordpress/">WordPress Installation Guide</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Then, the <a href="#https">secure HTTP</a> and/or the <a href="#http2">secure HTTP/2</a> Jetty modules should be enabled to allow browsers to connect to Jetty.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, enable the <code>fcgi-proxy</code> module to provide FastCGI support (to convert HTTP requests from browsers to FastCGI for <code>php-fpm</code> and vice versa), and the <code>core-deploy</code> module to deploy your WordPress web application as a <a href="../deploy/index.html#jetty" class="xref page">Jetty context XML file</a>.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=ssl,https,fcgi-proxy,core-deploy</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <code>https</code> Jetty module requires a KeyStore. If you do not already have one configured, you can add the <code>test-keystore</code> Jetty module to the command line above to create a KeyStore on-the-fly.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now you can deploy a Jetty context XML file that represents your WordPress web application.</p>
+</div>
+<div class="paragraph">
+<p>Use the following file as example, copy it as <code>$JETTY_BASE/webapps/wordpress.xml</code> and customize it as necessary:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"  encoding="UTF-8"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+&lt;Configure class="org.eclipse.jetty.server.handler.ContextHandler"&gt;
+
+  &lt;New id="root" class="java.lang.String"&gt;
+    &lt;Arg&gt;/var/www/wordpress&lt;/Arg&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+  &lt;/New&gt;
+
+  &lt;Set name="contextPath"&gt;/&lt;/Set&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+  &lt;Set name="baseResourceAsString"&gt;&lt;Ref refid="root" /&gt;&lt;/Set&gt;
+
+  &lt;Set name="handler"&gt;
+    &lt;New class="org.eclipse.jetty.server.handler.TryPathsHandler"&gt;
+      &lt;Set name="originalPathAttribute"&gt;wordpress.originalPath&lt;/Set&gt;
+      &lt;Set name="originalQueryAttribute"&gt;wordpress.originalQuery&lt;/Set&gt;
+      &lt;Set name="paths"&gt;
+        &lt;Call class="java.util.List" name="of"&gt;
+          &lt;Arg&gt;$path&lt;/Arg&gt;
+          &lt;Arg&gt;/index.php&lt;/Arg&gt;
+        &lt;/Call&gt;
+      &lt;/Set&gt;
+
+      &lt;Set name="handler"&gt;
+        &lt;New class="org.eclipse.jetty.server.handler.PathMappingsHandler"&gt;
+          &lt;Call name="addMapping"&gt;
+            &lt;Arg&gt;
+              &lt;New class="org.eclipse.jetty.http.pathmap.ServletPathSpec"&gt;&lt;Arg&gt;*.php&lt;/Arg&gt;&lt;/New&gt;
+            &lt;/Arg&gt;
+            &lt;Arg&gt;
+              &lt;New class="org.eclipse.jetty.fcgi.proxy.FastCGIProxyHandler"&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+                &lt;Arg&gt;(https?)://([^/]+)(.*)&lt;/Arg&gt; <i class="conum" data-value="4"></i><b>(4)</b>
+                &lt;Arg&gt;http://localhost:9000$3&lt;/Arg&gt; <i class="conum" data-value="5"></i><b>(5)</b>
+                &lt;Arg&gt;&lt;Ref refid="root" /&gt;&lt;/Arg&gt;
+
+                &lt;Set name="originalPathAttribute"&gt;wordpress.originalPath&lt;/Set&gt;
+                &lt;Set name="originalQueryAttribute"&gt;wordpress.originalQuery&lt;/Set&gt;
+                &lt;Set name="scriptPattern"&gt;&lt;Call class="java.util.regex.Pattern" name="compile"&gt;&lt;Arg&gt;(.+?\\.php)&lt;/Arg&gt;&lt;/Call&gt;&lt;/Set&gt;
+                &lt;Set name="fastCGISecure"&gt;true&lt;/Set&gt;
+                &lt;Set name="unixDomainPath"&gt;&lt;Call class="java.nio.file.Path" name="of"&gt;&lt;Arg&gt;/run/php/php-fpm.sock&lt;/Arg&gt;&lt;/Call&gt;&lt;/Set&gt; <i class="conum" data-value="6"></i><b>(6)</b>
+              &lt;/New&gt;
+            &lt;/Arg&gt;
+          &lt;/Call&gt;
+          &lt;Call name="addMapping"&gt;
+            &lt;Arg&gt;
+              &lt;New class="org.eclipse.jetty.http.pathmap.ServletPathSpec"&gt;&lt;Arg&gt;/&lt;/Arg&gt;&lt;/New&gt;
+            &lt;/Arg&gt;
+            &lt;Arg&gt;
+              &lt;New class="org.eclipse.jetty.server.handler.ResourceHandler"&gt; <i class="conum" data-value="7"></i><b>(7)</b>
+                &lt;Set name="welcomeFiles"&gt;&lt;Call class="java.util.List" name="of"&gt;&lt;Arg&gt;/index.php&lt;/Arg&gt;&lt;/Call&gt;&lt;/Set&gt;
+                &lt;Set name="welcomeMode"&gt;&lt;Call class="org.eclipse.jetty.server.ResourceService$WelcomeMode" name="valueOf"&gt;&lt;Arg&gt;REHANDLE&lt;/Arg&gt;&lt;/Call&gt;&lt;/Set&gt;
+                &lt;Set name="dirAllowed"&gt;false&lt;/Set&gt;
+              &lt;/New&gt;
+            &lt;/Arg&gt;
+          &lt;/Call&gt;
+        &lt;/New&gt;
+      &lt;/Set&gt;
+    &lt;/New&gt;
+  &lt;/Set&gt;
+
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Specify the WordPress installation path.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Specify the context path of your web application.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The <code>FastCGIProxyHandler</code> forwards requests whose URI path matches <code>*.php</code> to <code>php-fpm</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The client URI regex pattern to match.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The URI used to forward the request to <code>php-fpm</code>, where <code>$3</code> is the 3rd matching group of the client URI regex pattern (int this example, the client URI path).
+If <code>php-fpm</code> is configured to listen on a TCP socket, the host and port must match the listening TCP socket.
+If <code>php-fpm</code> is configured to listen on a Unix-Domain socket, the host and port values are ignored but must be present.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>If <code>php-fpm</code> is configured to listen on a Unix-Domain socket, specify the Unix-Domain socket path, otherwise omit this line.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>The <code>ResourceHandler</code> serves static files from WordPress, such as <code>*.css</code>, <code>*.js</code> and image files.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now you can start Jetty and navigate to <code>http://localhost:8080</code> with your browser to enjoy WordPress:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ssl"><a class="anchor" href="#ssl"></a>Configuring Secure Protocols</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Secure protocols are normal protocols such as HTTP/1.1, HTTP/2 or WebSocket that are wrapped by the <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">TLS protocol</a>.
+Any network protocol based on TCP can be wrapped with TLS.</p>
+</div>
+<div class="paragraph">
+<p>QUIC, the protocol based on UDP that transports HTTP/3, uses TLS messages but not the TLS protocol framing.</p>
+</div>
+<div class="paragraph">
+<p>The <code>https</code> scheme used in URIs really means <code>tls+http/1.1</code> (or <code>tls+http/2</code>, or <code>quic+http/3</code>) and similarly the <code>wss</code> scheme used in URIs really means <code>tls+websocket</code>, etc.
+Senders wrap the underlying protocol bytes (e.g. HTTP bytes or WebSocket bytes) with the TLS protocol, while receivers first interpret the TLS protocol to obtain the underlying protocol bytes, and then interpret the wrapped bytes.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="../modules/standard.html#ssl" class="xref page"><code>ssl</code> Jetty module</a> allows you to configure a secure network connector; if other modules require encryption, they declare a dependency on the <code>ssl</code> module.</p>
+</div>
+<div class="paragraph">
+<p>It is the job of other Jetty modules to configure the wrapped protocol.
+For example, it is the <a href="#https"><code>https</code> module</a> that configures the wrapped protocol to be HTTP/1.1.
+Similarly, it is the <a href="#http2"><code>http2</code> module</a> that configures the wrapped protocol to be HTTP/2.
+If you enable <em>both</em> the <code>https</code> and the <code>http2</code> module, you will have a single secure connector that will be able to interpret both HTTP/1.1 and HTTP/2.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Recall from the <a href="../modules/index.html" class="xref page">section about modules</a>, that only modules that are explicitly enabled get their module configuration file (<code>*.ini</code>) saved in <code>$JETTY_BASE/start.d/</code>, and you want <code>$JETTY_BASE/start.d/ssl.ini</code> to be present so that you can configure the connector properties, the KeyStore properties and the TLS properties.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="ssl-customize"><a class="anchor" href="#ssl-customize"></a>Customizing KeyStore and SSL/TLS Configuration</h3>
+<div class="paragraph">
+<p>Secure protocols have a slightly more complicated configuration since they require to configure a <em>KeyStore</em>.
+Refer to the <a href="../keystore/index.html" class="xref page">KeyStore section</a> for more information about how to create and manage a KeyStore.</p>
+</div>
+<div class="paragraph">
+<p>For simple cases, you only need to configure the KeyStore path and KeyStore password as explained in <a href="../modules/standard.html#ssl-keystore-tls" class="xref page">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>For more advanced configuration you may want to configure the TLS protocol versions, or the ciphers to include/exclude, etc.
+The correct way of doing this is to create a custom <a href="../xml/index.html" class="xref page">Jetty XML file</a> and reference it in <code>$JETTY_BASE/start.d/ssl.ini</code>:</p>
+</div>
+<div class="listingblock">
+<div class="title">ssl.ini</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">jetty.sslContext.keyStorePassword=my_passwd! <i class="conum" data-value="1"></i><b>(1)</b>
+etc/tls-config.xml <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Configures the <code>jetty.sslContext.keyStorePassword</code> property with the KeyStore password.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>References your newly created <code>$JETTY_BASE/etc/tls-config.xml</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>ssl.ini</code> file above only shows the lines that are not commented out (you can leave the lines that are commented unmodified for future reference).</p>
+</div>
+<div class="paragraph">
+<p>You want to create the <code>$JETTY_BASE/etc/tls-config.xml</code> with the following template content:</p>
+</div>
+<div class="listingblock">
+<div class="title">tls-config.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure&gt;
+  &lt;Ref refid="sslContextFactory"&gt;
+    ... <i class="conum" data-value="1"></i><b>(1)</b>
+  &lt;/Ref&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Here goes your advanced configuration.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>tls-config.xml</code> file references the <code>sslContextFactory</code> component (created by the <code>ssl</code> Jetty module) that configures the KeyStore and TLS parameters, so that you can now call its APIs via XML, and you will have full flexibility for any advanced configuration you want (see below for few examples).</p>
+</div>
+<div class="paragraph">
+<p>Refer to the <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/util/ssl/SslContextFactory.Server.html">SslContextFactory.Server javadocs</a> for the list of methods that you can call through the Jetty XML file.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Use module properties whenever possible, and only resort to use a Jetty XML file for advanced configuration that you cannot do using module properties.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="ssl-customize-versions"><a class="anchor" href="#ssl-customize-versions"></a>Customizing SSL/TLS Protocol Versions</h4>
+<div class="paragraph">
+<p>By default, the SSL protocols (SSL, SSLv2, SSLv3, etc.) are already excluded because they are vulnerable.
+To explicitly add the exclusion of TLSv1.0 and TLSv1.1 (that are also vulnerable&#8201;&#8212;&#8201;which leaves only TLSv1.2 and TLSv1.3 available), you want to use this XML:</p>
+</div>
+<div class="listingblock">
+<div class="title">tls-config.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure&gt;
+  &lt;Ref refid="sslContextFactory"&gt;
+    &lt;Call name="addExcludeProtocols"&gt;
+      &lt;Arg&gt;
+        &lt;Array type="String"&gt;
+          &lt;Item&gt;TLSv1.0&lt;/Item&gt;
+          &lt;Item&gt;TLSv1.1&lt;/Item&gt;
+        &lt;/Array&gt;
+      &lt;/Arg&gt;
+    &lt;/Call&gt;
+  &lt;/Ref&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ssl-customize-ciphers"><a class="anchor" href="#ssl-customize-ciphers"></a>Customizing SSL/TLS Ciphers</h4>
+<div class="paragraph">
+<p>You can precisely set the list of excluded ciphers, completely overriding Jetty&#8217;s default, with this XML:</p>
+</div>
+<div class="listingblock">
+<div class="title">tls-config.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure&gt;
+  &lt;Ref refid="sslContextFactory"&gt;
+    &lt;Set name="ExcludeCipherSuites"&gt;
+      &lt;Array type="String"&gt;
+        &lt;Item&gt;^TLS_RSA_.*$&lt;/Item&gt;
+        &lt;Item&gt;^.*_RSA_.*_(MD5|SHA|SHA1)$&lt;/Item&gt;
+        &lt;Item&gt;^.*_DHE_RSA_.*$&lt;/Item&gt;
+        &lt;Item&gt;SSL_RSA_WITH_DES_CBC_SHA&lt;/Item&gt;
+        &lt;Item&gt;SSL_DHE_RSA_WITH_DES_CBC_SHA&lt;/Item&gt;
+        &lt;Item&gt;SSL_DHE_DSS_WITH_DES_CBC_SHA&lt;/Item&gt;
+        &lt;Item&gt;SSL_RSA_EXPORT_WITH_RC4_40_MD5&lt;/Item&gt;
+        &lt;Item&gt;SSL_RSA_EXPORT_WITH_DES40_CBC_SHA&lt;/Item&gt;
+        &lt;Item&gt;SSL_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA&lt;/Item&gt;
+        &lt;Item&gt;SSL_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA&lt;/Item&gt;
+      &lt;/Array&gt;
+    &lt;/Set&gt;
+  &lt;/Ref&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note how each array item specifies a <em>regular expression</em> that matches multiple ciphers, or specifies a precise cipher to exclude.</p>
+</div>
+<div class="paragraph">
+<p>You can choose to create multiple XML files, and reference them all from <code>$JETTY_BASE/start.d/ssl.ini</code>, or put all your custom configurations in a single XML file.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ssl-renew"><a class="anchor" href="#ssl-renew"></a>Renewing the Certificates</h3>
+<div class="paragraph">
+<p>When you create a certificate, you must specify for how many days it is valid.</p>
+</div>
+<div class="paragraph">
+<p>The typical validity is 90 days, and while this period may seem short, it has two advantages:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Reduces the risk in case of compromised/stolen keys.</p>
+</li>
+<li>
+<p>Encourages automation, i.e. certificate renewal performed by automated tools (rather than manually) at scheduled times.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To renew a certificate, you must go through the <a href="../keystore/index.html#create" class="xref page">same steps</a> you followed to create the certificate the first time, and then you can <a href="#ssl-reload">reload the KeyStore</a> without the need to stop Jetty.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ssl-reload"><a class="anchor" href="#ssl-reload"></a>Watching and Reloading the KeyStore</h3>
+<div class="paragraph">
+<p>Jetty can be configured to monitor the directory of the KeyStore file, and reload the <code>SslContextFactory</code> component if the KeyStore file changed.</p>
+</div>
+<div class="paragraph">
+<p>This feature can be enabled by activating the <code>ssl-reload</code> Jetty module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=ssl-reload</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For more information about the configuration of the <code>ssl-reload</code> Jetty module, see <a href="../modules/standard.html#ssl-reload" class="xref page">this section</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ssl-conscrypt"><a class="anchor" href="#ssl-conscrypt"></a>Using Conscrypt as SSL/TLS Provider</h3>
+<div class="paragraph">
+<p>If not explicitly configured, the TLS implementation is provided by the JDK you are using at runtime.</p>
+</div>
+<div class="paragraph">
+<p>OpenJDK&#8217;s vendors may replace the default TLS provider with their own, but you can also explicitly configure an alternative TLS provider.</p>
+</div>
+<div class="paragraph">
+<p>The standard TLS provider from OpenJDK is implemented in Java (no native code), and its performance is not optimal, both in CPU usage and memory usage.</p>
+</div>
+<div class="paragraph">
+<p>A faster alternative, implemented natively, is Google&#8217;s <a href="https://github.com/google/conscrypt/">Conscrypt</a>, which is built on <a href="https://boringssl.googlesource.com/boringssl/">BoringSSL</a>, which is Google&#8217;s fork of <a href="https://www.openssl.org/">OpenSSL</a>.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+As Conscrypt eventually binds to a native library, there is a higher risk that a bug in Conscrypt or in the native library causes a JVM crash, while the Java implementation will not cause a JVM crash.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To use Conscrypt as the TLS provider just enable the <code>conscrypt</code> Jetty module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=conscrypt</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ssl-bouncycastle"><a class="anchor" href="#ssl-bouncycastle"></a>Using Bouncy Castle as SSL/TLS Provider</h3>
+<div class="paragraph">
+<p>If not explicitly configured, the TLS implementation is provided by the JDK you are using at runtime.</p>
+</div>
+<div class="paragraph">
+<p>OpenJDK&#8217;s vendors may replace the default TLS provider with their own, but you can also explicitly configure an alternative TLS provider.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.bouncycastle.org/">Bouncy Castle</a> is a pure Java alternative provider for the Java security APIs, and includes a TLS provider.</p>
+</div>
+<div class="paragraph">
+<p>To use Bouncy Castle as the TLS provider just enable the <code>bouncycastle</code> Jetty module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=bouncycastle</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ssl-sni"><a class="anchor" href="#ssl-sni"></a>Configuring SNI</h3>
+<div class="paragraph">
+<p>Server Name Indication (SNI) is a TLS extension that clients send to indicate what domain they want to connect to during the initial TLS handshake.</p>
+</div>
+<div class="paragraph">
+<p>Modern TLS clients (e.g. browsers) always send the SNI extension; however, older TLS clients may not send the SNI extension.</p>
+</div>
+<div class="paragraph">
+<p>Being able to handle the SNI is important when you have <a href="../deploy/index.html#virtual-hosts" class="xref page">virtual hosts</a> and a KeyStore with multiple certificates, one for each domain.</p>
+</div>
+<div class="paragraph">
+<p>For example, you may have deployed over a secure connector two web applications, both at context path <code>/</code>, one at virtual host <code>one.com</code> and one at virtual host <code>two.net</code>.
+The KeyStore contains two certificates, one for <code>one.com</code> and one for <code>two.net</code>.</p>
+</div>
+<div class="paragraph">
+<p>There are three <code>ssl</code> module properties that control the SNI behavior on the server: one that works at the TLS level, and two that works at the HTTP level.</p>
+</div>
+<div class="paragraph">
+<p>The property that works at the TLS level is:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.sslContext.sniRequired</code></dt>
+<dd>
+<p>Whether SNI is required at the TLS level, defaults to <code>false</code>.
+Its behavior is explained by the following table:</p>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Behavior of the <code>jetty.sslContext.sniRequired</code> property</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>sniRequired=false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>sniRequired=true</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>SNI = <code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>client receives default certificate</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>client receives TLS failure</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>SNI = <code>wrong.org</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>client receives default certificate</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>client receives TLS failure</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>SNI = <code>one.com</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>client receives <code>one.com</code> certificate</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>client receives <code>one.com</code> certificate</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <em>default certificate</em> is the certificate returned by the TLS implementation in case there is no SNI match, and you should not rely on this certificate to be the same across Java vendors and versions, or Jetty versions, or TLS provider vendors and versions.</p>
+</div>
+<div class="paragraph">
+<p>In the example above it could be either the <code>one.com</code> certificate or the <code>two.net</code> certificate.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>When <code>jetty.sslContext.sniRequired=true</code>, clients that don&#8217;t send a valid SNI receive a TLS failure, and their attempt to connect to the server fails.
+The details of this failure may not be reported and could be difficult to figure out that the failure is related to an invalid SNI.</p>
+</div>
+<div class="paragraph">
+<p>For this reason, other two properties are defined at the HTTP level, so that clients can received an HTTP 400 response with more details about what went wrong while trying to connect to the server:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.ssl.sniRequired</code></dt>
+<dd>
+<p>Whether SNI is required at the HTTP level, defaults to <code>false</code>.
+Its behavior is similar to the <code>jetty.sslContext.sniRequired</code> property above, and is explained by the following table:</p>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Behavior of the <code>jetty.ssl.sniRequired</code> property</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>sniRequired=false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>sniRequired=true</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>SNI = <code>null</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Accept</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Reject: 400 Bad Request</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>SNI = <code>wrong.org</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Accept</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Reject: 400 Bad Request</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>SNI = <code>one.com</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Accept</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Accept</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>When <code>jetty.ssl.sniRequired=true</code>, the SNI is matched against the certificate sent to the client, and only if there is a match the request is accepted.</p>
+</div>
+<div class="paragraph">
+<p>When the request is accepted, there could be an additional check controlled by the following property:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.ssl.sniHostCheck</code></dt>
+<dd>
+<p>Whether the certificate sent to the client matches the <code>Host</code> header, defaults to <code>true</code>.
+Its behavior is explained by the following table:</p>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. Behavior of the <code>jetty.ssl.sniHostCheck</code> property</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>sniHostCheck=false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>sniHostCheck=true</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>certificate = <code>one.com</code><br>
+<code>Host: wrong.org</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Accept</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Reject: 400 Bad Request</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>certificate = <code>one.com</code><br>
+<code>Host: one.com</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Accept</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Accept</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>In the normal case with the default server configuration, for a TLS clients that sends SNI, and then sends an HTTP request with the correct <code>Host</code> header, Jetty will pick the correct certificate from the KeyStore based on the SNI received from the client, and accept the request.</p>
+</div>
+<div class="paragraph">
+<p>Accepting the request does not mean that the request is responded with an HTTP 200 OK, but just that the request passed successfully the SNI checks and will be processed by the server.
+If the request URI is for a resource that does not exist, the response will likely be a 404 Not Found.</p>
+</div>
+<div class="paragraph">
+<p>You may modify the default values of the SNI properties if you want stricter control over old/broken TLS clients or bad HTTP requests.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="proxy"><a class="anchor" href="#proxy"></a>Jetty Behind a Load Balancer or Reverse Proxy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You may need to configure one or more Jetty instances behind an <em>intermediary</em>, typically a load balancer such as <a href="https://haproxy.org">HAProxy</a>, or a reverse proxy such as <a href="https://httpd.apache.org">Apache HTTP Server</a> or <a href="https://nginx.org">Nginx</a>.</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNp9jUEOwjAMBO95hdV7kVqJF3DjFyYJbWliV3Yq6O9JoIJw4WLteNdrnSdaUDDCBe08CK_kThxYIAmSZstTMvpJRSa2o3D0ObD6ytERHd8nGuCKQWtnQefK_miMWgweukOW4m1CGjLaMJUn38Ui_Ngqbs4-pa0BVLgV1f3xemPefdC2e9FrFtyPf7l_AplwXII=" alt="Diagram">
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>HAProxy can communicate either HTTP/1.1 or HTTP/2 to backend servers such as Jetty.</p>
+</div>
+<div class="paragraph">
+<p>Apache HTTP Server and Nginx can only speak HTTP/1.1 to backend servers such as Jetty, and have no plans to support HTTP/2 towards backend servers.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In these setups, typically the proxy performs TLS offloading, and the communication with backend servers happens in clear-text.
+It is possible, however, to configure the proxy so that all the bytes arriving from the client are tunnelled opaquely to the backend Jetty server (that therefore needs to perform the TLS offloading) and vice versa the bytes arriving from the Jetty server are tunnelled opaquely to the client.</p>
+</div>
+<div class="paragraph">
+<p>Also in these setups, the TCP/IP connection terminating on the Jetty servers does not originate from the client, but from the proxy, so that the remote IP address and port number may be reported incorrectly in backend server logs, or worse applications may not work because they need to be able to differentiate different clients based on the client IP address.</p>
+</div>
+<div class="paragraph">
+<p>For this reason, intermediaries typically implement at least one of several <em>de facto</em> standards to communicate information about the original client connection to the backend Jetty server.</p>
+</div>
+<div class="paragraph">
+<p>Jetty supports two methods to process client information sent by intermediaries:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>Forwarded</code> HTTP header, defined in <a href="https://tools.ietf.org/html/rfc7239">RFC 7239</a> and replacing the old <code>X-Forwarded-*</code> headers, defined in <a href="#proxy-forwarded">this section</a>.</p>
+</li>
+<li>
+<p>The <a href="https://www.haproxy.org/download/2.2/doc/proxy-protocol.txt">Proxy Protocol</a>, defined in <a href="#proxy-protocol">this section</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In both methods, web applications that call <code>HttpServletRequest.getRemoteAddr()</code> will receive the remote client IP address as specified by the client information sent by the intermediary, not the physical IP address of TCP connection with the intermediary.
+Likewise, <code>HttpServletRequest.getRemotePort()</code> will return the remote client IP port as specified by the client information sent by the intermediary, and <code>HttpServletRequest.isSecure()</code> will return whether the client made a secure request using the <code>https</code> scheme as specified by the client information sent by the intermediary.</p>
+</div>
+<div class="sect2">
+<h3 id="proxy-forwarded"><a class="anchor" href="#proxy-forwarded"></a>Configuring the Forwarded Header</h3>
+<div class="paragraph">
+<p>The <code>Forwarded</code> HTTP header is added by the intermediary with information about the client and the client request, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>GET / HTTP/1.1
+Host: domain.com
+Forwarded: for=2.36.72.144:21216;proto=https</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above, the intermediary added the <code>Forwarded</code> header specifying that the client remote address is <code>2.36.72.144:21216</code> and that the request was made with the <code>https</code> scheme.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume you have already configured Jetty with the HTTP/1.1 protocol with the following command (issued from within the <code>$JETTY_BASE</code> directory):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=http</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Support for the <code>Forwarded</code> HTTP header (and its predecessor <code>X-Forwarded-*</code> headers) is enabled with the <code>forwarded</code> Jetty module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=forwarded</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+setupArgs=--add-modules=http
+args=--add-modules=forwarded</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With the <code>forwarded</code> Jetty module enabled, Jetty interprets the <code>Forwarded</code> header and makes its information available to web applications via the standard Servlet APIs.</p>
+</div>
+<div class="paragraph">
+<p>For further information about configuring the <code>forwarded</code> Jetty module, see <a href="../modules/standard.html#forwarded" class="xref page">this section</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proxy-protocol"><a class="anchor" href="#proxy-protocol"></a>Configuring the Proxy Protocol</h3>
+<div class="paragraph">
+<p>The <a href="https://www.haproxy.org/download/2.2/doc/proxy-protocol.txt">Proxy Protocol</a> is the <em>de facto</em> standard, introduced by <a href="https://haproxy.org">HAProxy</a>, to communicate client information to backend servers via the TCP connection, rather than via HTTP headers.</p>
+</div>
+<div class="paragraph">
+<p>The information about the client connection is sent as a small data frame on each newly established connection.
+This mechanism is therefore independent of any protocol, so it can be used for TLS, HTTP/1.1, HTTP/2, etc.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>There are 2 versions of the proxy protocol: v1 and v2, both supported by Jetty.</p>
+</div>
+<div class="paragraph">
+<p>Proxy protocol v1 is human readable, but it only carries information about the client TCP connection (IP address and IP port).</p>
+</div>
+<div class="paragraph">
+<p>Proxy protocol v2 has a binary format, carries the information about the client TCP connection, and can carry additional arbitrary information encoded in pairs <code>(type, value)</code> where <code>type</code> is a single byte that indicates the value&#8217;s meaning, and <code>value</code> is a variable length byte array that can encode user-defined data.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Support for the proxy protocol can be enabled for the clear-text connector or for the secure connector (or both).</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume you have already configured Jetty with the HTTP/1.1 clear-text protocol with the following command (issued from within the <code>$JETTY_BASE</code> directory):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=http</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To enable proxy protocol support for the clear-text connector, enable the <code>proxy-protocol</code> Jetty module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=proxy-protocol</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+setupArgs=--add-modules=http
+args=--add-modules=proxy-protocol</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Starting Jetty yields:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+args=--module=proxy-protocol
+highlight=(\{.*:8080})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note how in the example above the list of protocols for the clear-text connector is first <code>proxy</code> and then <code>http/1.1</code>.
+For every new TCP connection, Jetty first interprets the proxy protocol bytes with the client information; after this initial proxy protocol processing, Jetty interprets the incoming bytes as HTTP/1.1 bytes.</p>
+</div>
+<div class="paragraph">
+<p>Enabling proxy protocol support for the secure connector is similar.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume you have already configured Jetty with the HTTP/1.1 secure protocol and the test KeyStore with the following command (issued from within the <code>$JETTY_BASE</code> directory):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=https,test-keystore</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Enable the <code>proxy-protocol-ssl</code> Jetty module with the following command (issued from within the <code>$JETTY_BASE</code> directory):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=proxy-protocol-ssl</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+setupArgs=--add-modules=https
+args=--add-modules=proxy-protocol-ssl</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Starting Jetty yields:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+setupArgs=--add-modules=https,test-keystore,proxy-protocol-ssl
+highlight=(\{.*:8443})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note how in the example above the list of protocols for the secure connector is first <code>proxy</code>, then <code>ssl</code> and then <code>http/1.1</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proxy-haproxy"><a class="anchor" href="#proxy-haproxy"></a>HAProxy and Jetty with HTTP/1.1 and HTTP/2</h3>
+<div class="paragraph">
+<p><a href="https://haproxy.org">HAProxy</a> is an open source solution that offers load balancing and proxying for TCP and HTTP based application, and can be used as a replacement for Apache or Nginx when these are used as reverse proxies.</p>
+</div>
+<div class="paragraph">
+<p>The deployment proposed here has HAProxy playing the role that Apache and Nginx usually do: to perform the TLS offloading (that is, decrypt incoming bytes and encrypt outgoing bytes) and then forwarding the now clear-text traffic to a backend Jetty server, speaking either HTTP/1.1 or HTTP/2.
+Since HAProxy&#8217;s TLS offloading is based on OpenSSL, it is much more efficient than the Java implementation shipped with OpenJDK.</p>
+</div>
+<div class="paragraph">
+<p>After you have installed HAProxy on your system, you want to configure it so that it can perform TLS offloading.</p>
+</div>
+<div class="paragraph">
+<p>HAProxy will need a single file containing the X509 certificates and the private key, all in <a href="https://en.wikipedia.org/wiki/X.509">PEM format</a>, with the following order:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The site certificate; this certificate&#8217;s Common Name refers to the site domain (for example: CN=*.webtide.com) and is signed by Certificate Authority #1.</p>
+</li>
+<li>
+<p>The Certificate Authority #1 certificate; this certificate may be signed by Certificate Authority #2.</p>
+</li>
+<li>
+<p>The Certificate Authority #2 certificate; this certificate may be signed by Certificate Authority #3; and so on until the Root Certificate Authority.</p>
+</li>
+<li>
+<p>The Root Certificate Authority certificate.</p>
+</li>
+<li>
+<p>The private key corresponding to the site certificate.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Refer to the <a href="../keystore/index.html" class="xref page">section about KeyStores</a> for more information about generating the required certificates and private key.</p>
+</div>
+<div class="paragraph">
+<p>Now you can create the HAProxy configuration file (in Linux it&#8217;s typically <code>/etc/haproxy/haproxy.cfg</code>).
+This is a minimal configuration:</p>
+</div>
+<div class="listingblock">
+<div class="title">haproxy.cfg</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">global
+tune.ssl.default-dh-param 1024
+
+defaults
+timeout connect 10000ms
+timeout client 60000ms
+timeout server 60000ms
+
+frontend fe_http <i class="conum" data-value="1"></i><b>(1)</b>
+mode http
+bind *:80
+# Redirect to https
+redirect scheme https code 301
+
+frontend fe_https <i class="conum" data-value="2"></i><b>(2)</b>
+mode tcp
+bind *:443 ssl no-sslv3 crt /path/to/domain.pem ciphers TLSv1.2 alpn h2,http/1.1
+default_backend be_http
+
+backend be_http <i class="conum" data-value="3"></i><b>(3)</b>
+mode tcp
+server domain 127.0.0.1:8282 send-proxy-v2</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code>fe_http</code> front-end accepts connections on port 80 and redirects them to use the <code>https</code> scheme.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <code>fe_https</code> front-end accepts connections on port 443, and it is where the TLS decryption/encryption happens.
+You must specify the path to the PEM file containing the TLS key material (the <code>crt /path/to/domain.pem</code> part), the ciphers that are suitable for HTTP/2 (<code>ciphers TLSv1.2</code>), and the ALPN protocols supported (<code>alpn h2,http/1.1</code>).
+This front-end then forwards the now decrypted bytes to the backend in <code>mode tcp</code>.
+The <code>mode tcp</code> says that HAProxy will not try to interpret the bytes but instead opaquely forwards them to the backend.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The <code>be_http</code> backend will forward (again in <code>mode tcp</code>) the clear-text bytes to a Jetty connector that talks clear-text HTTP/2 and HTTP/1.1 on port 8282.
+The <code>send-proxy-v2</code> directive sends the proxy protocol v2 bytes to the backend server.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>On the Jetty side, you need to enable the following modules:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=proxy-protocol,http2c,http,deploy</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You need to specify the host (<code>127.0.0.1</code>) and port (<code>8282</code>) you have configured in HAProxy when you start Jetty:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar jetty.http.host=127.0.0.1 jetty.http.port=8282</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You want the Jetty connector that listens on port <code>8282</code> to be available only to HAProxy, and not to remote clients.</p>
+</div>
+<div class="paragraph">
+<p>For this reason, you want to specify the <code>jetty.http.host</code> property on the command line (or in <code>$JETTY_BASE/start.d/http.ini</code> to make this setting persistent) to bind the Jetty connector only on the loopback interface (<code>127.0.0.1</code>), making it available to HAProxy but not to remote clients.</p>
+</div>
+<div class="paragraph">
+<p>If your Jetty instance runs on a different machine and/or on a different (sub)network, you may want to adjust both the back-end section of the HAProxy configuration file and the <code>jetty.http.host</code> property to match accordingly.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>With this configuration for HAProxy and Jetty, browsers supporting HTTP/2 will connect to HAProxy, which will decrypt the traffic and send it to Jetty.
+Likewise, HTTP/1.1 clients will connect to HAProxy, which will decrypt the traffic and send it to Jetty.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty connector, configured with the <code>http2c</code> and the <code>http</code> modules is able to distinguish whether the incoming bytes are HTTP/2 or HTTP/1.1 and will handle the request accordingly.</p>
+</div>
+<div class="paragraph">
+<p>The response is relayed back to HAProxy, which will encrypt it and send it back to the remote client.</p>
+</div>
+<div class="paragraph">
+<p>This configuration offers you efficient TLS offloading, HTTP/2 support and transparent fallback to HTTP/1.1 for clients that don&#8217;t support HTTP/1.1.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../server/index.html">Jetty Server</a></span>
+  <span class="next"><a href="../keystore/index.html">Configuring SSL/TLS KeyStores</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

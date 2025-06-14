@@ -1,0 +1,2521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Standard Modules :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="custom.html">
+    <link rel="next" href="../deploy/index.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Operations Guide</a></li>
+    <li><a href="index.html">Jetty Modules</a></li>
+    <li><a href="standard.html">Standard Modules</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/operations-guide/pages/modules/standard.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Standard Modules</h1>
+<div class="sect1">
+<h2 id="alpn"><a class="anchor" href="#alpn"></a>Module <code>alpn</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>alpn</code> module enables support for the ALPN negotiation mechanism of the TLS protocol.</p>
+</div>
+<div class="paragraph">
+<p>You can configure the list of application protocols negotiated by the ALPN mechanism, as well as the default protocol to use if the ALPN negotiation fails (for example, the client does not support ALPN).</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Specifies the ordered list of application protocols supported by the server.
+## The default list is specified by the list of the protocol modules that have
+## been enabled, and the order is specified by the module dependencies.
+# jetty.alpn.protocols=h2,http/1.1
+
+## Specifies the protocol to use when the ALPN negotiation fails.
+# jetty.alpn.defaultProtocol=http/1.1</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="accept-rate-limit"><a class="anchor" href="#accept-rate-limit"></a>Module <code>accept-rate-limit</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>accept-rate-limit</code> module limits the rate of new connections accepted by the server, across all connectors.</p>
+</div>
+<div class="paragraph">
+<p>Once the configured accept rate has been reached, Jetty will not accept more connections.
+Existing, established connections will work normally.</p>
+</div>
+<div class="paragraph">
+<p>Once accepting new connections has been suspended, Jetty will periodically check whether the rate has returned withing the limits, and if so, accepting new connections will be resumed.</p>
+</div>
+<div class="paragraph">
+<p>This module is often used in conjunction with the <a href="#connection-limit"><code>connection-limit</code></a> module.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The number of connections seen at the JVM level may be different from the number of connections seen at the OS level.
+For more information, refer to <a href="../../programming-guide/server/http.html#connector-limiting" class="xref page">this section</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The module file is <code>$JETTY_HOME/modules/accept-rate-limit.mod</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## The limit for the rate of accepted connections.
+#jetty.acceptratelimit.acceptRateLimit=1000
+
+## The period of time to check for the rate of accepted
+## connections to have returned within the limit.
+#jetty.acceptratelimit.period=1000
+
+## The unit of time for the period.
+#jetty.acceptratelimit.units=MILLISECONDS</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="bytebufferpool"><a class="anchor" href="#bytebufferpool"></a>Module <code>bytebufferpool</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>bytebufferpool</code> module allows you to configure the server-wide <code>ByteBuffer</code> pool.
+Pooling <code>ByteBuffer</code>s results in less memory usage and less pressure on the Garbage Collector.</p>
+</div>
+<div class="paragraph">
+<p><code>ByteBuffer</code>s are pooled in <em>buckets</em>; each bucket as a capacity that is a multiple of a capacity factor that you can configure.
+For example, if a request for a <code>ByteBuffer</code> of capacity 2000 is requested, and the capacity factor is 1024, then the pool will allocate a buffer from the second bucket, of capacity 2048 (1024 * 2).</p>
+</div>
+<div class="paragraph">
+<p>Applications that need to sustain many concurrent requests&#8201;&#8212;&#8201;or load spikes&#8201;&#8212;&#8201;may require many buffers during peak load. These buffers will remain pooled once the system transitions to a lighter load (or becomes idle), and it may be undesirable to retain a lot of memory for an idle system.</p>
+</div>
+<div class="paragraph">
+<p>It is possible to configure the max heap memory and the max direct memory that the pool retains.
+Excess buffers will not be pooled and will be eventually garbage collected.</p>
+</div>
+<div class="paragraph">
+<p>The module file is <code>$JETTY_HOME/modules/bytebufferpool.mod</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[description]
+Configures the ByteBufferPool used by ServerConnectors.
+The bucket sizes increase linearly.
+Use module "bytebufferpool-quadratic" for a pool that holds more coarse sized buffers.
+
+[depends]
+logging
+
+[xml]
+etc/jetty-bytebufferpool.xml
+
+[ini-template]
+## Minimum capacity of a single ByteBuffer.
+#jetty.byteBufferPool.minCapacity=0
+
+## Maximum capacity of a single ByteBuffer.
+## Requests for ByteBuffers larger than this value results
+## in the ByteBuffer being allocated but not pooled.
+#jetty.byteBufferPool.maxCapacity=65536
+
+## Bucket capacity factor.
+## ByteBuffers are allocated out of buckets that have
+## a capacity that is multiple of this factor.
+#jetty.byteBufferPool.factor=4096
+
+## Maximum size for each bucket (-1 for unbounded).
+#jetty.byteBufferPool.maxBucketSize=-1
+
+## Maximum heap memory held idle by the pool (0 for heuristic, -1 for unlimited).
+#jetty.byteBufferPool.maxHeapMemory=0
+
+## Maximum direct memory held idle by the pool (0 for heuristic, -1 for unlimited).
+#jetty.byteBufferPool.maxDirectMemory=0
+
+## Whether statistics are enabled.
+#jetty.byteBufferPool.statisticsEnabled=false</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Among the configurable properties, the most relevant are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.byteBufferPool.maxHeapMemory</code></dt>
+<dd>
+<p>This property allows you to cap the max heap memory retained by the pool.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.byteBufferPool.maxDirectMemory</code></dt>
+<dd>
+<p>This property allows you to cap the max direct memory retained by the pool.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="connection-limit"><a class="anchor" href="#connection-limit"></a>Module <code>connection-limit</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>connection-limit</code> module limits the number of connections accepted by the server, across all connectors.</p>
+</div>
+<div class="paragraph">
+<p>Once the configured maximum number of connections is reached, Jetty will not accept more connections.
+Existing, established connections will work normally.
+When existing connections are closed, accepting new connections will be resumed.</p>
+</div>
+<div class="paragraph">
+<p>This module is often used in conjunction with the <a href="#accept-rate-limit"><code>accept-rate-limit</code></a> module.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The number of connections seen at the JVM level may be different from the number of connections seen at the OS level.
+For more information, refer to <a href="../../programming-guide/server/http.html#connector-limiting" class="xref page">this section</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The module file is <code>$JETTY_HOME/modules/connection-limit.mod</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## The maximum number of TCP connections allowed across all connectors.
+#jetty.connectionlimit.maxConnections=1000
+
+## The idle timeout to apply (in milliseconds) to existing connections when the connection limit is reached.
+#jetty.connectionlimit.idleTimeout=1000</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="console-capture"><a class="anchor" href="#console-capture"></a>Module <code>console-capture</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>console-capture</code> module captures <code>System.out</code> and <code>System.err</code> output and appends it to a rolling file.</p>
+</div>
+<div class="paragraph">
+<p>The file is rolled every day at the midnight of the configured timezone.
+Old, rolled files are kept for the number of days specified by the <code>jetty.console-capture.retainDays</code> property.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Logging directory (relative to $JETTY_BASE).
+# jetty.console-capture.dir=./logs
+
+## Whether to append to existing file.
+# jetty.console-capture.append=true
+
+## How many days to retain old log files.
+# jetty.console-capture.retainDays=90
+
+## Timezone ID of the log timestamps, as specified by java.time.ZoneId.
+# jetty.console-capture.timezone=GMT</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="core-deploy"><a class="anchor" href="#core-deploy"></a>Module <code>core-deploy</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This module enables webapp deployment from the <code>$JETTY_BASE/webapps</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>Deployment is managed via a <code>DeploymentManager</code> component that watches a directory for changes.
+See <a href="../deploy/index.html" class="xref page">how to deploy web applications</a> for more information.</p>
+</div>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cross-origin"><a class="anchor" href="#cross-origin"></a>Module <code>cross-origin</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>cross-origin</code> module provides support for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS protocol</a> implemented by browsers when performing cross-origin requests.</p>
+</div>
+<div class="paragraph">
+<p>This module installs the <a href="../../programming-guide/server/http.html#handler-use-cross-origin" class="xref page"><code>CrossOriginHandler</code></a> in the <code>Handler</code> tree; <code>CrossOriginHandler</code> inspects cross-origin requests and adds the relevant CORS response headers.</p>
+</div>
+<div class="paragraph">
+<p><code>CrossOriginHandler</code> should be used when an application performs cross-origin requests to your domain, to protect from <a href="https://owasp.org/www-community/attacks/csrf">cross-site request forgery</a> attacks.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Whether cross-origin requests can include credentials such as cookies or authentication headers.
+# jetty.crossorigin.allowCredentials=false
+
+## A comma-separated list of headers allowed in cross-origin requests.
+# jetty.crossorigin.allowedHeaders=Content-Type
+
+## A comma-separated list of HTTP methods allowed in cross-origin requests.
+# jetty.crossorigin.allowedMethods=GET,POST,HEAD
+
+## A comma-separated list of origins regex patterns allowed in cross-origin requests.
+# jetty.crossorigin.allowedOriginPatterns=
+
+## A comma-separated list of timing origins regex patterns allowed in cross-origin requests.
+# jetty.crossorigin.allowedTimingOriginPatterns=
+
+## Whether preflight requests are delivered to the child Handler of CrossOriginHandler.
+# jetty.crossorigin.deliverPreflightRequests=false
+
+## Whether requests whose origin is not allowed are delivered to the child Handler of CrossOriginHandler.
+# jetty.crossorigin.deliverNonAllowedOriginRequests=true
+
+## Whether WebSocket upgrade requests whose origin is not allowed are delivered to the child Handler of CrossOriginHandler.
+# jetty.crossorigin.deliverNonAllowedOriginWebSocketUpgradeRequests=false
+
+## A comma-separated list of headers allowed in cross-origin responses.
+# jetty.crossorigin.exposedHeaders=
+
+## How long the preflight results can be cached by browsers, in seconds.
+# jetty.crossorigin.preflightMaxAge=60</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="debuglog"><a class="anchor" href="#debuglog"></a>Module <code>debuglog</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>debuglog</code> module logs extra information about request processing.</p>
+</div>
+<div class="paragraph">
+<p>This module installs the <code>DebugHandler</code> into the handler tree and logs information into a rollover log file.
+By default, the location of the log file is <code>$JETTY_BASE/logs</code>, although this can be configured via the <code>jetty.debuglog.dir</code>.
+The name of the log file is of the form: <code>yyyy_mm_dd.debug.log</code>, for example <code>2024-10-01.debug.log</code>.
+All deployed contexts will write to the same log file.</p>
+</div>
+<div class="paragraph">
+<p>Note that if a request uses asynchronous processing, the log event for the completion of handling may occur out of order with the log event for the continuation of processing.</p>
+</div>
+<div class="paragraph">
+<p>If more precise logging of request processing is required - including well-ordered async processing events - or you wish to constrain request debug logging to particular contexts only, then configure an ee-specific  <code>DebugListener</code> for each context instead of using this module.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Logging directory (relative to $JETTY_BASE)
+# jetty.debuglog.dir=logs
+
+## Whether to append to existing file
+# jetty.debuglog.append=false
+
+## How many days to retain old log files
+# jetty.debuglog.retainDays=90
+
+## Timezone of the log entries
+# jetty.debuglog.timezone=GMT
+
+## Show Request/Response headers
+# jetty.debug.showHeaders=true</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="eeN-deploy"><a class="anchor" href="#eeN-deploy"></a>Module <code>ee{8,9,10}-deploy</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This module enables webapp deployment from the <code>$JETTY_BASE/webapps</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>Deployment is managed via a <code>DeploymentManager</code> component that watches a directory for changes.
+See <a href="../deploy/index.html" class="xref page">how to deploy web applications</a> for more information.</p>
+</div>
+<div class="paragraph">
+<p>Adding files or directories to this monitored directory will cause the <code>DeploymentManager</code> to deploy them as web applications; updating files already existing in this monitored directory will cause the <code>DeploymentManager</code> to re-deploy the corresponding web application; removing files in this monitored directory will cause the <code>DeploymentManager</code> to "undeploy" the corresponding web application.
+(You can find a more detailed discussion of these rules in the <a href="../deploy/index.html#rules" class="xref page">deployment rules</a> section.)</p>
+</div>
+<div class="paragraph">
+<p>Multiple versions of this module exist (<code>ee{8,9,10}-deploy</code>) to support each Jakarta EE platform&#8217;s version of the Java Servlet specification.
+Jetty&#8217;s configuration properties are nearly identical across these versions; the configuration properties for the <code>ee10-deploy</code> Jetty module are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Monitored directory name (relative to $jetty.base)
+# jetty.deploy.monitoredDir=webapps
+
+## Defaults Descriptor for all deployed webapps
+# jetty.deploy.defaultsDescriptorPath=${jetty.base}/etc/webdefault-ee10.xml
+
+## Monitored directory scan period (seconds)
+# jetty.deploy.scanInterval=0
+
+## Whether to extract *.war files
+# jetty.deploy.extractWars=true
+
+## Whether to give the parent classloader priority
+# jetty.deploy.parentLoaderPriority=true
+
+## Comma separated list of configuration classes to set.
+# jetty.deploy.configurationClasses=
+
+## Pattern to select jars from the container classloader to be scanned (or null to scan no jars)
+# jetty.deploy.containerScanJarPattern=.*/jakarta.servlet-api-[^/]*\.jar$|.*jakarta.servlet.jsp.jstl-.*\.jar$
+
+## Pattern to select jars from the container classloader to be scanned (or null to scan all jars).
+# jetty.deploy.webInfScanJarPattern=
+
+## Pattern to exclude discovered ServletContainerInitializers
+# jetty.deploy.servletContainerInitializerExclusionPattern=
+
+## Order of discovered ServletContainerInitializers
+# jetty.deploy.servletContainerInitializerOrder=</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Among the configurable properties, the most relevant are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.deploy.monitoredDir</code></dt>
+<dd>
+<p>The name of the monitored directory.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.deploy.scanInterval</code></dt>
+<dd>
+<p>The scan period in seconds, that is how frequently the <code>DeploymentManager</code> wakes up to scan the monitored directory for changes.
+Setting <code>jetty.deploy.scanInterval=0</code> disabled <em>hot</em> deployment so that only static deployment will be possible (see also <a href="../deploy/index.html#hot-static" class="xref page">here</a> for more information).</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="eeN-webapp"><a class="anchor" href="#eeN-webapp"></a>Module <code>ee{8,9,10}-webapp</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This module enables deployment of Java Servlet web applications.</p>
+</div>
+<div class="paragraph">
+<p>Multiple versions of this module exist (<code>ee{8,9,10}-webapp</code>) to support each Jakarta EE platform&#8217;s version of the Java Servlet specification.
+Jetty&#8217;s configuration properties are identical across all versions of this module, and are as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Add to the environment wide default jars and packages protected or hidden from webapps.
+## Protected (aka System) classes cannot be overridden by a webapp.
+## Hidden (aka Server) classes cannot be seen by a webapp
+## Lists of patterns are comma separated and may be either:
+##  + a qualified classname e.g. 'com.acme.Foo' 
+##  + a package name e.g. 'net.example.'
+##  + a jar file e.g. '${jetty.base.uri}/lib/dependency.jar' 
+##  + a directory of jars,resource or classes e.g. '${jetty.base.uri}/resources' 
+##  + A pattern preceded with a '-' is an exclusion, all other patterns are inclusions
+##
+## The +=, operator appends to a CSV list with a comma as needed.
+##
+#jetty.webapp.addProtectedClasses+=,org.example.
+#jetty.webapp.addHiddenClasses+=,org.example.</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="graceful"><a class="anchor" href="#graceful"></a>Module <code>graceful</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>graceful</code> module allows to shut down gracefully the Jetty server when it is stopped (see <a href="../start/index.html#stop" class="xref page">this section</a> for more information about stopping Jetty).</p>
+</div>
+<div class="paragraph">
+<p>The <code>graceful</code> module installs the <code>GracefulHandler</code> at the root of the <code>Handler</code> tree; the <code>GracefulHandler</code> rejects new requests, but allows current requests to terminate within a configurable timeout, as explained in <a href="../../programming-guide/server/http.html#handler-use-graceful" class="xref page">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## The timeout, in milliseconds, to apply when stopping the server gracefully.
+# jetty.server.stopTimeout=5000</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="http"><a class="anchor" href="#http"></a>Module <code>http</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>http</code> module provides the clear-text connector and support for the clear-text HTTP/1.1 protocol, and depends on the <a href="#server"><code>server</code> module</a>.</p>
+</div>
+<div class="paragraph">
+<p>The module properties to configure the clear-text connector are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>### Clear-Text HTTP Connector Configuration
+
+## The host/address to bind the connector to.
+# jetty.http.host=0.0.0.0
+
+## The port the connector listens on.
+# jetty.http.port=8080
+
+## The connector idle timeout, in milliseconds.
+# jetty.http.idleTimeout=30000
+
+## The number of acceptors (-1 picks a default value based on number of cores).
+# jetty.http.acceptors=1
+
+## The number of selectors (-1 picks a default value based on number of cores).
+# jetty.http.selectors=-1
+
+## The ServerSocketChannel accept queue backlog (0 picks the platform default).
+# jetty.http.acceptQueueSize=0
+
+## The thread priority delta to give to acceptor threads.
+# jetty.http.acceptorPriorityDelta=0
+
+## Whether to enable the SO_REUSEADDR socket option.
+# jetty.http.reuseAddress=true
+
+## Whether to enable the SO_REUSEPORT socket option.
+# jetty.http.reusePort=false
+
+## Whether to enable the TCP_NODELAY socket option on accepted sockets.
+# jetty.http.acceptedTcpNoDelay=true
+
+## The SO_RCVBUF socket option to set on accepted sockets.
+## A value of -1 indicates that the platform default is used.
+# jetty.http.acceptedReceiveBufferSize=-1
+
+## The SO_SNDBUF socket option to set on accepted sockets.
+## A value of -1 indicates that the platform default is used.
+# jetty.http.acceptedSendBufferSize=-1</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Among the configurable properties, the most relevant are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.http.port</code></dt>
+<dd>
+<p>The network port that Jetty listens to for clear-text HTTP/1.1 connections&#8201;&#8212;&#8201;default <code>8080</code>.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.http.idleTimeout</code></dt>
+<dd>
+<p>The amount of time a connection can be idle (i.e. no bytes received and no bytes sent) until the server decides to close it to save resources&#8201;&#8212;&#8201;default <code>30</code> seconds.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.http.acceptors</code></dt>
+<dd>
+<p>The number of threads that compete to accept connections&#8201;&#8212;&#8201;default 1. Use -1 to let the accept heuristic decides the value; the current heuristic calculates a value based on the number of cores).
+Refer to <a href="#http-acceptors">this section</a> for more information about acceptor threads.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.http.selectors</code></dt>
+<dd>
+<p>The number of NIO selectors (with an associated thread) that manage connections&#8201;&#8212;&#8201;default -1 (i.e. a select heuristic decides the value; the current heuristic calculates a value based on the number of cores).</p>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="http-acceptors"><a class="anchor" href="#http-acceptors"></a>Configuration of Acceptors</h3>
+<div class="paragraph">
+<p>Accepting connections from remote clients may be configured as a blocking operation, or a non-blocking operation.</p>
+</div>
+<div class="paragraph">
+<p>When accepting connections is configured as a blocking operation (the number of acceptors is greater than zero), a thread is blocked in the <code>accept()</code> call until a connection is accepted, and other acceptor threads (if any) are blocked on the lock acquired by the accepting thread just before the <code>accept()</code> call.</p>
+</div>
+<div class="paragraph">
+<p>When the accepting thread accepts a connection, it performs a little processing of the just accepted connection, before forwarding it to other components.</p>
+</div>
+<div class="paragraph">
+<p>During this little processing other connections may be established; if there is only one accepting thread, the newly established connections are waiting for the accepting thread to finish the processing of the previously accepted connection and call again <code>accept()</code>.</p>
+</div>
+<div class="paragraph">
+<p>Servers that manage a very high number of connections that may (naturally) come and go, or that handle inefficient protocols that open and close connections very frequently (such as HTTP/1.0) may benefit of an increased number of acceptor threads, so that when one acceptor thread processes a just accepted connection, another acceptor thread can immediately take over accepting connections.</p>
+</div>
+<div class="paragraph">
+<p>When accepting connections is configured as a non-blocking operation (the number of acceptors is zero), then the server socket is set in non-blocking mode and added to a NIO selector.
+In this way, no dedicated acceptor threads exist: the work of accepting connections is performed by the selector thread.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="http-selectors"><a class="anchor" href="#http-selectors"></a>Configuration of Selectors</h3>
+<div class="paragraph">
+<p>Performing a NIO <code>select()</code> call is a blocking operation, where the selecting thread is blocked in the <code>select()</code> call until at least one connection is ready to be processed for an I/O operation.
+There are 4 I/O operations: ready to be accepted, ready to be connected, ready to be read and ready to be written.</p>
+</div>
+<div class="paragraph">
+<p>A single NIO selector can manage thousands of connections, with the assumption that not many of them will be ready at the same time.</p>
+</div>
+<div class="paragraph">
+<p>For a single NIO selector, the ratio between the average number of selected connections over the total number of connections for every <code>select()</code> call depends heavily on the protocol but also on the application.</p>
+</div>
+<div class="paragraph">
+<p>Multiplexed TCP protocols such as HTTP/2 tend to be busier than duplex protocols such as HTTP/1.1, leading to a higher ratio.</p>
+</div>
+<div class="paragraph">
+<p>REST applications that exchange many little JSON messages tend to be busier than file server applications, leading to a higher ratio.</p>
+</div>
+<div class="paragraph">
+<p>The higher the ratio, the higher the number of selectors you want to have, compatibly with the number of cores&#8201;&#8212;&#8201;there is no point in having 64 selector threads on a single core hardware.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="http2"><a class="anchor" href="#http2"></a>Module <code>http2</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>http2</code> module enables support for the secure HTTP/2 protocol.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Specifies the maximum number of concurrent requests per session.
+# jetty.http2.maxConcurrentStreams=128
+
+## Specifies the initial stream receive window (client to server) in bytes.
+# jetty.http2.initialStreamRecvWindow=524288
+
+## Specifies the initial session receive window (client to server) in bytes.
+# jetty.http2.initialSessionRecvWindow=1048576
+
+## Specifies the maximum number of keys in all SETTINGS frames received by a session.
+# jetty.http2.maxSettingsKeys=64
+
+## Specifies the maximum number of bad frames and pings per second,
+## after which a session is closed to avoid denial of service attacks.
+# jetty.http2.rateControl.maxEventsPerSecond=50</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>jetty.http2.rateControl.maxEventsPerSecond</code> property controls the number of "bad" or "unnecessary" frames that a client may send before the server closes the connection (with code <a href="https://tools.ietf.org/html/rfc7540#section-7"><code>ENHANCE_YOUR_CALM</code></a>) to avoid a denial of service.</p>
+</div>
+<div class="paragraph">
+<p>For example, an attacker may send empty <code>SETTINGS</code> frames to a server in a tight loop.
+While the <code>SETTINGS</code> frames don&#8217;t change the server configuration and each of them is somehow harmless, the server will be very busy processing them because they are sent by the attacker one after the other, causing a CPU spike and eventually a denial of service (as all CPUs will be busy processing empty <code>SETTINGS</code> frames).</p>
+</div>
+<div class="paragraph">
+<p>The same attack may be performed with <code>PRIORITY</code> frames, empty <code>DATA</code> frames, <code>PING</code> frames, etc.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="http2c"><a class="anchor" href="#http2c"></a>Module <code>http2c</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>http2c</code> module enables support for the clear-text HTTP/2 protocol.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Specifies the maximum number of concurrent requests per session.
+# jetty.http2c.maxConcurrentStreams=128
+
+## Specifies the initial stream receive window (client to server) in bytes.
+# jetty.http2c.initialStreamRecvWindow=524288
+
+## Specifies the initial session receive window (client to server) in bytes.
+# jetty.http2c.initialSessionRecvWindow=1232896
+
+## Specifies the maximum number of keys in all SETTINGS frames received by a session.
+# jetty.http2c.maxSettingsKeys=64
+
+## Specifies the maximum number of bad frames and pings per second,
+## after which a session is closed to avoid denial of service attacks.
+# jetty.http2c.rateControl.maxEventsPerSecond=50</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>jetty.http2.rateControl.maxEventsPerSecond</code> property controls the number of "bad" or "unnecessary" frames that a client may send before the server closes the connection (with code <a href="https://tools.ietf.org/html/rfc7540#section-7"><code>ENHANCE_YOUR_CALM</code></a>) to avoid a denial of service.</p>
+</div>
+<div class="paragraph">
+<p>For example, an attacker may send empty <code>SETTINGS</code> frames to a server in a tight loop.
+While the <code>SETTINGS</code> frames don&#8217;t change the server configuration and each of them is somehow harmless, the server will be very busy processing them because they are sent by the attacker one after the other, causing a CPU spike and eventually a denial of service (as all CPUs will be busy processing empty <code>SETTINGS</code> frames).</p>
+</div>
+<div class="paragraph">
+<p>The same attack may be performed with <code>PRIORITY</code> frames, empty <code>DATA</code> frames, <code>PING</code> frames, etc.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="http3"><a class="anchor" href="#http3"></a>Module <code>http3</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>http3</code> module enables support for the HTTP/3 protocol.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## The host/address to bind the connector to.
+# jetty.quic.host=0.0.0.0
+
+## The port the connector listens on.
+# jetty.quic.port=8444
+
+## The connector idle timeout, in milliseconds.
+# jetty.quic.idleTimeout=30000
+
+## Specifies the maximum number of concurrent requests per session.
+# jetty.quic.maxBidirectionalRemoteStreams=128
+
+## Specifies the session receive window (client to server) in bytes.
+# jetty.quic.sessionRecvWindow=4194304
+
+## Specifies the stream receive window (client to server) in bytes.
+# jetty.quic.bidirectionalStreamRecvWindow=2097152
+
+## Specifies the stream idle timeout, in milliseconds.
+# jetty.http3.streamIdleTimeout=30000</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="forwarded"><a class="anchor" href="#forwarded"></a>Module <code>forwarded</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>forwarded</code> module provides support for processing the <code>Forwarded</code> HTTP header (defined in <a href="https://tools.ietf.org/html/rfc7239">RFC 7239</a>) and the now obsoleted <code>X-Forwarded-*</code> HTTP headers.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>### ForwardedRequestCustomizer Configuration
+
+## Whether to process only the RFC7239 "Forwarded" header.
+## "X-Forwarded-*" headers are not processed.
+# jetty.httpConfig.forwardedOnly=false
+
+## Whether the address obtained from "Forwarded: by=" or
+## "X-Forwarded-Server" is used in the request authority.
+# jetty.httpConfig.forwardedProxyAsAuthority=false
+
+## Whether the "X-Forwarded-Port" header is used in the request authority,
+## or else it is the remote client port.
+# jetty.httpConfig.forwardedPortAsAuthority=true
+
+## The name of the RFC 7239 HTTP header.
+# jetty.httpConfig.forwardedHeader=Forwarded
+
+## The name of the obsolete forwarded host HTTP header.
+# jetty.httpConfig.forwardedHostHeader=X-Forwarded-Host
+
+## The name of the obsolete forwarded server HTTP header.
+# jetty.httpConfig.forwardedServerHeader=X-Forwarded-Server
+
+## The name of the obsolete forwarded scheme HTTP header.
+# jetty.httpConfig.forwardedProtoHeader=X-Forwarded-Proto
+
+## The name of the obsolete forwarded for HTTP header.
+# jetty.httpConfig.forwardedForHeader=X-Forwarded-For
+
+## The name of the obsolete forwarded port HTTP header.
+# jetty.httpConfig.forwardedPortHeader=X-Forwarded-Port
+
+## The name of the obsolete forwarded https HTTP header.
+# jetty.httpConfig.forwardedHttpsHeader=X-Proxied-Https
+
+## The name of the obsolete forwarded SSL session ID HTTP header.
+# jetty.httpConfig.forwardedSslSessionIdHeader=Proxy-ssl-id
+
+## The name of the obsolete forwarded SSL cipher HTTP header.
+# jetty.httpConfig.forwardedCipherSuiteHeader=Proxy-auth-cert</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="https"><a class="anchor" href="#https"></a>Module <code>https</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>https</code> module provides the HTTP/1.1 protocol to the <a href="#ssl"><code>ssl</code> module</a>.</p>
+</div>
+<div class="paragraph">
+<p>The module file is <code>$JETTY_HOME/modules/https.mod</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># DO NOT EDIT THIS FILE - See: https://jetty.org/docs/
+
+[description]
+Adds HTTPS protocol support to the TLS(SSL) Connector.
+
+[tags]
+connector
+https
+http
+ssl
+
+[depend]
+ssl
+
+[after]
+alpn
+http2
+
+[xml]
+etc/jetty-https.xml</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jmx"><a class="anchor" href="#jmx"></a>Module <code>jmx</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This module enables deployment of Java Servlet web applications.</p>
+</div>
+<div class="paragraph">
+<p>This configuration is useful for <a href="../jmx/index.html#local" class="xref page">local development and testing</a>.
+If you need to <a href="../jmx/index.html#remote" class="xref page">enable remote access</a>, use the <a href="../jmx/index.html#remote" class="xref page"><code>jmx-remote</code> module</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jmx-remote"><a class="anchor" href="#jmx-remote"></a>Module <code>jmx-remote</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>jmx-remote</code> module provides remote access to JMX clients.</p>
+</div>
+<div class="paragraph">
+<p>The module properties to configure remote JMX connector are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## The host/address to bind the RMI server to.
+# jetty.jmxremote.rmiserverhost=localhost
+
+## The port the RMI server listens to (0 means a random port is chosen).
+# jetty.jmxremote.rmiserverport=1099
+
+## The host/address to bind the RMI registry to.
+# jetty.jmxremote.rmiregistryhost=localhost
+
+## The port the RMI registry listens to.
+# jetty.jmxremote.rmiregistryport=1099
+
+## The host name exported in the RMI stub.
+-Djava.rmi.server.hostname=localhost</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The system property <code>java.rmi.server.hostname</code> is specified with the usual notation, prepending a <code>-D</code> in front of the system property name.</p>
+</div>
+<div class="paragraph">
+<p>The system property <code>java.rmi.server.hostname</code> is uncommented because it is necessary in the default configuration&#8201;&#8212;&#8201;most systems do not have the local name resolution configured properly for remote access.</p>
+</div>
+<div class="paragraph">
+<p>As an example, in a Linux machine named <code>beryl</code>, the <code>/etc/hosts</code> file may contain these entries:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>127.0.0.1 localhost
+127.0.1.1 beryl</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the system property <code>java.rmi.server.hostname</code> is not specified, the RMI implementation uses the host name <code>beryl</code> to figure out the IP address to store in the RMI stub, in this case <code>127.0.1.1</code>.
+However, the RMI server is configured to bind to <code>localhost</code>, i.e. <code>127.0.0.1</code>.</p>
+</div>
+<div class="paragraph">
+<p>If the system property <code>java.rmi.server.hostname</code> is not specified, the RMI client will try to connect to <code>127.0.1.1</code> (because that&#8217;s what in the RMI stub) and fail because nothing is listening on that address.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="openid"><a class="anchor" href="#openid"></a>Module <code>openid</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>openid</code> module enables support for OpenID Connect (OIDC) authentication in Jetty, as detailed in <a href="../security/openid-support.html#openid-support" class="xref page">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>This module allows Jetty to authenticate users via an OpenID Connect identity provider, making possible to integrate features like "Sign in with Google" or "Sign in with Microsoft", among others.</p>
+</div>
+<div class="paragraph">
+<p>This simplifies user authentication while leveraging the security and convenience of external identity providers.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## The OpenID Identity Provider's issuer ID (the entire URL *before* ".well-known/openid-configuration")
+# jetty.openid.provider=https://id.example.com/
+
+## The OpenID Identity Provider's authorization endpoint (optional if the metadata of the OP is accessible)
+# jetty.openid.provider.authorizationEndpoint=https://id.example.com/authorization
+
+## The OpenID Identity Provider's token endpoint (optional if the metadata of the OP is accessible)
+# jetty.openid.provider.tokenEndpoint=https://id.example.com/token
+
+## The Client Identifier
+# jetty.openid.clientId=test1234
+
+## The Client Secret
+# jetty.openid.clientSecret=XT_Mafv_aUCGheuCaKY8P
+
+## Additional Scopes to Request
+# jetty.openid.scopes=email,profile
+
+## Whether to Authenticate users not found by base LoginService
+# jetty.openid.authenticateNewUsers=false
+
+## True if all certificates should be trusted by the default SslContextFactory
+# jetty.openid.sslContextFactory.trustAll=false
+
+## What authentication method to use with the Token Endpoint (client_secret_post, client_secret_basic).
+# jetty.openid.authenticationMethod=client_secret_post
+
+## Whether the user should be logged out after the idToken expires.
+# jetty.openid.logoutWhenIdTokenIsExpired=false</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Among the configurable properties, the only required properties are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.openid.provider</code></dt>
+<dd>
+<p>The issuer identifier of the OpenID Provider, which is the base URL before .well-known/openid-configuration. It must match the issuer field in the provider&#8217;s configuration and is case-sensitive.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.openid.clientId</code></dt>
+<dd>
+<p>The Client Identifier assigned to your application by the OpenID Provider, used to uniquely identify your app during authentication requests.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.openid.clientSecret</code></dt>
+<dd>
+<p>The Client Secret issued by the OpenID Provider, used to verify your application&#8217;s identity during the authentication process. This must be kept confidential.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="qos"><a class="anchor" href="#qos"></a>Module <code>qos</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>qos</code> module installs the <code>QoSHandler</code> at the root of the <code>Handler</code> tree; the <code>QoSHandler</code> applies limits to the number of concurrent requests, as explained in <a href="../../programming-guide/server/http.html#handler-use-qos" class="xref page">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## The maximum number of concurrent requests allowed; use 0 for a default
+## value calculated from the ThreadPool configuration or the number of CPU cores.
+# jetty.qos.maxRequestCount=0
+
+## The maximum number of requests that may be suspended.
+# jetty.qos.maxSuspendedRequestCount=1024
+
+## The maximum duration that a request may remain suspended, in milliseconds; use 0 for unlimited time.
+# jetty.qos.maxSuspendDuration=0
+
+## A comma-separated list of HTTP methods to include when matching a request.
+# jetty.qos.include.method=
+
+## A comma-separated list of HTTP methods to exclude when matching a request.
+# jetty.qos.exclude.method=
+
+## A comma-separated list of URI path patterns to include when matching a request.
+# jetty.qos.include.path=
+
+## A comma-separated list of URI path patterns to exclude when matching a request.
+# jetty.qos.exclude.path=
+
+## A comma-separated list of remote addresses patterns to include when matching a request.
+# jetty.qos.include.inet=
+
+## A comma-separated list of remote addresses patterns to exclude when matching a request.
+# jetty.qos.exclude.inet=</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="requestlog"><a class="anchor" href="#requestlog"></a>Module <code>requestlog</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>requestlog</code> module provides HTTP request/response logging in the standard <a href="https://en.wikipedia.org/wiki/Common_Log_Format">NCSA format</a>, or in a custom format of your choice.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Format string
+# jetty.requestlog.formatString=%{client}a - %u %{dd/MMM/yyyy:HH:mm:ss ZZZ|GMT}t "%r" %s %O "%{Referer}i" "%{User-Agent}i"
+
+## Logging directory (relative to $JETTY_BASE)
+# jetty.requestlog.dir=logs
+
+## File path
+# jetty.requestlog.filePath=${jetty.requestlog.dir}/yyyy_mm_dd.request.log
+
+## Date format for rollovered files (uses SimpleDateFormat syntax)
+# jetty.requestlog.filenameDateFormat=yyyy_MM_dd
+
+## How many days to retain old log files
+# jetty.requestlog.retainDays=90
+
+## Whether to append to existing file
+# jetty.requestlog.append=false
+
+## Timezone of the log file rollover
+# jetty.requestlog.timezone=GMT</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The property <code>jetty.requestlog.formatString</code> can be customized using format codes.</p>
+</div>
+<div class="paragraph">
+<p>javadoc::code:partial$org/eclipse/jetty/server/CustomRequestLog.java[]</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources"><a class="anchor" href="#resources"></a>Module <code>resources</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This module adds the <code>$JETTY_BASE/resources</code> directory to the server&#8217;s classpath.</p>
+</div>
+<div class="paragraph">
+<p>A common use-case for this module is to provide resources for third-party libraries via the <a href="../start/index.html#start-class-path" class="xref page">server classpath</a>.
+For instance, many logging libraries (including <a href="https://logging.apache.org/log4j/2.x/">Log4j2</a> and <a href="https://logback.qos.ch/">Logback</a>) look for their configuration files on the classpath.</p>
+</div>
+<div class="paragraph">
+<p>Jetty provides a logging library implementation&#8201;&#8212;&#8201;enabled via the <code>logging-jetty</code> module&#8201;&#8212;&#8201;whose configuration file is <code>$JETTY_BASE/resources/jetty-logging.properties</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rewrite"><a class="anchor" href="#rewrite"></a>Module <code>rewrite</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>rewrite</code> module inserts the <code>RewriteHandler</code> at the beginning of the <code>Handler</code> chain, providing URI-rewriting features similar to the <a href="https://httpd.apache.org/docs/current/mod/mod_rewrite.html">Apache&#8217;s mod_rewrite</a> or the <a href="https://nginx.org/en/docs/http/ngx_http_rewrite_module.html">Nginx rewrite module</a>.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Request attribute name used to store the original request path.
+# jetty.rewrite.originalPathAttribute=jetty.rewrite.originalRequestPath</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A common use of the <code>rewrite</code> module is to redirect/rewrite old URI paths that have been renamed, for example from <code>/old/*</code> to <code>/new/*</code>; in this way, the old paths will not result in a <code>404</code> response, but rather be redirected/rewritten to the new paths.</p>
+</div>
+<div class="paragraph">
+<p><code>RewriteHandler</code> matches incoming requests against a set of rules that you can specify in the <code>$JETTY_BASE/etc/jetty-rewrite-rules.xml</code> file.</p>
+</div>
+<div class="paragraph">
+<p>Rules can be matched against request data such as the request URI or the request headers; if there is a match, the rule is applied.</p>
+</div>
+<div class="paragraph">
+<p>The rule file <code>$JETTY_BASE/etc/jetty-rewrite-rules.xml</code> is initially empty, but contains commented examples of rules that you can add.</p>
+</div>
+<div class="paragraph">
+<p>The list of available rules can be found <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/rewrite/handler/package-summary.html">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>An example of <code>jetty-rewrite-rules.xml</code> is the following:</p>
+</div>
+<div class="listingblock">
+<div class="title">jetty-rewrite-rules.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+&lt;Configure id="Rewrite" class="org.eclipse.jetty.rewrite.handler.RuleContainer"&gt;
+  &lt;Call name="addRule"&gt;
+    &lt;!-- Redirect with a 301 from /old/* to /new/* --&gt;
+    &lt;Arg&gt;
+      &lt;New class="org.eclipse.jetty.rewrite.handler.RedirectRegexRule"&gt;
+        &lt;Set name="statusCode"&gt;301&lt;/Set&gt;
+        &lt;Set name="pattern"&gt;/old/(.*)&lt;/Set&gt;
+        &lt;Set name="location"&gt;/new/$1&lt;/Set&gt;
+      &lt;/New&gt;
+    &lt;/Arg&gt;
+  &lt;/Call&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Rules can be scoped to a specific virtual host.
+In the example below, the rule will only be evaluated if the virtual host matches <code>example.com</code>:</p>
+</div>
+<div class="listingblock">
+<div class="title">jetty-rewrite-rules.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+&lt;Configure id="Rewrite" class="org.eclipse.jetty.rewrite.handler.RuleContainer"&gt;
+  &lt;Call name="addRule"&gt;
+    &lt;Arg&gt;
+      &lt;New class="org.eclipse.jetty.rewrite.handler.VirtualHostRuleContainer"&gt;
+        &lt;Call name="addVirtualHost"&gt;
+          &lt;!-- Only match the example.com domain --&gt;
+          &lt;Arg&gt;example.com&lt;/Arg&gt;
+        &lt;/Call&gt;
+        &lt;Call name="addRule"&gt;
+          &lt;Arg&gt;
+            &lt;New class="org.eclipse.jetty.rewrite.handler.RedirectPatternRule"&gt;
+              &lt;Set name="pattern"&gt;/advice&lt;/Set&gt;
+              &lt;Set name="location"&gt;/support&lt;/Set&gt;
+            &lt;/New&gt;
+          &lt;/Arg&gt;
+        &lt;/Call&gt;
+      &lt;/New&gt;
+    &lt;/Arg&gt;
+  &lt;/Call&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="server"><a class="anchor" href="#server"></a>Module <code>server</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>server</code> module provides generic server support, and configures generic HTTP properties that apply to all HTTP protocols, the scheduler properties and the server specific properties.</p>
+</div>
+<div class="paragraph">
+<p>The <code>server</code> module depends on the <a href="#threadpool"><code>threadpool</code> module</a>, the <a href="#bytebufferpool"><code>bytebufferpool</code> module</a> and the <a href="../server/index.html#logging" class="xref page"><code>logging</code> module</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>server</code> module configures the shared parameters for generic HTTP handling, but does not enable any specific network protocol.  You have to explicitly enable the protocols you want to support by enabling, for example, the <a href="#http"><code>http</code> module</a> for clear-text HTTP/1.1 support, or the <a href="#http2"><code>http2</code> module</a> for secure HTTP/2 support, etc.</p>
+</div>
+<div class="paragraph">
+<p>See also the <a href="../protocols/index.html" class="xref page">protocols section</a> for more information about the supported protocols.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="server-http-config"><a class="anchor" href="#server-http-config"></a>HTTP Configuration Properties</h3>
+<div class="paragraph">
+<p>The module properties to configure generic HTTP properties are listed below. Mostly they frequently apply to HTTP/1, HTTP/2 and HTTP/3, but some parameters are version specific:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>### Common HTTP configuration
+## Scheme to use to build URIs for secure redirects
+# jetty.httpConfig.secureScheme=https
+
+## Port to use to build URIs for secure redirects
+# jetty.httpConfig.securePort=8443
+
+## Response content buffer size (in bytes)
+# jetty.httpConfig.outputBufferSize=32768
+
+## Max response content write length that is buffered (in bytes)
+# jetty.httpConfig.outputAggregationSize=8192
+
+## If HTTP/1.x persistent connections should be enabled
+# jetty.httpConfig.persistentConnectionsEnabled=true
+
+## Max request headers size (in bytes)
+# jetty.httpConfig.requestHeaderSize=8192
+
+## Response headers size (in bytes)
+# jetty.httpConfig.responseHeaderSize=8192
+
+## Max response headers size (in bytes), or -1 to use jetty.httpConfig.responseHeaderSize as the max.
+# jetty.httpConfig.maxResponseHeaderSize=16384
+
+## Whether to send the Server: header
+# jetty.httpConfig.sendServerVersion=true
+
+## Whether to send the Date: header
+# jetty.httpConfig.sendDateHeader=false
+
+## Max per-connection header cache size (in nodes)
+# jetty.httpConfig.headerCacheSize=1024
+
+## Whether, for requests with content, delay dispatch until some content has arrived
+# jetty.httpConfig.delayDispatchUntilContent=true
+
+## Maximum number of error dispatches to prevent looping
+# jetty.httpConfig.maxErrorDispatches=10
+
+## Relative Redirect Locations allowed
+# jetty.httpConfig.relativeRedirectAllowed=true
+
+## Whether to use direct ByteBuffers for reading or writing
+# jetty.httpConfig.useInputDirectByteBuffers=true
+# jetty.httpConfig.useOutputDirectByteBuffers=true</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Among the configurable properties, the most relevant are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.httpConfig.headerCacheSize</code></dt>
+<dd>
+<p>The header cache is used when parsing HTTP/1 to more efficiently handle fields that are repeated in every request on a connection.  If the server does not receive persistent connection or infrequent repeated fields, then there may be a performance gain in reducing the cache size. If large fields are frequently repeated, then a large cache may be beneficial.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.httpConfig.delayDispatchUntilContent</code></dt>
+<dd>
+<p>It is not uncommon for the network packets containing a request header to arrive before packets that contain the data of any request body. In such cases it may be beneficial for overall performance to delay dispatching the request to be handled until the first data packet arrives, as this may avoid blocking the handling thread.  However, if minimum latency for receiving the request without content is important, then this parameter can be set to false.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.httpConfig.sendServerVersion</code></dt>
+<dd>
+<p>Whether you want to send the <code>Server</code> header in every HTTP response:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">HTTP/1.1 200 OK
+Content-Length: 0
+Server: Jetty(12.0.23-SNAPSHOT)</code></pre>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="server-config"><a class="anchor" href="#server-config"></a>Server Configuration Properties</h3>
+<div class="paragraph">
+<p>The module properties to configure the Jetty server are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>### Server configuration
+## Whether ctrl+c on the console gracefully stops the Jetty server
+# jetty.server.stopAtShutdown=true
+
+## Dump the state of the Jetty server, components, and webapps after startup
+# jetty.server.dumpAfterStart=false
+
+## The temporary directory used by the Jetty server and as a root for its contexts
+# jetty.server.tempDirectory=
+
+## Dump the state of the Jetty server, components, and webapps before shutdown
+# jetty.server.dumpBeforeStop=false</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Among the configurable properties, the most relevant are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.server.dumpAfterStart</code></dt>
+<dd>
+<p>Whether to perform a <code>Server.dump()</code> operation after the <code>Server</code> has started.
+The output of the dump operation is sent to <code>System.err</code>.
+See also the <a href="../troubleshooting/index.html#dump" class="xref page">Jetty Server Dump</a> section for more information.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.server.dumpBeforeStop</code></dt>
+<dd>
+<p>Whether to perform a <code>Server.dump()</code> operation before the <code>Server</code> stops.
+The output of the dump operation is sent to <code>System.err</code>.
+See also the <a href="../troubleshooting/index.html#dump" class="xref page">Jetty Server Dump</a> section for more information.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.server.stopAtShutdown</code></dt>
+<dd>
+<p>Whether to call <code>Server.stop()</code> through a JVM shutdown hook when the JVM exits.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="server-compliance"><a class="anchor" href="#server-compliance"></a>Server Compliance Properties</h3>
+<div class="paragraph">
+<p>The Jetty server strives to keep up with the latest <a href="https://en.wikipedia.org/wiki/Request_for_Comments">IETF RFC</a>s for compliance with internet specifications, which are periodically updated. When possible, Jetty will support backwards compatibility by providing compliance modes that can be configured to allow violations of the current specifications that may have been allowed in obsoleted specifications.
+The module properties to configure the Jetty server compliance are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## HTTP Compliance: RFC7230, RFC7230_LEGACY, RFC2616, RFC2616_LEGACY, LEGACY
+# jetty.httpConfig.compliance=RFC7230
+
+## URI Compliance: DEFAULT, LEGACY, RFC3986, RFC3986_UNAMBIGUOUS, UNSAFE
+# jetty.httpConfig.uriCompliance=DEFAULT
+
+## Cookie compliance mode for parsing request Cookie headers: RFC6265_STRICT, RFC6265, RFC6265_LEGACY, RFC2965, RFC2965_LEGACY
+# jetty.httpConfig.requestCookieCompliance=RFC6265
+
+## Cookie compliance mode for generating response Set-Cookie: RFC2965, RFC6265
+# jetty.httpConfig.responseCookieCompliance=RFC6265</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Among the configurable properties, the most relevant are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.httpConfig.compliance</code></dt>
+<dd>
+<p>Configures the compliance to HTTP specifications.
+The value could be:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>One of the predefined <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/HttpCompliance.html"><code>HttpCompliance</code></a> constants, such as <code>RFC7230</code> or <code>RFC2616</code>.
+For example: <code>jetty.httpConfig.compliance=RFC2616</code>.</p>
+</li>
+<li>
+<p>A comma-separated list of violations to allow or forbid, as specified by the <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/HttpCompliance.html#from(java.lang.String)"><code>HttpCompliance.from(String)</code></a> method.
+For example, <code>jetty.httpConfig.compliance=RFC7230,MULTIPLE_CONTENT_LENGTHS</code> means that the HTTP compliance is that defined by <code>RFC7230</code>, but also allows the <code>HttpCompliance.Violation.MULTIPLE_CONTENT_LENGTHS</code>, so that requests that have multiple <code>Content-Length</code> headers are accepted (they would be rejected when using just <code>HttpCompliance.RFC7230</code>).</p>
+<div class="paragraph">
+<p>For more information about <code>HttpCompliance</code> see also <a href="../../programming-guide/server/compliance.html#http" class="xref page">this section</a>.</p>
+</div>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1"><code>jetty.httpConfig.uriCompliance</code></dt>
+<dd>
+<p>Configures the compliance to URI specifications.
+The value could be:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>One of the predefined <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/UriCompliance.html"><code>UriCompliance</code></a> constants, such as <code>DEFAULT</code> or <code>RFC3986</code>.
+For example: <code>jetty.httpConfig.compliance=RFC3986</code>.</p>
+</li>
+<li>
+<p>A comma-separated list of violations to allow or forbid, as specified by the <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/UriCompliance.html#from(java.lang.String)"><code>UriCompliance.from(String)</code></a> method.
+For example, <code>jetty.httpConfig.uriCompliance=RFC3986,-AMBIGUOUS_PATH_SEPARATOR</code> means that the URI compliance is that defined by <code>RFC3986</code>, but also does not allow the <code>UriCompliance.Violation.AMBIGUOUS_PATH_SEPARATOR</code>, so that requests that have URIs such as <code>/foo/bar%2Fbaz</code> (where <code>%2F</code> is the URL-encoded <code>/</code> character) are rejected (they would be accepted when using just <code>UriCompliance.RFC3986</code>).</p>
+<div class="paragraph">
+<p>For more information about <code>UriCompliance</code> see also <a href="../../programming-guide/server/compliance.html#uri" class="xref page">this section</a>.</p>
+</div>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1"><code>jetty.httpConfig.requestCookieCompliance</code></dt>
+<dt class="hdlist1"><code>jetty.httpConfig.responseCookieCompliance</code></dt>
+<dd>
+<p>Configures the compliance to HTTP cookie specifications.
+The value could be:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>One of the predefined <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/CookieCompliance.html"><code>CookieCompliance</code></a> constants, such as <code>RFC6265</code>.
+For example: <code>jetty.httpConfig.compliance=RFC6265</code>.</p>
+</li>
+<li>
+<p>A comma-separated list of violations to allow or forbid, as specified by the <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/CookieCompliance.html#from(java.lang.String)"><code>CookieCompliance.from(String)</code></a> method.
+For example, <code>jetty.httpConfig.requestCookieCompliance=RFC6265,-RESERVED_NAMES_NOT_DOLLAR_PREFIXED</code> means that the cookie compliance is that defined by <code>RFC6265</code>, but also does not allow the <code>CookieCompliance.Violation.RESERVED_NAMES_NOT_DOLLAR_PREFIXED</code>, so that requests that have cookie headers such as <code>Cookie: $foo=bar</code> are rejected (they would be accepted when using just <code>CookieCompliance.RFC6265</code>).</p>
+<div class="paragraph">
+<p>For more information about <code>CookieCompliance</code> see also <a href="../../programming-guide/server/compliance.html#cookie" class="xref page">this section</a>.</p>
+</div>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="scheduler-config"><a class="anchor" href="#scheduler-config"></a>Server Scheduler Configuration Properties</h3>
+<div class="paragraph">
+<p>The module properties to configure the Jetty server scheduler are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>### Server Scheduler Configuration
+## The scheduler thread name, defaults to "Scheduler-{hashCode()}" if blank.
+# jetty.scheduler.name=
+
+## Whether the server scheduler threads are daemon.
+# jetty.scheduler.daemon=false
+
+## The number of server scheduler threads.
+# jetty.scheduler.threads=1</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="size-limit"><a class="anchor" href="#size-limit"></a>Module <code>size-limit</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>size-limit</code> module installs the <code>SizeLimitHandler</code> at the root of the <code>Handler</code> tree; the <code>SizeLimitHandler</code> applies limits to the request content and the response content, as explained in <a href="../../programming-guide/server/http.html#handler-use-size-limit" class="xref page">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## The maximum request content size in bytes, or -1 for unlimited.
+# jetty.sizeLimit.maxRequestContentSize=-1
+
+## The maximum response content size in bytes, or -1 for unlimited.
+# jetty.sizeLimit.maxResponseContentSize=-1</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ssl"><a class="anchor" href="#ssl"></a>Module <code>ssl</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>ssl</code> module provides the secure connector, and allows you to configure the KeyStore properties and the TLS parameters, and depends on the <a href="#server"><code>server</code> module</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="ssl-connector"><a class="anchor" href="#ssl-connector"></a>Secure Connector Properties</h3>
+<div class="paragraph">
+<p>The module properties to configure the secure connector are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>### TLS (SSL) Connector Configuration
+
+## The host/address to bind the connector to.
+# jetty.ssl.host=0.0.0.0
+
+## The port the connector listens on.
+# jetty.ssl.port=8443
+
+## The connector idle timeout, in milliseconds.
+# jetty.ssl.idleTimeout=30000
+
+## The number of acceptors (-1 picks a default value based on number of cores).
+# jetty.ssl.acceptors=1
+
+## The number of selectors (-1 picks a default value based on number of cores).
+# jetty.ssl.selectors=-1
+
+## The ServerSocketChannel accept queue backlog (0 picks the platform default).
+# jetty.ssl.acceptQueueSize=0
+
+## The thread priority delta to give to acceptor threads.
+# jetty.ssl.acceptorPriorityDelta=0
+
+## Whether to enable the SO_REUSEADDR socket option.
+# jetty.ssl.reuseAddress=true
+
+## Whether to enable the SO_REUSEPORT socket option.
+# jetty.ssl.reusePort=false
+
+## Whether to enable the TCP_NODELAY socket option on accepted sockets.
+# jetty.ssl.acceptedTcpNoDelay=true
+
+## The SO_RCVBUF socket option to set on accepted sockets.
+## A value of -1 indicates that the platform default is used.
+# jetty.ssl.acceptedReceiveBufferSize=-1
+
+## The SO_SNDBUF socket option to set on accepted sockets.
+## A value of -1 indicates that the platform default is used.
+# jetty.ssl.acceptedSendBufferSize=-1
+
+## Whether client SNI data is required for all secure connections.
+## When SNI is required, clients that do not send SNI data are rejected with an HTTP 400 response.
+# jetty.ssl.sniRequired=false
+
+## Whether client SNI data is checked to match CN and SAN in server certificates.
+## When SNI is checked, if the match fails the connection is rejected with an HTTP 400 response.
+# jetty.ssl.sniHostCheck=true
+
+## The max age, in seconds, for the Strict-Transport-Security response header.
+# jetty.ssl.stsMaxAgeSeconds=31536000
+
+## Whether to include the subdomain property in any Strict-Transport-Security header.
+# jetty.ssl.stsIncludeSubdomains=true</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Among the configurable properties, the most relevant are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.ssl.port</code></dt>
+<dd>
+<p>The network port that Jetty listens to for secure connections&#8201;&#8212;&#8201;default <code>8443</code>.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.ssl.idleTimeout</code></dt>
+<dd>
+<p>The amount of time a connection can be idle (i.e. no bytes received and no bytes sent) until the server decides to close it to save resources&#8201;&#8212;&#8201;default <code>30000</code> milliseconds.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.ssl.acceptors</code></dt>
+<dd>
+<p>The number of threads that compete to accept connections&#8201;&#8212;&#8201;default 1. Use -1 to let the accept heuristic decides the value; the current heuristic calculates a value based on the number of cores).
+Refer to <a href="#http-acceptors">this section</a> for more information about acceptor threads.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.ssl.selectors</code></dt>
+<dd>
+<p>The number of NIO selectors (with an associated thread) that manage connections&#8201;&#8212;&#8201;default -1 (i.e. a select heuristic decides the value; the current heuristic calculates a value based on the number of cores).
+Refer to <a href="#http-selectors">this section</a> for more information about selector threads.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The module properties to configure the KeyStore and TLS parameters are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>### SslContextFactory Configuration
+## Note that OBF passwords are not secure, just protected from casual observation.
+
+## Whether client SNI data is required for all secure connections.
+## When SNI is required, clients that do not send SNI data are rejected with a TLS handshake error.
+# jetty.sslContext.sniRequired=false
+
+## The Endpoint Identification Algorithm.
+## Same as javax.net.ssl.SSLParameters#setEndpointIdentificationAlgorithm(String).
+# jetty.sslContext.endpointIdentificationAlgorithm=
+
+## The JSSE Provider.
+# jetty.sslContext.provider=
+
+## The KeyStore file path, either an absolute path or a relative path to $JETTY_BASE.
+# jetty.sslContext.keyStorePath=etc/keystore.p12
+
+## The TrustStore file path, either an absolute path or a relative path to $JETTY_BASE.
+# jetty.sslContext.trustStorePath=etc/keystore.p12
+
+## The KeyStore password.
+# jetty.sslContext.keyStorePassword=
+
+## The Keystore type.
+# jetty.sslContext.keyStoreType=PKCS12
+
+## The KeyStore provider.
+# jetty.sslContext.keyStoreProvider=
+
+## The KeyManager password.
+# jetty.sslContext.keyManagerPassword=
+
+## The TrustStore password.
+# jetty.sslContext.trustStorePassword=
+
+## The TrustStore type.
+# jetty.sslContext.trustStoreType=PKCS12
+
+## The TrustStore provider.
+# jetty.sslContext.trustStoreProvider=
+
+## Whether client certificate authentication is required.
+# jetty.sslContext.needClientAuth=false
+
+## Whether client certificate authentication is desired, but not required.
+# jetty.sslContext.wantClientAuth=false
+
+## Whether cipher order is significant.
+# jetty.sslContext.useCipherSuitesOrder=true
+
+## The SSLSession cache size.
+# jetty.sslContext.sslSessionCacheSize=-1
+
+## The SSLSession cache timeout (in seconds).
+# jetty.sslContext.sslSessionTimeout=-1
+
+## Whether TLS renegotiation is allowed.
+# jetty.sslContext.renegotiationAllowed=true
+
+## The max number of TLS renegotiations per connection.
+# jetty.sslContext.renegotiationLimit=5</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ssl-keystore-tls"><a class="anchor" href="#ssl-keystore-tls"></a>KeyStore Properties and TLS Properties</h3>
+<div class="paragraph">
+<p>The Jetty component that manages the KeyStore, that contains the cryptographic material and the TLS configuration is an instance of <code>SslContextFactory.Server</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can configure the <code>SslContextFactory.Server</code> by specifying properties, or by invoking its method for a more <a href="#ssl-advanced">advanced configuration</a>.</p>
+</div>
+<div class="paragraph">
+<p>Among the configurable properties, the most relevant are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.sslContext.keyStorePath</code></dt>
+<dd>
+<p>The KeyStore path on the file system, either an absolute path or a relative path to <code>$JETTY_BASE</code>&#8201;&#8212;&#8201;defaults to <code>$JETTY_BASE/etc/keystore.p12</code>.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.sslContext.keyStorePassword</code></dt>
+<dd>
+<p>The KeyStore password, which you want to explicitly configure.
+The password may be obfuscated with the <a href="../tools/index.html#password" class="xref page">Jetty Password tool</a>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>If you need to configure client certificate authentication, you want to configure one of these properties (they are mutually exclusive):</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.sslContext.needClientAuth</code></dt>
+<dd>
+<p>Whether client certificate authentication should be required.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.sslContext.wantClientAuth</code></dt>
+<dd>
+<p>Whether client certificate authentication should be requested.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>If you configure client certificate authentication, you need to configure and distribute a client KeyStore as explained in <a href="../keystore/index.html#client-authn" class="xref page">this section</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ssl-advanced"><a class="anchor" href="#ssl-advanced"></a>Advanced TLS Configuration</h3>
+<div class="paragraph">
+<p>Configuring <code>SslContextFactory.Server</code> using properties as explained in <a href="#ssl-keystore-tls">this section</a> is sufficient for most cases.</p>
+</div>
+<div class="paragraph">
+<p>For the cases where Jetty module properties are not defined, or when you need more advanced configuration (for example the ability to include and/or exclude the TLS cipher suites), you can follow these steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Modify <code>$JETTY_BASE/start.d/ssl.ini</code> by adding a path to a custom XML file, for example:</p>
+<div class="listingblock">
+<div class="title">ssl.ini</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">--module=ssl
+<strong>etc/ssl-config.xml</strong> <i class="conum" data-value="1"></i><b>(1)</b>
+...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The path to the custom XML file, relative to <code>$JETTY_BASE</code>.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Create the custom XML file, with your advanced configuration.
+For example, to exclude certain TLS ciphers you can use the following file:</p>
+<div class="listingblock">
+<div class="title">ssl-config.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://jetty.org/jetty/configure_10_0.dtd"&gt;
+
+&lt;Configure&gt;
+  &lt;Ref refid="sslContextFactory"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;!-- Example using the Set element --&gt;
+    &lt;Set name="ExcludeCipherSuites"&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+      &lt;Array type="String"&gt;
+        &lt;Item&gt;^TLS_RSA_.*$&lt;/Item&gt;
+        &lt;Item&gt;^.*_(MD5|SHA|SHA1)$&lt;/Item&gt;
+      &lt;/Array&gt;
+    &lt;/Set&gt;
+    &lt;!-- Example using the Call element --&gt;
+    &lt;Call name="addExcludeCipherSuites"&gt;
+      &lt;Arg&gt;
+        &lt;Array type="String"&gt;
+          &lt;Item&gt;^SSL_.*$&lt;/Item&gt;
+        &lt;/Array&gt;
+      &lt;/Arg&gt;
+    &lt;/Call&gt;
+  &lt;/Ref&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Reference the existing <code>sslContextFactory</code> object.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Call the method <code>setExcludeCipherSuites(String...)</code> to specify regular expressions of the TLS ciphers you want to exclude.</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The syntax to use in the custom XML file is described in <a href="../xml/index.html" class="xref page">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>In the custom XML file you can call any <code>SslContextFactory.Server</code> method.
+Refer to the <code>SslContextFactory.Server</code> <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/util/ssl/SslContextFactory.Server.html">javadocs</a> for the comprehensive list of methods.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ssl-reload"><a class="anchor" href="#ssl-reload"></a>Module <code>ssl-reload</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>ssl-reload</code> module provides a periodic scanning of the directory where the KeyStore file resides.
+When the scanning detects a change to the KeyStore file, the correspondent <code>SslContextFactory.Server</code> component is reloaded with the new KeyStore configuration.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># Monitored directory scan period, in seconds.
+# jetty.sslContext.reload.scanInterval=1</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="state-tracking"><a class="anchor" href="#state-tracking"></a>Module <code>state-tracking</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>state-tracking</code> Jetty module inserts the <code>StateTrackingHandler</code> at the beginning of the Handler chain.</p>
+</div>
+<div class="paragraph">
+<p><code>StateTrackingHandler</code> is a <a href="../troubleshooting/index.html" class="xref page">troubleshooting</a> <code>Handler</code> that tracks usages of <code>Handler</code>/<code>Request</code>/<code>Response</code> asynchronous APIs, and logs at warning level invalid usages of the APIs that may lead to blockages, deadlocks, or missing completion of <code>Callback</code>s.</p>
+</div>
+<div class="paragraph">
+<p>This module can be enabled to troubleshoot web applications that do not behave as expected, for example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>That consume a lot of threads (possibly because they block).</p>
+</li>
+<li>
+<p>That do not send responses (or send only partial responses) to clients.</p>
+</li>
+<li>
+<p>That timeout when apparently they have received or have sent all data.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## The timeout in ms for the completion of the handle() callback.
+# jetty.stateTracking.handlerCallbackTimeout=0
+
+## Whether the handle() callback is completed in case of timeout.
+# jetty.stateTracking.completeHandlerCallbackAtTimeout=false
+
+## The timeout in ms for the execution of the demand callback.
+# jetty.stateTracking.demandCallbackTimeout=0
+
+## The timeout in ms for the execution of a response write.
+# jetty.stateTracking.writeTimeout=0
+
+## The timeout in ms for the execution of the response write callback.
+# jetty.stateTracking.writeCallbackTimeout=0</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="test-keystore"><a class="anchor" href="#test-keystore"></a>Module <code>test-keystore</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>test-keystore</code> module creates on-the-fly a KeyStore containing a self-signed certificate for domain <code>localhost</code>.
+The KeyStore file is automatically deleted when the JVM exits, and re-created when you restart Jetty, to enforce the fact that it is a <em>test</em> KeyStore that should not be reused if not for testing.</p>
+</div>
+<div class="paragraph">
+<p>The module file is <code>$JETTY_HOME/modules/test-keystore.mod</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[description]
+Test keystore with self-signed SSL Certificate.
+DO NOT USE IN PRODUCTION!!!
+
+[tags]
+demo
+ssl
+bouncycastle
+keystore
+
+[before]
+ssl
+
+[files]
+maven://org.bouncycastle/bcpkix-jdk18on/${bouncycastle.version}|lib/bouncycastle/bcpkix-jdk18on-${bouncycastle.version}.jar
+maven://org.bouncycastle/bcprov-jdk18on/${bouncycastle.version}|lib/bouncycastle/bcprov-jdk18on-${bouncycastle.version}.jar
+maven://org.bouncycastle/bcutil-jdk18on/${bouncycastle.version}|lib/bouncycastle/bcutil-jdk18on-${bouncycastle.version}.jar
+
+[lib]
+lib/jetty-keystore-${jetty.version}.jar
+lib/bouncycastle/bcpkix-jdk18on-${bouncycastle.version}.jar
+lib/bouncycastle/bcprov-jdk18on-${bouncycastle.version}.jar
+lib/bouncycastle/bcutil-jdk18on-${bouncycastle.version}.jar
+
+[xml]
+etc/jetty-test-keystore.xml
+
+[ini]
+bouncycastle.version?=1.80
+jetty.webapp.addHiddenClasses+=,${jetty.base.uri}/lib/bouncycastle/
+jetty.sslContext.keyStorePath?=etc/test-keystore.p12
+jetty.sslContext.keyStoreType?=PKCS12
+jetty.sslContext.keyStorePassword?=OBF:1vny1zlo1x8e1vnw1vn61x8g1zlu1vn4</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note how properties <code>jetty.sslContext.keyStorePath</code> and <code>jetty.sslContext.keyStorePassword</code> are configured, only if not already set (via the <code>?=</code> operator), directly in the module file, rather than in a <code>*.ini</code> file.
+This is done to avoid that these properties accidentally overwrite a real KeyStore configuration.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="thread-limit"><a class="anchor" href="#thread-limit"></a>Module <code>thread-limit</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>thread-limit</code> module installs the <code>ThreadLimitHandler</code> at the root of the <code>Handler</code> tree; the <code>ThreadLimitHandler</code> applies limits to the number of concurrent threads per remote IP address, as explained in <a href="../../programming-guide/server/http.html#handler-use-thread-limit" class="xref page">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Select style of reverse proxy forwarded header.
+# jetty.threadlimit.forwardedHeader=X-Forwarded-For
+# jetty.threadlimit.forwardedHeader=Forwarded
+
+## Whether thread limiting is enabled.
+# jetty.threadlimit.enabled=true
+
+## The thread limit per remote IP address.
+# jetty.threadlimit.threadLimit=10
+
+## A comma-separated list of HTTP methods to include when matching a request.
+# jetty.threadlimit.include.method=
+
+## A comma-separated list of HTTP methods to exclude when matching a request.
+# jetty.threadlimit.exclude.method=
+
+## A comma-separated list of URI path patterns to include when matching a request.
+# jetty.threadlimit.include.path=
+
+## A comma-separated list of URI path patterns to exclude when matching a request.
+# jetty.threadlimit.exclude.path=
+
+## A comma-separated list of remote addresses patterns to include when matching a request.
+# jetty.threadlimit.include.inet=
+
+## A comma-separated list of remote addresses patterns to exclude when matching a request.
+# jetty.threadlimit.exclude.inet=</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="threadpool"><a class="anchor" href="#threadpool"></a>Module <code>threadpool</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>threadpool</code> module allows you to configure the server-wide thread pool.</p>
+</div>
+<div class="paragraph">
+<p>The thread pool creates threads on demand up to <code>maxThreads</code>, and idles them out if they are not used.</p>
+</div>
+<div class="paragraph">
+<p>Since Jetty uses the thread pool internally to execute critical tasks, it is not recommended to constrain the thread pool to small values of <code>maxThreads</code> with the purpose of limiting HTTP request concurrency, as this could very likely cause a server lockup when Jetty needs to run a critical task but there are no threads available.
+Start with the default value of <code>maxThreads</code>, and tune for larger values if needed.</p>
+</div>
+<div class="paragraph">
+<p>The module properties to configure the thread pool are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Thread name prefix.
+#jetty.threadPool.namePrefix=qtp&lt;hashCode&gt;
+
+## Minimum number of pooled threads.
+#jetty.threadPool.minThreads=10
+
+## Maximum number of pooled threads.
+#jetty.threadPool.maxThreads=200
+
+## Number of reserved threads (-1 for heuristic).
+#jetty.threadPool.reservedThreads=-1
+
+## Whether to use virtual threads, if the runtime supports them.
+## Deprecated, use Jetty module 'threadpool-virtual' instead.
+#jetty.threadPool.useVirtualThreads=false
+
+## Thread idle timeout (in milliseconds).
+#jetty.threadPool.idleTimeout=60000
+
+## The max number of idle threads that are evicted in one idleTimeout period.
+#jetty.threadPool.maxEvictCount=1
+
+## Whether to output a detailed dump.
+#jetty.threadPool.detailedDump=false</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Among the configurable properties, the most relevant are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.threadPool.namePrefix</code></dt>
+<dd>
+<p>The name prefix to use for the thread names.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.threadPool.detailedDump</code></dt>
+<dd>
+<p>Whether the thread pool should dump the whole stack trace of each thread, or just the topmost stack frame&#8201;&#8212;&#8201;defaults to <code>false</code>.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.threadPool.idleTimeout</code></dt>
+<dd>
+<p>The time, in milliseconds, after which an idle thread is released from the pool&#8201;&#8212;&#8201;defaults to 60000, i.e. 60 seconds.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.threadPool.maxThreads</code></dt>
+<dd>
+<p>The max number of threads pooled by the thread pool&#8201;&#8212;&#8201;defaults to 200.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>If you want to use virtual threads, introduced as a preview feature in Java 19 and Java 20, and become an official feature since Java 21, use the following modules:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <a href="#threadpool-virtual"><code>threadpool-virtual</code></a> Jetty module for Java 21 or later.</p>
+</li>
+<li>
+<p>The <a href="#threadpool-virtual-preview"><code>threadpool-virtual-preview</code></a> Jetty module for Java 19 and Java 20.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>See also the <a href="../server/index.html#threadpool" class="xref page">section about configuring the thread pool</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="threadpool-all-virtual"><a class="anchor" href="#threadpool-all-virtual"></a>Module <code>threadpool-all-virtual</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>threadpool-all-virtual</code> module allows you to configure the server-wide thread pool, similarly to what you can do with the <a href="#threadpool"><code>threadpool</code></a> Jetty module, so that all threads are virtual threads, introduced as an official feature since Java 21.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Only use this module if you are using Java 21 or later.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The module properties to configure the thread pool are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Virtual threads name prefix.
+#jetty.threadPool.namePrefix=vtp&lt;hashCode&gt;
+
+## Maximum number of current virtual threads.
+#jetty.threadPool.maxThreads=200
+
+## Whether to track virtual threads so they appear
+## in the dump even if they are unmounted.
+#jetty.threadPool.tracking=false
+
+## Whether to output virtual thread's stack traces in the dump.
+#jetty.threadPool.detailedDump=false</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The property <code>jetty.threadpool.maxThreads</code> limits, using a <code>Semaphore</code>, the number of current virtual threads in use.</p>
+</div>
+<div class="paragraph">
+<p>Please refer to the <a href="../../programming-guide/arch/threads.html#thread-pool-virtual-threads" class="xref page">virtual threads section</a> of the Jetty Threading Architecture for more information about virtual threads and their pitfalls.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="threadpool-virtual"><a class="anchor" href="#threadpool-virtual"></a>Module <code>threadpool-virtual</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>threadpool-virtual</code> module allows you to configure the server-wide thread pool, similarly to what you can do with the <a href="#threadpool"><code>threadpool</code></a> Jetty module, but also specify to use virtual threads, introduced as an official feature since Java 21.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Only use this module if you are using Java 21 or later.
+If you are using Java 19 or Java 20, use the <a href="#threadpool-virtual-preview"><code>threadpool-virtual-preview</code></a> Jetty module instead.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Refer to the <a href="#threadpool"><code>threadpool</code></a> Jetty module for the general features provided by that Jetty module that also this Jetty module provides.</p>
+</div>
+<div class="paragraph">
+<p>The module properties to configure the thread pool are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Platform threads name prefix.
+#jetty.threadPool.namePrefix=qtp&lt;hashCode&gt;
+
+## Minimum number of pooled threads.
+#jetty.threadPool.minThreads=10
+
+## Maximum number of pooled threads.
+#jetty.threadPool.maxThreads=200
+
+## Number of reserved threads (-1 for heuristic).
+#jetty.threadPool.reservedThreads=-1
+
+## Thread idle timeout (in milliseconds).
+#jetty.threadPool.idleTimeout=60000
+
+## The max number of idle threads that can be evicted in one idleTimeout period.
+#jetty.threadPool.maxEvictCount=1
+
+## Whether to output a detailed dump.
+#jetty.threadPool.detailedDump=false
+
+## Virtual threads name prefix.
+#jetty.threadPool.virtual.namePrefix=qtp&lt;hashCode&gt;-virtual-
+
+## Max number of current virtual threads.
+#jetty.threadPool.virtual.maxThreads=200
+
+## Whether to track virtual threads so they appear
+## in the dump even if they are unmounted.
+#jetty.threadPool.virtual.tracking=false</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The specific properties to configure virtual threads are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.threadPool.virtual.namePrefix</code></dt>
+<dd>
+<p>The name prefix to use for the virtual thread names.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.threadPool.virtual.inheritInheritableThreadLocals</code></dt>
+<dd>
+<p>Whether virtual threads inherit the values of <code>InheritableThreadLocal</code> variables.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="threadpool-virtual-preview"><a class="anchor" href="#threadpool-virtual-preview"></a>Module <code>threadpool-virtual-preview</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>threadpool-virtual-preview</code> module allows you to configure the server-wide thread pool, similarly to what you can do with the <a href="#threadpool"><code>threadpool</code></a> Jetty module, but also specify to use virtual threads, introduced as a preview feature in Java 19 and in Java 20.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Only use this module if you are using Java 19 or Java 20.
+If you are using Java 21 or later, use the <a href="#threadpool-virtual"><code>threadpool-virtual</code></a> Jetty module instead.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To enable preview features, this module needs to specify the <code>--enable-preview</code> command line option using the <a href="index.html#directive-exec" class="xref page">[exec] directive</a>, and as such it will fork another JVM.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Refer to the <a href="#threadpool"><code>threadpool</code></a> Jetty module for the general features provided by that Jetty module that also this Jetty module provides.</p>
+</div>
+<div class="paragraph">
+<p>The module properties to configure the thread pool are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Platform threads name prefix.
+#jetty.threadPool.namePrefix=qtp&lt;hashCode&gt;
+
+## Minimum number of pooled threads.
+#jetty.threadPool.minThreads=10
+
+## Maximum number of pooled threads.
+#jetty.threadPool.maxThreads=200
+
+## Number of reserved threads (-1 for heuristic).
+#jetty.threadPool.reservedThreads=-1
+
+## Thread idle timeout (in milliseconds).
+#jetty.threadPool.idleTimeout=60000
+
+## The max number of idle threads that can be evicted in one idleTimeout period.
+#jetty.threadPool.maxEvictCount=1
+
+## Whether to output a detailed dump.
+#jetty.threadPool.detailedDump=false
+
+## Virtual threads name prefix.
+#jetty.threadPool.virtual.namePrefix=qtp&lt;hashCode&gt;-virtual-
+
+## Whether virtual threads are allowed to set thread locals.
+#jetty.threadPool.virtual.allowSetThreadLocals=true
+
+## Whether virtual threads inherits the values of inheritable thread locals.
+#jetty.threadPool.virtual.inheritInheritableThreadLocals=true</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The specific properties to configure virtual threads are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.threadPool.virtual.namePrefix</code></dt>
+<dd>
+<p>The name prefix to use for the virtual thread names.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.threadPool.virtual.allowSetThreadLocals</code></dt>
+<dd>
+<p>Whether virtual threads are allowed to set thread locals.</p>
+</dd>
+<dt class="hdlist1"><code>jetty.threadPool.virtual.inheritInheritableThreadLocals</code></dt>
+<dd>
+<p>Whether virtual threads inherit the values of <code>InheritableThreadLocal</code> variables.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="well-known"><a class="anchor" href="#well-known"></a>Module <code>well-known</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>well-known</code> Jetty module creates a <code>ResourceHandler</code> deployed at the <code>/.well-known</code> context path which serves files from a directory.
+By default, the directory created at <code>$JETTY_BASE/.well-known</code> is used, but it can be configured from <code>well-known.ini</code> to anywhere in the filesystem.
+Note that the <code>.well-known</code> directory may be seen as a hidden directory by the filesystem.</p>
+</div>
+<div class="paragraph">
+<p>The concept of well-known URIs has been defined in <a href="https://datatracker.ietf.org/doc/html/rfc5785">RFC5785</a>.
+This module can be used for things like the automatic renewal of <a href="https://letsencrypt.org/">Let&#8217;s Encrypt</a> certificates.
+See <a href="https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml">IANA Well-Known URIs</a> for more possible examples of how this can be used.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## Well Known Directory (relative to $JETTY_BASE if relative path, otherwise it is an absolute path).
+# jetty.wellknown.dir=.well-known
+
+## Allow contents of the well-known directory to be listed.
+# jetty.wellknown.listDirectories=false</pre>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="custom.html">Custom Jetty Modules</a></span>
+  <span class="next"><a href="../deploy/index.html">Web Application Deployment</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

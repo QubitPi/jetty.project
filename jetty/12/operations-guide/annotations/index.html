@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Annotations :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="../quickstart/index.html">
+    <link rel="next" href="../jsp/index.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Operations Guide</a></li>
+    <li><a href="index.html">Annotations</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/operations-guide/pages/annotations/index.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Annotations</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Enable the <code>ee{8,9,10}-annotations</code> module if your webapp - or any of its third party libraries - uses any of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Annotations:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>@Resource</p>
+</li>
+<li>
+<p>@Resources</p>
+</li>
+<li>
+<p>@PostConstruct</p>
+</li>
+<li>
+<p>@PreDestroy</p>
+</li>
+<li>
+<p>@DeclaredRoles</p>
+</li>
+<li>
+<p>@RunAs</p>
+</li>
+<li>
+<p>@MultipartConfig</p>
+</li>
+<li>
+<p>@WebServlet</p>
+</li>
+<li>
+<p>@WebFilter</p>
+</li>
+<li>
+<p>@WebListener</p>
+</li>
+<li>
+<p>@WebInitParam</p>
+</li>
+<li>
+<p>@ServletSecurity, @HttpConstraint, @HttpMethodConstraint</p>
+</li>
+<li>
+<p>@HandlesTypes</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>javax.servlet.ServletContainerInitializers or jakarta.servlet.ServletContainerInitializers</p>
+</li>
+<li>
+<p>JSP</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="scanning"><a class="anchor" href="#scanning"></a>Annotation Scanning</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>According to more recent versions of the Jakarta Servlet Specification, the <code>web.xml</code> file can contain the attribute <code>metadata-complete</code>.
+If this is set to <code>true</code>, then <em>no</em> annotation scanning takes place, and your descriptor must contain the equivalent xml statements of any annotations.</p>
+</div>
+<div class="paragraph">
+<p>If it is <code>metadata-complete=false</code>, or your <code>web.xml</code> predates the inclusion of this attribute, annotation scanning is required to take place.</p>
+</div>
+<div class="paragraph">
+<p>To prevent annotation scanning you can use the <code>WebAppContext.setConfigurationDiscovered(false)</code> method.
+Here&#8217;s an example context XML file that calls this method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+  &lt;Set name="configurationDiscovered"&gt;false&lt;/Set&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Configures a <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/ee10/webapp/WebAppContext.html"><code>WebAppContext</code></a>, which is the Jetty component that represents a standard Servlet web application.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Specifies that scanning should not take place.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>However, despite <code>metadata-complete=true</code>, scanning of classes may <em>still</em> occur because of <code>ServletContainerInitializer</code>.
+Classes implementing this interface are found by Jetty using the <a href="http://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html">javax.util.ServiceLoader</a> mechanism, and if one is present <em>and</em> it includes the <code>@HandlesTypes</code> annotation, then Jetty must scan the class hierarchy of the web application.
+This may be very time-consuming if you have many jars.</p>
+</div>
+<div class="paragraph">
+<p>Jetty can reduce the time taken by limiting the jars that are scanned.</p>
+</div>
+<div class="sect2">
+<h3 id="og-container-include-jar-pattern"><a class="anchor" href="#og-container-include-jar-pattern"></a>The container classpath</h3>
+<div class="paragraph">
+<p>By default, Jetty will <em>not</em> scan any classes that are on the container&#8217;s classpath.</p>
+</div>
+<div class="paragraph">
+<p>Sometimes, you may have third party libraries on the container&#8217;s classpath that you need to be scanned.
+In this case, use the <code>org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern</code> context attribute to define which container jars and class directories to scan.
+The value of this attribute is a regular expression.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example from a context XML file that includes any jar whose name starts with <code>foo-</code> or <code>bar-</code>, or a directory named <code>classes</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;Call name="setAttribute"&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+      &lt;Arg&gt;org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern&lt;/Arg&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+      &lt;Arg&gt;.*/foo-[^/]*\.jar$|.*/bar-[^/]*\.jar$|.*/classes/.*&lt;/Arg&gt; <i class="conum" data-value="4"></i><b>(4)</b>
+    &lt;/Call&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Configures a <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/ee10/webapp/WebAppContext.html"><code>WebAppContext</code></a>, which is the Jetty component that represents a standard Servlet web application.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Specifies a context attribute.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Specifies the name of the context attribute.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Specifies the value of the context attribute.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Note that the order of the patterns defines the ordering of the scanning of the jars or class directories.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="og-web-inf-include-jar-pattern"><a class="anchor" href="#og-web-inf-include-jar-pattern"></a>The webapp classpath</h3>
+<div class="paragraph">
+<p>By default, Jetty will scan <em>all</em> classes from <code>WEB-INF/classes</code> and <em>all</em> jars from <code>WEB-INF/lib</code> according to the order, if any, established by absolute or relative ordering clauses in <code>web.xml</code>.</p>
+</div>
+<div class="paragraph">
+<p>If your webapp contains many jar files that you know do not contain any annotations, you can significantly speed up deployment by omitting them from scanning.
+However, be careful if your webapp uses a <code>ServletContainerInitializer</code> with a <code>@HandlesTypes</code> annotation that you don&#8217;t exclude jars that contain classes matching the annotation.</p>
+</div>
+<div class="paragraph">
+<p>Use the <code>org.eclipse.jetty.server.webapp.WebInfIncludeJarPattern</code> context attribute to define a regular expression for jars and class directories to select for scanning.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example of a context XML file that sets a pattern that matches any jar on the webapp&#8217;s classpath that starts with <code>"spring-"</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;Call name="setAttribute"&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
+      &lt;Arg&gt;org.eclipse.jetty.server.webapp.WebInfIncludeJarPattern&lt;/Arg&gt;  <i class="conum" data-value="3"></i><b>(3)</b>
+      &lt;Arg&gt;.*/spring-[^/]*\.jar$&lt;/Arg&gt;  <i class="conum" data-value="4"></i><b>(4)</b>
+    &lt;/Call&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Configures a <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/ee10/webapp/WebAppContext.html"><code>WebAppContext</code></a>, which is the Jetty component that represents a standard Servlet web application.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Specifies a context attribute.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Specifies the name of the context attribute.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Specifies the value of the context attribute.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="multi-threading"><a class="anchor" href="#multi-threading"></a>Multi-threading</h3>
+<div class="paragraph">
+<p>By default, Jetty performs annotation scanning in a multi-threaded manner in order to complete it in the minimum amount of time.</p>
+</div>
+<div class="paragraph">
+<p>If you don&#8217;t want multi-threaded scanning, you can configure Jetty to revert to single-threaded scanning.
+There are several options to configure this:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Set the context attribute <code>org.eclipse.jetty.annotations.multiThreaded</code> to <code>false</code></p>
+</li>
+<li>
+<p>Set the <code>Server</code> attribute <code>org.eclipse.jetty.annotations.multiThreaded</code> to <code>false</code></p>
+</li>
+<li>
+<p>Set the <code>System</code> property <code>org.eclipse.jetty.annotations.multiThreaded</code> to <code>false</code></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Method 1 will only affect the current webapp.
+Method 2 will affect all webapps deployed to the same Server instance.
+Method 3 will affect all webapps deployed in the same JVM.</p>
+</div>
+<div class="paragraph">
+<p>By default, Jetty will wait a maximum of 60 seconds for all of the scanning threads to complete.
+You can set this to a higher or lower number of seconds by doing one of the following:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Set the context attribute <code>org.eclipse.jetty.annotations.maxWait</code></p>
+</li>
+<li>
+<p>Set the <code>Server</code> attribute <code>org.eclipse.jetty.annotations.maxWait</code></p>
+</li>
+<li>
+<p>Set the <code>System</code> property <code>org.eclipse.jetty.annotations.maxWait</code></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Method 1 will only affect the current webapp.
+Method 2 will affect all webapps deployed to the same Server instance.
+Method 3 will affect all webapps deployed in the same JVM.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="scis"><a class="anchor" href="#scis"></a>ServletContainerInitializers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>ServletContainerInitializer</code> class can exist in: the container&#8217;s classpath, the webapp&#8217;s <code>WEB-INF/classes</code> directory, the webapp&#8217;s <code>WEB-INF/lib</code> jars, or any external extraClasspath that you have configured on the webapp.</p>
+</div>
+<div class="paragraph">
+<p>The Jakarta Servlet Specification does not define any order in which a <code>ServletContainerInitializer</code> must be called when the webapp starts.
+By default, Jetty will call them in the following order:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>ServletContainerInitializers from the container&#8217;s classpath</p>
+</li>
+<li>
+<p>ServletContainerInitializers from <code>WEB-INF/classes</code></p>
+</li>
+<li>
+<p>ServletContainerInitializers from <code>WEB-INF/lib</code> jars <em>in the order established in web.xml</em>, or in the order that the SCI is returned by the <a href="http://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html">javax.util.ServiceLoader</a> if there is <em>no</em> ordering.</p>
+</li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="exclusions"><a class="anchor" href="#exclusions"></a>Exclusions</h3>
+<div class="paragraph">
+<p>By default, as according to the Jakarta Servlet Specification, all <code>ServletContainerInitializer</code> instances that are discovered are invoked.</p>
+</div>
+<div class="paragraph">
+<p>Sometimes, depending on your requirements, you may need to prevent some being called at all.</p>
+</div>
+<div class="paragraph">
+<p>In this case, you can define the <code>org.eclipse.jetty.containerInitializerExclusionPattern</code> context attribute.</p>
+</div>
+<div class="paragraph">
+<p>This is a regular expression that defines <a href="http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html">patterns</a> of classnames that you want to exclude.
+Here&#8217;s an example of setting the context attribute in a context XML file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;Call name="setAttribute"&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
+      &lt;Arg&gt;org.eclipse.jetty.containerInitializerExclusionPattern&lt;/Arg&gt;  <i class="conum" data-value="3"></i><b>(3)</b>
+      &lt;Arg&gt;com.acme.*|com.corp.SlowContainerInitializer&lt;/Arg&gt;  <i class="conum" data-value="4"></i><b>(4)</b>
+    &lt;/Call&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Configures a <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/ee10/webapp/WebAppContext.html"><code>WebAppContext</code></a>, which is the Jetty component that represents a standard Servlet web application.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Specifies a context attribute.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Specifies the name of the context attribute.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Specifies the value of the context attribute.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In this example we exclude <strong>all</strong> <code>ServletContainerInitializer</code> instances in the <code>com.acme package</code>, and the specific class <code>com.corp.SlowContainerInitializer</code>.</p>
+</div>
+<div class="paragraph">
+<p>It is possible to use exclusion and ordering together to control <code>ServletContainerInitializer</code> invocation - the exclusions will be applied before the ordering.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ordering"><a class="anchor" href="#ordering"></a>Ordering</h3>
+<div class="paragraph">
+<p>If you need <code>ServletContainerInitializer</code> classes called in a specific order, you can use the context attribute <code>org.eclipse.jetty.containerInitializerOrder</code>.
+Set it to a list of comma separated <code>ServletContainerInitializer</code> class names in the order that you want them applied.</p>
+</div>
+<div class="paragraph">
+<p>You may optionally use the wildcard character <code>*</code> <strong>once</strong> in the list.
+It will match all <code>ServletContainerInitializer</code> classes not explicitly named in the list.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example context XML file that ensures the <code>com.example.PrioritySCI</code> will be called first, followed by the <code>com.acme.FooSCI</code>, then all other SCIs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+
+&lt;Configure class="org.eclipse.jetty.ee10.webapp.WebAppContext"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;Call name="setAttribute"&gt;  <i class="conum" data-value="2"></i><b>(2)</b>
+      &lt;Arg&gt;org.eclipse.jetty.containerInitializerOrder&lt;/Arg&gt;  <i class="conum" data-value="3"></i><b>(3)</b>
+      &lt;Arg&gt;org.eclipse.jetty.websocket.javax.server.JavaxWebSocketServletContainerInitializer, com.acme.FooSCI, *&lt;/Arg&gt;  <i class="conum" data-value="4"></i><b>(4)</b>
+    &lt;/Call&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Configures a <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/ee10/webapp/WebAppContext.html"><code>WebAppContext</code></a>, which is the Jetty component that represents a standard Servlet web application.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Specifies a context attribute.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Specifies the name of the context attribute.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Specifies the value of the context attribute.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../quickstart/index.html">Faster Web Application Deployment</a></span>
+  <span class="next"><a href="../jsp/index.html">Java Server Pages</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

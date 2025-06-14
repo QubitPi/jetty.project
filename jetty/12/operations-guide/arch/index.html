@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Architecture Overview :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="../howtos/index.html">
+    <link rel="next" href="../start/index.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Operations Guide</a></li>
+    <li><a href="index.html">Architecture Overview</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/operations-guide/pages/arch/index.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Architecture Overview</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jetty is an HTTP server and Servlet Container, and supports deployments of web applications.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="../server/index.html" class="xref page">Jetty server</a> listens on one or more network ports using one or more <a href="../protocols/index.html" class="xref page">protocol connectors</a>.</p>
+</div>
+<div class="paragraph">
+<p>Clients send HTTP requests for specific URIs, such as <code>https://host/store/cart</code>.</p>
+</div>
+<div class="paragraph">
+<p>The HTTP requests arrive to the connectors through the network; the Jetty server processes the requests and, based on their URIs, forwards them to the appropriate <a href="../deploy/index.html" class="xref page">deployed web application</a>.</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/plantuml/svg/eNptj0FPwzAMhe_5FVbvG7QSPwD1ApwmbRJnLzVttdauHJdp_560KRDBLonfe5_y4nDpeULFEc7oL63KzE0tgyiYIocYEZsLP9QoLL5TGSkCM2VJ6LCRa88tfOAQ8mR7VJkUykfngseBoNxXT875QeYGXtkoxgYYoN9mp-QNuY1o8UZmNziSfpIWCxTWMUdeTqfDQ7kvoRbmaEsCO7PpH1bdgaqceqfz8zRBcYwEFalxGe8xNRoO0ibKJ-Hc9xaw26U__DUqt5yL2nZZzUynazXW6l-9lXwB9-SZng==" alt="Diagram">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="concepts"><a class="anchor" href="#concepts"></a>Main Concepts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are three main concepts on which the Jetty standalone server is based:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <a href="#modules">Jetty <em>module</em> system</a>, where Jetty modules provides Jetty features.</p>
+</li>
+<li>
+<p>The <a href="#jetty-base"><code>$JETTY_BASE</code> directory</a>, that provides a place where you configure which Jetty modules you want to enable, configure the properties of each enabled module, and therefore configure the features you need for your web applications.</p>
+</li>
+<li>
+<p>The <a href="#start">Jetty start mechanism</a>, that starts a JVM that runs Jetty with the configuration you specified.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>After installing Jetty, you will want to set up a <a href="#jetty-base"><code>$JETTY_BASE</code> directory</a> where you configure <a href="#modules">Jetty modules</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="modules"><a class="anchor" href="#modules"></a>Jetty Modules</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jetty standalone server is made of Java components that are assembled together, configured and started to provide different features.</p>
+</div>
+<div class="paragraph">
+<p>A Jetty <em>module</em> provides one or more components that work together to provide typically one feature, although they may provide more than one feature.</p>
+</div>
+<div class="paragraph">
+<p>A Jetty module is nothing more than Jetty components assembled together like you would do using Java APIs, just done in a declarative way using configuration files.
+What you can do in Java code to assemble Jetty components can be done using Jetty modules.</p>
+</div>
+<div class="paragraph">
+<p>A Jetty module may be dependent on other Jetty modules: for example, the <code>http</code> Jetty module depends on the <code>server</code> Jetty module which in turn depends on the <code>threadpool</code> and <code>logging</code> Jetty modules.</p>
+</div>
+<div class="paragraph">
+<p>Every feature in a Jetty server is enabled by enabling the corresponding Jetty module(s).</p>
+</div>
+<div class="paragraph">
+<p>For example, if you enable only the <code>http</code> Jetty module, then your Jetty standalone server will only be able to listen to a network port for clear-text HTTP requests.
+It will not be able to process secure HTTP (i.e. <code>https</code>) requests, it will not be able to process WebSocket, or HTTP/2, or HTTP/3 or any other protocol because the correspondent modules have not been enabled.</p>
+</div>
+<div class="paragraph">
+<p>You can even start a Jetty server <em>without</em> listening on a network port&#8201;&#8212;&#8201;for example because you have enabled a custom module you wrote that provides the features you need.</p>
+</div>
+<div class="paragraph">
+<p>This allows the Jetty standalone server to be as small as necessary: modules that are not enabled are not loaded, don&#8217;t waste memory, and you don&#8217;t risk a client using a module that you did not know was even there.</p>
+</div>
+<div class="paragraph">
+<p>For more detailed information about the Jetty module system, see <a href="../modules/index.html" class="xref page">this section</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jetty-base"><a class="anchor" href="#jetty-base"></a><code>$JETTY_HOME</code> and <code>$JETTY_BASE</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Instead of managing multiple Jetty distributions out of many locations, it is possible to maintain a separation between the binary installation of the standalone Jetty, known as <code>$JETTY_HOME</code>, and the customizations for your specific environment(s), known as <code>$JETTY_BASE</code>.</p>
+</div>
+<div class="paragraph">
+<p>This separation between the binary installation directory and the specific configuration directory allows managing multiple, different, server configurations, and allows for quick, drop-in upgrades of Jetty.</p>
+</div>
+<div class="paragraph">
+<p>There should always only be <strong>one</strong> <code>$JETTY_HOME</code> (per version of Jetty), but there can be many <code>$JETTY_BASE</code> directories that reference it.</p>
+</div>
+<div class="paragraph">
+<p>This separation between <code>$JETTY_HOME</code> and <code>$JETTY_BASE</code> allows Jetty upgrades without affecting your web applications.
+<code>$JETTY_HOME</code> contains the Jetty runtime and libraries and the default configuration, while a <code>$JETTY_BASE</code> contains your web applications and any override of the default configuration.</p>
+</div>
+<div class="paragraph">
+<p>For example, with the <code>$JETTY_HOME</code> installation the default value for the network port for clear-text HTTP is <code>8080</code>.
+However, you may want that port to be <code>6060</code>, because <a href="../protocols/index.html#proxy" class="xref page">Jetty is behind a load balancer</a> that is configured to forward to the backend on port <code>6060</code>.
+In this case, you configure the clear-text HTTP port in <code>$JETTY_BASE</code>, not in <code>$JETTY_HOME</code>.
+When you upgrade Jetty, you will upgrade only the files in <code>$JETTY_HOME</code>, and all the configuration in <code>$JETTY_BASE</code> will remain unchanged, keeping your clear-text HTTP port at <code>6060</code>.</p>
+</div>
+<div class="paragraph">
+<p>Installing the Jetty runtime and libraries in <code>$JETTY_HOME</code> also allows you to leverage file system permissions: <code>$JETTY_HOME</code> may be owned by an administrator user (so that only administrators can upgrade it), while <code>$JETTY_BASE</code> directories may be owned by a less privileged user.</p>
+</div>
+<div class="paragraph">
+<p>If you had changed the default configuration in <code>$JETTY_HOME</code>, when you upgrade Jetty, say from version <code>10.0.0</code> to version <code>10.0.1</code>, your changes would be lost.
+Maintaining all the changes in <code>$JETTY_HOME</code>, and having to reconfigure these with each upgrade results in a massive commitment of time and effort.</p>
+</div>
+<div class="paragraph">
+<p>To recap:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>$JETTY_HOME</code></dt>
+<dd>
+<p>This is the location for the Jetty binaries.</p>
+</dd>
+<dt class="hdlist1"><code>$JETTY_BASE</code></dt>
+<dd>
+<p>This is the location for your configurations and customizations to the Jetty binaries.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="start"><a class="anchor" href="#start"></a>Start Mechanism</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jetty start mechanism provides two features:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The mean to configure your <code>$JETTY_BASE</code> by enabling the desired modules, and to display the configuration of your <code>$JETTY_BASE</code>.</p>
+</li>
+<li>
+<p>The mean to start Jetty itself, by starting a JVM that reads the Jetty configuration in <code>$JETTY_BASE</code>, which is then executed to assemble and start the Jetty components.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Jetty start mechanism is invoked by executing <code>$JETTY_HOME/start.jar</code> from within your <code>$JETTY_BASE</code>, and you can think of it as the Jetty command line program, similar to many Unix/Windows command line programs.</p>
+</div>
+<div class="paragraph">
+<p>For example, you can ask for help:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --help</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or you can list all available modules (or only those with a specific tag):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># List all the modules.
+$ java -jar $JETTY_HOME/start.jar --list-modules=*
+
+# List all the modules tagged as "demo".
+$ java -jar $JETTY_HOME/start.jar --list-modules=demo</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can enable a module, for example the <code>http</code> module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=http</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once you have one or more module enabled, you can display the current configuration, to verify that the configuration is correct:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --list-config</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can enable a Jetty demo module, which will deploy a demo web application:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar --add-modules=demo-simple</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, you can start Jetty:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ java -jar $JETTY_HOME/start.jar</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Read more information at the <a href="../start/index.html" class="xref page">Jetty start mechanism section</a>.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../howtos/index.html">Eclipse Jetty How-Tos</a></span>
+  <span class="next"><a href="../start/index.html">Jetty Start Mechanism</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

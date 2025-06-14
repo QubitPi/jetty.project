@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Migrating from Jetty 11.0.x to Jetty 12.0.x :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="94-to-10.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Programming Guide</a></li>
+    <li>Migration Guides</li>
+    <li><a href="11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/programming-guide/pages/migration/11-to-12.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Migrating from Jetty 11.0.x to Jetty 12.0.x</h1>
+<div class="sect1">
+<h2 id="java-version"><a class="anchor" href="#java-version"></a>Required Java Version Changes</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Jetty 11.0.x</th>
+<th class="tableblock halign-left valign-top">Jetty 12.0.x</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Java 11</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Java 17</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="maven-artifacts"><a class="anchor" href="#maven-artifacts"></a>Maven Artifacts Changes</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Jetty 11.0.x</th>
+<th class="tableblock halign-left valign-top">Jetty 12.0.x</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.fcgi:<strong>fcgi-client</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.fcgi:<strong>jetty-fcgi-client</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.fcgi:<strong>fcgi-server</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.fcgi:<strong>jetty-fcgi-server</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http2:<strong>http2-client</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http2:<strong>jetty-http2-client</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http2:<strong>http2-common</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http2:<strong>jetty-http2-common</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http2:<strong>http2-hpack</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http2:<strong>jetty-http2-hpack</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http2:<strong>http2-http-client-transport</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http2:<strong>jetty-http2-client-transport</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http2:<strong>http2-server</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http2:<strong>jetty-http2-server</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http3:<strong>http3-client</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http3:<strong>jetty-http3-client</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http3:<strong>http3-common</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http3:<strong>jetty-http3-common</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http3:<strong>http3-http-client-transport</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http3:<strong>jetty-http3-client-transport</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http3:<strong>http3-qpack</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http3:<strong>jetty-http3-qpack</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http3:<strong>http3-server</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.http3:<strong>jetty-http3-server</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-osgi.</strong>*</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>org.eclipse.jetty:<strong>jetty-osgi</strong></p>
+</li>
+<li>
+<p>org.eclipse.jetty.ee{8,9,10}:<strong>jetty-ee{8,9,10}-osgi-</strong>*</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-proxy</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>org.eclipse.jetty:<strong>jetty-proxy</strong></p>
+</li>
+<li>
+<p>org.eclipse.jetty.ee{8,9,10}:<strong>jetty-ee{8,9,10}-proxy</strong></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.quic:<strong>quic-client</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.quic:<strong>jetty-quic-client</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.quic:<strong>quic-common</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.quic:<strong>jetty-quic-common</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.quic:<strong>quic-quiche</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.quic:<strong>jetty-quic-quiche</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.quic:<strong>quic-server</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.quic:<strong>jetty-quic-server</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-unixsocket.</strong>*</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Removed&#8201;&#8212;&#8201;Use org.eclipse.jetty:jetty-unixdomain-server</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.websocket:<strong>websocket-core-client</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.websocket:<strong>jetty-websocket-core-client</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.websocket:<strong>websocket-core-common</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.websocket:<strong>jetty-websocket-core-common</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.websocket:<strong>websocket-core-server</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.websocket:<strong>jetty-websocket-core-server</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.websocket:<strong>websocket-jetty-api</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.websocket:<strong>jetty-websocket-jetty-api</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.websocket:<strong>websocket-jetty-client</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>org.eclipse.jetty.websocket:<strong>jetty-websocket-jetty-client</strong></p>
+</li>
+<li>
+<p>org.eclipse.jetty.<strong>ee{8,9,10}.websocket</strong>:jetty-<strong>ee{8,9,10}-websocket-jetty-client</strong></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.websocket:<strong>websocket-jetty-common</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>org.eclipse.jetty.websocket:<strong>jetty-websocket-jetty-common</strong></p>
+</li>
+<li>
+<p>org.eclipse.jetty.<strong>ee{8,9,10}.websocket</strong>:jetty-<strong>ee{8,9,10}-websocket-jetty-common</strong></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.websocket:<strong>websocket-jetty-server</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>org.eclipse.jetty.websocket:<strong>jetty-websocket-jetty-server</strong></p>
+</li>
+<li>
+<p>org.eclipse.jetty.<strong>ee{8,9,10}.websocket</strong>:jetty-<strong>ee{8,9,10}-websocket-jetty-server</strong></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>websocket</strong>:<strong>websocket-jakarta-client</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}.websocket</strong>:<strong>jetty-ee{8,9,10}-websocket-jakarta-client</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>websocket</strong>:<strong>websocket-jakarta-common</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}.websocket</strong>:<strong>jetty-ee{8,9,10}-websocket-jakarta-common</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>websocket</strong>:<strong>websocket-jakarta-server</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}.websocket</strong>:<strong>jetty-ee{8,9,10}-websocket-jakarta-server</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>websocket</strong>:<strong>websocket-servlet</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}.websocket</strong>:<strong>jetty-ee{8,9,10}-websocket-servlet</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>apache-jsp</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}</strong>:<strong>jetty-ee{8,9,10}-apache-jsp</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-annotations</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}</strong>:<strong>jetty-ee{8,9,10}-annotations</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-ant</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Removed&#8201;&#8212;&#8201;No Replacement</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-cdi</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}</strong>:<strong>jetty-ee{8,9,10}-cdi</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>glassfish-jstl</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}</strong>:<strong>jetty-ee{8,9,10}-glassfish-jstl</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-jaspi</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}</strong>:<strong>jetty-ee{8,9,10}-jaspi</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-jndi</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}</strong>:<strong>jetty-ee{8,9,10}-jndi</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-jspc-maven-plugin</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}</strong>:<strong>jetty-ee{8,9,10}-jspc-maven-plugin</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-maven-plugin</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}</strong>:<strong>jetty-ee{8,9,10}-maven-plugin</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-plus</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}</strong>:<strong>jetty-ee{8,9,10}-plus</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-quickstart</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}</strong>:<strong>jetty-ee{8,9,10}-quickstart</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-runner</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}</strong>:<strong>jetty-ee{8,9,10}-runner</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-servlet</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}</strong>:<strong>jetty-ee{8,9,10}-servlet</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-servlets</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}</strong>:<strong>jetty-ee{8,9,10}-servlets</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty:<strong>jetty-webapp</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>org.eclipse.jetty.<strong>ee{8,9,10}</strong>:<strong>jetty-ee{8,9,10}-webapp</strong></p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="class-packages-names"><a class="anchor" href="#class-packages-names"></a>Class Packages/Names Changes</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Jetty 11.0.x</th>
+<th class="tableblock halign-left valign-top">Jetty 12.0.x</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.client.<strong>api</strong>.*</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.client.*</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.client.<strong>util</strong>.*</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.client.*</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.client.<strong>util</strong>.*</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.client.*</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.client.<strong>http</strong>.*</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.client.<strong>transport</strong>.*</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.http2.client.<strong>http</strong>.*</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.http2.client.<strong>transport</strong>.*</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.websocket.api.annotation.<strong>OnWebSocketConnect</strong></code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.websocket.api.annotation.<strong>OnWebSocketOpen</strong></code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.websocket.api.<strong>WriteCallback</strong></code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.websocket.api.<strong>Callback</strong></code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.websocket.api.<strong>WebSocket*Listener</strong></code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.websocket.api.<strong>Session.Listener.AutoDemanding</strong></code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.websocket.api.<strong>RemoteEndpoint</strong></code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.websocket.api.<strong>Session</strong></code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.websocket.api.<strong>WebSocketPolicy</strong></code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.eclipse.jetty.websocket.api.<strong>Configurable</strong></code></p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jetty-module-names"><a class="anchor" href="#jetty-module-names"></a>Jetty Module Changes</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Jetty 11.0.x</th>
+<th class="tableblock halign-left valign-top">Jetty 12.0.x</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>annotations.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>ee{8,9,10}-annotations.mod</code><br></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>apache-jsp.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>ee{8,9,10}-apache-jsp.mod</code><br></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bytebufferpool-logarithmic.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>bytebufferpool-quadratic.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>cdi.mod</code><br>
+<code>cdi-*.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>ee{8,9,10}-cdi.mod</code><br>
+<code>ee{8,9,10}-cdi-*.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>deploy.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>core-deploy.mod</code><br>
+<code>ee{8,9,10}-deploy.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>fcgi.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>ee{8,9,10}-fcgi-proxy.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>glassfish-jstl.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>ee{8,9,10}-glassfish-jstl.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>jaspi.mod</code><br>
+<code>jaspi-*.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>ee{8,9,10}-jaspi.mod</code><br>
+<code>ee{8,9,10}-jaspi-*.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>jsp.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>ee{8,9,10}-jsp.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>jstl.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>ee{8,9,10}-jstl.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>openid.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>openid.mod</code><br>
+<code>ee{8,9,10}-openid.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>plus.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>plus.mod</code><br>
+<code>ee{8,9,10}-plus.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>proxy.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>proxy.mod</code><br>
+<code>ee{8,9,10}-proxy.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>security.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>security.mod</code><br>
+<code>ee{8,9,10}-security.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>servlet.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>ee{8,9,10}-servlet.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>servlets.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>ee{8,9,10}-servlets.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>stats.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>statistics.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>webapp.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>ee{8,9,10}-webapp.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>websocket.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>websocket-jakarta.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>ee{8,9,10}-websocket-jakarta.mod</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>websocket-jetty.mod</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>websocket-jetty.mod</code><br>
+<code>ee{8,9,10}-websocket-jetty.mod</code></p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>With the introduction of the <a href="#jetty-core-apis">Jetty Core APIs</a>, modules that in Jetty 11 were implicitly based on the Servlet APIs, in Jetty 12 have been renamed to <code>ee{8,9,10}-&lt;name&gt;.mod</code>.</p>
+</div>
+<div class="paragraph">
+<p>Modules that retain the same name, such as <code>openid.mod</code>, <code>security.mod</code>, etc., in Jetty 12 enable the same functionality using the Jetty Core APIs, not the Servlet APIs.
+For the correspondent module that uses the Servlet API, use <code>ee{8,9,10}-openid.mod</code>, <code>ee{8,9,10}-security.mod</code>, etc.</p>
+</div>
+<div class="paragraph">
+<p>This is particularly important for the Jetty 11 <code>deploy.mod</code>, that in Jetty 12 must be explicitly changed to one of the <code>ee{8,9,10}-deploy.mod</code>, otherwise web applications will not be deployed.
+Refer to <a href="../../operations-guide/deploy/index.html" class="xref page">web application deployment</a> section for more information.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jetty-core-apis"><a class="anchor" href="#jetty-core-apis"></a>Server-Side Web Application APIs Changes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jetty 12 introduced redesigned server-side APIs for web applications.
+In Jetty 11, these APIs were based on a mix of Jakarta Servlet APIs and Jetty Handler APIs, while in Jetty 12 they are solely based on Jetty Handler APIs.</p>
+</div>
+<div class="paragraph">
+<p>In Jetty 12 you can now write web applications independently of the Servlet APIs, so you can migrate Jakarta Servlets to Jetty Handlers as explained in <a href="#servlet-to-handler">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you were already using the Jetty 11 Handler APIs, you can migrate them to the Jetty 12 Handler APIs as explained in <a href="#api-changes-handler">this section</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="servlet-to-handler"><a class="anchor" href="#servlet-to-handler"></a>Migrate Servlets to Jetty Handlers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Web applications written using the Servlet APIs may be re-written using the Jetty <code>Handler</code> APIs.
+The sections below outline the Jetty <code>Handler</code> APIs that correspond to the Servlet APIs.
+For more information about why using the Jetty <code>Handler</code> APIs instead of the Servlet APIs, refer to <a href="../server/http.html" class="xref page">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>For more information about replacing <code>HttpServlet</code>s or Servlet <code>Filter</code>s with Jetty <code>Handler</code>s, refer to <a href="../server/http.html#handler" class="xref page">this section</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="handler-request-apis"><a class="anchor" href="#handler-request-apis"></a>Handler Request APIs</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class RequestAPIs extends Handler.Abstract
+{
+    @Override
+    public boolean handle(Request request, Response response, Callback callback) throws Exception
+    {
+        // Gets the request method.
+        // Replaces:
+        //   - servletRequest.getMethod();
+        String method = request.getMethod();
+
+        // Gets the request protocol name and version.
+        // Replaces:
+        //   - servletRequest.getProtocol();
+        String protocol = request.getConnectionMetaData().getProtocol();
+
+        // Gets the request URL.
+        // Replaces:
+        //   - servletRequest.getRequestURL();
+        HttpURI httpURI = HttpURI.build(request.getHttpURI()).query(null);
+        StringBuffer requestURL = new StringBuffer(httpURI.asString());
+
+        // Gets the request context.
+        // Replaces:
+        //   - servletRequest.getServletContext()
+        Context context = request.getContext();
+
+        // Gets the context path.
+        // Replaces:
+        //   - servletRequest.getContextPath()
+        String contextPath = context.getContextPath();
+
+        // Gets the request path.
+        // Replaces:
+        //   - servletRequest.getRequestURI();
+        String requestPath = request.getHttpURI().getPath();
+
+        // Gets the request path after the context path.
+        // Replaces:
+        //   - servletRequest.getServletPath() + servletRequest.getPathInfo()
+        String pathInContext = Request.getPathInContext(request);
+
+        // Gets the request query.
+        // Replaces:
+        //   - servletRequest.getQueryString()
+        String queryString = request.getHttpURI().getQuery();
+
+        // Gets request parameters.
+        // Replaces:
+        //   - servletRequest.getParameterNames();
+        //   - servletRequest.getParameter(name);
+        //   - servletRequest.getParameterValues(name);
+        //   - servletRequest.getParameterMap();
+        Fields queryParameters = Request.extractQueryParameters(request, UTF_8);
+        Fields allParameters = Request.getParameters(request);
+
+        // Gets cookies.
+        // Replaces:
+        //   - servletRequest.getCookies();
+        List&lt;HttpCookie&gt; cookies = Request.getCookies(request);
+
+        // Gets request HTTP headers.
+        // Replaces:
+        //   - servletRequest.getHeaderNames()
+        //   - servletRequest.getHeader(name)
+        //   - servletRequest.getHeaders(name)
+        //   - servletRequest.getDateHeader(name)
+        //   - servletRequest.getIntHeader(name)
+        HttpFields requestHeaders = request.getHeaders();
+
+        // Gets the request Content-Type.
+        // Replaces:
+        //   - servletRequest.getContentType()
+        String contentType = request.getHeaders().get(HttpHeader.CONTENT_TYPE);
+
+        // Gets the request Content-Length.
+        // Replaces:
+        //   - servletRequest.getContentLength()
+        //   - servletRequest.getContentLengthLong()
+        long contentLength = request.getLength();
+
+        // Gets the request locales.
+        // Replaces:
+        //   - servletRequest.getLocale()
+        //   - servletRequest.getLocales()
+        List&lt;Locale&gt; locales = Request.getLocales(request);
+
+        // Gets the request scheme.
+        // Replaces:
+        //   - servletRequest.getScheme()
+        String scheme = request.getHttpURI().getScheme();
+
+        // Gets the server name.
+        // Replaces:
+        //   - servletRequest.getServerName()
+        String serverName = Request.getServerName(request);
+
+        // Gets the server port.
+        // Replaces:
+        //   - servletRequest.getServerPort()
+        int serverPort = Request.getServerPort(request);
+
+        // Gets the remote host/address.
+        // Replaces:
+        //   - servletRequest.getRemoteAddr()
+        //   - servletRequest.getRemoteHost()
+        String remoteAddress = Request.getRemoteAddr(request);
+
+        // Gets the remote port.
+        // Replaces:
+        //   - servletRequest.getRemotePort()
+        int remotePort = Request.getRemotePort(request);
+
+        // Gets the local host/address.
+        // Replaces:
+        //   - servletRequest.getLocalAddr()
+        //   - servletRequest.getLocalHost()
+        String localAddress = Request.getLocalAddr(request);
+
+        // Gets the local port.
+        // Replaces:
+        //   - servletRequest.getLocalPort()
+        int localPort = Request.getLocalPort(request);
+
+        // Gets the request attributes.
+        // Replaces:
+        //   - servletRequest.getAttributeNames()
+        //   - servletRequest.getAttribute(name)
+        //   - servletRequest.setAttribute(name, value)
+        //   - servletRequest.removeAttribute(name)
+        String name = "name";
+        Object value = "value";
+        Set&lt;String&gt; names = request.getAttributeNameSet();
+        Object attribute = request.getAttribute(name);
+        Object oldValue = request.setAttribute(name, value);
+        Object removedValue = request.removeAttribute(name);
+        request.clearAttributes();
+        Map&lt;String, Object&gt; map = request.asAttributeMap();
+
+        // Gets the request trailers.
+        // Replaces:
+        //   - servletRequest.getTrailerFields()
+        HttpFields trailers = request.getTrailers();
+
+        // Gets the HTTP session.
+        // Replaces:
+        //   - servletRequest.getSession()
+        //   - servletRequest.getSession(create)
+        boolean create = true;
+        Session session = request.getSession(create);
+
+        callback.succeeded();
+        return true;
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="handler-request-content-apis"><a class="anchor" href="#handler-request-content-apis"></a>Handler Request Content APIs</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Override
+public boolean handle(Request request, Response response, Callback callback) throws Exception
+{
+    // Non-blocking read the request content as a String.
+    // Use with caution as the request content may be large.
+    Content.Source.asString(request, UTF_8, new Promise&lt;&gt;()
+    {
+        @Override
+        public void succeeded(String result)
+        {
+            // Process the request content here.
+
+            // Implicitly respond with status code 200 and no content.
+            callback.succeeded();
+        }
+
+        @Override
+        public void failed(Throwable failure)
+        {
+            // Implicitly respond with status code 500.
+            callback.failed(failure);
+        }
+    });
+
+    return true;
+}
+
+@Override
+public boolean handle(Request request, Response response, Callback callback) throws Exception
+{
+    // Non-blocking read the request content as a ByteBuffer.
+    // Use with caution as the request content may be large.
+    Content.Source.asByteBuffer(request, new Promise&lt;&gt;()
+    {
+        @Override
+        public void succeeded(ByteBuffer result)
+        {
+            // Process the request content here.
+
+            // Implicitly respond with status code 200 and no content.
+            callback.succeeded();
+        }
+
+        @Override
+        public void failed(Throwable failure)
+        {
+            // Implicitly respond with status code 500.
+            callback.failed(failure);
+        }
+    });
+
+    return true;
+}
+
+@Override
+public boolean handle(Request request, Response response, Callback callback) throws Exception
+{
+    // Read the request content as an InputStream.
+    // Note that InputStream.read() may block.
+    try (InputStream inputStream = Content.Source.asInputStream(request))
+    {
+        while (true)
+        {
+            int read = inputStream.read();
+
+            // EOF was reached, stop reading.
+            if (read &lt; 0)
+                break;
+
+            // Process the read byte here.
+        }
+    }
+
+    // Implicitly respond with status code 200 and no content.
+    callback.succeeded();
+    return true;
+}
+
+@Override
+public boolean handle(Request request, Response response, Callback callback) throws Exception
+{
+    // When the read is complete, complete the Handler callback.
+    Promise.Task&lt;Void&gt; reader = new Promise.Task&lt;&gt;(callback::succeeded, callback::failed)
+    {
+        @Override
+        public void run()
+        {
+            // Read in a loop.
+            while (true)
+            {
+                // Read a chunk of content.
+                Content.Chunk chunk = request.read();
+
+                // If there is no content, demand to be
+                // called back when more content is available.
+                if (chunk == null)
+                {
+                    request.demand(this);
+                    return;
+                }
+
+                // If a failure is read, complete with a failure.
+                if (Content.Chunk.isFailure(chunk))
+                {
+                    Throwable failure = chunk.getFailure();
+                    failed(failure);
+                    return;
+                }
+
+                if (chunk instanceof Trailers trailers)
+                {
+                    // Possibly process the request trailers here.
+                    // Trailers have an empty ByteBuffer and are a last chunk.
+                }
+
+                // Process the request content chunk here.
+                // After the processing, the chunk MUST be released.
+                chunk.release();
+
+                // If the last chunk is read, complete normally.
+                if (chunk.isLast())
+                {
+                    succeeded(null);
+                    return;
+                }
+
+                // Not the last chunk of content, loop around to read more.
+            }
+        }
+    };
+
+    // Initiate the read of the request content.
+    reader.run();
+
+    return true;
+}
+
+@Override
+public boolean handle(Request request, Response response, Callback callback) throws Exception
+{
+    FormFields.onFields(request, new Promise.Invocable&lt;&gt;()
+    {
+        @Override
+        public void succeeded(Fields fields)
+        {
+            // Process the form fields here.
+
+            // Implicitly respond with status code 200 and no content.
+            callback.succeeded();
+        }
+
+        @Override
+        public void failed(Throwable failure)
+        {
+            // Implicitly respond with status code 500.
+            callback.failed(failure);
+        }
+    });
+
+    return true;
+}
+
+@Override
+public boolean handle(Request request, Response response, Callback callback) throws Exception
+{
+    String contentType = request.getHeaders().get(HttpHeader.CONTENT_TYPE);
+
+    MultiPartConfig multiPartConfig = new MultiPartConfig.Builder()
+        // The directory where the parts content are saved.
+        .location(Path.of("/tmp"))
+        .build();
+
+    MultiPartFormData.onParts(request, request, contentType, multiPartConfig, new Promise.Invocable&lt;&gt;()
+    {
+        @Override
+        public void succeeded(MultiPartFormData.Parts parts)
+        {
+            // Process the parts here.
+
+            // Implicitly respond with status code 200 and no content.
+            callback.succeeded();
+        }
+
+        @Override
+        public void failed(Throwable failure)
+        {
+            // Implicitly respond with status code 500.
+            callback.failed(failure);
+        }
+    });
+
+    return true;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Refer also to the <code>Content.Source</code> APIs detailed in <a href="../arch/io.html#content-source" class="xref page">this section</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="handler-response-apis"><a class="anchor" href="#handler-response-apis"></a>Handler Response APIs</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class ResponseAPIs extends Handler.Abstract
+{
+    @Override
+    public boolean handle(Request request, Response response, Callback callback) throws Exception
+    {
+        // Sets/Gets the response HTTP status.
+        // Replaces:
+        //   - servletResponse.setStatus(code);
+        //   - servletResponse.getStatus();
+        response.setStatus(HttpStatus.OK_200);
+        int status = response.getStatus();
+
+        // Gets the response HTTP headers.
+        // Replaces:
+        //   - servletResponse.setHeader(name, value);
+        //   - servletResponse.addHeader(name, value);
+        //   - servletResponse.setDateHeader(name, date);
+        //   - servletResponse.addDateHeader(name, date);
+        //   - servletResponse.setIntHeader(name, value);
+        //   - servletResponse.addIntHeader(name, value);
+        //   - servletResponse.getHeaderNames()
+        //   - servletResponse.getHeader(name)
+        //   - servletResponse.getHeaders(name)
+        //   - servletResponse.containsHeader(name)
+        HttpFields.Mutable responseHeaders = response.getHeaders();
+
+        // Sets an HTTP cookie.
+        // Replaces:
+        //   - Cookie cookie = new Cookie("name", "value");
+        //   - cookie.setDomain("example.org");
+        //   - cookie.setPath("/path");
+        //   - cookie.setMaxAge(24 * 3600);
+        //   - cookie.setAttribute("SameSite", "Lax");
+        //   - servletResponse.addCookie(cookie);
+        HttpCookie cookie = HttpCookie.build("name", "value")
+            .domain("example.org")
+            .path("/path")
+            .maxAge(Duration.ofDays(1).toSeconds())
+            .sameSite(HttpCookie.SameSite.LAX)
+            .build();
+        Response.addCookie(response, cookie);
+
+        // Sets the response Content-Type.
+        // Replaces:
+        //   - servletResponse.setContentType(type)
+        responseHeaders.put(HttpHeader.CONTENT_TYPE, "text/plain; charset=UTF-8");
+
+        // Sets the response Content-Length.
+        // Replaces:
+        //   - servletResponse.setContentLength(length)
+        //   - servletResponse.setContentLengthLong(length)
+        responseHeaders.put(HttpHeader.CONTENT_LENGTH, 1024L);
+
+        // Sets/Gets the response trailers.
+        // Replaces:
+        //   - servletResponse.setTrailerFields(() -&gt; trailers)
+        //   - servletResponse.getTrailerFields()
+        HttpFields trailers = HttpFields.build().put("checksum", 0xCAFE);
+        response.setTrailersSupplier(trailers);
+        Supplier&lt;HttpFields&gt; trailersSupplier = response.getTrailersSupplier();
+
+        // Gets whether the response is committed.
+        // Replaces:
+        //   - servletResponse.isCommitted()
+        boolean committed = response.isCommitted();
+
+        // Resets the response.
+        // Replaces:
+        //   - servletResponse.reset();
+        response.reset();
+
+        // Sends a redirect response.
+        // Replaces:
+        //   - servletResponse.encodeRedirectURL(location)
+        //   - servletResponse.sendRedirect(location)
+        String location = Response.toRedirectURI(request, "/redirect");
+        Response.sendRedirect(request, response, callback, location);
+
+        // Sends an error response.
+        // Replaces:
+        //   - servletResponse.sendError(code);
+        //   - servletResponse.sendError(code, message);
+        Response.writeError(request, response, callback, HttpStatus.SERVICE_UNAVAILABLE_503, "Request Cannot be Processed");
+
+        callback.succeeded();
+        return true;
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="handler-response-content-apis"><a class="anchor" href="#handler-response-content-apis"></a>Handler Response Content APIs</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Override
+public boolean handle(Request request, Response response, Callback callback) throws Exception
+{
+    // Produces an implicit response with status code 200
+    // with no content when returning from this method.
+
+    // The Handler callback must be completed when returning true.
+    callback.succeeded();
+    return true;
+}
+
+@Override
+public boolean handle(Request request, Response response, Callback callback) throws Exception
+{
+    // Produces an implicit response with status 204
+    // with no content when returning from this method.
+    response.setStatus(HttpStatus.NO_CONTENT_204);
+
+    // The Handler callback must be completed when returning true.
+    callback.succeeded();
+    return true;
+}
+
+@Override
+public boolean handle(Request request, Response response, Callback callback) throws Exception
+{
+    // Produces an explicit response with status 204 with no content.
+    response.setStatus(HttpStatus.NO_CONTENT_204);
+
+    // This explicit first write() writes the response status code and headers.
+    // It is also the last write (as specified by the first parameter)
+    // and writes an empty content (the second parameter, a null ByteBuffer).
+    // When this write completes, the Handler callback is completed.
+    response.write(true, null, callback);
+
+    return true;
+}
+
+@Override
+public boolean handle(Request request, Response response, Callback callback) throws Exception
+{
+    response.setStatus(HttpStatus.OK_200);
+
+    ByteBuffer content = UTF_8.encode("Hello World");
+
+    // Explicit first write that writes the response status code, headers and content.
+    // When this write completes, the Handler callback is completed.
+    response.write(true, content, callback);
+
+    return true;
+}
+@Override
+public boolean handle(Request request, Response response, Callback callback) throws Exception
+{
+    response.setStatus(HttpStatus.OK_200);
+
+    ByteBuffer content = UTF_8.encode("Hello World");
+    response.getHeaders().put(HttpHeader.CONTENT_LENGTH, content.remaining());
+
+    // Flush the response status code and the headers (no content).
+    // This is the fist but non-last write.
+    Callback.Completable completable = new Callback.Completable();
+    response.write(false, null, completable);
+
+    // When the first write completes, perform the second (and last) write.
+    completable.whenComplete((ignored, failure) -&gt;
+    {
+        if (failure == null)
+        {
+            // Now explicitly write the content as the last write.
+            // When this write completes, the Handler callback is completed.
+            response.write(true, content, callback);
+        }
+        else
+        {
+            // Implicitly respond with status code 500.
+            callback.failed(failure);
+        }
+    });
+
+    return true;
+}
+
+@Override
+public boolean handle(Request request, Response response, Callback callback) throws Exception
+{
+    response.setStatus(HttpStatus.OK_200);
+
+    // Utility method to write UTF-8 string content.
+    // When this write completes, the Handler callback is completed.
+    Content.Sink.write(response, true, "Hello World", callback);
+
+    return true;
+}
+
+@Override
+public boolean handle(Request request, Response response, Callback callback) throws Exception
+{
+    response.setStatus(HttpStatus.OK_200);
+
+    // Utility method to echo the content from the request to the response.
+    // When the echo completes, the Handler callback is completed.
+    Content.copy(request, response, callback);
+
+    return true;
+}
+
+@Override
+public boolean handle(Request request, Response response, Callback callback) throws Exception
+{
+    response.setStatus(HttpStatus.OK_200);
+
+    // The trailers must be set on the response before the first write.
+    HttpFields.Mutable trailers = HttpFields.build();
+    response.setTrailersSupplier(trailers);
+
+    // Explicit first write that writes the response status code, headers and content.
+    // The trailers have not been written yet; they will be written with the last write.
+    ByteBuffer content = UTF_8.encode("Hello World");
+    Callback.Completable completable = new Callback.Completable();
+    response.write(false, content, completable);
+
+    completable.whenComplete((ignored, failure) -&gt;
+    {
+        if (failure == null)
+        {
+            // Update the trailers
+            trailers.put("Content-Checksum", 0xCAFE);
+
+            // Explicit last write to write the trailers
+            // and complete the Handler callback.
+            response.write(true, null, callback);
+        }
+        else
+        {
+            // Implicitly respond with status code 500.
+            callback.failed(failure);
+        }
+    });
+
+    return true;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Refer also to the <code>Content.Sink</code> APIs detailed in <a href="../arch/io.html#content-sink" class="xref page">this section</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="api-changes"><a class="anchor" href="#api-changes"></a>APIs Changes</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="api-changes-handler"><a class="anchor" href="#api-changes-handler"></a><code>Handler</code></h3>
+<div class="paragraph">
+<p>The server-side <code>Handler</code> class, and the APIs to use for request/response processing, have been redesigned in Jetty 12.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty 11 <code>Handler</code> method:</p>
+</div>
+<div class="paragraph">
+<p><code>Handler.handle(String target, Request jettyRequest, HttpServletRequest request, HttpServletResponse response)</code></p>
+</div>
+<div class="paragraph">
+<p>has been changed in Jetty 12 to:</p>
+</div>
+<div class="paragraph">
+<p><code>Handler.handle(Request request, Response response, Callback callback)</code></p>
+</div>
+<div class="paragraph">
+<p>The Jetty 11 <code>target</code> parameter has been removed, and in Jetty 12 it has been replaced by the information present in <code>Request.getHttpURI()</code>.</p>
+</div>
+<div class="paragraph">
+<p>In Jetty 11, <code>Handler</code>s would mark the fact that they handled the request, and therefore are producing a response, by calling <code>Request.setHandled(true)</code>.
+In Jetty 12, this is performed by returning <code>true</code> from the <code>Handler.handle(...)</code> method, which also requires that the <code>Callback</code> parameter must be completed, either by succeeding it or failing it.</p>
+</div>
+<div class="paragraph">
+<p>In Jetty 11, the <code>Handler.handle(...)</code> method has a blocking semantic, while in Jetty 12 the <code>Handler.handle(...)</code> method has an asynchronous semantic, thanks to the <code>Callback</code> parameter.
+This means that you can return from the <code>Handler.handle(...)</code> method <em>before</em> the response has been sent, similarly to what you can do with the Servlet APIs when you call <code>HttpServletRequest.startAsync()</code>.
+Similarly, in Jetty 11 after a call to <code>startAsync()</code> you must call <code>AsyncContext.complete()</code>, while in Jetty 12 you must complete the <code>Callback</code> parameter, either by succeeding it or failing it.</p>
+</div>
+<div class="paragraph">
+<p>In Jetty 11, <code>AbstractHandler</code> provides a utility class to implement <code>Handler</code>.
+In Jetty 12, use <code>Handler.Abstract</code>.</p>
+</div>
+<div class="paragraph">
+<p>In Jetty 11, the APIs to deal with request or response HTTP headers are based on either Jetty&#8217;s <code>HttpFields</code>, or the Servlet APIs.
+In Jetty 12, the HTTP headers API are only based on <code>HttpFields</code>.
+Please refer to the <code>HttpFields</code> <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/http/HttpFields.html">javadocs</a> for details.</p>
+</div>
+<div class="paragraph">
+<p>In Jetty 11, the request content is accessed via <code>Request.getInputStream()</code> or <code>HttpServletRequest.getInputStream()</code>.
+In Jetty 12, the <code>Request</code> object itself <em>is-a</em> <code>Content.Source</code> that can be read as explained in <a href="../arch/io.html#content-source" class="xref page">this section</a>.
+In Jetty 12, you can use <code>Content.Source.asInputStream(request)</code> to obtain an <code>InputStream</code> and minimize the changes to your code, but remember that <code>InputStream</code> only provides blocking APIs, while <code>Content.Source</code> provides non-blocking APIs.</p>
+</div>
+<div class="paragraph">
+<p>In Jetty 11, the response content is accessed via <code>Response.getOutputStream()</code> or <code>HttpServletResponse.getOutputStream()</code>.
+In Jetty 12, the <code>Response</code> object itself <em>is-a</em> <code>Content.Sink</code> that can be written as explained in <a href="../arch/io.html#content-sink" class="xref page">this section</a>.
+In Jetty 12, you can use <code>Content.Sink.asOutputStream(response)</code> to obtain an <code>OutputStream</code> and minimize the changes to your code, but remember that <code>OutputStream</code> only provides blocking APIs, while <code>Content.Sink</code> provides non-blocking APIs.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="api-changes-handler-sequence"><a class="anchor" href="#api-changes-handler-sequence"></a><code>HandlerCollection</code> and <code>HandlerList</code></h3>
+<div class="paragraph">
+<p>Jetty 11&#8217;s <code>org.eclipse.jetty.server.handler.HandlerCollection</code> and <code>org.eclipse.jetty.server.handler.HandlerList</code> have been replaced by Jetty 12&#8217;s <code>org.eclipse.jetty.server.Handler.Sequence</code>.</p>
+</div>
+<div class="paragraph">
+<p>Note that when used in configuration properties, XML files, or via reflection, you must use the fully qualified class name <code>org.eclipse.jetty.server.Handler$Sequence</code> (note the <code>$</code> symbol).</p>
+</div>
+<div class="paragraph">
+<p>Note that class <code>org.eclipse.jetty.server.handler.ContextHandlerCollection</code> has been retained (with the updates introduced by <code>Handler</code> as described <a href="#api-changes-handler">here</a>), and it is typically a better choice: where <code>Handler.Sequence</code> just iterates all its children <code>Handler</code>s until one return <code>true</code> from the <code>handle(Request, Response, Callback)</code> method, <code>ContextHandlerCollection</code> more efficiently selects the child <code>ContextHandler</code> based on context path and virtual hosts.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="api-changes-handler-requestlog"><a class="anchor" href="#api-changes-handler-requestlog"></a><code>RequestLogHandler</code></h3>
+<div class="paragraph">
+<p>Jetty 11&#8217;s <code>org.eclipse.jetty.server.handler.RequestLogHandler</code> has been removed with no replacement.</p>
+</div>
+<div class="paragraph">
+<p>In Jetty 12, request logging is achieved by calling <code>Server.setRequestLog(RequestLog requestLog)</code>, as described in <a href="../server/http.html#request-logging" class="xref page">this section</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="httpclient"><a class="anchor" href="#httpclient"></a><code>HttpClient</code></h3>
+<div class="paragraph">
+<p>The Jetty 11 <code>Request.onResponseContentDemanded(Response.DemandedContentListener)</code> API has been replaced by <code>Request.onResponseContentSource(Response.ContentSourceListener)</code> in Jetty 12.</p>
+</div>
+<div class="paragraph">
+<p>However, also look at <code>Request.onResponseContentAsync(Response.AsyncContentListener)</code> and <code>Request.onResponseContent(Response.ContentListener)</code> for simpler usages.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty 11 model was a "demand+push" model: the application was demanding content; when the content was available, the implementation was pushing content to the application by calling <code>DemandedContentListener.onContent(Response, LongConsumer, ByteBuffer, Callback)</code> for every content chunk.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty 12 model is a "demand+pull" model: when the content is available, the implementation calls once <code>Response.ContentSourceListener.onContentSource(Content.Source)</code>; the application can then pull the content chunks from the <code>Content.Source</code>.</p>
+</div>
+<div class="paragraph">
+<p>For more information about the new model, see <a href="../arch/io.html#content-source" class="xref page">this section</a>.</p>
+</div>
+<div class="paragraph">
+<p>Jetty 12 introduced the concept of low-level transport for high-level protocols, described in <a href="../client/io-arch.html#transport" class="xref page">this section</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="websocket"><a class="anchor" href="#websocket"></a>WebSocket</h3>
+<div class="paragraph">
+<p>The Jetty WebSocket APIs have been vastly simplified, and brought in line with the style of other APIs.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty 12 WebSocket APIs are now fully asynchronous, so the Jetty 11 <code>SuspendToken</code> class has been removed in favor of an explicit (or automatic) demand mechanism in Jetty 12 (for more information, refer to <a href="../client/websocket.html#endpoints-demand" class="xref page">this section</a>).</p>
+</div>
+<div class="paragraph">
+<p>The various Jetty 11 <code>WebSocket*Listener</code> interfaces have been replaced by a single interface in Jetty 12, <code>Session.Listener.AutoDemanding</code> (for more information, refer to <a href="../client/websocket.html#endpoints-listener" class="xref page">this section</a>).</p>
+</div>
+<div class="paragraph">
+<p>The Jetty 11 <code>RemoteEndpoint</code> APIs have been merged into the <code>Session</code> APIs in Jetty 12.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty 11 <code>WriteCallback</code> class has been renamed to just <code>Callback</code> in Jetty 12, because it is now also used when receiving binary data.
+Note that this <code>Callback</code> interface is a different interface from the <code>org.eclipse.jetty.util.Callback</code> interface, which cannot be used in the Jetty WebSocket APIs due to class loader visibility issues.</p>
+</div>
+<div class="paragraph">
+<p>On the server-side, the Jetty WebSocket APIs have been made independent of the Servlet APIs.</p>
+</div>
+<div class="paragraph">
+<p>Jetty 11 <code>JettyWebSocketServerContainer</code> has been replaced by <code>ServerWebSocketContainer</code> in Jetty 12, with similar APIs (for more information, refer to <a href="../server/websocket.html#jetty" class="xref page">this section</a>).</p>
+</div>
+<div class="paragraph">
+<p>On the client-side the <code>WebSocketClient</code> APIs are practically unchanged, as most of the changes come from the <code>HttpClient</code> changes described above.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>JAAS :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="configuring-form-size.html">
+    <link rel="next" href="jaspi-support.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/maven-jetty/jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../programming-guide/troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../programming-guide/migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Operations Guide</a></li>
+    <li>Jetty Security</li>
+    <li><a href="jaas-support.html">JAAS</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/operations-guide/pages/security/jaas-support.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">JAAS</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>JAAS implements a Java version of the standard Pluggable Authentication Module (PAM) framework.</p>
+</div>
+<div class="paragraph">
+<p>JAAS can be used for two purposes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>for authentication of users, to reliably and securely determine who is currently executing Java code, regardless of whether the code is running as an application, an applet, a bean, or a servlet</p>
+</li>
+<li>
+<p>for authorization of users to ensure they have the access control rights (permissions) required to do the actions performed</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>JAAS authentication is performed in a pluggable fashion.
+This permits applications to remain independent from underlying authentication technologies.
+New or updated authentication technologies can be plugged under an application without requiring modifications to the application itself.</p>
+</div>
+<div class="paragraph">
+<p>See Java Authentication and Authorization Service (JAAS) <a href="http://java.sun.com/javase/7/docs/technotes/guides/security/jaas/JAASRefGuide.html">Reference Guide</a> for more information about JAAS.</p>
+</div>
+<div class="paragraph">
+<p>The Jetty JAAS support aims to dictate as little as possible whilst providing a sufficiently flexible infrastructure to allow users to drop either one of the <a href="#loginmodules">JAAS Login Modules that ships with Jetty</a>, or their
+own custom <a href="https://docs.oracle.com/javase/7/docs/api/javax/security/auth/spi/LoginModule.html">LoginModule</a>s.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="module"><a class="anchor" href="#module"></a>The <code>jaas</code> module</h3>
+<div class="paragraph">
+<p>Enable the <code>jaas</code> module.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs"># DO NOT EDIT THIS FILE - See: https://jetty.org/docs/
+
+[description]
+Enables JAAS for deployed web applications.
+
+[depend]
+security
+
+[before]
+deploy
+
+[xml]
+etc/jetty-jaas.xml
+
+[ini-template]
+## The file location (relative to $JETTY_BASE) for the
+## JAAS "java.security.auth.login.config" system property
+# jetty.jaas.login.conf=etc/login.conf</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The configurable items in the resulting <code>$JETTY_BASE/start.d/jaas.ini</code> file are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">jetty.jaas.login.conf</dt>
+<dd>
+<p>This is the location of the file that will be referenced by the system property <code>java.security.auth.login.config</code>: Jetty sets this system property for you based on the value of this property.
+The value of this property is assumed to be <em>relative to <code>$JETTY_BASE</code></em>.
+The default value is <code>etc/login.conf</code>, which resolves to  <code>$JETTY_BASE/etc/login.conf</code>.
+If you don&#8217;t want to put your login module configuration file here, you can change this property to point to where it is.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>See more about the contents of this file in the <a href="#loginconf">Configuring JAAS</a> section.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="webapp"><a class="anchor" href="#webapp"></a>Configure the webapp for JAAS</h3>
+<div class="paragraph">
+<p>The <code>&lt;realm-name&gt;</code> in <code>web.xml</code> will be used to identify the <code>org.eclipse.jetty.security.jaas.JAASLoginService</code> declaration that integrates JAAS with Jetty.</p>
+</div>
+<div class="paragraph">
+<p>For example, this <code>web.xml</code> contains a realm called <code>Test JAAS Realm</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;login-config&gt;
+  &lt;auth-method&gt;FORM&lt;/auth-method&gt;
+  &lt;realm-name&gt;Test JAAS Realm&lt;/realm-name&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+  &lt;form-login-config&gt;
+    &lt;form-login-page&gt;/login/login&lt;/form-login-page&gt;
+    &lt;form-error-page&gt;/login/error&lt;/form-error-page&gt;
+  &lt;/form-login-config&gt;
+&lt;/login-config&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The name of the realm, which must be <em>identical</em> to the name of an <code>org.eclipse.jetty.security.jaas.JAASLoginService</code> declaration.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We now need to declare an <code>org.eclipse.jetty.security.jaas.JAASLoginService</code> that references the realm name of <code>Test JAAS Realm</code>.
+Here&#8217;s an example of a suitable XML snippet:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;New class="org.eclipse.jetty.security.jaas.JAASLoginService"&gt;
+  &lt;Set name="Name"&gt;Test JAAS Realm&lt;/Set&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+  &lt;Set name="LoginModuleName"&gt;xyz&lt;/Set&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+&lt;/New&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The name is the <em>same</em> as that declared in the <code>&lt;realm-name&gt;</code> in <code>web.xml</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The name that identifies a set of <code>javax.security.auth.spi.LoginModule</code> configurations that comprise the <a href="#loginconf">JAAS config file</a> identified in the <code>jetty.jaas.login.conf</code> property of the <a href="#module"><code>jaas</code> module</a>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>org.eclipse.jetty.security.jaas.JAASLoginService</code> can be declared in a couple of different places, pick whichever suits your purposes best:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If you have more than one webapp that you would like to use the same security infrastructure, then you can declare your <code>org.eclipse.jetty.security.jaas.JAASLoginService</code> as a bean that is added to the <code>org.eclipse.jetty.server.Server</code>.
+The file in which you declare this needs to be on Jetty&#8217;s execution path.
+The recommended procedure is to create a file in your <code>$JETTY_BASE/etc</code> directory and then ensure it is on the classpath either by adding it to the Jetty <a href="../start/index.html" class="xref page">start command line</a>, or more conveniently to a <a href="../modules/custom.html" class="xref page">custom module</a>.</p>
+<div class="paragraph">
+<p>Here&#8217;s an example of this type of XML file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+&lt;Configure id="Server" class="org.eclipse.jetty.server.Server"&gt;
+  &lt;Call name="addBean"&gt;
+    &lt;Arg&gt;
+      &lt;New class="org.eclipse.jetty.security.jaas.JAASLoginService"&gt;
+        &lt;Set name="name"&gt;Test JAAS Realm&lt;/Set&gt;
+        &lt;Set name="LoginModuleName"&gt;xyz&lt;/Set&gt;
+      &lt;/New&gt;
+    &lt;/Arg&gt;
+  &lt;/Call&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Alternatively, if you want to use JAAS with a specific webapp only, you declare your <code>org.eclipse.jetty.security.jaas.JAASLoginService</code> in a context XLM file specific to that webapp:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://jetty.org/configure_10_0.dtd"&gt;
+&lt;Configure class="org.eclipse.jetty.ee9.webapp.WebAppContext"&gt;
+  &lt;Set name="securityHandler"&gt;
+    &lt;New class="org.eclipse.jetty.security.ConstraintSecurityHandler"&gt;
+     &lt;Set name="loginService"&gt;
+       &lt;New class="org.eclipse.jetty.security.jaas.JAASLoginService"&gt;
+         &lt;Set name="name"&gt;Test JAAS Realm&lt;/Set&gt;
+         &lt;Set name="loginModuleName"&gt;xyz&lt;/Set&gt;
+       &lt;/New&gt;
+     &lt;/Set&gt;
+    &lt;/New&gt;
+  &lt;/Set&gt;
+&lt;/Configure&gt;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="loginconf"><a class="anchor" href="#loginconf"></a>Configure JAAS</h3>
+<div class="paragraph">
+<p>We now need to setup the contents of the file we specified as the <code>jetty.jaas.login.conf</code> property when we <a href="#module">configured the <code>jaas</code> module</a>.
+Refer to the <a href="https://docs.oracle.com/javase/7/docs/api/javax/security/auth/login/Configuration.html">syntax rules</a> of this file for a full description.</p>
+</div>
+<div class="paragraph">
+<p>Remembering the example we set up <a href="#webapp">previously</a>, the contents of the <code>$JETTY_BASE/etc/login.conf</code> file could look as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">xyz  { <i class="conum" data-value="1"></i><b>(1)</b>
+  com.acme.SomeLoginModule required debug=true; <i class="conum" data-value="2"></i><b>(2)</b>
+  com.other.OtherLoginModule optional; <i class="conum" data-value="3"></i><b>(3)</b>
+};</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The name of the configuration <em>exactly</em> as specified in your <code>org.eclipse.jetty.security.jaas.JAASLoginService</code> declaration.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The first <code>LoginModule</code> declaration, containing the classname of the <code>LoginModule</code> and its configuration properties.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>A second <code>LoginModule</code> declaration.
+You can provide as many <code>LoginModule</code> alternatives as you like, with a minimum of one.
+Refer to the <a href="https://docs.oracle.com/javase/7/docs/api/javax/security/auth/login/Configuration.html">JAAS documentation</a> for more information on the standard configuration properties, and how JAAS interprets this file.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="loginmodules"><a class="anchor" href="#loginmodules"></a>Provided LoginModules</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/security/jaas/spi/JDBCLoginModule.html"><code>org.eclipse.jetty.security.jaas.spi.JDBCLoginModule</code></a></p>
+</li>
+<li>
+<p><a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/security/jaas/spi/PropertyFileLoginModule.html"><code>org.eclipse.jetty.security.jaas.spi.PropertyFileLoginModule</code></a></p>
+</li>
+<li>
+<p><a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/security/jaas/spi/DataSourceLoginModule.html"><code>org.eclipse.jetty.security.jaas.spi.DataSourceLoginModule</code></a></p>
+</li>
+<li>
+<p><a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/security/jaas/spi/LdapLoginModule.html"><code>org.eclipse.jetty.security.jaas.ldap.LdapLoginModule</code></a></p>
+</li>
+</ul>
+</div>
+<div id="og-password" class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Passwords can be obfuscated using the <a href="../tools/index.html#password" class="xref page">Jetty Password tool</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="jdbcloginmodule"><a class="anchor" href="#jdbcloginmodule"></a>JDBCLoginModule</h3>
+<div class="paragraph">
+<p>The <code>org.eclipse.jetty.security.jaas.spi.JDBCLoginModule</code> stores user passwords and roles in a database accessed via JDBC calls.
+You can configure the JDBC connection information, as well as the names of the table and columns storing the username and credential, and the names of the table and columns storing the roles.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example <a href="#loginconf">login module configuration file</a> entry for it using an HSQLDB driver:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">jdbc { <i class="conum" data-value="1"></i><b>(1)</b>
+  org.eclipse.jetty.security.jaas.spi.JDBCLoginModule required <i class="conum" data-value="2"></i><b>(2)</b><i class="conum" data-value="3"></i><b>(3)</b>
+  dbUrl="jdbc:hsqldb:." <i class="conum" data-value="4"></i><b>(4)</b>
+  dbUserName="sa" <i class="conum" data-value="5"></i><b>(5)</b>
+  dbDriver="org.hsqldb.jdbcDriver" <i class="conum" data-value="6"></i><b>(6)</b>
+  userTable="myusers" <i class="conum" data-value="7"></i><b>(7)</b>
+  userField="myuser" <i class="conum" data-value="8"></i><b>(8)</b>
+  credentialField="mypassword" <i class="conum" data-value="9"></i><b>(9)</b>
+  userRoleTable="myuserroles" <i class="conum" data-value="10"></i><b>(10)</b>
+  userRoleUserField="myuser" <i class="conum" data-value="11"></i><b>(11)</b>
+  userRoleRoleField="myrole"; <i class="conum" data-value="12"></i><b>(12)</b>
+};</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The name of the configuration.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The name of the <code>LoginModule</code> class.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>A standard JAAS flag making successful authentication via this <code>LoginModule</code> mandatory.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The JDBC url used to connect to the database.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The name of the JDBC user to use for the connection.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The name of the JDBC Driver class.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>The name of the table holding the user authenication information.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>The name of the column holding the user name.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>The name of the column holding the user credential.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>The name of the table holding the user authorization information.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>The name of the column holding the user name.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="12"></i><b>12</b></td>
+<td>The name of the column holding the user role.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The properties <strong>7</strong>-<strong>12</strong> are used to format the following queries:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">select &lt;credentialField&gt; from &lt;userTable&gt; where &lt;userField&gt;=?
+select &lt;userRoleRoleField&gt; from &lt;userRoleTable&gt; where &lt;userRoleUserField&gt;=?</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Credential and role information is lazily read from the database when a previously unauthenticated user requests authentication.
+Note that this information is <em>only</em> cached for the length of the authenticated session.
+When the user logs out or the session expires, the information is flushed from memory.</p>
+</div>
+<div class="paragraph">
+<p>Note that passwords can be stored in the database in plain text or encoded formats&#8201;&#8212;&#8201;see the note on "Passwords/Credentials" above.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="datasourceloginmodule"><a class="anchor" href="#datasourceloginmodule"></a>DataSourceLoginModule</h3>
+<div class="paragraph">
+<p>Similar to the <code>org.eclipse.jetty.security.jaas.spi.JDBCLoginModule</code>, but using a <code>javax.sql.DataSource</code> to connect to the database instead of a JDBC driver.
+The <code>javax.sql.DataSource</code> is obtained at runtime by performing a JNDI lookup on <code>java:comp/env/${dnJNDIName}</code>.</p>
+</div>
+<div class="paragraph">
+<p>A sample login module configuration for this <code>LoginModule</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">ds { <i class="conum" data-value="1"></i><b>(1)</b>
+  org.eclipse.jetty.security.jaas.spi.DataSourceLoginModule required <i class="conum" data-value="2"></i><b>(2)</b><i class="conum" data-value="3"></i><b>(3)</b>
+  dbJNDIName="ds" <i class="conum" data-value="4"></i><b>(4)</b>
+  userTable="myusers" <i class="conum" data-value="5"></i><b>(5)</b>
+  userField="myuser" <i class="conum" data-value="6"></i><b>(6)</b>
+  credentialField="mypassword" <i class="conum" data-value="7"></i><b>(7)</b>
+  userRoleTable="myuserroles" <i class="conum" data-value="8"></i><b>(8)</b>
+  userRoleUserField="myuser" <i class="conum" data-value="9"></i><b>(9)</b>
+  userRoleRoleField="myrole"; <i class="conum" data-value="10"></i><b>(10)</b>
+};</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The name of the configuration.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The name of the <code>LoginModule</code> class.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>A standard JAAS flag making successful authentication via this <code>LoginModule</code> mandatory.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The JNDI name, relative to <code>java:comp/env/</code> to lookup to obtain the <code>javax.sql.DataSource</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The name of the table holding the user authenication information.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The name of the column holding the user name.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>The name of the column holding the user credential.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>The name of the table holding the user authorization information.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>The name of the column holding the user name.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>The name of the column holding the user role.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="propertyfileloginmodule"><a class="anchor" href="#propertyfileloginmodule"></a>PropertyFileLoginModule</h3>
+<div class="paragraph">
+<p>With this login module implementation, the authentication and role information is read from a property file.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">props { <i class="conum" data-value="1"></i><b>(1)</b>
+  org.eclipse.jetty.security.jaas.spi.PropertyFileLoginModule required  <i class="conum" data-value="2"></i><b>(2)</b><i class="conum" data-value="3"></i><b>(3)</b>
+  file="/somewhere/somefile.props"; <i class="conum" data-value="4"></i><b>(4)</b>
+};</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The name of the configuration.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The name of the <code>LoginModule</code> class.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>A standard JAAS flag making successful authentication via this <code>LoginModule</code> mandatory.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The location of a properties file containing the authentication and authorization information.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The property file must be of the format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">&lt;username&gt;: &lt;password&gt; [,&lt;rolename&gt; ...]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>fred: OBF:1xmk1w261u9r1w1c1xmq,user,admin
+harry: changeme,user,developer
+tom: MD5:164c88b302622e17050af52c89945d44,user
+dick: CRYPT:adpexzg3FUZAk,admin</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The contents of the file are fully read in and cached in memory the first time a user requests authentication.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ldaploginmodule"><a class="anchor" href="#ldaploginmodule"></a>LdapLoginModule</h3>
+<div class="paragraph">
+<p>The <code>org.eclipse.jetty.security.jaas.spi.LdapLoginModule</code> uses LDAP to access authentication and authorization information stored in a directory.
+The LDAP connection information and structure of the authentication/authorization data can be configured.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">example  { <i class="conum" data-value="1"></i><b>(1)</b>
+  org.eclipse.jetty.security.jaas.spi.LdapLoginModule required  <i class="conum" data-value="2"></i><b>(2)</b><i class="conum" data-value="3"></i><b>(3)</b>
+  contextFactory="com.sun.jndi.ldap.LdapCtxFactory" <i class="conum" data-value="4"></i><b>(4)</b>
+  hostname="ldap.example.com" <i class="conum" data-value="5"></i><b>(5)</b>
+  port="389" <i class="conum" data-value="6"></i><b>(6)</b>
+  bindDn="cn=Directory Manager" <i class="conum" data-value="7"></i><b>(7)</b>
+  bindPassword="directory" <i class="conum" data-value="8"></i><b>(8)</b>
+  authenticationMethod="simple" <i class="conum" data-value="9"></i><b>(9)</b>
+  useLdaps="true" <i class="conum" data-value="10"></i><b>(10)</b>
+  userBaseDn="ou=people,dc=alcatel" <i class="conum" data-value="11"></i><b>(11)</b>
+  userRdnAttribute="uid" <i class="conum" data-value="12"></i><b>(12)</b>
+  userIdAttribute="cn" <i class="conum" data-value="13"></i><b>(13)</b>
+  userPasswordAttribute="userPassword" <i class="conum" data-value="14"></i><b>(14)</b>
+  userObjectClass="inetOrgPerson" <i class="conum" data-value="15"></i><b>(15)</b>
+  roleBaseDn="ou=groups,dc=example,dc=com" <i class="conum" data-value="16"></i><b>(16)</b>
+  roleNameAttribute="cn" <i class="conum" data-value="17"></i><b>(17)</b>
+  roleMemberAttribute="uniqueMember" <i class="conum" data-value="18"></i><b>(18)</b>
+  roleObjectClass="groupOfUniqueNames"; <i class="conum" data-value="19"></i><b>(19)</b>
+  forceBindingLogin="false" <i class="conum" data-value="20"></i><b>(20)</b>
+  debug="false" <i class="conum" data-value="21"></i><b>(21)</b>
+};</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The name of the configuration.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The name of the <code>LoginModule</code> class.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>A standard JAAS flag making successful authentication via this <code>LoginModule</code> mandatory.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The name of the context factory to use for the LDAP connection.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The hostname for the LDAP connection. Optional.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The port for the LDAP connection. Optional.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>The caller security Principal. Optional.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>The caller security credential. Optional.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>The security level for the LDAP connection environment. Optional.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>If true, use <code>ldaps</code> instead of <code>ldap</code> for the connection url.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>The distinguished name of the directory to search for user information.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="12"></i><b>12</b></td>
+<td>The name of the attribute for the user roles.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="13"></i><b>13</b></td>
+<td>The name of the attribute for the user id.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="14"></i><b>14</b></td>
+<td>The name of the attribute for the user password.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="15"></i><b>15</b></td>
+<td>The <code>ObjectClass</code> for users.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="16"></i><b>16</b></td>
+<td>The distinguished name of the directory to search for role information.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="17"></i><b>17</b></td>
+<td>The name of the attribute for roles.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="18"></i><b>18</b></td>
+<td>The name of the attribute storing the user for the roles <code>ObjectClass</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="19"></i><b>19</b></td>
+<td>The name of the <code>ObjectClass</code> for roles.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="20"></i><b>20</b></td>
+<td>If true, the authentication proceeds on the basis of a successful LDAP binding using the username and credential provided by the user.
+If false, then authentication proceeds based on username and password information retrieved from LDAP.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="21"></i><b>21</b></td>
+<td>If true, failed login attempts are logged on the server.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="configuring-form-size.html">Limiting Form Content</a></span>
+  <span class="next"><a href="jaspi-support.html">JASPI</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

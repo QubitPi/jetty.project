@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Jetty Jspc Maven Plugin :: Eclipse Jetty Documentation (Branch Preview)</title>
+    <link rel="prev" href="jetty-maven-plugin.html">
+    <link rel="next" href="../arch/bean.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" width="120"></a>
+      <a class="navbar-item" href="../../../..">Eclipse Jetty Documentation (Branch Preview)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Documentation</a>
+        <a class="navbar-item" href="#">Support</a>
+        <!--a class="navbar-item" href="#">Community</a-->
+        <a class="navbar-item" href="#">Security</a>
+        <a class="navbar-item" href="#">Download</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project">Source Code</a>
+            <a class="navbar-item" href="https://github.com/jetty/jetty.project/issues">Issues</a>
+            <a class="navbar-item" href="#">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jetty" data-version="12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">Eclipse Jetty</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/index.html">Operations Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/begin/index.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/features/index.html">Eclipse Jetty Features</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/howtos/index.html">Eclipse Jetty How-Tos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/arch/index.html">Architecture Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/start/index.html">Jetty Start Mechanism</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/start/start-jpms.html">Starting Jetty using JPMS</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../operations-guide/modules/index.html">Jetty Modules</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/custom.html">Custom Jetty Modules</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/modules/standard.html">Standard Modules</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/deploy/index.html">Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/server/index.html">Jetty Server</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/protocols/index.html">Jetty Connectors and Protocols</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/keystore/index.html">Configuring SSL/TLS KeyStores</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/session/index.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/quickstart/index.html">Faster Web Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/annotations/index.html">Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsp/index.html">Java Server Pages</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jstl/index.html">JavaServer Pages Standard Tag Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jsf-taglibs/index.html">JavaServer Faces TagLibs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jndi/index.html">JNDI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaas-support.html">JAAS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/jaspi-support.html">JASPI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../operations-guide/security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/jmx/index.html">JMX Monitoring &amp; Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/tools/index.html">Jetty Tools</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../operations-guide/xml/index.html">Jetty XML</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Programming Guide</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../client/index.html">Client Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/io-arch.html">I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http.html">HTTP Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http2.html">HTTP/2 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/http3.html">HTTP/3 Client Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../client/websocket.html">WebSocket Client</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../server/index.html">Server Libraries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http.html">HTTP Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http2.html">HTTP/2 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/http3.html">HTTP/3 Server Library</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/compliance.html">Server Compliance Modes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/session.html">HTTP Session Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/websocket.html">WebSocket Server</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/fastcgi.html">FastCGI Server Libraries</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../server/io-arch.html">Server I/O Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maven and Jetty</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jetty-maven-helloworld.html">Using Maven</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jetty-maven-plugin.html">Using the Jetty Maven Plugin</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Architecture</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/bean.html">Jetty Component Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/threads.html">Jetty Threading Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/io.html">Jetty I/O Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/listener.html">Jetty Listeners</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../arch/jmx.html">Jetty JMX Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting Jetty</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/thread-dump.html">JVM Thread Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/state-tracking.html"><code>StateTrackingHandler</code></a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/component-dump.html">Jetty Component Dump</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/debugging.html">Remote Debugging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Jetty Security</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/configuring-form-size.html">Limiting Form Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security/openid-support.html">OpenID Support</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Migration Guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/94-to-10.html">Migrating from Jetty 9.4.x to Jetty 10.0.x</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../migration/11-to-12.html">Migrating from Jetty 11.0.x to Jetty 12.0.x</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Eclipse Jetty</span>
+    <span class="version">12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../index.html">Eclipse Jetty</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Eclipse Jetty</a></li>
+    <li><a href="../index.html">Programming Guide</a></li>
+    <li>Maven and Jetty</li>
+    <li><a href="jetty-jspc-maven-plugin.html">Jetty Jspc Maven Plugin</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/QubitPi/jetty.project/edit/HEAD/documentation/jetty/modules/programming-guide/pages/maven-jetty/jetty-jspc-maven-plugin.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Page Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Jetty Jspc Maven Plugin</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This plugin will pre-compile your JSP and works in conjunction with the Maven war plugin to put them inside an assembled war.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jspc-config"><a class="anchor" href="#jspc-config"></a>Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here&#8217;s the basic setup required to put the JSPC plugin into your build for the Jakarta EE ee10 environment:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.jetty.ee10&lt;/groupId&gt;
+   &lt;artifactId&gt;jetty-ee10-jspc-maven-plugin&lt;/artifactId&gt;
+   &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+   &lt;executions&gt;
+     &lt;execution&gt;
+       &lt;id&gt;jspc&lt;/id&gt;
+       &lt;goals&gt;
+         &lt;goal&gt;jspc&lt;/goal&gt;
+       &lt;/goals&gt;
+       &lt;configuration&gt;
+       &lt;/configuration&gt;
+     &lt;/execution&gt;
+   &lt;/executions&gt;
+ &lt;/plugin&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The configurable parameters are as follows:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">webXmlFragment</dt>
+<dd>
+<p>Default value: <code>${project.basedir}/target/webfrag.xml</code></p>
+<div class="paragraph">
+<p>File into which to generate the servlet declarations.
+Will be merged with an existing <code>web.xml</code>.</p>
+</div>
+</dd>
+<dt class="hdlist1">webAppSourceDirectory</dt>
+<dd>
+<p>Default value: <code>${project.basedir}/src/main/webapp</code></p>
+<div class="paragraph">
+<p>Root of resources directory where jsps, tags etc are located.</p>
+</div>
+</dd>
+<dt class="hdlist1">webXml</dt>
+<dd>
+<p>Default value: <code>${project.basedir}/src/main/webapp/WEB-INF/web.xml</code></p>
+<div class="paragraph">
+<p>The web.xml file to use to merge with the generated fragments.</p>
+</div>
+</dd>
+<dt class="hdlist1">includes</dt>
+<dd>
+<p>Default value: <code>**/*.jsp, **/*.jspx</code></p>
+<div class="paragraph">
+<p>The comma separated list of patterns for file extensions to be processed.</p>
+</div>
+</dd>
+<dt class="hdlist1">excludes</dt>
+<dd>
+<p>Default value: <code>**/.svn/**</code></p>
+<div class="paragraph">
+<p>The comma separated list of patterns for file extensions to be skipped.</p>
+</div>
+</dd>
+<dt class="hdlist1">classesDirectory</dt>
+<dd>
+<p>Default value: <code>${project.build.outputDirectory}</code></p>
+<div class="paragraph">
+<p>Location of classes for the webapp.</p>
+</div>
+</dd>
+<dt class="hdlist1">generatedClasses</dt>
+<dd>
+<p>Default value: <code>${project.build.outputDirectory}</code></p>
+<div class="paragraph">
+<p>Location to put the generated classes for the jsps.</p>
+</div>
+</dd>
+<dt class="hdlist1">insertionMarker</dt>
+<dd>
+<p>Default value: <em>none</em></p>
+<div class="paragraph">
+<p>A marker string in the src <code>web.xml</code> file which indicates where to merge in the generated web.xml fragment.
+Note that the marker string will NOT be preserved during the insertion.
+Can be left blank, in which case the generated fragment is inserted just before the line containing <code>&lt;/web-app&gt;</code>.</p>
+</div>
+</dd>
+<dt class="hdlist1">useProvidedScope</dt>
+<dd>
+<p>Default value: false</p>
+<div class="paragraph">
+<p>If true, jars of dependencies marked with &lt;scope&gt;provided&lt;/scope&gt; will be placed on the compilation classpath.</p>
+</div>
+</dd>
+<dt class="hdlist1">mergeFragment</dt>
+<dd>
+<p>Default value: true</p>
+<div class="paragraph">
+<p>Whether or not to merge the generated fragment file with the source web.xml.
+The merged file will go into the same directory as the webXmlFragment.</p>
+</div>
+</dd>
+<dt class="hdlist1">keepSources</dt>
+<dd>
+<p>Default value: false</p>
+<div class="paragraph">
+<p>If true, the generated .java files are not deleted at the end of processing.</p>
+</div>
+</dd>
+<dt class="hdlist1">scanAllDirectories</dt>
+<dd>
+<p>Default value: true</p>
+<div class="paragraph">
+<p>Determines if dirs on the classpath should be scanned as well as jars.
+If true, this allows scanning for tlds of dependent projects that
+are in the reactor as unassembled jars.</p>
+</div>
+</dd>
+<dt class="hdlist1">scanManifest</dt>
+<dd>
+<p>Default value: true</p>
+<div class="paragraph">
+<p>Determines if the manifest of JAR files found on the classpath should be scanned.</p>
+</div>
+</dd>
+<dt class="hdlist1">sourceVersion</dt>
+<dd>
+<p>Java version of jsp source files.
+The default value depends on the version of the <code>jetty-ee10-jspc-maven-plugin</code>.</p>
+</dd>
+<dt class="hdlist1">targetVersion</dt>
+<dd>
+<p>Java version of class files generated from jsps.
+The default value depends on the version of the <code>jetty-ee10-jspc-maven-plugin</code>.</p>
+</dd>
+<dt class="hdlist1">tldJarNamePatterns</dt>
+<dd>
+<p>Default value: <code>.*taglibs[^/]*\.jar|.*jstl[^/]*\.jar$</code></p>
+<div class="paragraph">
+<p>Patterns of jars on the 'system' (ie container) path that contain tlds.
+Use | to separate each pattern.</p>
+</div>
+</dd>
+<dt class="hdlist1">jspc</dt>
+<dd>
+<p>Default value: the <code>org.apache.jasper.JspC</code> instance being configured.</p>
+<div class="paragraph">
+<p>The JspC class actually performs the pre-compilation.
+All setters on the JspC class are available.</p>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Taking all the default settings, here&#8217;s how to configure the war plugin to use the generated <code>web.xml</code> that includes all of the jsp servlet declarations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+  &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
+  &lt;configuration&gt;
+    &lt;webXml&gt;${project.basedir}/target/web.xml&lt;/webXml&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jspc-production-precompile"><a class="anchor" href="#jspc-production-precompile"></a>Precompiling only for Production Build</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As compiling jsps is usually done during preparation for a production release and not usually done during development, it is more convenient to put the plugin setup inside a &lt;profile&gt; which which can be deliberately invoked during prep for production.</p>
+</div>
+<div class="paragraph">
+<p>For example, the following profile will only be invoked if the flag <code>-Dprod</code> is present on the run line:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;profiles&gt;
+  &lt;profile&gt;
+    &lt;id&gt;prod&lt;/id&gt;
+    &lt;activation&gt;
+      &lt;property&gt;&lt;name&gt;prod&lt;/name&gt;&lt;/property&gt;
+    &lt;/activation&gt;
+    &lt;build&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.eclipse.jetty.ee10&lt;/groupId&gt;
+        &lt;artifactId&gt;jetty-ee10-jspc-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+        &lt;!-- put your configuration in here --&gt;
+      &lt;/plugin&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+        &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
+        &lt;!-- put your configuration in here --&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+    &lt;/build&gt;
+  &lt;/profile&gt;
+&lt;/profiles&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following invocation would cause your code to be compiled, the jsps to be compiled, the &lt;servlet&gt; and &lt;servlet-mapping&gt;s inserted in the <code>web.xml</code> and your webapp assembled into a war:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ mvn -Dprod package</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="jspc-overlay-precompile"><a class="anchor" href="#jspc-overlay-precompile"></a>Precompiling Jsps with Overlaid Wars</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Precompiling jsps with an overlaid war requires a bit more configuration.
+This is because you need to separate the steps of unpacking the overlaid war and then repacking the final target war so the <code>jetty-ee10-jspc-maven-plugin</code> has the opportunity to access the overlaid resources.</p>
+</div>
+<div class="paragraph">
+<p>In the following example the overlaid war will provide the <code>web.xml</code> file but the jsps will be in <code>src/main/webapp</code> (i.e. part of the project that uses the overlay).
+The overlaid war file will be unpacked, the jsps compiled and their servlet definitions merged into the extracted <code>web.xml</code>, and everything packed into a war.</p>
+</div>
+<div class="paragraph">
+<p>An example configuration of the war plugin that separates those phases into an unpack phase, and then a packing phase:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt;
+  &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;id&gt;unpack&lt;/id&gt;
+      &lt;goals&gt;&lt;goal&gt;exploded&lt;/goal&gt;&lt;/goals&gt;
+      &lt;phase&gt;generate-resources&lt;/phase&gt;
+      &lt;configuration&gt;
+        &lt;webappDirectory&gt;target/foo&lt;/webappDirectory&gt;
+        &lt;overlays&gt;
+          &lt;overlay /&gt;
+          &lt;overlay&gt;
+            &lt;groupId&gt;org.eclipse.jetty.{ee-current}.demos&lt;/groupId&gt;
+            &lt;artifactId&gt;jetty-{ee-current}-demo-jetty-webapp&lt;/artifactId&gt;
+          &lt;/overlay&gt;
+        &lt;/overlays&gt;
+      &lt;/configuration&gt;
+    &lt;/execution&gt;
+    &lt;execution&gt;
+      &lt;id&gt;pack&lt;/id&gt;
+      &lt;goals&gt;&lt;goal&gt;war&lt;/goal&gt;&lt;/goals&gt;
+      &lt;phase&gt;package&lt;/phase&gt;
+      &lt;configuration&gt;
+        &lt;warSourceDirectory&gt;target/foo&lt;/warSourceDirectory&gt;
+        &lt;webXml&gt;target/web.xml&lt;/webXml&gt;
+      &lt;/configuration&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you also need to configure the <code>jetty-ee10-jspc-maven-plugin</code> so that it can use the web.xml that was extracted by the war unpacking and merge in the generated definitions of the servlets.
+This is in <code>target/foo/WEB-INF/web.xml</code>.
+Using the default settings, the <code>web.xml</code> merged with the jsp servlet definitions will be put into <code>target/web.xml</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.jetty.ee10&lt;/groupId&gt;
+   &lt;artifactId&gt;jetty-ee10-jspc-maven-plugin&lt;/artifactId&gt;
+   &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+   &lt;executions&gt;
+     &lt;execution&gt;
+       &lt;id&gt;jspc&lt;/id&gt;
+       &lt;goals&gt;
+         &lt;goal&gt;jspc&lt;/goal&gt;
+       &lt;/goals&gt;
+       &lt;configuration&gt;
+          &lt;webXml&gt;target/foo/WEB-INF/web.xml&lt;/webXml&gt;
+          &lt;includes&gt;**/*.foo&lt;/includes&gt;
+          &lt;excludes&gt;**/*.fff&lt;/excludes&gt;
+      &lt;/configuration&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="jetty-maven-plugin.html">Using the Jetty Maven Plugin</a></span>
+  <span class="next"><a href="../arch/bean.html">Jetty Component Architecture</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="../../../.."><img src="../../../../_/img/jetty-logo.svg" alt="Eclipse Jetty Documentation (Branch Preview)" height="46" width="160"></a>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="#">Docs</a></li>
+      <li><a href="#">Support</a></li>
+      <li>Lists: <a href="http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html" target="_blank" rel="noopener">users</a> - <a href="http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html" target="_blank" rel="noopener">dev</a></li>
+      <li><a href="https://github.com/eclipse/jetty.project" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/JettyProject" title="Follow us on X" target="_blank" rel="noopener"><img src="../../../../_/img/x-logo.svg" alt="X logo" class="logo" width="24"><span class="handle">@JettyProject</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2008-2025 Webtide</p>
+    <p>The <a href="https://github.com/jetty/jetty.website" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>Eclipse Jetty® is a trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>This project is made possible by Webtide. Additional thanks to the <a href="https://eclipse.org" target="_blank" rel="noopener">Eclipse Foundation</a> for hosting this project.</p>
+    <p class="badges">
+      <a href="https://webtide.com" title="Development led by Webtide" target="_blank" rel="noopener"><img src="../../../../_/img/webtide-logo.png" alt="Webtide Logo" width="100"></a>
+      <a href="https://jetbrains.com/idea" title="IntelliJ IDEA integration provided by JetBrains" target="_blank" rel="noopener"><img src="../../../../_/img/jetbrains.svg" alt="Jetbrains Logo" width="24"></a>
+    </p>
+    <p>Authored in <a href="https://asciidoc.org" target="_blank" rel="noopener">AsciiDoc</a>.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
