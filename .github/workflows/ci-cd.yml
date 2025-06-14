@@ -1,0 +1,45 @@
+# Copyright Jiaqi Liu
+---
+name: CI/CD
+
+"on":
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  documentation:
+    # build steps copied from codeql-analysis.yml action file
+    name: Deploy Documentation to GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Set up Maven
+        run:
+          mvn -e -B -V org.apache.maven.plugins:maven-wrapper-plugin:3.3.2:wrapper "-Dmaven=3.9.9"
+      - name: Clean install dependencies and build
+        env:
+          MAVEN_OPTS: "-Djava.awt.headless=true -client -Xmx4G -Xms4G"
+        run: ./mvnw clean install -P fast -B -V
+      # https://jetty.org/docs/contribution-guide/documentation/index.html#cg-documentation-build
+      - name: Build documentation
+        run: |
+          mvn install -Dcollector -Pfast -am -pl documentation/jetty
+          cd documentation/jetty
+          mvn antora -N
+      - name: Deploy documentation to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: documentation/jetty/target/site/
+          enable_jekyll: false
+          user_name: QubitPi
+          user_email: jack20220723@gmail.com
+          cname: jetty.qubitpi.org
