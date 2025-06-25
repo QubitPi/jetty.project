@@ -61,6 +61,18 @@ public class WebSocketConnection extends AbstractConnection implements Connectio
         CANCELLED
     }
 
+    /*
+     * The state of the WebSocketConnection, used to serialize fillingAndParsing with connection close events.
+     * <pre>
+     *   ┌────IDLE<───────────────┐
+     *   │      │                 │
+     *   │      V                 │
+     *   │    FILLING_AND_PARSING─┤
+     *   │                        │
+     *   │                        V
+     *   └───>CLOSED<────────CLOSING
+     * </pre>
+     */
     private enum State
     {
         IDLE,
@@ -464,7 +476,7 @@ public class WebSocketConnection extends AbstractConnection implements Connectio
 
     private void fillAndParse()
     {
-        boolean doClose = false;
+        boolean close = false;
         Throwable closeCause = null;
         try (AutoLock ignored = lock.lock())
         {
@@ -473,14 +485,14 @@ public class WebSocketConnection extends AbstractConnection implements Connectio
                 case IDLE -> state = State.FILLING_AND_PARSING;
                 case CLOSED ->
                 {
-                    doClose = true;
+                    close = true;
                     closeCause = this.closeCause;
                 }
                 default -> throw new IllegalStateException(state.name());
             }
         }
 
-        if (doClose)
+        if (close)
         {
             doOnClose(closeCause);
             return;
@@ -566,13 +578,13 @@ public class WebSocketConnection extends AbstractConnection implements Connectio
                     case FILLING_AND_PARSING -> state = State.IDLE;
                     case CLOSING ->
                     {
-                        doClose = true;
+                        close = true;
                         closeCause = this.closeCause;
                     }
                     default -> throw new IllegalStateException(state.name());
                 }
             }
-            if (doClose)
+            if (close)
                 doOnClose(closeCause);
         }
     }
