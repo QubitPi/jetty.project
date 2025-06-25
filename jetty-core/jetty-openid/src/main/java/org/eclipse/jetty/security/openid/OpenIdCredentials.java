@@ -50,7 +50,7 @@ public class OpenIdCredentials implements Serializable
     private String authCode;
     private Map<String, Object> response;
     private Map<String, Object> claims;
-    private boolean verified = false;
+    private Fields errorFields;
 
     public OpenIdCredentials(Map<String, Object> claims)
     {
@@ -80,7 +80,12 @@ public class OpenIdCredentials implements Serializable
         return response;
     }
 
-    public void redeemAuthCode(OpenIdConfiguration configuration) throws Exception
+    public Fields getErrorFields()
+    {
+        return errorFields;
+    }
+
+    public void redeemAuthCode(OpenIdConfiguration configuration)
     {
         if (LOG.isDebugEnabled())
             LOG.debug("redeemAuthCode() {}", this);
@@ -92,6 +97,27 @@ public class OpenIdCredentials implements Serializable
                 response = claimAuthCode(configuration);
                 if (LOG.isDebugEnabled())
                     LOG.debug("response: {}", response);
+
+                // Parse error response define by Section 5.2 of OAuth 2.0 [RFC6749].
+                String errorCode = (String)response.get("error");
+                if (errorCode != null)
+                {
+                    String errorDescription = (String)response.get("error_description");
+                    String errorUri = (String)response.get("error_uri");
+                    StringBuilder errorMessage = new StringBuilder();
+                    errorMessage.append("auth failed: ").append(errorCode);
+                    if (errorDescription != null)
+                        errorMessage.append(" - ").append(errorDescription);
+
+                    errorFields = new Fields();
+                    errorFields.put(OpenIdAuthenticator.ERROR_PARAMETER, errorMessage.toString());
+                    errorFields.put("error", errorCode);
+                    if (errorUri != null)
+                        errorFields.put("error_description", errorDescription);
+                    if (errorUri != null)
+                        errorFields.put("error_uri", errorUri);
+                    return;
+                }
 
                 String idToken = (String)response.get("id_token");
                 if (idToken == null)
@@ -108,18 +134,18 @@ public class OpenIdCredentials implements Serializable
                 claims = JwtDecoder.decode(idToken);
                 if (LOG.isDebugEnabled())
                     LOG.debug("claims {}", claims);
+                validateClaims(configuration);
+            }
+            catch (Throwable t)
+            {
+                errorFields = new Fields();
+                errorFields.put(OpenIdAuthenticator.ERROR_PARAMETER, t.getMessage());
             }
             finally
             {
                 // reset authCode as it can only be used once
                 authCode = null;
             }
-        }
-
-        if (!verified)
-        {
-            validateClaims(configuration);
-            verified = true;
         }
     }
 
