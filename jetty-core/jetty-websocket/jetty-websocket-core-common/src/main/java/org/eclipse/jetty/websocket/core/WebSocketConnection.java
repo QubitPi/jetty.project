@@ -64,13 +64,11 @@ public class WebSocketConnection extends AbstractConnection implements Connectio
     /*
      * The state of the WebSocketConnection, used to serialize fillingAndParsing with connection close events.
      * <pre>
-     *   ┌────IDLE<───────────────┐
-     *   │      │                 │
-     *   │      V                 │
-     *   │    FILLING_AND_PARSING─┤
-     *   │                        │
-     *   │                        V
-     *   └───>CLOSED<────────CLOSING
+     *   IDLE   <------> FILLING_AND_PARSING
+     *     |                 |
+     *     |                 |
+     *     v                 v
+     *   CLOSED <-------- CLOSING
      * </pre>
      */
     private enum State
