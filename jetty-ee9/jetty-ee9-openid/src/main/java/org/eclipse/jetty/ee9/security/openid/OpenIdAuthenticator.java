@@ -458,6 +458,7 @@ public class OpenIdAuthenticator extends LoginAuthenticator
 
                 // Attempt to login with the provided authCode.
                 OpenIdCredentials credentials = new OpenIdCredentials(authCode, getRedirectUri(request));
+                credentials.redeemAuthCode(_openIdConfiguration);
                 UserIdentity user = login(null, credentials, request);
                 if (user == null)
                 {
