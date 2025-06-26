@@ -257,17 +257,7 @@ public class ServletApiRequest implements HttpServletRequest
 
     private AuthenticationState getUndeferredAuthentication()
     {
-        AuthenticationState authenticationState = getAuthentication();
-        if (authenticationState instanceof AuthenticationState.Deferred deferred)
-        {
-            AuthenticationState undeferred = deferred.authenticate(getRequest());
-            if (undeferred != null && undeferred != authenticationState)
-            {
-                authenticationState = undeferred;
-                AuthenticationState.setAuthenticationState(getRequest(), authenticationState);
-            }
-        }
-        return authenticationState;
+        return AuthenticationState.getUndeferredAuthentication(getRequest());
     }
 
     @Override

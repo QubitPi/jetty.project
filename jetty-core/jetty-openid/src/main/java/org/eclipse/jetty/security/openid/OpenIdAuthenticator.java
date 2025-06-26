@@ -449,7 +449,15 @@ public class OpenIdAuthenticator extends LoginAuthenticator
         {
             Fields parameters = getParameters(request);
 
-            // Handle error response define by Section 3.1.2.6 of OpenID Connect Core 1.0.
+            // State parameter must be present even in the error case.
+            String state = parameters.getValue("state");
+            if (state == null)
+            {
+                sendError(request, response, cb, "auth failed: no state parameter");
+                return AuthenticationState.SEND_FAILURE;
+            }
+
+            // Handle error response defined by Section 3.1.2.6 of OpenID Connect Core 1.0.
             String errorCode = parameters.getValue("error");
             if (errorCode != null)
             {
@@ -474,13 +482,6 @@ public class OpenIdAuthenticator extends LoginAuthenticator
             if (authCode == null)
             {
                 sendError(request, response, cb, "auth failed: no code parameter");
-                return AuthenticationState.SEND_FAILURE;
-            }
-
-            String state = parameters.getValue("state");
-            if (state == null)
-            {
-                sendError(request, response, cb, "auth failed: no state parameter");
                 return AuthenticationState.SEND_FAILURE;
             }
 

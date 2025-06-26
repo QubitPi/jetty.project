@@ -112,7 +112,7 @@ public class OpenIdCredentials implements Serializable
                     errorFields = new Fields();
                     errorFields.put(OpenIdAuthenticator.ERROR_PARAMETER, errorMessage.toString());
                     errorFields.put("error", errorCode);
-                    if (errorUri != null)
+                    if (errorDescription != null)
                         errorFields.put("error_description", errorDescription);
                     if (errorUri != null)
                         errorFields.put("error_uri", errorUri);
