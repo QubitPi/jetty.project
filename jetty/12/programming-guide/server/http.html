@@ -379,7 +379,7 @@ This result in your web applications to be available to HTTP clients as if you d
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
   &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
   &lt;artifactId&gt;jetty-server&lt;/artifactId&gt;
-  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+  &lt;version&gt;12.0.24-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
@@ -1469,7 +1469,7 @@ As Conscrypt eventually binds to a native library, there is a higher risk that a
 </table>
 </div>
 <div class="paragraph">
-<p>To use Conscrypt as TLS provider, you must have the Conscrypt jar and the Jetty dependency <code>jetty-alpn-conscrypt-server-12.0.23-SNAPSHOT.jar</code> in the class-path or module-path.</p>
+<p>To use Conscrypt as TLS provider, you must have the Conscrypt jar and the Jetty dependency <code>jetty-alpn-conscrypt-server-12.0.24-SNAPSHOT.jar</code> in the class-path or module-path.</p>
 </div>
 <div class="paragraph">
 <p>Then, you must configure the JDK with the Conscrypt provider, and configure Jetty to use the Conscrypt provider, in this way:</p>
@@ -1499,7 +1499,7 @@ sslContextFactory.setProvider("Conscrypt");</code></pre>
 <p><a href="https://www.bouncycastle.org/">Bouncy Castle</a> is a pure Java alternative provider for the Java security APIs, and includes a TLS provider.</p>
 </div>
 <div class="paragraph">
-<p>To use Bouncy Castle as TLS provider, you must have the Bouncy Castle jars and the Jetty dependency <code>jetty-alpn-bouncycastle-server-12.0.23-SNAPSHOT.jar</code> in the class-path or module-path.</p>
+<p>To use Bouncy Castle as TLS provider, you must have the Bouncy Castle jars and the Jetty dependency <code>jetty-alpn-bouncycastle-server-12.0.24-SNAPSHOT.jar</code> in the class-path or module-path.</p>
 </div>
 <div class="paragraph">
 <p>Then, you must configure the JDK with the Conscrypt provider, and configure Jetty to use the Conscrypt provider, in this way:</p>
@@ -2228,7 +2228,7 @@ server.start();</code></pre>
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
   &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
   &lt;artifactId&gt;jetty-rewrite&lt;/artifactId&gt;
-  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+  &lt;version&gt;12.0.24-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
@@ -3010,12 +3010,12 @@ server.start();</code></pre>
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
   &lt;groupId&gt;org.eclipse.jetty.ee{8,9,10}&lt;/groupId&gt;
   &lt;artifactId&gt;jetty-ee{8,9,10}-servlet&lt;/artifactId&gt;
-  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+  &lt;version&gt;12.0.24-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>For example, for Jakarta EE 10 the coordinates are: <code>org.eclipse.jetty.ee10:jetty-ee10-servlet:12.0.23-SNAPSHOT</code>.</p>
+<p>For example, for Jakarta EE 10 the coordinates are: <code>org.eclipse.jetty.ee10:jetty-ee10-servlet:12.0.24-SNAPSHOT</code>.</p>
 </div>
 <div class="paragraph">
 <p>Below you can find an example of how to set up a Jakarta EE 10 <code>ServletContextHandler</code>:</p>
@@ -3105,7 +3105,7 @@ Server applications must be careful when creating the <code>Handler</code> tree 
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
   &lt;groupId&gt;org.eclipse.jetty.ee{8,9,10}&lt;/groupId&gt;
   &lt;artifactId&gt;jetty-ee{8,9,10}-webapp&lt;/artifactId&gt;
-  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+  &lt;version&gt;12.0.24-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
@@ -3174,7 +3174,7 @@ The features are similar, but <code>DefaultServlet</code> is more commonly used 
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
   &lt;groupId&gt;org.eclipse.jetty.ee{8,9,10}&lt;/groupId&gt;
   &lt;artifactId&gt;jetty-ee{8,9,10}-servlet&lt;/artifactId&gt;
-  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+  &lt;version&gt;12.0.24-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
@@ -4102,7 +4102,7 @@ This makes the web application stateful, because a computation performed by a pr
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
   &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
   &lt;artifactId&gt;jetty-session&lt;/artifactId&gt;
-  &lt;version&gt;12.0.23-SNAPSHOT&lt;/version&gt;
+  &lt;version&gt;12.0.24-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
