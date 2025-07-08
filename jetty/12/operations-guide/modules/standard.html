@@ -557,9 +557,6 @@ Old, rolled files are kept for the number of days specified by the <code>jetty.c
 <h2 id="core-deploy"><a class="anchor" href="#core-deploy"></a>Module <code>core-deploy</code></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This module enables webapp deployment from the <code>$JETTY_BASE/webapps</code> directory.</p>
-</div>
-<div class="paragraph">
 <p>Deployment is managed via a <code>DeploymentManager</code> component that watches a directory for changes.
 See <a href="../deploy/index.html" class="xref page">how to deploy web applications</a> for more information.</p>
 </div>
@@ -723,6 +720,81 @@ Jetty&#8217;s configuration properties are nearly identical across these version
 <dd>
 <p>The scan period in seconds, that is how frequently the <code>DeploymentManager</code> wakes up to scan the monitored directory for changes.
 Setting <code>jetty.deploy.scanInterval=0</code> disabled <em>hot</em> deployment so that only static deployment will be possible (see also <a href="../deploy/index.html#hot-static" class="xref page">here</a> for more information).</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="eeN-proxy"><a class="anchor" href="#eeN-proxy"></a>Module <code>ee{8,9,10}-proxy</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>ee{8,9,10}-proxy</code> module adds a simple reverse proxy service that proxies incoming requests to a backend server.
+Each module targets the corresponding Jakarta EE platform version.</p>
+</div>
+<div class="paragraph">
+<p>The module properties are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>## The proxy contextPath.
+# jetty.proxy.contextPath=/
+
+## The proxy Servlet class.
+# jetty.proxy.servletClass=org.eclipse.jetty.ee10.proxy.ProxyServlet$Transparent
+
+## The proxy Servlet mapping.
+# jetty.proxy.servletMapping=/*
+
+## The target URI to proxy to, for example http://backend:9090/path.
+## This parameter is mandatory.
+# jetty.proxy.proxyTo=
+
+## The prefix of the URI path in context to strip from the incoming URI.
+## For example, incoming URI http://proxy:8080/ctx/foo/bar, with
+## jetty.proxy.prefix=/foo becomes http://backend:9090/path/bar.
+# jetty.proxy.prefix=
+
+## The proxy HttpClient max number of threads.
+# jetty.proxy.maxThreads=128
+
+## The proxy HttpClient max number of connections.
+# jetty.proxy.maxConnections=256
+
+## The proxy HttpClient idle timeout.
+# jetty.proxy.idleTimeout=30000
+
+## The proxy HttpClient total request timeout.
+# jetty.proxy.timeout=60000
+
+## The proxy HttpClient request buffer size.
+# jetty.proxy.requestBufferSize=4096
+
+## The proxy HttpClient response buffer size.
+# jetty.proxy.responseBufferSize=16384
+
+## The proxy HttpClient max request headers size.
+# jetty.proxy.maxRequestHeadersSize=8192
+
+## The proxy HttpClient max response headers size.
+# jetty.proxy.maxResponseHeadersSize=8192
+
+## The proxy HttpClient number of selectors.
+# jetty.proxy.selectors=1</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Among the configurable properties, the only mandatory one is:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>jetty.proxy.proxyTo</code></dt>
+<dd>
+<p>The URI of the backend server, in absolute form, for example <code>http://backend:9090/path</code>.</p>
+<div class="paragraph">
+<p>The path in context of the incoming request is appended to the <code>jetty.proxy.proxyTo</code> property to obtain the URI to proxy to.
+For example, for the incoming URI <code>http://proxy:8080/ctx/foo/bar</code>, the path in context (assuming the context path is <code>/ctx</code>) is <code>/foo/bar</code>, therefore the request is proxied to <code>http://backend:9090/path/foo/bar</code>.</p>
+</div>
 </dd>
 </dl>
 </div>
@@ -1109,7 +1181,7 @@ etc/jetty-https.xml</pre>
 <h2 id="jmx"><a class="anchor" href="#jmx"></a>Module <code>jmx</code></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This module enables deployment of Java Servlet web applications.</p>
+<p>This module enables local Java Management Extension (JMX) support for Jetty components.</p>
 </div>
 <div class="paragraph">
 <p>This configuration is useful for <a href="../jmx/index.html#local" class="xref page">local development and testing</a>.
