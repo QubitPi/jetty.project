@@ -100,6 +100,7 @@ public class OpenIdErrorResponseTest
     @AfterEach
     public void stop() throws Exception
     {
+        _client.stop();
         _provider.stop();
         _server.stop();
     }
@@ -109,7 +110,7 @@ public class OpenIdErrorResponseTest
         @Override
         public boolean handle(Request request, Response response, Callback callback) throws Exception
         {
-            AuthenticationState authState = AuthenticationState.getUndeferredAuthentication(request);
+            AuthenticationState authState = AuthenticationState.getUndeferredAuthenticationState(request);
             try (PrintStream out = new PrintStream(Content.Sink.asOutputStream(response)))
             {
                 response.setStatus(HttpStatus.OK_200);

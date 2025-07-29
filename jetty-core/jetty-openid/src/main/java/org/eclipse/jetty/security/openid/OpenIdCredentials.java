@@ -80,11 +80,22 @@ public class OpenIdCredentials implements Serializable
         return response;
     }
 
+    /**
+     * <p>This returns a non-null value only when {@link #redeemAuthCode(OpenIdConfiguration)} has been called and an error occurred.</p>
+     * <p>The returned {@link Fields} will contain an entry for {@link OpenIdAuthenticator#ERROR_PARAMETER}, and optional
+     * fields from the response if present, including {@code error}, {@code error_description} and {@code error_uri}.</p>
+     * @return the error fields or null if no error has occurred.
+     */
     public Fields getErrorFields()
     {
         return errorFields;
     }
 
+    /**
+     * <p>Redeems the Authorization Code with the Token Endpoint to receive an ID Token.</p>
+     * <p>{@link #getErrorFields()} should be called directly following this to check if an error occurred.</p>
+     * @param configuration the openIdConfiguration to use.
+     */
     public void redeemAuthCode(OpenIdConfiguration configuration)
     {
         if (LOG.isDebugEnabled())

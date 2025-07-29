@@ -51,7 +51,7 @@ public interface AuthenticationState extends Request.AuthenticationState
      * @param request The request to query.
      * @return The authentication state of the request or null if none or {@link Deferred} authentication could not be resolved.
      */
-    static AuthenticationState getUndeferredAuthentication(Request request)
+    static AuthenticationState getUndeferredAuthenticationState(Request request)
     {
         AuthenticationState authenticationState = getAuthenticationState(request);
         if (authenticationState instanceof AuthenticationState.Deferred deferred)

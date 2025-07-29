@@ -121,6 +121,7 @@ public class OpenIdErrorResponseTest
     @AfterEach
     public void stop() throws Exception
     {
+        _client.stop();
         _provider.stop();
         _server.stop();
     }
