@@ -1059,18 +1059,18 @@ server.start();</code></pre>
 <div class="sect2">
 <h3 id="connector-limiting"><a class="anchor" href="#connector-limiting"></a>Limiting Connections</h3>
 <div class="paragraph">
-<p>It is possible to limit the number of connections accepted by the whole server (and therefore across all connectors), or by a specific connector.</p>
+<p>It is possible to limit the number of TCP connections accepted by the whole server (and therefore across all connectors), or by a specific connector.</p>
 </div>
 <div class="paragraph">
-<p>This feature is implemented by class <code>org.eclipse.jetty.server.ConnectionLimit</code> and you can use it in this way:</p>
+<p>This feature is implemented by class <code>org.eclipse.jetty.server.NetworkConnectionLimit</code> and you can use it in this way:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-java hljs" data-lang="java">Server server = new Server();
 
-// Limit connections to the server, across all connectors.
-ConnectionLimit serverConnectionLimit = new ConnectionLimit(1024, server);
-server.addBean(serverConnectionLimit);
+// Limit TCP connections to the server, across all connectors.
+NetworkConnectionLimit serverNetworkConnectionLimit = new NetworkConnectionLimit(1024, server);
+server.addBean(serverNetworkConnectionLimit);
 
 ServerConnector connector1 = new ServerConnector(server);
 connector1.setPort(8080);
@@ -1080,8 +1080,8 @@ ServerConnector connector2 = new ServerConnector(server);
 connector2.setPort(9090);
 server.addConnector(connector2);
 // Limit connections for this connector only.
-ConnectionLimit connectorConnectionLimit = new ConnectionLimit(64, connector2);
-connector2.addBean(connectorConnectionLimit);</code></pre>
+NetworkConnectionLimit connectorNetworkConnectionLimit = new NetworkConnectionLimit(64, connector2);
+connector2.addBean(connectorNetworkConnectionLimit);</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1092,13 +1092,13 @@ connector2.addBean(connectorConnectionLimit);</code></pre>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>When the maximum number of connections is reached, no more connections will be accepted <em>at the JVM level</em>&#8201;&#8212;&#8201;but they could be accepted at the OS level.</p>
+<p>When the maximum number of TCP connections is reached, no more TCP connections will be accepted <em>at the JVM level</em>&#8201;&#8212;&#8201;but they could be accepted at the OS level.</p>
 </div>
 <div class="paragraph">
-<p>This means that if you are using OS tools (like Linux&#8217;s <code>ss</code>) to count the number of established connections, you may find a number that may be greater than the maximum number of connections configured in a <code>ConnectionLimit</code>.</p>
+<p>This means that if you are using OS tools (like Linux&#8217;s <code>ss</code>) to count the number of established TCP connections, you may find a number that may be greater than the maximum number of TCP connections configured in a <code>NetworkConnectionLimit</code>.</p>
 </div>
 <div class="paragraph">
-<p>Note also that different operative systems may behave differently when Jetty is not accepting connections: some OS accepts connections at the TCP level anyway (but does not notify this event to the JVM), some other OS may not accept connections at the TCP level.</p>
+<p>Note also that different operative systems may behave differently when Jetty is not accepting TCP connections: some OS accepts connections at the TCP level anyway (but does not notify this event to the JVM), some other OS may not accept connections at the TCP level.</p>
 </div>
 </td>
 </tr>

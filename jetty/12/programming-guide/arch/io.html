@@ -567,17 +567,7 @@ class MyConnection extends AbstractConnection
 You can add as beans many <code>Connection.Listener</code> objects, each with its own logic, so that you can separate different logics into different <code>Connection.Listener</code> implementations.</p>
 </div>
 <div class="paragraph">
-<p>The Jetty I/O library provides useful <code>Connection.Listener</code> implementations that you should evaluate before writing your own:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/io/ConnectionStatistics.html"><code>ConnectionStatistics</code></a></p>
-</li>
-<li>
-<p><a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/server/ConnectionLimit.html"><code>ConnectionLimit</code></a></p>
-</li>
-</ul>
+<p>The Jetty I/O library provides useful <code>Connection.Listener</code> implementations that you should evaluate before writing your own, for example <a href="https://javadoc.jetty.org/jetty-12/org/eclipse/jetty/io/ConnectionStatistics.html"><code>ConnectionStatistics</code></a>.</p>
 </div>
 <div class="paragraph">
 <p>Here is a simple example of a <code>Connection.Listener</code> used both on the client and on the server:</p>
