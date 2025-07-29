@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.eclipse.jetty.ee10.websocket</groupId>
     <artifactId>jetty-ee10-websocket</artifactId>
-    <version>12.0.23-SNAPSHOT</version>
+    <version>12.0.24-SNAPSHOT</version>
   </parent>
   <artifactId>jetty-ee10-websocket-jetty-tests</artifactId>
   <name>EE10 :: Websocket :: Jetty Tests</name>
@@ -20,6 +20,11 @@
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>

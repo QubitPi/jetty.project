@@ -309,6 +309,21 @@ public abstract class SelectorManager extends ContainerLifeCycle implements Dump
      */
     protected void endPointClosed(EndPoint endpoint)
     {
+        Object transport = endpoint.getTransport();
+        if (transport instanceof SelectableChannel selectableChannel)
+        {
+            for (AcceptListener l : _acceptListeners)
+            {
+                try
+                {
+                    l.onClosed(selectableChannel);
+                }
+                catch (Throwable x)
+                {
+                    LOG.warn("Failed to notify onClosed() on listener {}", l, x);
+                }
+            }
+        }
     }
 
     /**
@@ -456,7 +471,7 @@ public abstract class SelectorManager extends ContainerLifeCycle implements Dump
             }
             catch (Throwable x)
             {
-                LOG.warn("Failed to notify onAccepting on listener {}", l, x);
+                LOG.warn("Failed to notify onAccepting() on listener {}", l, x);
             }
         }
     }
@@ -471,7 +486,7 @@ public abstract class SelectorManager extends ContainerLifeCycle implements Dump
             }
             catch (Throwable x)
             {
-                LOG.warn("Failed to notify onAcceptFailed on listener {}", l, x);
+                LOG.warn("Failed to notify onAcceptFailed() on listener {}", l, x);
             }
         }
     }
@@ -486,7 +501,7 @@ public abstract class SelectorManager extends ContainerLifeCycle implements Dump
             }
             catch (Throwable x)
             {
-                LOG.warn("Failed to notify onAccepted on listener {}", l, x);
+                LOG.warn("Failed to notify onAccepted() on listener {}", l, x);
             }
         }
     }
@@ -531,6 +546,15 @@ public abstract class SelectorManager extends ContainerLifeCycle implements Dump
          * @param channel the accepted channel
          */
         default void onAccepted(SelectableChannel channel)
+        {
+        }
+
+        /**
+         * Called when an accepted {@link SelectableChannel} is closed.
+         *
+         * @param channel the accepted channel
+         */
+        default void onClosed(SelectableChannel channel)
         {
         }
     }
