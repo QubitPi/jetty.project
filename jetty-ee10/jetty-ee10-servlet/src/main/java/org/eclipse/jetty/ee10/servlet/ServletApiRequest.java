@@ -250,12 +250,21 @@ public class ServletApiRequest implements HttpServletRequest
         _servletChannel = _servletContextRequest.getServletChannel();
     }
 
+    /**
+     * @deprecated use {@link #getAuthenticationState()} instead.
+     */
+    @Deprecated(since = "12.0.24", forRemoval = true)
     public AuthenticationState getAuthentication()
     {
         return AuthenticationState.getAuthenticationState(getRequest());
     }
 
-    private AuthenticationState getUndeferredAuthentication()
+    public AuthenticationState getAuthenticationState()
+    {
+        return AuthenticationState.getAuthenticationState(getRequest());
+    }
+
+    private AuthenticationState getUndeferredAuthenticationState()
     {
         return AuthenticationState.getUndeferredAuthenticationState(getRequest());
     }
@@ -350,7 +359,7 @@ public class ServletApiRequest implements HttpServletRequest
     @Override
     public String getAuthType()
     {
-        AuthenticationState authenticationState = getUndeferredAuthentication();
+        AuthenticationState authenticationState = getUndeferredAuthenticationState();
         if (authenticationState instanceof AuthenticationState.Succeeded succeededAuthentication)
             return succeededAuthentication.getAuthenticationType();
         return null;
@@ -456,7 +465,7 @@ public class ServletApiRequest implements HttpServletRequest
     {
         //obtain any substituted role name from the destination servlet
         String linkedRole = getServletRequestInfo().getMatchedResource().getResource().getServletHolder().getUserRoleLink(role);
-        AuthenticationState authenticationState = getUndeferredAuthentication();
+        AuthenticationState authenticationState = getUndeferredAuthenticationState();
 
         if (authenticationState instanceof AuthenticationState.Succeeded succeededAuthentication)
             return succeededAuthentication.isUserInRole(linkedRole);
@@ -466,7 +475,7 @@ public class ServletApiRequest implements HttpServletRequest
     @Override
     public Principal getUserPrincipal()
     {
-        AuthenticationState authenticationState = getUndeferredAuthentication();
+        AuthenticationState authenticationState = getUndeferredAuthenticationState();
 
         if (authenticationState instanceof AuthenticationState.Succeeded succeededAuthentication)
         {
@@ -510,7 +519,7 @@ public class ServletApiRequest implements HttpServletRequest
         Session session = getRequest().getSession(create);
         if (session == null)
             return null;
-        if (session.isNew() && getAuthentication() instanceof AuthenticationState.Succeeded)
+        if (session.isNew() && getAuthenticationState() instanceof AuthenticationState.Succeeded)
             session.setAttribute(ManagedSession.SESSION_CREATED_SECURE, Boolean.TRUE);
         return session.getApi();
     }
@@ -575,7 +584,7 @@ public class ServletApiRequest implements HttpServletRequest
             return true;
 
         //do the authentication
-        AuthenticationState authenticationState = getUndeferredAuthentication();
+        AuthenticationState authenticationState = getUndeferredAuthenticationState();
 
         //if the authentication did not succeed
         if (authenticationState instanceof AuthenticationState.Deferred)
