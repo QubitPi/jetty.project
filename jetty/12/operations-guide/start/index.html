@@ -798,15 +798,7 @@ replace=( ),$1\\\n</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can then run the generated command line.</p>
-</div>
-<div class="paragraph">
-<p>For example, in the Linux <code>bash</code> shell you can run it by wrapping it into <code>$(...)</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ $(java -jar $JETTY_HOME/start.jar --dry-run)</code></pre>
-</div>
+<p>You can then run the generated command line by copying the output generated using the <code>--dry-run</code> option, and pasting it in a terminal window.</p>
 </div>
 <div class="paragraph">
 <p>The <code>--dry-run</code> option is quite flexible and below you can find a few examples of how to use it to avoid forking a second JVM, or generating scripts or creating an arguments file that can be passed to (a possibly alternative) <code>java</code> executable.</p>
@@ -932,31 +924,55 @@ replace=( ),$1\\\n</pre>
 <p>Note how the program arguments are a list of properties in the form <code>&lt;name&gt;=&lt;value&gt;</code> and a list of Jetty XML files.</p>
 </div>
 <div class="paragraph">
-<p>The various parts of the full JVM command line can be combined to leverage the arguments file feature (that is, specify the JVM options in a file rather than on the command line) that is built-in in the <code>java</code> executable:</p>
+<p>To display the <a href="../deploy/index.html" class="xref page">environments</a> configuration:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ java -jar $JETTY_HOME/start.jar --dry-run=<mark>opts,path,main,args</mark> &gt; /tmp/jvm_cmd_line.txt
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ java -jar $JETTY_HOME/start.jar --dry-run=<mark>envs</mark></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">[jetty]
+setupModules=code:example$jetty-modules/postgresql.mod
+setupArgs=--add-modules=http,ee10-deploy
+args=--dry-run=args
+replace=( ),$1\\\n</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note how the environments configuration specifies additional class-path and Jetty XML files for every environment.</p>
+</div>
+<div class="paragraph">
+<p>The various parts of the full JVM command line can be combined to leverage the JVM arguments file feature (that is, specify the JVM options in a file rather than on the command line) that is built-in in the <code>java</code> executable:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ java -jar $JETTY_HOME/start.jar --dry-run=<mark>opts,path,main,args,envs</mark> &gt; /tmp/jvm_cmd_line.txt
 $ /some/other/java @/tmp/jvm_cmd_line.txt</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Using <code>--dry-run=opts,path,main,args</code> can be used to avoid that the Jetty start mechanism forks a second JVM when using modules that require forking:</p>
+<p>Using <code>--dry-run=opts,path,main,args,envs</code> can be used to avoid that the Jetty start mechanism forks a second JVM when using modules that require forking.</p>
+</div>
+<div class="paragraph">
+<p>In the Linux <code>bash</code> shell you can run the output of <code>--dry-run</code> in this way:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ java $(java -jar $JETTY_HOME/start.jar --dry-run=opts,path,main,args)</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ java -jar $JETTY_HOME/start.jar --dry-run=opts,path,main,args,envs | xargs java</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The output of different <code>--dry-run</code> executions can be creatively combined in a shell script:</p>
+<p>The output of different <code>--dry-run</code> executions can be creatively combined in a script, for example in the Linux <code>bash</code> shell:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ OPTS=$(java -jar start.jar --dry-run=<mark>opts,path</mark>)
 $ MAIN=$(java -jar start.jar --dry-run=<mark>main</mark>)
 $ ARGS=$(java -jar start.jar --dry-run=<mark>args</mark>)
-$ java $OPTS -Dextra=opt $MAIN $ARGS extraProp=value extra.xml</code></pre>
+$ ENVS=$(java -jar start.jar --dry-run=<mark>envs</mark>)
+$ echo $OPTS -Dextra=opt $MAIN $ARGS $ENVS extraProp=value extra.xml | xargs java</code></pre>
 </div>
 </div>
 </div>
